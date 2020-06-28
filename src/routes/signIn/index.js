@@ -1,14 +1,27 @@
 import React from 'react';
-import { Form, Input, Button, Divider } from 'antd';
-
+import { Form, Input, Button, Divider, DatePicker, notification, Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
 
 const FormSignIn = () => {
+	const [ form ] = Form.useForm();
+	let history = useHistory();
+
 	const onFinish = (values) => {
 		console.log('Success:', values);
+		notification.success({
+			message: `Usuario registrado`,
+			placement: 'bottomLeft'
+		});
+		history.push('/');
 	};
 
 	const onFinishFailed = (errorInfo) => {
 		console.log('Failed:', errorInfo);
+		notification.error({
+			message: `No se pudo registrar usuario`,
+			placement: 'bottomLeft'
+		});
 	};
 
 	return (
@@ -19,9 +32,10 @@ const FormSignIn = () => {
 			}}
 			onFinish={onFinish}
 			onFinishFailed={onFinishFailed}
+			form={form}
 		>
 			<Form.Item
-				label="Username"
+				label="Nombre"
 				name="userName"
 				rules={[
 					{
@@ -34,7 +48,7 @@ const FormSignIn = () => {
 			</Form.Item>
 
 			<Form.Item
-				label="userSurname"
+				label="Apellido"
 				name="userSurname"
 				rules={[
 					{
@@ -47,7 +61,7 @@ const FormSignIn = () => {
 			</Form.Item>
 
 			<Form.Item
-				label="userEmail"
+				label="Email"
 				name="userEmail"
 				rules={[
 					{
@@ -60,7 +74,7 @@ const FormSignIn = () => {
 			</Form.Item>
 
 			<Form.Item
-				label="userConfirmEmail"
+				label="Confirme email"
 				name="userConfirmEmail"
 				rules={[
 					{
@@ -72,8 +86,8 @@ const FormSignIn = () => {
 				<Input />
 			</Form.Item>
 
-            <Form.Item
-				label="userPassword"
+			<Form.Item
+				label="Contraseña"
 				name="userPassword"
 				rules={[
 					{
@@ -85,8 +99,8 @@ const FormSignIn = () => {
 				<Input.Password />
 			</Form.Item>
 
-            <Form.Item
-				label="userConfirmPassword"
+			<Form.Item
+				label="Confirme contraseña"
 				name="userConfirmPassword"
 				rules={[
 					{
@@ -98,9 +112,9 @@ const FormSignIn = () => {
 				<Input.Password />
 			</Form.Item>
 
-            <Form.Item
-				label="userPhone"
-				name="userPhone"
+			<Form.Item
+				label="Fecha de Nacimiento"
+				name="userBirthDate"
 				rules={[
 					{
 						required: true,
@@ -108,63 +122,50 @@ const FormSignIn = () => {
 					}
 				]}
 			>
+				<DatePicker />
+			</Form.Item>
+
+			<Divider />
+
+			<Form.Item label="Número de Celular" name="userPhone">
 				<Input />
 			</Form.Item>
 
-            <Divider />
-
-            <Form.Item
-				label="userDni"
-				name="userDni"
-			>
+			<Form.Item label="Documento de Identidad" name="userDni">
 				<Input />
 			</Form.Item>
 
-            <Form.Item
-				label="userSex"
-				name="userSex"
-			>
+			<Form.Item label="Sexo" name="userSex">
 				<Input />
 			</Form.Item>
 
-            <Form.Item
-				label="userBirthDate"
-				name="userBirthDate"
-			>
+			<Form.Item label="Nacionalidad" name="userNationality">
 				<Input />
 			</Form.Item>
 
-            <Form.Item
-				label="userNationality"
-				name="userNationality"
-			>
+			<Form.Item label="Ciudad" name="userCity">
 				<Input />
 			</Form.Item>
 
-            <Form.Item
-				label="userCity"
-				name="userCity"
-			>
+			<Form.Item label="Descripción Personal" name="userDescription">
 				<Input />
 			</Form.Item>
 
-            <Form.Item
-				label="userDescription"
-				name="userDescription"
-			>
+			<Form.Item label="Preferencias" name="userPreferences">
 				<Input />
 			</Form.Item>
 
-            <Form.Item
-				label="userPreferences"
-				name="userPreferences"
-			>
-				<Input />
+			<Form.Item label="Cargar Imagen">
+				<Upload>
+					<Button>
+						<UploadOutlined />  Subir
+					</Button>
+				</Upload>
 			</Form.Item>
 
 			<Form.Item>
 				<Button type="primary" htmlType="submit">
-					Submit
+					Registrarse
 				</Button>
 			</Form.Item>
 		</Form>
