@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, notification } from 'antd';
+import { Form, Button, notification, Divider } from 'antd';
 import { useHistory } from 'react-router-dom';
 import InputRepository from './InputRepository';
 
@@ -26,7 +26,7 @@ const Row = (props) => {
 							)
 						}
 					>
-						{InputRepository( element )}
+						{InputRepository(element)}
 					</Form.Item>
 				);
 			})}
@@ -42,7 +42,6 @@ const CustomizedForm = (props) => {
 	const [ showSecondary, setShowSecondary ] = useState(false);
 	const [ showTertiary, setShowTertiary ] = useState(false);
 	const history = useHistory();
-
 
 	const onFinish = (values) => {
 		console.log(values)
@@ -62,8 +61,29 @@ const CustomizedForm = (props) => {
 		});
 	};
 
-	return (
-		<div className="customizedForm">
+	const showMore = () => {
+		if(secondaries){
+			if(showSecondary){
+				if(tertiaries){
+					if(showTertiary){
+						return <div onClick={ () => {setShowTertiary(false);setShowSecondary(false)}}>Show less</div>
+					}else{
+						return <div onClick={ () => {setShowTertiary(true)}}>Show more</div>
+					}
+				}else{
+					return null
+				}
+
+			}else{
+				return <div onClick={ () => {setShowSecondary(true)} }>Show More</div>
+			}
+		}else{
+			return null
+		}
+	}
+
+	const renderForm = () => {
+		return (
 			<Form
 				name={name}
 				initialValues={{
@@ -80,56 +100,27 @@ const CustomizedForm = (props) => {
 					})
 				) : null}
 
-				{secondaries ? (
-					<p>
-						<a href="##" onClick={() => setShowSecondary(!showSecondary)}>
-							{!showSecondary ? 'Show more+' : null}
-						</a>
-					</p>
-				) : null}
-
 				{showSecondary ? (
-					secondaries.map((row, index) => {
+					<>
+					<Divider />
+					{secondaries.map((row, index) => {
 						return <Row key={index} fields={row} />;
-					})
-				) : null}
-
-				{showSecondary ? (
-					<p>
-						<a
-							href="##"
-							onClick={
-								tertiaries && !showTertiary ? (
-									() => setShowTertiary(!showTertiary)
-								) : (
-									() => setShowSecondary(false)
-								)
-							}
-						>
-							{tertiaries && !showTertiary ? 'Show more+' : showTertiary ? null : 'Show less-'}
-						</a>
-					</p>
+					})}
+					</>
 				) : null}
 
 				{showTertiary ? (
-					tertiaries.map((row, index) => {
+					<>
+					<Divider />
+					{tertiaries.map((row, index) => {
 						return <Row key={index} fields={row} />;
-					})
+					})}
+					</>
 				) : null}
 
-				{showTertiary ? (
-					<p>
-						<a
-							href="##"
-							onClick={() => {
-								setShowTertiary(false);
-								setShowSecondary(false);
-							}}
-						>
-							{showTertiary ? 'Show less-' : null}
-						</a>
-					</p>
-				) : null}
+				<div className="showmore">
+					{showMore()}
+				</div>
 
 				<Form.Item>
 					<Button type="primary" htmlType="submit">
@@ -137,6 +128,13 @@ const CustomizedForm = (props) => {
 					</Button>
 				</Form.Item>
 			</Form>
+
+		)
+	}
+
+	return (
+		<div className="customizedForm">
+			{renderForm()}
 		</div>
 	);
 };
