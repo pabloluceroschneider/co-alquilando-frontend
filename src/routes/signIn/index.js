@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button, Divider, DatePicker, notification, Upload, Select } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-
 const { Option } = Select;
 
 const FormSignIn = () => {
 	const [ provinces, setProvinces ] = useState(null);
+	const [ showMore, setShowMore ] = useState(false);
 	const [ form ] = Form.useForm();
 	let sexOptions = [ 'Femenino', 'Masculino', 'Otro' ];
 	let history = useHistory();
@@ -15,11 +15,11 @@ const FormSignIn = () => {
 		notification.success({
 			message: `Usuario registrado`,
 			placement: 'bottomLeft'
-		});
+        });
 		history.push('/');
 	};
 
-	const onFinishFailed = (errorInfo) => {
+	const onFinishFailed = () => {
 		notification.error({
 			message: `No se pudo registrar usuario`,
 			placement: 'bottomLeft'
@@ -151,8 +151,9 @@ const FormSignIn = () => {
 				</Form.Item>
 			</div>
 
-			<Divider />
 
+            { showMore ? ( <>
+			<Divider />
 			<div className="group">
 				<Form.Item label="Documento de Identidad" name="userDni">
 					<Input />
@@ -205,15 +206,35 @@ const FormSignIn = () => {
 				</Form.Item>
 			</div>
 
+			<Divider />
 			<Form.Item label="Preferencias" name="userPreferences">
-				<Input />
+                <Form.Item label="Tipología" name="userPreferences.typology">
+                    <Input />
+                </Form.Item>
 			</Form.Item>
+            </>
+            ) : null }
 
-			<Form.Item name="submit-sign-in">
-				<Button id="submit-sign-in" type="primary" htmlType="submit">
-					Registrarse
-				</Button>
-			</Form.Item>
+            <div className="group">
+                <div>
+                    { !showMore ? 
+                    <div onClick={() => setShowMore(!showMore)} style={{display:'inline'}}>
+                        <DownOutlined/>
+                    <span style={{marginLeft:5}}>Mostrar más</span>
+                    </div> :
+                    <div onClick={() => setShowMore(!showMore)} style={{display:'inline'}}>
+                    <UpOutlined/>
+                    <span style={{marginLeft:5}}>Mostrar menos</span>
+                </div>         
+                }
+                </div>
+                <Form.Item name="submit-sign-in" style={{alignItems:'right'}}>
+                    <Button type="primary" htmlType="submit">
+                        Registrarse
+                    </Button>
+                </Form.Item>
+            </div>
+
 		</Form>
 	);
 };
