@@ -1,8 +1,8 @@
 import React from 'react';
-import { Input, Button, DatePicker, Upload, Select } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Input, DatePicker } from 'antd';
+import Select from './Select'
+import Upload from './Upload'
 
-const { Option } = Select;
 
 const InputRepository = (props) => {
 	const { component } = props;
@@ -19,25 +19,10 @@ const InputRepository = (props) => {
 		case 'Input.TextArea':
 			return <Input.TextArea />;
 		case 'Select':
-			return (
-				<Select>
-					{props.options.map((op) => {
-						return (
-							<Option key={op} value={op}>
-								{op}
-							</Option>
-						);
-					})}
-				</Select>
-			);
+			return <Select options={props.options} />
 		case 'Upload':
-			return (
-				<Upload>
-					<Button>
-						<UploadOutlined /> Subir
-					</Button>
-				</Upload>
-			);
+			return <Upload />
+					
 		default:
 			return <Input />;
 	}

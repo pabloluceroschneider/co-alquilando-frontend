@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, notification, Divider } from 'antd';
 import { useHistory } from 'react-router-dom';
-import InputRepository from './InputRepository';
+import InputRepository from '../InputRepository';
 
 const Row = (props) => {
 	const { fields } = props;

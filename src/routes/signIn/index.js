@@ -107,7 +107,7 @@ const userForm = {
 				{
 					label: "Documento de Identidad",
 					name: "userDni",
-					component: "Input",
+					component: "CheckBox",
 				},
 				{
 					label: "Sexo",

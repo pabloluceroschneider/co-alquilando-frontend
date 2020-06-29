@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './styles/index.css';
 // import App from './components/App';
-import Routes from './routes';
+import App from './routes';
 
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.Fragment>
-    <Routes />
+    <App />
   </React.Fragment>,
   document.getElementById('root')
 );
