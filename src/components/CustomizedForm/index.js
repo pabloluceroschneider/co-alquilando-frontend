@@ -14,12 +14,12 @@ const Row = (props) => {
 						key={element.label}
 						label={element.label}
 						name={element.name}
-						rules={[
+						rules={ element.required ? [
 							{
 								required: true,
 								message: 'Please input your username!'
 							}
-						]}
+						]: false}
 					>
 						<Input />
 					</Form.Item>
@@ -32,7 +32,7 @@ const Row = (props) => {
 const CustomizedForm = (props) => {
 	const { form } = props;
 	const { name, layout, fields } = form;
-	const { primaries, secondaries, tertiary } = fields;
+	const { primaries, secondaries, tertiaries } = fields;
 	const [ customizeForm ] = Form.useForm();
 	const [ showSecondary, setShowSecondary ] = useState(false);
 	const [ showTertiary, setShowTertiary ] = useState(false);
@@ -57,7 +57,9 @@ const CustomizedForm = (props) => {
 
 				{secondaries ? (
 					<p>
-						<a href="##" onClick={() => setShowSecondary(!showSecondary)}>{!showSecondary ? 'Show more+' : null}</a>
+						<a href="##" onClick={() => setShowSecondary(!showSecondary)}>
+							{!showSecondary ? 'Show more+' : null}
+						</a>
 					</p>
 				) : null}
 
@@ -69,7 +71,26 @@ const CustomizedForm = (props) => {
 
 				{showSecondary ? (
 					<p>
-						<a href="##" onClick={() => setShowSecondary(!showSecondary)}>{tertiary ? 'Show more+' : 'Show less-'}</a>
+						<a href="##" onClick={ (tertiaries && !showTertiary) ? () => setShowTertiary(!showTertiary) : () => setShowSecondary(false)}>
+							{tertiaries && !showTertiary ? 'Show more+' : showTertiary ? null : 'Show less-'}
+						</a>
+					</p>
+				) : null}
+
+				{showTertiary ? (
+					tertiaries.map((row, index) => {
+						return <Row key={index} fields={row} />;
+					})
+				) : null}
+
+				{showTertiary ? (
+					<p>
+						<a href="##" onClick={() => {
+							setShowTertiary(false);
+							setShowSecondary(false);
+						}}>
+							{showTertiary ? 'Show less-' : null}
+						</a>
 					</p>
 				) : null}
 

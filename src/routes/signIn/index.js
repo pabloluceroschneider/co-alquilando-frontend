@@ -58,8 +58,7 @@ const userForm = {
 				{
 					label: "Número de Celular",
 					name: "userPhone",
-					component: "Input",
-					required: true
+					component: "Input"
 				}
 			]
 		],
@@ -103,46 +102,43 @@ const userForm = {
 			]
 
 		],
-		tertiary: [
-			[
-				{
-					label: "Documento de Identidad",
-					name: "userDni",
-					component: "Input",
-				},
-				{
-					label: "Sexo",
-					name: "userSex",
-					component: "Select",
-					options : ["Femenino","Masculino","Otros"]
-				}
-			],
-			[
-				{
-					label: "Nacionalidad",
-					name: "userNationality",
-					component: "Input",
-				},
-				{
-					label: "Ciudad",
-					name: "userCity",
-					component: "Input",
-				}
-			],
-			[
-				{
-					label: "Descripción Personal",
-					name: "userDescription",
-					component: "TextArea",
-				},
-				{
-					label: "Cargar Imagen",
-					name: "userPhoto",
-					component: "Upload",
-				}
-			]
-
-		],
+		// tertiaries: [
+		// 	[
+		// 		{
+		// 			label: "Documento de Identidad",
+		// 			name: "userDni",
+		// 			component: "Input",
+		// 		},
+		// 		{
+		// 			label: "Sexo",
+		// 			name: "userSex",
+		// 			component: "Select",
+		// 			options : ["Femenino","Masculino","Otros"]
+		// 		},
+		// 		{
+		// 			label: "Nacionalidad",
+		// 			name: "userNationality",
+		// 			component: "Input",
+		// 		}
+		// 	],
+		// 	[
+		// 		{
+		// 			label: "Ciudad",
+		// 			name: "userCity",
+		// 			component: "Input",
+		// 		},
+		// 		{
+		// 			label: "Descripción Personal",
+		// 			name: "userDescription",
+		// 			component: "TextArea",
+		// 		},
+		// 		{
+		// 			label: "Cargar Imagen",
+		// 			name: "userPhoto",
+		// 			component: "Upload",
+		// 		}
+		// 	]
+		// ]
 	}
 };
 
