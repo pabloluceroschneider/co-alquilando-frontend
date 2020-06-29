@@ -1,249 +1,154 @@
-import React, { useState } from 'react';
-import { Form, Input, Button, Divider, DatePicker, notification, Upload, Select } from 'antd';
-import { UploadOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
-const { Option } = Select;
+import React from 'react';
+import CustomizedForm from '../../components/CustomizedForm';
 
-const FormSignIn = () => {
-	const [ provinces, setProvinces ] = useState(null);
-	const [ showMore, setShowMore ] = useState(false);
-	const [ form ] = Form.useForm();
-	let sexOptions = [ 'Femenino', 'Masculino', 'Otro' ];
-	let history = useHistory();
+const userForm = {
+	name: 'user',
+	layout: 'vertical',
+	fields: {
+		primaries: [
+			[
+				{
+					label: "Nombre",
+					name: "userName",
+					component: "Input",
+					required: true
+				},
+				{
+					label: "Apellido",
+					name: "userSurName",
+					component: "Input",
+					required: true
+				}
+			],
+			[
+				{
+					label: "Email",
+					name: "userEmail",
+					component: "Input",
+					required: true
+				},
+				{
+					label: "Confirme Email",
+					name: "userConfirmEmail",
+					component: "Input",
+					required: true
+				}
+			],
+			[
+				{
+					label: "Contraseña",
+					name: "userPassword",
+					component: "Input.Password",
+					required: true
+				},
+				{
+					label: "Confirme contraseña",
+					name: "userConfirmPassword",
+					component: "Input.Password",
+					required: true
+				}
+			],
+			[
+				{
+					label: "Fecha de Nacimiento",
+					name: "userBirthDate",
+					component: "DatePicker",
+					required: true
+				},				
+				{
+					label: "Número de Celular",
+					name: "userPhone",
+					component: "Input",
+					required: true
+				}
+			]
+		],
+		secondaries: [
+			[
+				{
+					label: "Documento de Identidad",
+					name: "userDni",
+					component: "Input",
+				},
+				{
+					label: "Sexo",
+					name: "userSex",
+					component: "Select",
+					options : ["Femenino","Masculino","Otros"]
+				}
+			],
+			[
+				{
+					label: "Nacionalidad",
+					name: "userNationality",
+					component: "Input",
+				},
+				{
+					label: "Ciudad",
+					name: "userCity",
+					component: "Input",
+				}
+			],
+			[
+				{
+					label: "Descripción Personal",
+					name: "userDescription",
+					component: "TextArea",
+				},
+				{
+					label: "Cargar Imagen",
+					name: "userPhoto",
+					component: "Upload",
+				}
+			]
 
-	const onFinish = (values) => {
-		notification.success({
-			message: `Usuario registrado`,
-			placement: 'bottomLeft'
-        });
-		history.push('/');
-	};
+		],
+		tertiary: [
+			[
+				{
+					label: "Documento de Identidad",
+					name: "userDni",
+					component: "Input",
+				},
+				{
+					label: "Sexo",
+					name: "userSex",
+					component: "Select",
+					options : ["Femenino","Masculino","Otros"]
+				}
+			],
+			[
+				{
+					label: "Nacionalidad",
+					name: "userNationality",
+					component: "Input",
+				},
+				{
+					label: "Ciudad",
+					name: "userCity",
+					component: "Input",
+				}
+			],
+			[
+				{
+					label: "Descripción Personal",
+					name: "userDescription",
+					component: "TextArea",
+				},
+				{
+					label: "Cargar Imagen",
+					name: "userPhoto",
+					component: "Upload",
+				}
+			]
 
-	const onFinishFailed = () => {
-		notification.error({
-			message: `No se pudo registrar usuario`,
-			placement: 'bottomLeft'
-		});
-	};
-
-	const getProvinces = () => {
-		if (!provinces) {
-			fetch('https://apis.datos.gob.ar/georef/api/provincias')
-				.then(function(response) {
-					return response.json();
-				})
-				.then(function(myJson) {
-					setProvinces(myJson.provincias);
-				});
-		}
-	};
-
-	return (
-		<Form
-			name="sign-in"
-			initialValues={{
-				remember: true
-			}}
-			onFinish={onFinish}
-			onFinishFailed={onFinishFailed}
-			form={form}
-			layout="vertical"
-		>
-			<div className="group">
-				<Form.Item
-					label="Nombre"
-					name="userName"
-					rules={[
-						{
-							required: true,
-							message: 'Please input your username!'
-						}
-					]}
-				>
-					<Input />
-				</Form.Item>
-
-				<Form.Item
-					label="Apellido"
-					name="userSurname"
-					rules={[
-						{
-							required: true,
-							message: 'Please input your username!'
-						}
-					]}
-				>
-					<Input />
-				</Form.Item>
-			</div>
-
-			<div className="group">
-				<Form.Item
-					label="Email"
-					name="userEmail"
-					rules={[
-						{
-							required: true,
-							message: 'Please input your username!'
-						}
-					]}
-				>
-					<Input />
-				</Form.Item>
-
-				<Form.Item
-					label="Confirme email"
-					name="userConfirmEmail"
-					rules={[
-						{
-							required: true,
-							message: 'Please input your username!'
-						}
-					]}
-				>
-					<Input />
-				</Form.Item>
-			</div>
-
-			<div className="group">
-				<Form.Item
-					label="Contraseña"
-					name="userPassword"
-					rules={[
-						{
-							required: true,
-							message: 'Please input your password!'
-						}
-					]}
-				>
-					<Input.Password />
-				</Form.Item>
-
-				<Form.Item
-					label="Confirme contraseña"
-					name="userConfirmPassword"
-					rules={[
-						{
-							required: true,
-							message: 'Please input your password!'
-						}
-					]}
-				>
-					<Input.Password />
-				</Form.Item>
-			</div>
-
-			<div className="group">
-				<Form.Item
-					label="Fecha de Nacimiento"
-					name="userBirthDate"
-					rules={[
-						{
-							required: true,
-							message: 'Please input your username!'
-						}
-					]}
-				>
-					<DatePicker />
-				</Form.Item>
-				<Form.Item label="Número de Celular" name="userPhone">
-					<Input />
-				</Form.Item>
-			</div>
-
-
-            { showMore ? ( <>
-			<Divider />
-			<div className="group">
-				<Form.Item label="Documento de Identidad" name="userDni">
-					<Input />
-				</Form.Item>
-
-				<Form.Item label="Sexo" name="userSex">
-					<Select allowClear>
-						{sexOptions.map((s) => {
-							return (
-								<Option key={s} value={s}>
-									{s}
-								</Option>
-							);
-						})}
-					</Select>
-				</Form.Item>
-			</div>
-
-			<div className="group">
-				<Form.Item label="Nacionalidad" name="userNationality">
-					<Input />
-				</Form.Item>
-
-				<Form.Item label="Ciudad" name="userCity">
-					<Select allowClear onClick={getProvinces()}>
-						{provinces ? (
-							provinces.map((p) => {
-								return (
-									<Option key={p.id} value={p.nombre}>
-										{p.nombre}
-									</Option>
-								);
-							})
-						) : null}
-					</Select>
-				</Form.Item>
-			</div>
-
-			<div className="group">
-				<Form.Item label="Descripción Personal" name="userDescription">
-					<Input.TextArea />
-				</Form.Item>
-
-				<Form.Item label="Cargar Imagen">
-					<Upload>
-						<Button>
-							<UploadOutlined /> Subir
-						</Button>
-					</Upload>
-				</Form.Item>
-			</div>
-
-			<Divider />
-			<Form.Item label="Preferencias" name="userPreferences">
-                <Form.Item label="Tipología" name="userPreferences.typology">
-                    <Input />
-                </Form.Item>
-			</Form.Item>
-            </>
-            ) : null }
-
-            <div className="group">
-                <div>
-                    { !showMore ? 
-                    <div onClick={() => setShowMore(!showMore)} style={{display:'inline'}}>
-                        <DownOutlined/>
-                    <span style={{marginLeft:5}}>Mostrar más</span>
-                    </div> :
-                    <div onClick={() => setShowMore(!showMore)} style={{display:'inline'}}>
-                    <UpOutlined/>
-                    <span style={{marginLeft:5}}>Mostrar menos</span>
-                </div>         
-                }
-                </div>
-                <Form.Item name="submit-sign-in" style={{alignItems:'right'}}>
-                    <Button type="primary" htmlType="submit">
-                        Registrarse
-                    </Button>
-                </Form.Item>
-            </div>
-
-		</Form>
-	);
+		],
+	}
 };
 
 const SignIn = () => {
 	return (
-		<div className="form-sign-in">
-			<FormSignIn />
-		</div>
+			<CustomizedForm form={userForm} />
 	);
 };
 
