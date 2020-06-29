@@ -66,16 +66,16 @@ const CustomizedForm = (props) => {
 			if(showSecondary){
 				if(tertiaries){
 					if(showTertiary){
-						return <div onClick={ () => {setShowTertiary(false);setShowSecondary(false)}}>Show less</div>
+						return <div onClick={ () => {setShowTertiary(false);setShowSecondary(false)}}>Mostrar menos</div>
 					}else{
-						return <div onClick={ () => {setShowTertiary(true)}}>Show more</div>
+						return <div onClick={ () => {setShowTertiary(true)}}>Mostrar más</div>
 					}
 				}else{
-					return null
+					return <div onClick={ () => {setShowSecondary(false)}}>Mostrar menos</div>
 				}
 
 			}else{
-				return <div onClick={ () => {setShowSecondary(true)} }>Show More</div>
+				return <div onClick={ () => {setShowSecondary(true)} }>Mostrar más</div>
 			}
 		}else{
 			return null
