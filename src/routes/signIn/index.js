@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { notification } from 'antd';
+import { useHistory } from 'react-router-dom';
 import CustomizedForm from '../../components/CustomizedForm';
 import api from '../../util/api'
 
@@ -122,14 +124,20 @@ const usePostProperty = fields => {
 
 const SignIn = () => {
 	const [ fields, setFields ] = useState(null)
-
+	const history = useHistory();
 	let property = usePostProperty(fields)
 	
 	useEffect( () => {
-		if(!property){
+		console.log(property)
+		if(property){
 			console.log(property)
+			notification.success({
+				message: `Usuario registrado`,
+				placement: 'bottomLeft'
+			});
+			history.push('/');
 		}
-	},[property])
+	},[property, history])
 
 
 	return <CustomizedForm form={userForm} onfinish={setFields} />

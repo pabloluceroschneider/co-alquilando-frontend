@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Button, notification, Divider } from 'antd';
-import { useHistory } from 'react-router-dom';
 import InputRepository from '../InputRepository';
 
 const Row = (props) => {
@@ -41,7 +40,6 @@ const CustomizedForm = (props) => {
 	const [ customizeForm ] = Form.useForm();
 	const [ showSecondary, setShowSecondary ] = useState(false);
 	const [ showTertiary, setShowTertiary ] = useState(false);
-	const history = useHistory();
 
 	const onFinish = (values) => {
 		onfinish(values)
