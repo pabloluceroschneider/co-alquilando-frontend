@@ -35,7 +35,7 @@ const Row = (props) => {
 };
 
 const CustomizedForm = (props) => {
-	const { form } = props;
+	const { form, onfinish } = props;
 	const { name, layout, fields } = form;
 	const { primaries, secondaries, tertiaries } = fields;
 	const [ customizeForm ] = Form.useForm();
@@ -44,17 +44,16 @@ const CustomizedForm = (props) => {
 	const history = useHistory();
 
 	const onFinish = (values) => {
-		console.log(values)
-		notification.success({
-			message: `Usuario registrado`,
-			placement: 'bottomLeft'
-		});
-		history.push('/');
+		onfinish(values)
+		// console.log(values)
+		// notification.success({
+		// 	message: `Usuario registrado`,
+		// 	placement: 'bottomLeft'
+		// });
+		// history.push('/');
 	};
 
 	const onFinishFailed = values => {
-		console.log(values)
-
 		notification.error({
 			message: `No se pudo registrar usuario`,
 			placement: 'bottomLeft'
@@ -113,7 +112,7 @@ const CustomizedForm = (props) => {
 					<>
 					<Divider />
 					{tertiaries.map((row, index) => {
-						return <Row key={index} fields={row} />;
+						return <Row key={index} fields={row} form={customizeForm}/>;
 					})}
 					</>
 				) : null}

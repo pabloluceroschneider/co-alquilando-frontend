@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import CustomizedForm from '../../components/CustomizedForm';
 
 const userForm = {
@@ -101,52 +101,19 @@ const userForm = {
 				}
 			]
 
-		],
-		tertiaries: [
-			[
-				{
-					label: "Documento de Identidad",
-					name: "userDni",
-					component: "CheckBox",
-				},
-				{
-					label: "Sexo",
-					name: "userSex",
-					component: "Select",
-					options : ["Femenino","Masculino","Otros"]
-				},
-				{
-					label: "Cargar Imagen",
-					name: "userPhoto",
-					component: "Upload",
-				}
-
-			],
-			[
-				{
-					label: "Nacionalidad",
-					name: "userNationality",
-					component: "Input",
-				},
-				{
-					label: "Ciudad",
-					name: "userCity",
-					component: "Input",
-				},
-				{
-					label: "Descripción Personal",
-					name: "userDescription",
-					component: "TextArea",
-				},
-				
-			]
 		]
 	}
 };
 
 const SignIn = () => {
+	const [ fields, setFields ] = useState(null)
+
+	useEffect(() => {
+		console.log(fields)
+	}, [fields])
+
 	return (
-			<CustomizedForm form={userForm} />
+			<CustomizedForm form={userForm} onfinish={setFields} />
 	);
 };
 
