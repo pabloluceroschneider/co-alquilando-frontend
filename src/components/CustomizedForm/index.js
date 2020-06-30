@@ -55,7 +55,7 @@ const CustomizedForm = (props) => {
 
 	const onFinishFailed = values => {
 		notification.error({
-			message: `No se pudo registrar usuario`,
+			message: `Error en formulario`,
 			placement: 'bottomLeft'
 		});
 	};

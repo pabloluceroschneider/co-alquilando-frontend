@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import CustomizedForm from '../../components/CustomizedForm';
+import api from '../../util/api'
 
 const userForm = {
 	name: 'user',
@@ -105,16 +106,34 @@ const userForm = {
 	}
 };
 
+const usePostProperty = fields => {
+	const [ response, setResponse ] = useState(null)
+	useEffect(() => {
+		if (fields){
+			let post = async () => { 
+				await api.post("/property", fields)
+						 .then( res => setResponse(res) 
+			)}
+			post();	
+		}
+	}, [fields])
+	return response;
+}
+
 const SignIn = () => {
 	const [ fields, setFields ] = useState(null)
 
-	useEffect(() => {
-		console.log(fields)
-	}, [fields])
+	let property = usePostProperty(fields)
+	
+	useEffect( () => {
+		if(!property){
+			console.log(property)
+		}
+	},[property])
 
-	return (
-			<CustomizedForm form={userForm} onfinish={setFields} />
-	);
+
+	return <CustomizedForm form={userForm} onfinish={setFields} />
+
 };
 
 export default SignIn;
