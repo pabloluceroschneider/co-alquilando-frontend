@@ -13,7 +13,6 @@ const Row = (props) => {
 						key={element.label}
 						label={element.label}
 						name={element.name}
-						valuePropName={element.component === "Checkbox" ? "checked": null}
 						rules={
 							element.required ? (
 								[
