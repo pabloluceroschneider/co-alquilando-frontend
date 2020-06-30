@@ -1,7 +1,9 @@
 import React from 'react';
-import { Input, DatePicker } from 'antd';
+import { Input, Checkbox } from 'antd';
 import Select from './Select'
 import Upload from './Upload'
+import DatePicker from './DatePicker'
+import CheckboxGroup from './CheckboxGroup'
 
 
 const InputRepository = (props) => {
@@ -14,12 +16,17 @@ const InputRepository = (props) => {
 			return <Input.Password />;
 		case 'Input.Number':
 			return <Input.Number />;
-		case 'DatePicker':
-			return <DatePicker />;
 		case 'Input.TextArea':
 			return <Input.TextArea />;
+		case 'Checkbox':
+			return <Checkbox>{props.label}</Checkbox>
+		case 'CheckboxGroup':
+			// revisar, envia una función a values
+			return CheckboxGroup({...props,all:true})
+		case 'DatePicker':
+			return DatePicker(props);
 		case 'Select':
-			return <Select options={props.options} />
+			return Select(props)
 		case 'Upload':
 			return <Upload />
 					
