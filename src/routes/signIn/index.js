@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { notification } from 'antd';
+import { Form, notification } from 'antd';
 import { useHistory } from 'react-router-dom';
 import CustomizedForm from '../../components/CustomizedForm';
 import api from '../../util/api'
 
-const userForm = {
+const userData = {
 	name: 'user',
 	layout: 'vertical',
 	fields: {
@@ -124,6 +124,7 @@ const usePostProperty = fields => {
 
 const SignIn = () => {
 	const [ fields, setFields ] = useState(null)
+	const [form]= Form.useForm();
 	const history = useHistory();
 	let property = usePostProperty(fields)
 	
@@ -140,7 +141,7 @@ const SignIn = () => {
 	},[property, history])
 
 
-	return <CustomizedForm form={userForm} onfinish={setFields} />
+	return <CustomizedForm form={form} data={userData} onfinish={setFields} />
 
 };
 

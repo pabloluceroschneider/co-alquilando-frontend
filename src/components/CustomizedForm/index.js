@@ -34,21 +34,14 @@ const Row = (props) => {
 };
 
 const CustomizedForm = (props) => {
-	const { form, onfinish } = props;
-	const { name, layout, fields } = form;
+	const { data, onfinish, form } = props;
+	const { name, layout, fields } = data;
 	const { primaries, secondaries, tertiaries } = fields;
-	const [ customizeForm ] = Form.useForm();
 	const [ showSecondary, setShowSecondary ] = useState(false);
 	const [ showTertiary, setShowTertiary ] = useState(false);
 
 	const onFinish = (values) => {
 		onfinish(values)
-		// console.log(values)
-		// notification.success({
-		// 	message: `Usuario registrado`,
-		// 	placement: 'bottomLeft'
-		// });
-		// history.push('/');
 	};
 
 	const onFinishFailed = values => {
@@ -88,10 +81,10 @@ const CustomizedForm = (props) => {
 				}}
 				onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
-				form={customizeForm}
+				form={form}
 				layout={layout}
 			>
-				{form ? (
+				{data ? (
 					primaries.map((row, index) => {
 						return <Row key={index} fields={row} />;
 					})
@@ -110,7 +103,7 @@ const CustomizedForm = (props) => {
 					<>
 					<Divider />
 					{tertiaries.map((row, index) => {
-						return <Row key={index} fields={row} form={customizeForm}/>;
+						return <Row key={index} fields={row}/>;
 					})}
 					</>
 				) : null}
