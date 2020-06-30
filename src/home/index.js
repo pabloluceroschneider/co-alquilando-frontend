@@ -4,6 +4,7 @@ import Carrousel from '../components/reusable/carrousel/index'
 import image1 from '../components/assets/images/Home/1.jpg'
 import image2 from '../components/assets/images/Home/2.jpg'
 import image3 from '../components/assets/images/Home/3.jpeg'
+import Menu from '../components/menu/index'
 
 const Home = () => {
    console.log("asd",image1)
@@ -11,7 +12,9 @@ const Home = () => {
         <div>
             <head>Head</head>
             
-            <h1>Menu</h1>
+            <h1>
+                {/* <Menu></Menu> */}
+            </h1>
 
             <div>
                 <div >
