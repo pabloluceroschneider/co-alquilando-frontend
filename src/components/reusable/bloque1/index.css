@@ -1,0 +1,37 @@
+.Block1 {
+    display: flex;
+    flex-direction: row;
+    min-height: 400px;
+    margin-top: 40px;
+}
+    .images {
+        width: 50%;
+        background-size: cover;
+      background-repeat: no-repeat;
+      }
+
+      .content {
+        display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      width: 50%;
+      background-color: beige;
+      }
+   
+      .title {
+        padding-bottom: 15px;
+        margin-left: 25px;
+        font-size: 30px;
+        color: #707070;
+        font-weight: bold;
+        padding-top: 35px;
+      }
+      .subtitle {
+        color: #707070;
+        font-weight: 400;
+        margin: 0 20px 0 25px;
+        font-size: 25px;
+        line-height: 26px;
+        margin-block-end: 15px;
+      }

@@ -12,6 +12,7 @@ const carrusel = props => {
     return (
         <div>
             <Carousel 
+            infiniteLoop={true}
             autoPlay={true}
             showArrows={false}
             showThumbs={false}
