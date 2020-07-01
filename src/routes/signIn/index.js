@@ -34,7 +34,17 @@ const userData = {
 					label: "Confirme Email",
 					name: "userConfirmEmail",
 					component: "Input",
-					required: true
+					required: true,
+					dependencies:['userEmail'],
+					hasFeedback: true,
+					validate: ({ getFieldValue }) => ({
+						validator(rule, value) {
+						  if (!value || getFieldValue('userEmail') === value) {
+							return Promise.resolve();
+						  }
+						  return Promise.reject('Los emails no coinciden!');
+						},
+					  }),
 				}
 			],
 			[
@@ -48,7 +58,17 @@ const userData = {
 					label: "Confirme contraseña",
 					name: "userConfirmPassword",
 					component: "Input.Password",
-					required: true
+					required: true,
+					dependencies:['userPassword'],
+					hasFeedback: true,
+					validate: ({ getFieldValue }) => ({
+						validator(rule, value) {
+						  if (!value || getFieldValue('userPassword') === value) {
+							return Promise.resolve();
+						  }
+						  return Promise.reject('Las constraseñas no coinciden!');
+						},
+					  }),
 				}
 			],
 			[
@@ -56,7 +76,7 @@ const userData = {
 					label: "Fecha de Nacimiento",
 					name: "userBirthDate",
 					component: "DatePicker",
-					required: true
+					required: true,
 				},				
 				{
 					label: "Número de Celular",
@@ -112,8 +132,10 @@ const usePostProperty = fields => {
 	const [ response, setResponse ] = useState(null)
 	useEffect(() => {
 		if (fields){
+			delete fields.userConfirmEmail
+			delete fields.userConfirmPassword
 			let post = async () => { 
-				await api.post("/property", fields)
+				await api.post("/user", fields)
 						 .then( res => setResponse(res) 
 			)}
 			post();	
@@ -129,7 +151,6 @@ const SignIn = () => {
 	let property = usePostProperty(fields)
 	
 	useEffect( () => {
-		console.log(property)
 		if(property){
 			console.log(property)
 			notification.success({

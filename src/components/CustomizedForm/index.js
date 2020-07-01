@@ -12,17 +12,19 @@ const Row = (props) => {
 						key={element.label}
 						label={element.label}
 						name={element.name}
-						rules={
-							element.required ? (
-								[
-									{
-										required: true,
-										message: `Porfavor, ingrese ${element.label}`
-									}
-								]
-							) : (
-								false
-							)
+						dependencies={element.dependencies}
+						hasFeedback={element.hasFeedback}
+						rules={ element.validate ?
+							[
+								{
+									required: element.required,
+									message: `Porfavor, ingrese ${element.label}`
+								},
+								element.validate ? element.validate : () => { return Promise.resolve() }
+						] : [{
+							required: element.required,
+							message: `Porfavor, ingrese ${element.label}`
+						}]
 						}
 					>
 						{InputRepository(element)}
