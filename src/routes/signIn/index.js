@@ -132,10 +132,12 @@ const usePostProperty = fields => {
 	const [ response, setResponse ] = useState(null)
 	useEffect(() => {
 		if (fields){
-			delete fields.userConfirmEmail
-			delete fields.userConfirmPassword
+			let bodyReq = fields
+			delete bodyReq.userConfirmEmail
+			delete bodyReq.userConfirmPassword
+			bodyReq = { ...bodyReq, userPhoto:null, userPreferences: null }
 			let post = async () => { 
-				await api.post("/user", fields)
+				await api.post("/user", bodyReq)
 						 .then( res => setResponse(res) 
 			)}
 			post();	
