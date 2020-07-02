@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Form, notification } from 'antd';
 import { useHistory } from 'react-router-dom';
 import CustomizedForm from '../../components/CustomizedForm';
-import api from '../../util/api'
+import { ApiRequest } from '../../util/ApiRequest';
 
 const userData = {
 	name: 'user',
@@ -18,7 +18,7 @@ const userData = {
 				},
 				{
 					label: "Apellido",
-					name: "userSurName",
+					name: "userSurname",
 					component: "Input",
 					required: true
 				}
@@ -135,12 +135,19 @@ const usePostProperty = fields => {
 			let bodyReq = fields
 			delete bodyReq.userConfirmEmail
 			delete bodyReq.userConfirmPassword
-			bodyReq = { ...bodyReq, userPhoto:null, userPreferences: null }
-			let post = async () => { 
-				await api.post("/user", bodyReq)
-						 .then( res => setResponse(res) 
-			)}
-			post();	
+			bodyReq = { ...bodyReq, userPhoto:null, userPreferences: null, userId:123322 }
+			let asyncPost = async() => {
+				try{
+					let ok = await ApiRequest.post("/user", bodyReq);
+					setResponse(ok)
+				}catch(e){
+					notification.error({
+						message: `Error: ${e.message}`,
+						placement: 'bottomLeft'
+					});
+				}
+			}
+			asyncPost()
 		}
 	}, [fields])
 	return response;
