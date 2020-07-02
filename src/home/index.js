@@ -1,13 +1,17 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import './index.css';
 import Carrousel from '../components/reusable/carrousel/index'
 import image1 from '../components/assets/images/Home/1.jpg'
 import image2 from '../components/assets/images/Home/2.jpg'
-import image3 from '../components/assets/images/Home/3.jpeg'
+import image3 from '../components/assets/images/Home/3.jpg'
 import image4 from '../components/assets/images/Home/4.jpg'
+import image5 from '../components/assets/images/Home/bloque1_1.jpg'
+import image6 from '../components/assets/images/Home/bloque1_2.jpg'
+import image7 from '../components/assets/images/Home/bloque1_3.jpg'
 import Menu from '../components/menu/index'
-import Bloque1 from '../components/reusable/bloque1/index'
+import Body2 from '../components/reusable/body2/index'
+import Body1 from '../components/reusable/body1/index'
+import { Divider } from 'antd';
 
 const Home = () => {
    console.log("asd",image1)
@@ -15,23 +19,29 @@ const Home = () => {
         <div>
             <head>Head</head>
             
-            <h1>
-                {/* <Menu></Menu> */}
-            </h1>
-
+            <div>
+                <Menu></Menu>
+            </div>
             <div>
                 <div >
                     <Carrousel data={[
                         { imgUrl:image1, caption:"", position:""},
-                        { imgUrl:image2, caption:"Multiples Opciones", position:"end"},
-                        { imgUrl:image3, caption:"Comodidad Ilimitada", position:"end"}
+                        { imgUrl:image2, caption:"Encontra tu lugar", position:"left"},
+                        { imgUrl:image3, caption:"Desde donde estes", position:"end"}
                      ]}>
 
                     </Carrousel>
                 </div>
+                
                 <div >
-                    <Bloque1 imgUrl={image4} title="Bienvenido" subtitle="Con CoAlquilando vas a poder encontrar compañero de vivienda de una manera rapida y sensilla ">
-                    </Bloque1>
+                    <Body1 imgUrl1={image5} title1="Elegí" imgUrl2={image6} title2="Conecta" imgUrl3={image7} title3="Compartí">
+                    </Body1>
+                </div>
+                <Divider></Divider>
+
+                <div >
+                    <Body2 imgUrl={image4} title="Bienvenido" subtitle="Con CoAlquilando vas a poder encontrar compañero de vivienda de una manera rapida y sensilla ">
+                    </Body2>
                 </div>
                 
 

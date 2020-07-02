@@ -19,17 +19,17 @@ class App extends React.Component {
     return (
       <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
         <Menu.Item key="Inicio">
-        <a href="/" target="_blank" rel="noopener noreferrer">
+        <a href="/" rel="noopener noreferrer">
             Inicio
           </a>
         </Menu.Item>
         <Menu.Item key="login">
-          <a href="/login" target="_blank" rel="noopener noreferrer">
+          <a href="/login"  rel="noopener noreferrer">
             Iniciar Sesion
           </a>
         </Menu.Item>
         <Menu.Item key="Sing-in">
-        <a href="/sign-in" target="_blank" rel="noopener noreferrer">
+        <a href="/sign-in"  rel="noopener noreferrer">
             Registrate
           </a>
         </Menu.Item>

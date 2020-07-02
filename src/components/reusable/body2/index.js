@@ -4,7 +4,7 @@ import './index.css';
 
 
 
-const Bloque1 = props => {
+const Body2 = props => {
     const {imgUrl, title, subtitle} = props
 
     return (
@@ -28,4 +28,4 @@ const Bloque1 = props => {
 
 }
 
-export default Bloque1;
+export default Body2;

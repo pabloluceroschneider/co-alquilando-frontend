@@ -7,7 +7,6 @@ import Menu from '../components/menu/index'
 const Routes = props => {
 	return (
 		<Router>
-			 <Menu></Menu>
 			<Switch>
 				<Route exact path="/" component={Home}></Route>
 				<Route path="/sign-in" exact component={SignIn} />
