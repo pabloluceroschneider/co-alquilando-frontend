@@ -96,7 +96,11 @@ const userData = {
 					label: "Sexo",
 					name: "userSex",
 					component: "Select",
-					options : ["Femenino","Masculino","Otros"]
+					options : [
+						{ name: "Femenino", value: "FEMALE"},
+						{ name: "Masculino", value: "MALE"},
+						{ name: "Otro", value: "NOT_DEFINED"}
+					]
 				}
 			],
 			[
