@@ -14,25 +14,25 @@ import Body1 from '../components/reusable/body1/index'
 import { Divider } from 'antd';
 
 const Home = () => {
-   console.log("asd",image1)
-    return (			
+    console.log("asd", image1)
+    return (
         <div>
-            <head>Head</head>
-            
+
             <div>
-                <Menu></Menu>
-            </div>
-            <div>
+                <div style={{ height: 50 }}>
+                    <Menu></Menu>
+                </div>
                 <div >
                     <Carrousel data={[
-                        { imgUrl:image1, caption:"", position:""},
-                        { imgUrl:image2, caption:"Encontra tu lugar", position:"left"},
-                        { imgUrl:image3, caption:"Desde donde estes", position:"end"}
-                     ]}>
+                        { imgUrl: image1, caption: "", position: "" },
+                        { imgUrl: image2, caption: "Encontra tu lugar", position: "left" },
+                        { imgUrl: image3, caption: "Desde donde estes", position: "end" }
+                    ]}>
 
                     </Carrousel>
                 </div>
-                
+
+
                 <div >
                     <Body1 imgUrl1={image5} title1="Elegí" imgUrl2={image6} title2="Conecta" imgUrl3={image7} title3="Compartí">
                     </Body1>
@@ -40,15 +40,16 @@ const Home = () => {
                 <Divider></Divider>
 
                 <div >
-                    <Body2 imgUrl={image4} title="Bienvenido" subtitle="Con CoAlquilando vas a poder encontrar compañero de vivienda de una manera rapida y sensilla ">
+                    <Body2 imgUrl={image4} title="Bienvenido" subtitle="Co-Alquilando es tu oportunidad de encontrar compañero de vivienda de una manera rapida y sensilla ">
                     </Body2>
                 </div>
-                
+                <div style={{ height: 100 }}></div>
+
 
             </div>
         </div>
-        );
-    
-    }
-    
-    export default Home;
+    );
+
+}
+
+export default Home;

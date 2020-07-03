@@ -1,0 +1,16 @@
+.site-page-header{
+    background-color: rgb(0, 0, 51);
+    display: block;
+    height: 55px;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.856);
+    font-size: 20px;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-weight: 500;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-top: 8px;
+};
+.link{
+position: right;
+};
