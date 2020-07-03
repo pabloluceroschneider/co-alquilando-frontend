@@ -1,5 +1,5 @@
 
-import axios from './api';
+import axios from './Api';
 
 export class ApiRequest {
 

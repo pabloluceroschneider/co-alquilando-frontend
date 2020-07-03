@@ -11,6 +11,13 @@ const userData = {
 		primaries: [
 			[
 				{
+					label: "Nombre de usuario",
+					name: "userNickName",
+					component: "Input"
+				}
+			],
+			[
+				{
 					label: "Nombre",
 					name: "userName",
 					component: "Input",
@@ -76,7 +83,6 @@ const userData = {
 					label: "Fecha de Nacimiento",
 					name: "userBirthDate",
 					component: "DatePicker",
-					required: true,
 				},				
 				{
 					label: "Número de Celular",
@@ -139,7 +145,6 @@ const usePostProperty = fields => {
 			let bodyReq = fields
 			delete bodyReq.userConfirmEmail
 			delete bodyReq.userConfirmPassword
-			bodyReq = { ...bodyReq, userPhoto:null, userPreferences: null, userId:123322 }
 			let asyncPost = async() => {
 				try{
 					let ok = await ApiRequest.post("/user", bodyReq);
