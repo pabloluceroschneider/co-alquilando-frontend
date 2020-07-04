@@ -14,6 +14,7 @@ const Row = (props) => {
 						name={element.name}
 						dependencies={element.dependencies}
 						hasFeedback={element.hasFeedback}
+						valuePropName={element.valuePropName}
 						rules={ element.validate ?
 							[
 								{
@@ -37,7 +38,7 @@ const Row = (props) => {
 
 const CustomizedForm = (props) => {
 	const { data, onfinish, form } = props;
-	const { name, layout, fields } = data;
+	const { name, layout, fields, btnSubmit } = data;
 	const { primaries, secondaries, tertiaries } = fields;
 	const [ showSecondary, setShowSecondary ] = useState(false);
 	const [ showTertiary, setShowTertiary ] = useState(false);
@@ -116,7 +117,7 @@ const CustomizedForm = (props) => {
 
 				<Form.Item>
 					<Button type="primary" htmlType="submit">
-						Registrarse
+						{btnSubmit}
 					</Button>
 				</Form.Item>
 			</Form>

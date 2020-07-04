@@ -20,7 +20,7 @@ const InputRepository = (props) => {
 			return <Input.TextArea />;
 		case 'Checkbox':
 			// revisar, no retorna valor
-			return <Checkbox checked={props.form.getFieldsValue()[props.name]}/>
+			return <Checkbox/>
 		case 'CheckboxGroup':
 			// revisar, no retorna valor
 			return CheckboxGroup({...props,all:true})
@@ -30,7 +30,6 @@ const InputRepository = (props) => {
 			return Select(props)
 		case 'Upload':
 			return <Upload />
-					
 		default:
 			return <Input />;
 	}

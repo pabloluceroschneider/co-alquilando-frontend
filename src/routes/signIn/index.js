@@ -7,6 +7,7 @@ import { ApiRequest } from '../../util/ApiRequest';
 const userData = {
 	name: 'user',
 	layout: 'vertical',
+	btnSubmit: 'Registrarse',
 	fields: {
 		primaries: [
 			[
