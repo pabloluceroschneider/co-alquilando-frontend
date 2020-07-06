@@ -3,6 +3,7 @@ import { Form, notification } from 'antd';
 import { useHistory } from 'react-router-dom';
 import CustomizedForm from '../../components/CustomizedForm';
 import { ApiRequest } from '../../util/ApiRequest';
+import ContentWrapper from '../../components/ContentWrapper'
 
 const userData = {
 	name: 'user',
@@ -180,8 +181,11 @@ const SignIn = () => {
 		}
 	},[property, history])
 
-
-	return <CustomizedForm form={form} data={userData} onfinish={setFields} />
+	return (
+		<ContentWrapper header footer>
+			<CustomizedForm form={form} data={userData} onfinish={setFields} />
+		</ContentWrapper>
+	);
 
 };
 
