@@ -1,5 +1,6 @@
 .site-page-header{
-    background-color: rgb(0, 0, 51);
+    /* background-color: rgb(0, 0, 51); */
+    background-color: #2E86C1;
     display: block;
     height: 55px;
     width: 100%;
