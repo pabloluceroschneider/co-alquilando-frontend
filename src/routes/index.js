@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SignIn from './signIn'
 import Home from './home'
-import Menu from '../components/menu/index'
 import Header from '../components/header/index'
 import Footer from '../components/footer/index'
 import Property from './property';

@@ -2,7 +2,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Menu } from 'antd';
 import './index.css'
-const { SubMenu } = Menu;
+// const { SubMenu } = Menu;
 
 class App extends React.Component {
   state = {
