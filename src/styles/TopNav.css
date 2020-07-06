@@ -1,6 +1,9 @@
 
-/* TODO: Meter dentro de variable, para no impactar a TODO. */
-.ant-menu {
+.container.topnav{
+    min-height: 50px;
+}
+
+.container.topnav .ant-menu {
     text-align: center !important;
     margin-bottom: -12px;
     font-size: 20px;

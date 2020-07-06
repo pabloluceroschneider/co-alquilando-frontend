@@ -1,4 +1,5 @@
 import React from 'react';
+import ContentWrapper from '../../components/ContentWrapper'
 import Carrousel from '../../components/Carrousel'
 import image1 from '../../assets/images/Home/1.jpg'
 import image2 from '../../assets/images/Home/2.jpg'
@@ -7,26 +8,20 @@ import image4 from '../../assets/images/Home/4.jpg'
 import image5 from '../../assets/images/Home/bloque1_1.jpg'
 import image6 from '../../assets/images/Home/bloque1_2.jpg'
 import image7 from '../../assets/images/Home/bloque1_3.jpg'
-import TopNav from '../../containers/TopNav';
 import Body2 from '../../components/reusable/body2/index'
 import Body1 from '../../components/reusable/body1/index'
 import { Divider } from 'antd';
 
 const Home = () => {
     return (
-        <div>
-
+		<ContentWrapper header topnav footer>
             <div>
-                <div style={{ height: 50 }}>
-                    <TopNav />
-                </div>
                 <div >
                     <Carrousel data={[
                         { imgUrl: image1, caption: "", position: "" },
                         { imgUrl: image2, caption: "Encontra tu lugar", position: "left" },
                         { imgUrl: image3, caption: "Desde donde estes", position: "end" }
                     ]}>
-
                     </Carrousel>
                 </div>
 
@@ -45,7 +40,7 @@ const Home = () => {
 
 
             </div>
-        </div>
+		</ContentWrapper>
     );
 
 }

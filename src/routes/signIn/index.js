@@ -1,5 +1,6 @@
 import React from 'react';
 import CustomizedForm from '../../components/CustomizedForm';
+import ContentWrapper from '../../components/ContentWrapper'
 
 const userForm = {
 	name: 'user',
@@ -146,7 +147,9 @@ const userForm = {
 
 const SignIn = () => {
 	return (
+		<ContentWrapper header footer>
 			<CustomizedForm form={userForm} />
+		</ContentWrapper>
 	);
 };
 
