@@ -1,7 +1,6 @@
 import React from 'react';
-import './index.css';
 
-const header = () => {
+const Header = () => {
   return (
 
     <div className= "col-sm-12 site-page-header">
@@ -10,5 +9,5 @@ const header = () => {
   );
 }
 
-export default header;
+export default Header;
 

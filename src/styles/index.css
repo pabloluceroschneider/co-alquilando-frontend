@@ -1,5 +1,9 @@
 @import "./App.css";
 @import "./customizedForm.css";
+@import "./Footer.css";
+@import "./Header.css";
+@import "./TopNav.css";
+@import "./Carrousel.css";
 
 body {
   margin: 0;

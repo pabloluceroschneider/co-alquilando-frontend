@@ -1,11 +1,9 @@
 import React from 'react';
-import 'antd/dist/antd.css';
-import './index.css';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 
 
-const carrusel = props => {
+const CustomizedCarrousel = props => {
     const {data={}} = props
 
     return (
@@ -36,4 +34,4 @@ const carrusel = props => {
 
 }
 
-export default carrusel;
+export default CustomizedCarrousel;

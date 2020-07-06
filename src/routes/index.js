@@ -2,8 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SignIn from './signIn'
 import Home from './home'
-import Header from '../components/header/index'
-import Footer from '../components/footer/index'
+// import Header from '../components/header/index'
+// import Footer from '../components/footer/index'
+import Footer from '../containers/Footer';
+import Header from '../containers/Header';
 import Property from './property';
 
 const Routes = props => {

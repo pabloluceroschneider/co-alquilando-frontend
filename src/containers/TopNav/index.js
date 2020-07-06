@@ -1,10 +1,8 @@
 import React from 'react';
-import 'antd/dist/antd.css';
 import { Menu } from 'antd';
-import './index.css'
 // const { SubMenu } = Menu;
 
-class App extends React.Component {
+class TopNav extends React.Component {
   state = {
     current: 'mail',
   };
@@ -48,4 +46,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default TopNav;
