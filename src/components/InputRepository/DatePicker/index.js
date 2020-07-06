@@ -3,7 +3,7 @@ import { DatePicker } from 'antd'
 
 const CustomDatePicker = props => {
     return (
-        <DatePicker/>
+        <DatePicker format={'DD/MM/YYYY'}/>
     )
 }
 

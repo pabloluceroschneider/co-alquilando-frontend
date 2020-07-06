@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Button, notification, Divider } from 'antd';
-import { useHistory } from 'react-router-dom';
 import InputRepository from '../InputRepository';
 
 const Row = (props) => {
@@ -13,18 +12,20 @@ const Row = (props) => {
 						key={element.label}
 						label={element.label}
 						name={element.name}
-						valuePropName={element.component === "Checkbox" ? "checked": null}
-						rules={
-							element.required ? (
-								[
-									{
-										required: true,
-										message: `Porfavor, ingrese ${element.label}`
-									}
-								]
-							) : (
-								false
-							)
+						dependencies={element.dependencies}
+						hasFeedback={element.hasFeedback}
+						valuePropName={element.valuePropName}
+						rules={ element.validate ?
+							[
+								{
+									required: element.required,
+									message: `Porfavor, ingrese ${element.label}`
+								},
+								element.validate ? element.validate : () => { return Promise.resolve() }
+						] : [{
+							required: element.required,
+							message: `Porfavor, ingrese ${element.label}`
+						}]
 						}
 					>
 						{InputRepository(element)}
@@ -36,28 +37,19 @@ const Row = (props) => {
 };
 
 const CustomizedForm = (props) => {
-	const { form } = props;
-	const { name, layout, fields } = form;
+	const { data, onfinish, form } = props;
+	const { name, layout, fields, btnSubmit } = data;
 	const { primaries, secondaries, tertiaries } = fields;
-	const [ customizeForm ] = Form.useForm();
 	const [ showSecondary, setShowSecondary ] = useState(false);
 	const [ showTertiary, setShowTertiary ] = useState(false);
-	const history = useHistory();
 
 	const onFinish = (values) => {
-		console.log(values)
-		notification.success({
-			message: `Usuario registrado`,
-			placement: 'bottomLeft'
-		});
-		history.push('/');
+		onfinish(values)
 	};
 
 	const onFinishFailed = values => {
-		console.log(values)
-
 		notification.error({
-			message: `No se pudo registrar usuario`,
+			message: `Error en formulario`,
 			placement: 'bottomLeft'
 		});
 	};
@@ -92,10 +84,10 @@ const CustomizedForm = (props) => {
 				}}
 				onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
-				form={customizeForm}
+				form={form}
 				layout={layout}
 			>
-				{form ? (
+				{data ? (
 					primaries.map((row, index) => {
 						return <Row key={index} fields={row} />;
 					})
@@ -114,7 +106,7 @@ const CustomizedForm = (props) => {
 					<>
 					<Divider />
 					{tertiaries.map((row, index) => {
-						return <Row key={index} fields={row} />;
+						return <Row key={index} fields={row}/>;
 					})}
 					</>
 				) : null}
@@ -125,7 +117,7 @@ const CustomizedForm = (props) => {
 
 				<Form.Item>
 					<Button type="primary" htmlType="submit">
-						Registrarse
+						{btnSubmit}
 					</Button>
 				</Form.Item>
 			</Form>

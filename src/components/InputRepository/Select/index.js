@@ -8,8 +8,8 @@ const CustomSelect = (props) => {
 		<Select>
 			{options.map((op) => {
 				return (
-					<Option key={op} value={op}>
-						{op}
+					<Option key={op.value} value={op.value}>
+						{op.name}
 					</Option>
 				);
 			})}

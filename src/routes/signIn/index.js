@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
+import { Form, notification } from 'antd';
+import { useHistory } from 'react-router-dom';
 import CustomizedForm from '../../components/CustomizedForm';
+import { ApiRequest } from '../../util/ApiRequest';
 import ContentWrapper from '../../components/ContentWrapper'
 
-const userForm = {
+const userData = {
 	name: 'user',
 	layout: 'vertical',
+	btnSubmit: 'Registrarse',
 	fields: {
 		primaries: [
+			[
+				{
+					label: "Nombre de usuario",
+					name: "userNickName",
+					component: "Input"
+				}
+			],
 			[
 				{
 					label: "Nombre",
@@ -16,7 +27,7 @@ const userForm = {
 				},
 				{
 					label: "Apellido",
-					name: "userSurName",
+					name: "userSurname",
 					component: "Input",
 					required: true
 				}
@@ -32,7 +43,17 @@ const userForm = {
 					label: "Confirme Email",
 					name: "userConfirmEmail",
 					component: "Input",
-					required: true
+					required: true,
+					dependencies:['userEmail'],
+					hasFeedback: true,
+					validate: ({ getFieldValue }) => ({
+						validator(rule, value) {
+						  if (!value || getFieldValue('userEmail') === value) {
+							return Promise.resolve();
+						  }
+						  return Promise.reject('Los emails no coinciden!');
+						},
+					  }),
 				}
 			],
 			[
@@ -46,7 +67,17 @@ const userForm = {
 					label: "Confirme contraseña",
 					name: "userConfirmPassword",
 					component: "Input.Password",
-					required: true
+					required: true,
+					dependencies:['userPassword'],
+					hasFeedback: true,
+					validate: ({ getFieldValue }) => ({
+						validator(rule, value) {
+						  if (!value || getFieldValue('userPassword') === value) {
+							return Promise.resolve();
+						  }
+						  return Promise.reject('Las constraseñas no coinciden!');
+						},
+					  }),
 				}
 			],
 			[
@@ -54,7 +85,6 @@ const userForm = {
 					label: "Fecha de Nacimiento",
 					name: "userBirthDate",
 					component: "DatePicker",
-					required: true
 				},				
 				{
 					label: "Número de Celular",
@@ -74,7 +104,11 @@ const userForm = {
 					label: "Sexo",
 					name: "userSex",
 					component: "Select",
-					options : ["Femenino","Masculino","Otros"]
+					options : [
+						{ name: "Femenino", value: "FEMALE"},
+						{ name: "Masculino", value: "MALE"},
+						{ name: "Otro", value: "NOT_DEFINED"}
+					]
 				}
 			],
 			[
@@ -102,55 +136,57 @@ const userForm = {
 				}
 			]
 
-		],
-		tertiaries: [
-			[
-				{
-					label: "Documento de Identidad",
-					name: "userDni",
-					component: "CheckBox",
-				},
-				{
-					label: "Sexo",
-					name: "userSex",
-					component: "Select",
-					options : ["Femenino","Masculino","Otros"]
-				},
-				{
-					label: "Cargar Imagen",
-					name: "userPhoto",
-					component: "Upload",
-				}
-
-			],
-			[
-				{
-					label: "Nacionalidad",
-					name: "userNationality",
-					component: "Input",
-				},
-				{
-					label: "Ciudad",
-					name: "userCity",
-					component: "Input",
-				},
-				{
-					label: "Descripción Personal",
-					name: "userDescription",
-					component: "TextArea",
-				},
-				
-			]
 		]
 	}
 };
 
+const usePostProperty = fields => {
+	const [ response, setResponse ] = useState(null)
+	useEffect(() => {
+		if (fields){
+			let bodyReq = fields
+			delete bodyReq.userConfirmEmail
+			delete bodyReq.userConfirmPassword
+			let asyncPost = async() => {
+				try{
+					let ok = await ApiRequest.post("/user", bodyReq);
+					setResponse(ok)
+				}catch(e){
+					notification.error({
+						message: `Error: ${e.message}`,
+						placement: 'bottomLeft'
+					});
+				}
+			}
+			asyncPost()
+		}
+	}, [fields])
+	return response;
+}
+
 const SignIn = () => {
+	const [ fields, setFields ] = useState(null)
+	const [form]= Form.useForm();
+	const history = useHistory();
+	let property = usePostProperty(fields)
+	
+	useEffect( () => {
+		if(property){
+			console.log(property)
+			notification.success({
+				message: `Usuario registrado`,
+				placement: 'bottomLeft'
+			});
+			history.push('/');
+		}
+	},[property, history])
+
 	return (
 		<ContentWrapper header footer>
-			<CustomizedForm form={userForm} />
+			<CustomizedForm form={form} data={userData} onfinish={setFields} />
 		</ContentWrapper>
 	);
+
 };
 
 export default SignIn;

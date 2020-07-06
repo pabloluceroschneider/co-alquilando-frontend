@@ -19,9 +19,10 @@ const InputRepository = (props) => {
 		case 'Input.TextArea':
 			return <Input.TextArea />;
 		case 'Checkbox':
-			return <Checkbox>{props.label}</Checkbox>
+			// revisar, no retorna valor
+			return <Checkbox/>
 		case 'CheckboxGroup':
-			// revisar, envia una función a values
+			// revisar, no retorna valor
 			return CheckboxGroup({...props,all:true})
 		case 'DatePicker':
 			return DatePicker(props);
@@ -29,7 +30,6 @@ const InputRepository = (props) => {
 			return Select(props)
 		case 'Upload':
 			return <Upload />
-					
 		default:
 			return <Input />;
 	}
