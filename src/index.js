@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
 import 'antd/dist/antd.css';
-// import App from './components/App';
-import Routes from './routes'
+import './styles/index.css';
+import App from './routes';
+
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Routes />
-  </React.StrictMode>,
+  <React.Fragment>
+    <App />
+  </React.Fragment>,
   document.getElementById('root')
 );
 

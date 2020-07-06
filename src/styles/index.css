@@ -1,5 +1,12 @@
 @import "./App.css";
 @import "./property.css";
+@import "./customizedForm.css";
+@import "./Footer.css";
+@import "./Header.css";
+@import "./TopNav.css";
+@import "./Carrousel.css";
+@import "./GaleriaTresImagenes.css";
+@import "./Portada.css";
 
 body {
   margin: 0;
@@ -8,6 +15,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+
 }
 
 code {
