@@ -1,9 +1,6 @@
 import React from 'react';
-import './index.css';
 
-
-
-const Body2 = props => {
+const Portada = props => {
     const {imgUrl, title, subtitle} = props
 
     return (
@@ -27,4 +24,4 @@ const Body2 = props => {
 
 }
 
-export default Body2;
+export default Portada;

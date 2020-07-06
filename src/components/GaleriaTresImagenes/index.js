@@ -1,9 +1,6 @@
 import React from 'react';
-import './index.css';
 
-
-
-const Body1 = props => {
+const GaleriaTresImagenes = props => {
     const { imgUrl1, title1, imgUrl2, title2, imgUrl3, title3, } = props
 
     return (
@@ -44,4 +41,4 @@ const Body1 = props => {
 
 }
 
-export default Body1;
+export default GaleriaTresImagenes;

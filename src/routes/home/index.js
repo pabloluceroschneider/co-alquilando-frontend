@@ -8,11 +8,18 @@ import image4 from '../../assets/images/Home/4.jpg'
 import image5 from '../../assets/images/Home/bloque1_1.jpg'
 import image6 from '../../assets/images/Home/bloque1_2.jpg'
 import image7 from '../../assets/images/Home/bloque1_3.jpg'
-import Body2 from '../../components/reusable/body2/index'
-import Body1 from '../../components/reusable/body1/index'
+import GaleriaTresImagenes from '../../components/GaleriaTresImagenes'
+import Portada from '../../components/Portada'
 import { Divider } from 'antd';
 
 const Home = () => {
+
+    const portadaProps = {
+        imgUrl : image4,
+        title: "Bienvenido",
+        subtitle:"Co-Alquilando es tu oportunidad de encontrar compañero de vivienda de una manera rapida y sensilla"
+    }
+    
     return (
 		<ContentWrapper header topnav footer>
             <div>
@@ -27,14 +34,12 @@ const Home = () => {
 
 
                 <div >
-                    <Body1 imgUrl1={image5} title1="Elegí" imgUrl2={image6} title2="Conecta" imgUrl3={image7} title3="Compartí">
-                    </Body1>
+                    <GaleriaTresImagenes imgUrl1={image5} title1="Elegí" imgUrl2={image6} title2="Conecta" imgUrl3={image7} title3="Compartí" />
                 </div>
                 <Divider></Divider>
 
                 <div >
-                    <Body2 imgUrl={image4} title="Bienvenido" subtitle="Co-Alquilando es tu oportunidad de encontrar compañero de vivienda de una manera rapida y sensilla ">
-                    </Body2>
+                    <Portada {...portadaProps}/>
                 </div>
                 <div style={{ height: 100 }}></div>
 

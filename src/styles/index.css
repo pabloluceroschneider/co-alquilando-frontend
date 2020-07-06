@@ -4,6 +4,8 @@
 @import "./Header.css";
 @import "./TopNav.css";
 @import "./Carrousel.css";
+@import "./GaleriaTresImagenes.css";
+@import "./Portada.css";
 
 body {
   margin: 0;
