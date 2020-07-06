@@ -1,0 +1,45 @@
+.ant-carousel .slick-slide {
+    text-align: center;
+    display: flex;
+    background-position: center;
+    height: 260px;
+    line-height: 160px;
+    background: #364d79;
+    overflow: hidden;
+  }
+  
+  .ant-carousel .slick-slide h3 {
+    color: #fff;
+  }
+  
+  .image {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .carousel  .slider-wrapper  .slider {
+    height: 350px;
+    width: 100%;
+  }
+  .slide  div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-position: center;
+    background-size: cover;
+    
+   
+  }
+  .caption {
+    padding: 0 20px !important;
+    line-height: 2.5vw;
+    font-size: 3vw;      
+    width: 100%;
+    color: white;
+    width: 100%;
+    font-weight: 400;
+    position: relative;
+    top: 34%;
+  }
