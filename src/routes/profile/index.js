@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ApiRequest } from "../../util/ApiRequest";
+import calculateAge from "../../util/CalculateAge";
 import { Button } from "antd";
 
 const image =
@@ -11,30 +12,51 @@ const Profile = (props) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    const userData = ApiRequest.get(`/users/${nickname}`);
-    setData(userData.data);
-    console.log(data);
+    if (!data) {
+      const getUser = async () => {
+        const userData = await ApiRequest.get(`/user/${nickname}`);
+        setData(userData.data);
+      };
+      getUser();
+    }
   }, [nickname, data]);
 
   return (
     <>
-      <div className="profileContent">
-        <div className="group2">
-          <div className="imageContent">
-            <img alt="imagen de perfil" src={image} className="profileImage" />
-            <h2>
-              <strong>Michael Scofield</strong>
-            </h2>
-            <h4>Córdoba - Argentina</h4>
-          </div>
-          <div className="datosContent">
-            <p>Nickname: {nickname}</p>
-            <p>Edad: 28</p>
-            <p>Descripcion: Aqui va la Descripcion</p>
-            <Button type="primary">Conectar</Button>
-          </div>
+      {data ? (
+        <div className="profileContent">
+          <div className="group2">
+            <div className="imageContent">
+              <img
+                alt="imagen de perfil"
+                src={image}
+                className="profileImage"
+                />
+                </div>
+              <div className="profileMainData">
+
+              <h2>
+                <strong>
+                  {data.userName} {data.userSurname}
+                </strong>
+              </h2>
+              <h4>
+                {data.userCity} - {data.userNationality}
+              </h4>
+              </div>
+              </div>
+            <div className="datosContent">
+              <p>Nickname: {nickname}</p>
+              <p>Sexo: {data.userSex === "Male" ? "Masculino" : "Femenino"}</p>
+              <p>Edad: {calculateAge(data.userBirthDate)}</p>
+              <p>Descripcion: {data.userDescription}</p>
+            </div>
+            <div className="profileButton">
+              <Button id="buttonConectar">Conectar</Button>
+            </div>
+          
         </div>
-      </div>
+      ) : null}
     </>
   );
 };

@@ -4,6 +4,7 @@ import './styles/index.css';
 // import App from './components/App';
 import Routes from './routes'
 import * as serviceWorker from './serviceWorker';
+import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <React.StrictMode>
