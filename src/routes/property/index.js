@@ -4,6 +4,11 @@ import { Form, notification } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
 import ContentWrapper from "../../components/ContentWrapper";
 
+// propertyPreferences: Ubicacion, tipologia, habitaciones, 
+// baño, sum, gym, pileta, playroom, asador, cochera, 
+// balcon, ascensor, cantidad de personas por propiedad, 
+// amoblado, aire acondicionado, calefaccion, acepta mascotas.
+
 const propertyData = {
   name: "property",
   layout: "vertical",
@@ -13,7 +18,7 @@ const propertyData = {
       [
         {
           label: "Título",
-          name: "propertyTitle",
+          name: "title",
           component: "Input",
           required: true,
         },
@@ -21,13 +26,13 @@ const propertyData = {
       [
         {
           label: "Dirección",
-          name: "propertyAddress",
+          name: "address",
           component: "Input",
           required: true,
         },
         {
           label: "Habitaciones",
-          name: "propertyRooms",
+          name: "rooms",
           component: "Input",
           required: true,
         },
@@ -134,8 +139,7 @@ const Property = () => {
     <ContentWrapper header footer>
       <CustomizedForm form={form} data={propertyData} onfinish={onFinish} />
     </ContentWrapper>
-  )
+  );
 };
-
 
 export default Property;
