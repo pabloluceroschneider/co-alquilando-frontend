@@ -125,7 +125,7 @@ const UpdateForm = (props) => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/user/${nickname}`).then((res) => {
         console.log(res.data);
-        setIdUser(res.data.userId);
+        setIdUser(res.data.id);
         form.setFieldsValue(res.data);
       });
     };
@@ -134,7 +134,7 @@ const UpdateForm = (props) => {
   useEffect(()=>{
     if(fields){
         let asyncPutUser = async () => {
-            await ApiRequest.put(`/user/${idUser}`).then((res) => {
+            await ApiRequest.put(`/user`).then((res) => {
               console.log(res.data);
             });
           };
