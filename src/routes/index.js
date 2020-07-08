@@ -10,8 +10,8 @@ const Routes = props => {
 			<Switch>
 				<Route exact path="/">Home</Route>
 				<Route path="/sign-in" exact component={SignIn} />
+				<Route path="/property/:idProperty/update" exact component={PropertyId}/>
 				<Route path="/property" exact component={Property} />
-				<Route path="/property/:idProperty" exact component={PropertyId}/>
 			</Switch>
 		</Router>
 	);
