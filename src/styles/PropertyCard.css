@@ -1,0 +1,13 @@
+.content{
+display: grid;
+        grid-template-columns: 50% 50%;
+        column-gap: 5px;
+        width: 70%;
+    };
+
+    .content2{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        column-gap: 5px;
+        width: 70%;
+            };
