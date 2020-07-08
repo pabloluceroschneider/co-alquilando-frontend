@@ -6,7 +6,7 @@ const PropertyId = props => {
     console.log(idProperty);
     return (
         <div>
-            Profile: {idProperty}
+            Property Update: {idProperty}
         </div>
     )
 }
