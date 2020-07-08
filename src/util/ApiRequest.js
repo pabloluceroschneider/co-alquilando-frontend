@@ -23,5 +23,15 @@ export class ApiRequest {
             }
         })
     }
+    static put = async (endpoint, body) => {
+        return new Promise( async (res, rej) => {
+            try{
+                let data = await axios.put(endpoint, body)
+                res(data)
+            }catch(err){
+                rej(err)
+            }
+        })
+    }
 
 }
