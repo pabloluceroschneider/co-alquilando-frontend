@@ -69,8 +69,6 @@ const userData = {
           component: "Input",
         },
       ],
-    ],
-    secondaries: [
       [
         {
           label: "Documento de Identidad",
@@ -112,6 +110,8 @@ const userData = {
           component: "Upload",
         },
       ],
+    ],
+    secondaries: [
     ],
   },
 };
