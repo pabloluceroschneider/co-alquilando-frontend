@@ -19,6 +19,14 @@
     color: rgb(0, 132, 255)
 }
 
+.group2, .group3, .group4{
+    display: grid;
+    grid-template-columns: 100%;
+    text-align: center;
+}
+
+
+
 /* pantalla de escritorio */
 @media only screen and (min-width: 600px){
     .customizedForm{
@@ -29,20 +37,24 @@
         display: grid;
         grid-template-columns: 50% 50%;
         column-gap: 5px;
+        text-align: justify;
     }
     .group3{
         display: grid;
         grid-template-columns: 33% 33% 33%;
         column-gap: 5px;
+        text-align: justify;
     }
     .group4{
         display: grid;
         grid-template-columns: 25% 25% 25% 25%;
         column-gap: 5px;
+        text-align: justify;
     }
     .group5{
         display: grid;
         grid-template-columns: 20% 20% 20% 20% 20%;
         column-gap: 5px;
+        text-align: justify;
     }
 }

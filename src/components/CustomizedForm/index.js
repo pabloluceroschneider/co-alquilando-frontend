@@ -7,30 +7,7 @@ const Row = (props) => {
 	return (
 		<div className={`group${fields.length}`}>
 			{fields.map((element) => {
-				return (
-					<Form.Item
-						key={element.label}
-						label={element.label}
-						name={element.name}
-						dependencies={element.dependencies}
-						hasFeedback={element.hasFeedback}
-						valuePropName={element.valuePropName}
-						rules={ element.validate ?
-							[
-								{
-									required: element.required,
-									message: `Porfavor, ingrese ${element.label}`
-								},
-								element.validate ? element.validate : () => { return Promise.resolve() }
-						] : [{
-							required: element.required,
-							message: `Porfavor, ingrese ${element.label}`
-						}]
-						}
-					>
-						{InputRepository(element)}
-					</Form.Item>
-				);
+				return InputRepository(element)
 			})}
 		</div>
 	);

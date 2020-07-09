@@ -6,7 +6,8 @@ import { ApiRequest } from '../../util/ApiRequest'
 const loginFields = {
 	name: 'login',
 	layout: 'vertical',
-	className: 'login',
+    btnSubmit: 'Ingresar',
+    className: 'login',
 	fields: {
 		primaries: [
 			[
@@ -24,34 +25,28 @@ const loginFields = {
 					component: 'Input.Password',
 					required: true
 				}
+            ],
+            [
+				{
+					label: 'Olvidé mi Contraseña',
+                    component: 'link',
+                    href: "/"
+                },
+                {
+					label: '¿No tienes cuenta? ¡Registrate!',
+                    component: 'link',
+                    href:"/sign-in"
+				}
 			]
 		]
 	}
 };
 
 const CustomizedModal = (props) => {
-	const { visible, toggleVisible, onSubmit } = props;
+	const { visible, toggleVisible } = props;
     const [ form ] = Form.useForm();
-    
-	return (
-		<Modal title="Iniciar Sesión" visible={visible} okText="Registrarse" cancelText="Cancelar" onOk={onSubmit} onCancel={toggleVisible} okButtonProps={{ color: 'red' }}>
-			<CustomizedForm form={form} data={loginFields}/>
-            <div className="links-login">
-                <a href="/" rel="noopener noreferrer">Olvidé mi contraseña</a>
-                <a href="/sign-in" rel="noopener noreferrer">¿No tienes cuenta? ¡Registrate!</a><br />
-            </div>
-        </Modal>
-	);
-};
-
-const Login = () => {
-    const [ visible, setVisible ] = useState(false);
 	const [ response, setResponse ] = useState(null);
 
-	const toggleVisible = (value) => {
-		setVisible(!value);
-    };
-    
     const postSession = data => {
         console.log("data -->", data)
         if (data) {
@@ -71,11 +66,30 @@ const Login = () => {
             localStorage.setItem("session", response)
         }
     }, [response])
+    
+	return (
+        <Modal 
+            title="Iniciar Sesión" 
+            visible={visible} 
+            onCancel={toggleVisible} 
+            footer={null} 
+        >
+			<CustomizedForm form={form} data={loginFields} onfinish={postSession}/>
+        </Modal>
+	);
+};
 
+const Login = () => {
+    const [ visible, setVisible ] = useState(false);
+
+	const toggleVisible = (value) => {
+		setVisible(!value);
+    };
+    
 	return (
 		<div>
 			<span onClick={() => toggleVisible(visible)}> Iniciar sesión </span>
-			<CustomizedModal visible={visible} onSubmit={postSession} toggleVisible={toggleVisible} />
+			<CustomizedModal visible={visible} toggleVisible={toggleVisible} />
 		</div>
 	);
 };
