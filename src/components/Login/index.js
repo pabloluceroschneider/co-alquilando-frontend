@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Form, notification } from 'antd';
+import { Modal, Form } from 'antd';
 import CustomizedForm from '../CustomizedForm';
 import { ApiRequest } from '../../util/ApiRequest'
 
@@ -63,15 +63,16 @@ const CustomizedModal = (props) => {
     useEffect(() => {
         if(response){
             localStorage.setItem("session", response)
-        }
-    }, [response])
+		}
+	}, [response])
     
 	return (
         <Modal 
             title="Iniciar Sesión" 
             visible={visible} 
             onCancel={toggleVisible} 
-            footer={null} 
+			footer={null} 
+			destroyOnClose={true}
         >
 			<CustomizedForm form={form} data={loginFields} onfinish={postSession}/>
         </Modal>
