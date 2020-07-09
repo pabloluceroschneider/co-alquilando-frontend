@@ -57,7 +57,7 @@ const propertyData = {
           label: "Precio",
           name: "price",
           component: "Input",
-          required: true,
+          // required: true,
         },
       ],
     ],

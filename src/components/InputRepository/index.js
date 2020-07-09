@@ -37,9 +37,9 @@ const InputRepository = (props) => {
 
   switch (component) {
     case "label":
-      return <label className="label">{label}</label>;
+      return <label className="label" key={label}>{label}</label>;
     case "h2":
-      return <h2 className="h2">{label}</h2>;
+      return <h2 className="h2" key={label}>{label}</h2>;
     case "link":
       return (
         <a key={props.label} href={props.href} rel="noopener noreferrer">
