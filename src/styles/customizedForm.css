@@ -25,6 +25,12 @@
     text-align: center;
 }
 
+.group2 :first-child, .group3 :first-child, .group4 :first-child{
+    text-align: left;
+}
+.group2 :nth-child(2), .group3 :nth-child(3), .group4 :nth-child(4){
+    text-align: right;
+}
 
 
 /* pantalla de escritorio */
