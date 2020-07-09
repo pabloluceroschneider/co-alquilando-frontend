@@ -16,7 +16,8 @@ const userData = {
 				{
 					label: "Nombre de usuario",
 					name: "userNickname",
-					component: "Input"
+					component: "Input",
+					required: true
 				}
 			],
 			[
@@ -141,32 +142,30 @@ const userData = {
 	}
 };
 
-const usePostProperty = fields => {
+const usePostUser = bodyReq => {
 	const [ response, setResponse ] = useState(null)
+	const [ error, setError ] = useState(null)
 	useEffect(() => {
-		if (fields){
+		if (bodyReq){
 
 			// AWS Cognito Integration
-			let asyncCognito = async () => {
-				let awsData = { email: fields.userEmail, password: fields.userPassword };
-				console.log("fields -->", fields)
-				try {
-					const signUpResponse = await Auth.signUp({
-						username: fields.userNickname,
-						password: fields.userPassword,
-						attributes: {
-							email: fields.userEmail
-						}
-					})
-					console.log("signUpResponse -->", signUpResponse)
-				} catch (error) {
-					console.log(error)
-				}
-			}
-			let bodyReq = fields
-			delete bodyReq.userConfirmEmail
-			delete bodyReq.userConfirmPassword
-			let asyncPost = async() => {
+			let asyncCognito = new Promise ( async (res, rej) => {
+					try {
+						await Auth.signUp({
+							username: bodyReq.userNickname,
+							password: bodyReq.userPassword,
+							attributes: {
+								email: bodyReq.userEmail
+							}
+						})
+						setError(null)
+						res()
+					} catch (error) {
+						setError(error)
+						rej()
+					}
+				})
+			let asyncPost = async () => {
 				try{
 					let ok = await ApiRequest.post("/user", bodyReq);
 					setResponse(ok)
@@ -177,29 +176,39 @@ const usePostProperty = fields => {
 					});
 				}
 			}
-			asyncCognito()
-			asyncPost()
+
+			asyncCognito.then( () => {
+				asyncPost()
+			})
 		}
-	}, [fields])
-	return response;
+	}, [bodyReq])
+	return [response, error];
 }
 
 const SignIn = () => {
 	const [ fields, setFields ] = useState(null)
 	const [form]= Form.useForm();
 	const history = useHistory();
-	let property = usePostProperty(fields)
+	const [ response, error ] = usePostUser(fields)
 	
 	useEffect( () => {
-		if(property){
-			console.log(property)
+		if(response && !error){
 			notification.success({
 				message: `Usuario registrado`,
 				placement: 'bottomLeft'
 			});
 			history.push('/');
 		}
-	},[property, history])
+	},[response, history])
+
+	useEffect(() => {
+		if(error){
+			notification.error({
+				message: `Error: ${error.message}`,
+				placement: 'bottomLeft'
+			});
+		}
+	}, [error, form])
 
 	return (
 		<ContentWrapper header footer>
