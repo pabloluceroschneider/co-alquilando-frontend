@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { Form, notification } from "antd";
-import { useHistory } from "react-router-dom";
+
 import CustomizedForm from "../../components/CustomizedForm";
 import { ApiRequest } from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
+import moment from 'moment';
 
 const userData = {
   name: "user",
   layout: "vertical",
-  btnSubmit:"Actualizar Datos",
+  btnSubmit: "Actualizar Datos",
   fields: {
     primaries: [
       [
@@ -118,29 +119,46 @@ const userData = {
 
 const UpdateForm = (props) => {
   const [form] = Form.useForm();
-  const [ fields, setFields ] = useState(null)
-  const [idUser, setIdUser] = useState(null)
+  const [fields, setFields] = useState(null);
+  const [idUser, setIdUser] = useState(null);
   let { nickname } = useParams();
+  const history = useHistory();
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/user/${nickname}`).then((res) => {
         console.log(res.data);
-        setIdUser(res.data.id);
-        form.setFieldsValue(res.data);
+        let formated = { ...res.data, userBirthDate: moment(res.data.userBirthDate),userConfirmEmail:res.data.userEmail };
+        form.setFieldsValue(formated);
+        setIdUser(formated.id);
       });
     };
     asyncGetUser();
   }, [form, nickname]);
-  useEffect(()=>{
-    if(fields){
-        let asyncPutUser = async () => {
-            await ApiRequest.put(`/user`).then((res) => {
-              console.log(res.data);
+  useEffect(() => {
+    if (fields) {
+      let bodyReq = fields;
+      delete bodyReq.userConfirmEmail;
+      delete bodyReq.userConfirmPassword;
+      let asyncPutUser = async () => {
+        await ApiRequest.put(`/user/${idUser}`, bodyReq).then((res) => {
+          console.log(res);
+          if (res.status === 200){
+            notification.success({
+              message: `Datos Actualizados`,
+              placement: 'bottomLeft'
             });
-          };
-          asyncPutUser();
+            history.push(`/profile/${bodyReq.userNickname}`);
+          } else{
+            notification.error({
+              message: `Error: No se pudo actualizar sus datos`,
+              placement: 'bottomLeft'
+            });
+          }
+        });
+      };
+      asyncPutUser();
     }
-  },[fields,idUser])
+  }, [fields, idUser]);
   return (
     <div>
       <div>Hola mundo: {nickname}</div>
