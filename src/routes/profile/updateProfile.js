@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Form, notification } from "antd";
-
 import CustomizedForm from "../../components/CustomizedForm";
 import { ApiRequest } from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
-import moment from 'moment';
+import moment from "moment";
 
 const userData = {
   name: "user",
@@ -127,7 +126,11 @@ const UpdateForm = (props) => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/user/${nickname}`).then((res) => {
         console.log(res.data);
-        let formated = { ...res.data, userBirthDate: moment(res.data.userBirthDate),userConfirmEmail:res.data.userEmail };
+        let formated = {
+          ...res.data,
+          userBirthDate: moment(res.data.userBirthDate),
+          userConfirmEmail: res.data.userEmail,
+        };
         form.setFieldsValue(formated);
         setIdUser(formated.id);
       });
@@ -142,23 +145,23 @@ const UpdateForm = (props) => {
       let asyncPutUser = async () => {
         await ApiRequest.put(`/user/${idUser}`, bodyReq).then((res) => {
           console.log(res);
-          if (res.status === 200){
+          if (res.status === 200) {
             notification.success({
               message: `Datos Actualizados`,
-              placement: 'bottomLeft'
+              placement: "bottomLeft",
             });
             history.push(`/profile/${bodyReq.userNickname}`);
-          } else{
+          } else {
             notification.error({
               message: `Error: No se pudo actualizar sus datos`,
-              placement: 'bottomLeft'
+              placement: "bottomLeft",
             });
           }
         });
       };
       asyncPutUser();
     }
-  }, [fields, idUser]);
+  }, [fields, idUser,history]);
   return (
     <div>
       <div>Hola mundo: {nickname}</div>
