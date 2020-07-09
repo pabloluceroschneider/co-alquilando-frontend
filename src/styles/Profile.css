@@ -29,6 +29,12 @@
         column-gap: 5px;
     }
 
+    .group3{
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+        column-gap: 5px;
+    }
+
     .profileImage{
         width: 250px;
         border-radius: 100%;
@@ -41,7 +47,7 @@
     .datosContent{
         text-align: start;
         margin-top: 2%;
-        margin-left: 10%;
+        margin-left: 15%;
     }
 
     .profileButton{

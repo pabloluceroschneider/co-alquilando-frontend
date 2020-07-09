@@ -31,10 +31,9 @@ const Profile = (props) => {
                 alt="imagen de perfil"
                 src={image}
                 className="profileImage"
-                />
-                </div>
-              <div className="profileMainData">
-
+              />
+            </div>
+            <div className="profileMainData">
               <h2>
                 <strong>
                   {data.userName} {data.userSurname}
@@ -43,18 +42,39 @@ const Profile = (props) => {
               <h4>
                 {data.userCity} - {data.userNationality}
               </h4>
-              </div>
-              </div>
-            <div className="datosContent">
-              <p>Nickname: {nickname}</p>
-              <p>Sexo: {data.userSex === "Male" ? "Masculino" : "Femenino"}</p>
-              <p>Edad: {calculateAge(data.userBirthDate)}</p>
-              <p>Descripcion: {data.userDescription}</p>
             </div>
-            <div className="profileButton">
-              <Button id="buttonConectar">Conectar</Button>
+          </div>
+          <div className="datosContent">
+            <div className="group3">
+              <div>
+                <p>Nickname: {nickname}</p>
+              </div>
+              <div>
+                <p>
+                  Sexo: {data.userSex === "Male" ? "Masculino" : "Femenino"}
+                </p>
+              </div>
+              <div>
+                <p>Edad: {calculateAge(data.userBirthDate)}</p>
+              </div>
             </div>
-          
+          </div>
+          <div className="profileButton">
+            <Button id="buttonConectar">Conectar</Button>
+          </div>
+        </div>
+      ) : null}
+
+      {data && data.userPreferences ? (
+        <div className="profileContent">
+          <h3>Preferencias</h3>
+        </div>
+      ) : null}
+
+      {data && data.userDescription ? (
+        <div className="profileContent">
+          <h3>Más de {data.userName}</h3>
+          <p>{data.userDescription}</p>
         </div>
       ) : null}
     </>
