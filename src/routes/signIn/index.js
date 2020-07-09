@@ -3,7 +3,8 @@ import { Form, notification } from 'antd';
 import { useHistory } from 'react-router-dom';
 import CustomizedForm from '../../components/CustomizedForm';
 import { ApiRequest } from '../../util/ApiRequest';
-import ContentWrapper from '../../components/ContentWrapper'
+import ContentWrapper from '../../components/ContentWrapper';
+import { Auth } from 'aws-amplify';
 
 const userData = {
 	name: 'user',
@@ -14,7 +15,7 @@ const userData = {
 			[
 				{
 					label: "Nombre de usuario",
-					name: "userNickName",
+					name: "userNickname",
 					component: "Input"
 				}
 			],
@@ -144,6 +145,24 @@ const usePostProperty = fields => {
 	const [ response, setResponse ] = useState(null)
 	useEffect(() => {
 		if (fields){
+
+			// AWS Cognito Integration
+			let asyncCognito = async () => {
+				let awsData = { email: fields.userEmail, password: fields.userPassword };
+				console.log("fields -->", fields)
+				try {
+					const signUpResponse = await Auth.signUp({
+						username: fields.userNickname,
+						password: fields.userPassword,
+						attributes: {
+							email: fields.userEmail
+						}
+					})
+					console.log("signUpResponse -->", signUpResponse)
+				} catch (error) {
+					console.log(error)
+				}
+			}
 			let bodyReq = fields
 			delete bodyReq.userConfirmEmail
 			delete bodyReq.userConfirmPassword
@@ -158,6 +177,7 @@ const usePostProperty = fields => {
 					});
 				}
 			}
+			asyncCognito()
 			asyncPost()
 		}
 	}, [fields])
