@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { ApiRequest } from '../../util/ApiRequest';
 import { Form, notification } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
 import ContentWrapper from "../../components/ContentWrapper";
@@ -152,7 +153,30 @@ const propertyData = {
   },
 };
 
+const usePostProperty = fields => {
+	const [ response, setResponse ] = useState(null)
+	useEffect(() => {
+		if (fields){
+			let bodyReq = fields
+			let asyncPost = async() => {
+				try{
+					let ok = await ApiRequest.post("/property", bodyReq);
+					setResponse(ok)
+				}catch(e){
+					notification.error({
+						message: `Error: ${e.message}`,
+						placement: 'bottomLeft'
+					});
+				}
+			}
+			asyncPost()
+		}
+	}, [fields])
+	return response;
+}
+
 const Property = () => {
+  
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
