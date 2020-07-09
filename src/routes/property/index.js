@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { ApiRequest } from '../../util/ApiRequest';
+import { ApiRequest } from "../../util/ApiRequest";
 import { Form, notification } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
 import ContentWrapper from "../../components/ContentWrapper";
-
 
 const propertyData = {
   name: "property",
@@ -22,13 +21,13 @@ const propertyData = {
       [
         {
           label: "Dirección",
-          name: ["attributes","address"],
+          name: ["attributes", "address"],
           component: "Input",
           required: true,
         },
         {
           label: "Tipología",
-          name: ["attributes","typology"],
+          name: ["attributes", "typology"],
           component: "Input",
           required: true,
         },
@@ -36,13 +35,13 @@ const propertyData = {
       [
         {
           label: "Habitaciones",
-          name: ["attributes","rooms"],
+          name: ["attributes", "rooms"],
           component: "Input",
           required: true,
         },
         {
           label: "Baños",
-          name: ["attributes","bathrooms"],
+          name: ["attributes", "bathrooms"],
           component: "Input",
           required: true,
         },
@@ -56,7 +55,7 @@ const propertyData = {
         },
         {
           label: "Precio",
-          name: "monto",
+          name: "price",
           component: "Input",
           required: true,
         },
@@ -153,61 +152,60 @@ const propertyData = {
   },
 };
 
-const usePostProperty = fields => {
-	const [ response, setResponse ] = useState(null)
-	useEffect(() => {
-		if (fields){
-			let bodyReq = fields
-			let asyncPost = async() => {
-				try{
-					let ok = await ApiRequest.post("/property", bodyReq);
-					setResponse(ok)
-				}catch(e){
-					notification.error({
-						message: `Error: ${e.message}`,
-						placement: 'bottomLeft'
-					});
-				}
-			}
-			asyncPost()
-		}
-	}, [fields])
-	return response;
-}
+const usePostProperty = (values) => {
+  const [response, setResponse] = useState(null);
+
+  useEffect(() => {
+    if (values) {
+      var atributos = Object.entries(values.attributes);
+      const attributesFormate = atributos.map((a) => {
+        let json = {
+          attribute: a[0],
+          value: `"${a[1]}"`,
+          weigth: 0,
+        };
+        return json;
+      });
+
+      let formatedBody = { ...values, attributes: attributesFormate };
+
+      let bodyReq = formatedBody;
+      let asyncPost = async () => {
+        try {
+          let ok = await ApiRequest.post("/property", bodyReq);
+          setResponse(ok);
+        } catch (e) {
+          notification.error({
+            message: `Error: ${e.message}`,
+            placement: "bottomLeft",
+          });
+        }
+      };
+      asyncPost();
+    }
+  }, [values]);
+  return response;
+};
 
 const Property = () => {
-  
+  const [values, setValues] = useState(null);
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
-    
-    var atributos = Object.entries(values.attributes)
-    const attributesFormate = atributos.map((a) => {
-      let json = {
-        attribute: a[0],
-        value: `"${a[1]}"`,
-        weigth: 0
-      }
+  let property = usePostProperty(values);
 
-      return json
-    })
-
-    let formatedBody = {...values, attributes: attributesFormate}
-
-    console.log('Body =>', formatedBody);
-    
-    
-    notification.success({
-      message: "Se cargo con éxito",
-      description: "Se agrego correctamente la propiedad",
-      placement: "bottomLeft",
-    });
-  };
+  useEffect(() => {
+    if (property) {
+      console.log(property);
+      notification.success({
+        message: `Prpiedad Publicada`,
+        placement: "bottomLeft",
+      });
+    }
+  }, [property]);
 
   return (
     <ContentWrapper header footer>
-      <CustomizedForm form={form} data={propertyData} onfinish={onFinish} />
+      <CustomizedForm form={form} data={propertyData} onfinish={setValues} />
     </ContentWrapper>
   );
 };
