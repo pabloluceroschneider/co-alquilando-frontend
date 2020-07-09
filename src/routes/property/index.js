@@ -1,13 +1,8 @@
 import React from "react";
 import { Form, notification } from "antd";
-// import { UploadOutlined } from "@ant-design/icons";
 import CustomizedForm from "../../components/CustomizedForm";
 import ContentWrapper from "../../components/ContentWrapper";
 
-// propertyPreferences: Ubicacion, tipologia, habitaciones, 
-// baño, sum, gym, pileta, playroom, asador, cochera, 
-// balcon, ascensor, cantidad de personas por propiedad, 
-// amoblado, aire acondicionado, calefaccion, acepta mascotas.
 
 const propertyData = {
   name: "property",
@@ -17,8 +12,8 @@ const propertyData = {
     primaries: [
       [
         {
-          label: "Título",
-          name: "title",
+          label: "Descripción",
+          name: "description",
           component: "Input",
           required: true,
         },
@@ -26,52 +21,41 @@ const propertyData = {
       [
         {
           label: "Dirección",
-          name: "address",
+          name: ["attributes","address"],
           component: "Input",
           required: true,
         },
         {
-          label: "Habitaciones",
-          name: "rooms",
+          label: "Tipología",
+          name: ["attributes","typology"],
           component: "Input",
           required: true,
         },
       ],
-      // [
-      // 	{
-      // 		label: "Comodidades",
-      // 		name: "propertyAmenities",
-      // 		component: "Checkbox",
-      //   },
-      //   {
-      // 		label: "",
-      // 		name: "propertyAmenities",
-      // 		component: "Checkbox",
-      //   },
-      //   {
-      // 		name: "propertyAmenities",
-      // 		component: "Checkbox",
-      //   },
-      //   {
-      // 		label: "",
-      // 		name: "propertyAmenities",
-      // 		component: "Checkbox",
-      // 	},
-      // ],
       [
         {
-          label: "Tipo de Contrato",
-          name: "propertyContract",
-          component: "Select",
-          options: [
-            { name: "Dueño", value: "DUEÑO" },
-            { name: "Inmobiliaria", value: "INMOBILIARIA" },
-          ],
+          label: "Habitaciones",
+          name: ["attributes","rooms"],
+          component: "Input",
+          required: true,
+        },
+        {
+          label: "Baños",
+          name: ["attributes","bathrooms"],
+          component: "Input",
+          required: true,
+        },
+      ],
+      [
+        {
+          label: "Cantidad de personas",
+          name: ["attributes", "amountPeople"],
+          component: "Input",
           required: true,
         },
         {
           label: "Precio",
-          name: "propertyPrice",
+          name: "monto",
           component: "Input",
           required: true,
         },
@@ -80,43 +64,88 @@ const propertyData = {
     secondaries: [
       [
         {
-          label: "Documento de Identidad",
-          name: "userDni",
-          component: "Input",
-        },
-        {
-          label: "Sexo",
-          name: "userSex",
-          component: "Select",
-          options: [
-            { name: "Femenino", value: "FEMALE" },
-            { name: "Masculino", value: "MALE" },
-            { name: "Otro", value: "NOT_DEFINED" },
-          ],
+          label: "Comodidades",
+          component: "h2",
         },
       ],
       [
         {
-          label: "Nacionalidad",
-          name: "userNationality",
-          component: "Input",
+          label: "Gimnasio",
+          name: ["attributes", "gym"],
+          valuePropName: "checked",
+          component: "Checkbox",
         },
         {
-          label: "Ciudad",
-          name: "userCity",
-          component: "Input",
+          label: "Pileta",
+          name: ["attributes", "pool"],
+          valuePropName: "checked",
+          component: "Checkbox",
+        },
+        {
+          label: "Playroom",
+          name: ["attributes", "playroom"],
+          valuePropName: "checked",
+          component: "Checkbox",
         },
       ],
       [
         {
-          label: "Descripción Personal",
-          name: "userDescription",
-          component: "Input.TextArea",
+          label: "Asador",
+          name: ["attributes", "roaster"],
+          valuePropName: "checked",
+          component: "Checkbox",
         },
         {
-          label: "Cargar Imagen",
-          name: "userPhoto",
-          component: "Upload",
+          label: "Cochera",
+          name: ["attributes", "garage"],
+          valuePropName: "checked",
+          component: "Checkbox",
+        },
+        {
+          label: "Balcón",
+          name: ["attributes", "balcony"],
+          valuePropName: "checked",
+          component: "Checkbox",
+        },
+      ],
+      [
+        {
+          label: "Ascensor",
+          name: ["attributes", "elevator"],
+          valuePropName: "checked",
+          component: "Checkbox",
+        },
+        {
+          label: "Amoblado Incluido",
+          name: ["attributes", "furnished"],
+          valuePropName: "checked",
+          component: "Checkbox",
+        },
+        {
+          label: "Aire acondicionado",
+          name: ["attributes", "aa"],
+          valuePropName: "checked",
+          component: "Checkbox",
+        },
+      ],
+      [
+        {
+          label: "Salon de usos múltiples",
+          name: ["attributes", "sum"],
+          valuePropName: "checked",
+          component: "Checkbox",
+        },
+        {
+          label: "Calefacción",
+          name: ["attributes", "calefaction"],
+          valuePropName: "checked",
+          component: "Checkbox",
+        },
+        {
+          label: "Acepta Mascotas",
+          name: ["attributes", "pets"],
+          valuePropName: "checked",
+          component: "Checkbox",
         },
       ],
     ],
@@ -128,6 +157,23 @@ const Property = () => {
 
   const onFinish = (values) => {
     console.log("Success:", values);
+    
+    var atributos = Object.entries(values.attributes)
+    const attributesFormate = atributos.map((a) => {
+      let json = {
+        attribute: a[0],
+        value: `"${a[1]}"`,
+        weigth: 0
+      }
+
+      return json
+    })
+
+    let formatedBody = {...values, attributes: attributesFormate}
+
+    console.log('Body =>', formatedBody);
+    
+    
     notification.success({
       message: "Se cargo con éxito",
       description: "Se agrego correctamente la propiedad",
