@@ -1,0 +1,14 @@
+.links-login{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    column-gap: 5px;
+    color: #1890ff;
+    cursor: pointer;
+}
+
+.links-login :nth-child(1){
+    text-align: left;
+}
+.links-login :nth-child(2){
+    text-align: right;
+}

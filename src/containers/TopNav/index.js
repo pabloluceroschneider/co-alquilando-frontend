@@ -1,16 +1,21 @@
 import React from 'react';
 import { Menu } from 'antd';
 // const { SubMenu } = Menu;
+import Login from '../../components/Login'
 
 class TopNav extends React.Component {
 	state = {
-		current: 'mail'
+		current: 'mail',
+		showLogin: false
 	};
 
 	handleClick = (e) => {
-		console.log('click ', e);
 		this.setState({ current: e.key });
 	};
+
+	showLogin = () => {
+		this.setState( { showLogin: !this.state.showLogin });
+	}
 
 	render() {
 		const { current } = this.state;
@@ -23,15 +28,14 @@ class TopNav extends React.Component {
 						</a>
 					</Menu.Item>
 					<Menu.Item key="login">
-						<a href="/login" rel="noopener noreferrer">
-							Iniciar Sesion
-						</a>
+						<Login />
 					</Menu.Item>
 					<Menu.Item key="Sing-in">
 						<a href="/sign-in" rel="noopener noreferrer">
 							Registrate
 						</a>
 					</Menu.Item>
+					
 					{/* <SubMenu title="Navigation Three - Submenu">
           <Menu.ItemGroup title="Item 1">
             <Menu.Item key="setting:1">Option 1</Menu.Item>

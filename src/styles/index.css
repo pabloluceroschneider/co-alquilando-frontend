@@ -6,6 +6,7 @@
 @import "./Carrousel.css";
 @import "./GaleriaTresImagenes.css";
 @import "./Portada.css";
+@import "./Login.css";
 
 body {
   margin: 0;
