@@ -6,7 +6,6 @@ import DatePicker from './DatePicker';
 import CheckboxGroup from './CheckboxGroup';
 
 const InputRepository = (props) => {
-	console.log(props)
 	const { label, name, component, required } = props;
 
 	const pickInput = () => {
@@ -40,7 +39,7 @@ const InputRepository = (props) => {
 		case 'label':
 			return <label></label>
 		case 'link':
-			return <a href={props.href} rel="noopener noreferrer">{props.label}</a>
+			return <a key={props.label} href={props.href} rel="noopener noreferrer">{props.label}</a>
 		default:
 			return <Form.Item
 						key={label}

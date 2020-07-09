@@ -48,7 +48,6 @@ const CustomizedModal = (props) => {
 	const [ response, setResponse ] = useState(null);
 
     const postSession = data => {
-        console.log("data -->", data)
         if (data) {
             let asyncPost = async () => {
                 await ApiRequest.post('/auth', data).then( res => {
