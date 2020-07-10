@@ -111,8 +111,6 @@ const userData = {
         },
       ],
     ],
-    secondaries: [
-    ],
   },
 };
 
@@ -125,11 +123,11 @@ const UpdateForm = (props) => {
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/user/${nickname}`).then((res) => {
-        console.log(res.data);
+        let { data } = res;
         let formated = {
-          ...res.data,
-          userBirthDate: moment(res.data.userBirthDate),
-          userConfirmEmail: res.data.userEmail,
+          ...data,
+          userBirthDate: data.userBirthDate ? moment(data.userBirthDate) : null,
+          userConfirmEmail: data.userEmail,
         };
         form.setFieldsValue(formated);
         setIdUser(formated.id);
@@ -163,12 +161,9 @@ const UpdateForm = (props) => {
     }
   }, [fields, idUser,history]);
   return (
-    <div>
-      <div>Hola mundo: {nickname}</div>
       <ContentWrapper header footer>
         <CustomizedForm form={form} data={userData} onfinish={setFields} />
       </ContentWrapper>
-    </div>
   );
 };
 
