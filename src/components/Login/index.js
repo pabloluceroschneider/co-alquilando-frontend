@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Form, notification } from 'antd';
 import Auth from '../../util/Auth';
+import ApiRequest from '../../util/ApiRequest';
 import CustomizedForm from '../CustomizedForm';
 
 const loginFields = {
@@ -49,7 +50,7 @@ const CustomizedModal = (props) => {
 
     const postSession = data => {
         if (data) {
-            let asyncLogIn = new Promise ( async (res,rej) => {
+            let asyncSignIn = new Promise ( async (res,rej) => {
 				try {
 					let user = await Auth.signIn( data.username, data.password )
 					res(user)
@@ -57,8 +58,23 @@ const CustomizedModal = (props) => {
 					rej(e)
 				}
 			})
-			asyncLogIn.then( res => {
-				setResponse(res)
+			let asyncGetUser = async user => {
+				try {
+					let nickname = user.username
+					let userData = await ApiRequest.get(`user/${nickname}`)
+					//TODO: Store user in global state
+					setResponse(userData.data)
+				}catch(e) {
+					notification.error({
+						message: 'No se pudo traer datos del usuario.',
+						description: `Servidor de Coalquilando: ${e.message}`,
+						placement: 'bottomLeft'
+					});
+				}
+
+			}
+			asyncSignIn.then( user => {
+				asyncGetUser(user)
 			}).catch( e => {
 				notification.error({
 					message: 'Error iniciar sesión',
@@ -72,7 +88,7 @@ const CustomizedModal = (props) => {
     useEffect(() => {
         if(response){
 			toggleVisible(visible)
-			localStorage.setItem("session", JSON.stringify(response))
+			localStorage.setItem("userData", JSON.stringify(response))
 			notification.success({
 				message: '¡Bienvenido a Coalquilando!',
 				placement: 'bottomLeft'
