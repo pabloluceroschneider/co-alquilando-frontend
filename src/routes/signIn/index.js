@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Form, notification } from 'antd';
 import { useHistory } from 'react-router-dom';
-import CustomizedForm from '../../components/CustomizedForm';
-import { ApiRequest } from '../../util/ApiRequest';
-import ContentWrapper from '../../components/ContentWrapper';
-// import { Auth } from 'aws-amplify';
+import { Form, notification } from 'antd';
 import Auth from '../../util/Auth';
+import ApiRequest from '../../util/ApiRequest';
+import ContentWrapper from '../../components/ContentWrapper';
+import CustomizedForm from '../../components/CustomizedForm';
 
 const userData = {
 	name: 'user',
@@ -144,7 +143,7 @@ const userData = {
 };
 
 const usePostUser = bodyReq => {
-	const [ response, setResponse ] = useState(null)
+	const [ user, setUser ] = useState(null)
 	useEffect(() => {
 		if (bodyReq){
 			let asyncAuth = new Promise ( async (res, rej) => {
@@ -157,12 +156,14 @@ const usePostUser = bodyReq => {
 			})
 			let asyncPost = async () => {
 				try{
+					delete bodyReq.userConfirmPassword;
+					delete bodyReq.userConfirmEmail;
 					let ok = await ApiRequest.post("/user", bodyReq);
-					setResponse(ok)
+					setUser(ok)
 				}catch(e){
 					notification.error({
 						message: 'Error al almacenar usuario ',
-						description: `Api Error: ${e}`,
+						description: `Api Error: ${e.message}`,
 						placement: 'bottomLeft'
 					});
 				}
@@ -172,30 +173,30 @@ const usePostUser = bodyReq => {
 			}).catch( e => {
 				notification.error({
 					message: 'Error al crear usuario ',
-					description: `${e.message}`,
+					description: `Cognito: ${e.message}`,
 					placement: 'bottomLeft'
 				});
 			})
 		}
 	}, [bodyReq])
-	return [response];
+	return [user];
 }
 
 const SignIn = () => {
 	const [ fields, setFields ] = useState(null)
-	const [form]= Form.useForm();
 	const history = useHistory();
-	const [ response ] = usePostUser(fields)
+	const [ form ] = Form.useForm();
+	const [ user ] = usePostUser(fields)
 	
 	useEffect( () => {
-		if(response){
+		if(user){
 			notification.success({
 				message: `Usuario registrado`,
 				placement: 'bottomLeft'
 			});
 			history.push('/');
 		}
-	},[response, history])
+	},[user, history])
 
 	return (
 		<ContentWrapper header footer>
