@@ -22,14 +22,14 @@ const propertyData = {
       ],
       [
         {
-          label: "Dirección",
-          name: ["attributes", "address"],
+          label: "Tipología",
+          name: ["attributes", "typology"],
           component: "Input",
           required: true,
         },
         {
-          label: "Tipología",
-          name: ["attributes", "typology"],
+          label: "Cantidad de personas",
+          name: ["attributes", "amountPeople"],
           component: "Input",
           required: true,
         },
@@ -50,16 +50,79 @@ const propertyData = {
       ],
       [
         {
-          label: "Cantidad de personas",
-          name: ["attributes", "amountPeople"],
+          label: "Dirección",
+          component: "h2",
+        },
+      ],
+      [
+         {
+           label: "Calle",
+           name: ["address", "street"],
+           component: "Input",
+           required: true,
+         },
+         {
+          label: "Número",
+          name: ["address", "number"],
           component: "Input",
           required: true,
         },
         {
-          label: "Precio",
-          name: "monto",
+          label: "Barrio",
+          name: ["address", "neighborhood"],
           component: "Input",
           required: true,
+        },
+      ],
+      [
+        {
+          label: "Piso",
+          name: ["address", "floor"],
+          component: "Input",
+        },
+        {
+          label: "Departamento",
+          name: ["address", "apartment"],
+          component: "Input",
+        },
+        {
+          label: "Provincia",
+          name: ["address", "province"],
+          component: "Input",
+          required: true,
+        },
+      ]
+      ,
+      [
+        {
+          label: "Precio",
+          component: "h2",
+        },
+      ],
+      [
+        {
+          label: "Monto",
+          name: ["price","rentPrice"],
+          component: "Input",
+          required: true,
+        },
+        {
+          label: "Expensas",
+          name: ["price","expenses"],
+          component: "Input",
+          required: true,
+        },
+        {
+          label: "Servicios",
+          name: ["price","services"],
+          component: "Input",
+          
+        },
+        {
+          label: "Impuestos",
+          name: ["price","taxes"],
+          component: "Input",
+          
         },
       ],
       [
@@ -149,7 +212,6 @@ const propertyData = {
         },
       ],
     ],
-    secondaries: [],
   },
 };
 
@@ -161,13 +223,24 @@ const FormPropertyUpdate = (props) => {
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/property/${idProperty}`).then((res) => {
+        let data = res.data
+        console.log(data);
+        let array = [];
+        res.data.attributes.forEach((t) => {
+          array.push({ [t.attributeType]: t.value });
+        });
+        delete  res.data.attributes;
+        array.forEach((t) => {
+          res.data = { ...res.data, attributes: { ...res.data.attributes, ...t } };
+        });
         console.log(res.data);
-
+        //[{"typology":"departamento"},{"gym":"1"}]
         form.setFieldsValue(res.data);
       });
     };
     asyncGetUser();
   }, [form, idProperty]);
+  
   return (
     <div>
       <div>Hola mundo: {idProperty}</div>
