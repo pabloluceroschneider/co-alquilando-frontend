@@ -84,7 +84,7 @@ const CustomizedModal = (props) => {
 				});
 			})
         }
-    }
+	}
 
     useEffect(() => {
         if(response){
@@ -119,7 +119,7 @@ const Login = () => {
     
 	return (
 		<div>
-			<span onClick={() => toggleVisible(visible)}> Iniciar sesión </span>
+			<span onClick={() => toggleVisible()}> Iniciar sesión </span>
 			<CustomizedModal visible={visible} toggleVisible={toggleVisible} />
 		</div>
 	);
