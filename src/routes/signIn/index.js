@@ -4,7 +4,8 @@ import { useHistory } from 'react-router-dom';
 import CustomizedForm from '../../components/CustomizedForm';
 import { ApiRequest } from '../../util/ApiRequest';
 import ContentWrapper from '../../components/ContentWrapper';
-import { Auth } from 'aws-amplify';
+// import { Auth } from 'aws-amplify';
+import Auth from '../../util/Auth';
 
 const userData = {
 	name: 'user',
@@ -144,55 +145,50 @@ const userData = {
 
 const usePostUser = bodyReq => {
 	const [ response, setResponse ] = useState(null)
-	const [ error, setError ] = useState(null)
 	useEffect(() => {
 		if (bodyReq){
-
-			// AWS Cognito Integration
-			let asyncCognito = new Promise ( async (res, rej) => {
-					try {
-						await Auth.signUp({
-							username: bodyReq.userNickname,
-							password: bodyReq.userPassword,
-							attributes: {
-								email: bodyReq.userEmail
-							}
-						})
-						setError(null)
-						res()
-					} catch (error) {
-						setError(error)
-						rej()
-					}
-				})
+			let asyncAuth = new Promise ( async (res, rej) => {
+				try {
+					let user = await Auth.signUp( bodyReq.userNickname, bodyReq.userPassword, bodyReq.userEmail )
+					res(user)
+				}catch(e){
+					rej(e)
+				}
+			})
 			let asyncPost = async () => {
 				try{
 					let ok = await ApiRequest.post("/user", bodyReq);
 					setResponse(ok)
 				}catch(e){
 					notification.error({
-						message: `Error: ${e.message}`,
+						message: 'Error al almacenar usuario ',
+						description: `Api Error: ${e}`,
 						placement: 'bottomLeft'
 					});
 				}
 			}
-
-			asyncCognito.then( () => {
+			asyncAuth.then( user => {
 				asyncPost()
+			}).catch( e => {
+				notification.error({
+					message: 'Error al crear usuario ',
+					description: `${e.message}`,
+					placement: 'bottomLeft'
+				});
 			})
 		}
 	}, [bodyReq])
-	return [response, error];
+	return [response];
 }
 
 const SignIn = () => {
 	const [ fields, setFields ] = useState(null)
 	const [form]= Form.useForm();
 	const history = useHistory();
-	const [ response, error ] = usePostUser(fields)
+	const [ response ] = usePostUser(fields)
 	
 	useEffect( () => {
-		if(response && !error){
+		if(response){
 			notification.success({
 				message: `Usuario registrado`,
 				placement: 'bottomLeft'
@@ -200,15 +196,6 @@ const SignIn = () => {
 			history.push('/');
 		}
 	},[response, history])
-
-	useEffect(() => {
-		if(error){
-			notification.error({
-				message: `Error: ${error.message}`,
-				placement: 'bottomLeft'
-			});
-		}
-	}, [error, form])
 
 	return (
 		<ContentWrapper header footer>
