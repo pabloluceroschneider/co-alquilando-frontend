@@ -14,7 +14,7 @@ const userData = {
 			[
 				{
 					label: "Nombre de usuario",
-					name: "userNickName",
+					name: "userNickname",
 					component: "Input"
 				}
 			],
