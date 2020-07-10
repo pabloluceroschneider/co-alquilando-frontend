@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Form, notification } from 'antd';
+import { useHistory } from 'react-router';
 import Auth from '../../util/Auth';
 import ApiRequest from '../../util/ApiRequest';
 import CustomizedForm from '../CustomizedForm';
@@ -45,6 +46,7 @@ const loginFields = {
 
 const CustomizedModal = (props) => {
 	const { visible, toggleVisible } = props;
+	const history = useHistory();
     const [ form ] = Form.useForm();
 	const [ response, setResponse ] = useState(null);
 
@@ -86,14 +88,14 @@ const CustomizedModal = (props) => {
 
     useEffect(() => {
         if(response){
-			toggleVisible(visible)
 			localStorage.setItem("userData", JSON.stringify(response))
 			notification.success({
 				message: '¡Bienvenido a Coalquilando!',
 				placement: 'bottomLeft'
 			});
+			history.push("/user/profile")
 		}
-	}, [response])
+	}, [response, history])
     
 	return (
         <Modal 
@@ -111,9 +113,9 @@ const CustomizedModal = (props) => {
 const Login = () => {
     const [ visible, setVisible ] = useState(false);
 
-	const toggleVisible = (value) => {
-		setVisible(!value);
-    };
+	const toggleVisible = () => {
+		setVisible(!visible);
+    }
     
 	return (
 		<div>
