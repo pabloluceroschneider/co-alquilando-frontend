@@ -1,7 +1,7 @@
 
 import axios from './Api';
 
-export class ApiRequest {
+export default class ApiRequest {
 
     static get = async (endpoint) => {
         return new Promise( async (res, rej) => {

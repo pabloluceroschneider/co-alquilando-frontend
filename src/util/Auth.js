@@ -32,11 +32,30 @@ export default class Auth {
      * @param {string} password Contraseña del usuario
      * @returns {Promise} res(user) Retorna el usuario logueado
      */
-    static logIn = (username, password) => {}
+    static signIn = (username, password) => {
+        return new Promise ( async (res, rej) => {
+            try {
+                let user = await Cognito.signIn(username, password)
+                res(user)
+            } catch (error) {
+                rej(error)
+            }
+        }) 
+
+    }
 
     /** 
      * FUNCIÓN PARA DESLOGUEARSE
      * @returns {Promise} res(user) Retorna el usuario deslogueado
      */
-    static logOut = () => {}
+    static signOut = () => {
+        return new Promise ( async (res, rej) => {
+            try {
+                let signout = await Cognito.signOut()
+                res(signout)
+            } catch (error) {
+                rej(error)
+            }
+        }) 
+    }
 }

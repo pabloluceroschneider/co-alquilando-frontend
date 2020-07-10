@@ -1,7 +1,8 @@
 import React from 'react';
 import { Menu } from 'antd';
 // const { SubMenu } = Menu;
-import Login from '../../components/Login'
+import Login from '../../components/Login';
+import Auth from '../../util/Auth';
 
 class TopNav extends React.Component {
 	state = {
@@ -15,6 +16,10 @@ class TopNav extends React.Component {
 
 	showLogin = () => {
 		this.setState( { showLogin: !this.state.showLogin });
+	}
+
+	handleSignOut = async () => {
+		await Auth.signOut()
 	}
 
 	render() {
@@ -34,6 +39,11 @@ class TopNav extends React.Component {
 						<a href="/sign-in" rel="noopener noreferrer">
 							Registrate
 						</a>
+					</Menu.Item>
+					<Menu.Item key="logout">
+						<div onClick={this.handleSignOut}>
+							Log out
+						</div>
 					</Menu.Item>
 					
 					{/* <SubMenu title="Navigation Three - Submenu">

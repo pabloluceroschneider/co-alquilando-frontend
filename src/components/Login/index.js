@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Form } from 'antd';
+import { Modal, Form, notification } from 'antd';
+import Auth from '../../util/Auth';
 import CustomizedForm from '../CustomizedForm';
-import { ApiRequest } from '../../util/ApiRequest'
 
 const loginFields = {
 	name: 'login',
@@ -12,8 +12,8 @@ const loginFields = {
 		primaries: [
 			[
 				{
-					label: 'Email',
-					name: 'email',
+					label: 'Usuario',
+					name: 'username',
 					component: 'Input',
 					required: true
 				}
@@ -30,7 +30,7 @@ const loginFields = {
 				{
 					label: 'Olvidé mi Contraseña',
                     component: 'link',
-                    href: "/"
+                    href: "#"
                 },
                 {
 					label: '¿No tienes cuenta? ¡Registrate!',
@@ -49,20 +49,34 @@ const CustomizedModal = (props) => {
 
     const postSession = data => {
         if (data) {
-            let asyncPost = async () => {
-                await ApiRequest.post('/auth', data).then( res => {
-                    setResponse(res.data);
-                }).catch( err => {
-                    setResponse(err);
-                })
-                }
-            asyncPost();
+            let asyncLogIn = new Promise ( async (res,rej) => {
+				try {
+					let user = await Auth.signIn( data.username, data.password )
+					res(user)
+				}catch(e){
+					rej(e)
+				}
+			})
+			asyncLogIn.then( res => {
+				setResponse(res)
+			}).catch( e => {
+				notification.error({
+					message: 'Error iniciar sesión',
+					description: `Cognito: ${e.message}`,
+					placement: 'bottomLeft'
+				});
+			})
         }
     }
 
     useEffect(() => {
         if(response){
-            localStorage.setItem("session", response)
+			toggleVisible(visible)
+			localStorage.setItem("session", JSON.stringify(response))
+			notification.success({
+				message: '¡Bienvenido a Coalquilando!',
+				placement: 'bottomLeft'
+			});
 		}
 	}, [response])
     
