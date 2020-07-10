@@ -61,9 +61,9 @@ const CustomizedModal = (props) => {
 			let asyncGetUser = async user => {
 				try {
 					let nickname = user.username
-					let userData = await ApiRequest.get(`user/${nickname}`)
+					let { data } = await ApiRequest.get(`user/${nickname}`)
 					//TODO: Store user in global state
-					setResponse(userData.data)
+					setResponse(data)
 				}catch(e) {
 					notification.error({
 						message: 'No se pudo traer datos del usuario.',
@@ -71,7 +71,6 @@ const CustomizedModal = (props) => {
 						placement: 'bottomLeft'
 					});
 				}
-
 			}
 			asyncSignIn.then( user => {
 				asyncGetUser(user)
