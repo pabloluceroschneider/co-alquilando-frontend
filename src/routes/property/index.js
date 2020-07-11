@@ -277,8 +277,9 @@ const Property = () => {
         message: `Propiedad Publicada`,
         placement: "bottomLeft",
       });
+      form.resetFields();
     }
-  }, [property]);
+  }, [property,form]);
 
   return (
     <ContentWrapper header footer>
