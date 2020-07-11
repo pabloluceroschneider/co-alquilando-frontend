@@ -12,8 +12,8 @@ const propertyData = {
     primaries: [
       [
         {
-          label: "Descripción",
-          name: "description",
+          label: "Título",
+          name: "title",
           component: "Input",
           required: true,
         },
@@ -48,6 +48,14 @@ const propertyData = {
           label: "Baños",
           name: ["attributes", "bathrooms"],
           component: "Input",
+          required: true,
+        },
+      ],
+      [
+        {
+          label: "Descripción",
+          name: "description",
+          component: "Input.TextArea",
           required: true,
         },
       ],
@@ -234,7 +242,7 @@ const usePostProperty = (values) => {
       let formatedBody = {
         ...values,
         attributes: attributesFormate,
-        ownerId: "5f078f662f0f3728ba327956",
+        ownerId: "5f010068285a9156b2b4c7dd",
         status: "available",
       };
 
