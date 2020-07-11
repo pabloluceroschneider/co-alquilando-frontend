@@ -266,7 +266,7 @@ const Property = () => {
     if (property) {
       console.log(property);
       notification.success({
-        message: `Prpiedad Publicada`,
+        message: `Propiedad Publicada`,
         placement: "bottomLeft",
       });
     }
