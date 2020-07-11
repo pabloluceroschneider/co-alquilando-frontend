@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, notification, Divider } from 'antd';
+import { DownOutlined, UpOutlined } from '@ant-design/icons'
 import InputRepository from '../InputRepository';
 
 const Row = (props) => {
@@ -42,16 +43,16 @@ const CustomizedForm = (props) => {
 			if(showSecondary){
 				if(tertiaries){
 					if(showTertiary){
-						return <div onClick={ () => {setShowTertiary(false);setShowSecondary(false)}}>Mostrar menos</div>
+						return <div onClick={ () => {setShowTertiary(false);setShowSecondary(false)}}><UpOutlined />  Mostrar menos</div>
 					}else{
-						return <div onClick={ () => {setShowTertiary(true)}}>Mostrar más</div>
+						return <div onClick={ () => {setShowTertiary(true)}}><DownOutlined />  Mostrar más</div>
 					}
 				}else{
-					return <div onClick={ () => {setShowSecondary(false)}}>Mostrar menos</div>
+					return <div onClick={ () => {setShowSecondary(false)}}><UpOutlined />  Mostrar menos</div>
 				}
 
 			}else{
-				return <div onClick={ () => {setShowSecondary(true)} }>Mostrar más</div>
+				return <div onClick={ () => {setShowSecondary(true)} }><DownOutlined />  Mostras más</div>
 			}
 		}else{
 			return null
@@ -70,43 +71,41 @@ const CustomizedForm = (props) => {
 				form={form}
 				layout={layout}
 			>
-				{data ? (
+				{data && (
 					primaries.map((row, index) => {
 						return <Row key={index} fields={row} />;
 					})
-				) : null}
+				)}
 
-				{showSecondary ? (
+				{showSecondary && (
 					<>
 					<Divider />
 					{secondaries.map((row, index) => {
 						return <Row key={index} fields={row} />;
 					})}
 					</>
-				) : null}
+				)}
 
-				{showTertiary ? (
+				{showTertiary && (
 					<>
 					<Divider />
 					{tertiaries.map((row, index) => {
 						return <Row key={index} fields={row}/>;
 					})}
 					</>
-				) : null}
+				)}
 
 				<div className="showmore">
 					{showMore()}
 				</div>
 
-				{
-					btnSubmit ? 
-						<Form.Item>
-							<Button loading={loading} type="primary" htmlType="submit">
-								{btnSubmit}
-							</Button>
-						</Form.Item>
-					: null
-				}
+				{btnSubmit && (
+					<Form.Item>
+						<Button loading={loading} type="primary" htmlType="submit">
+							{btnSubmit}
+						</Button>
+					</Form.Item>
+				)}
 			</Form>
 
 		)
