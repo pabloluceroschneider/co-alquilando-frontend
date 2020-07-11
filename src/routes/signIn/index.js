@@ -5,6 +5,7 @@ import Auth from '../../util/Auth';
 import ApiRequest from '../../util/ApiRequest';
 import ContentWrapper from '../../components/ContentWrapper';
 import CustomizedForm from '../../components/CustomizedForm';
+import calcAge from '../../util/CalculateAge';
 
 const userData = {
 	name: 'user',
@@ -87,6 +88,20 @@ const userData = {
 					label: "Fecha de Nacimiento",
 					name: "userBirthDate",
 					component: "DatePicker",
+					dependencies:['userBirthDate'],
+					validate: ({getFieldValue}) => ({
+						validator() {
+							let userBirthDate = getFieldValue("userBirthDate")
+							let age = calcAge(userBirthDate)
+						    if(age < 18){
+								return Promise.reject('Debes ser mayor de 18 años');
+							}else if(age > 100){
+								return Promise.reject('Edad no permitida');
+							}else{
+								return Promise.resolve()
+							}
+						},
+					  }),
 				},				
 				{
 					label: "Número de Celular",
