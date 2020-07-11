@@ -4,12 +4,11 @@ import { Form, notification } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
 import { ApiRequest } from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
-import moment from "moment";
 
 const propertyData = {
   name: "property",
   layout: "vertical",
-  btnSubmit: "Registrar Propiedad",
+  btnSubmit: "Actualizar Propiedad",
   fields: {
     primaries: [
       [
@@ -55,13 +54,13 @@ const propertyData = {
         },
       ],
       [
-         {
-           label: "Calle",
-           name: ["address", "street"],
-           component: "Input",
-           required: true,
-         },
-         {
+        {
+          label: "Calle",
+          name: ["address", "street"],
+          component: "Input",
+          required: true,
+        },
+        {
           label: "Número",
           name: ["address", "number"],
           component: "Input",
@@ -91,8 +90,7 @@ const propertyData = {
           component: "Input",
           required: true,
         },
-      ]
-      ,
+      ],
       [
         {
           label: "Precio",
@@ -102,27 +100,25 @@ const propertyData = {
       [
         {
           label: "Monto",
-          name: ["price","rentPrice"],
+          name: ["price", "rentPrice"],
           component: "Input",
           required: true,
         },
         {
           label: "Expensas",
-          name: ["price","expenses"],
+          name: ["price", "expenses"],
           component: "Input",
           required: true,
         },
         {
           label: "Servicios",
-          name: ["price","services"],
+          name: ["price", "services"],
           component: "Input",
-          
         },
         {
           label: "Impuestos",
-          name: ["price","taxes"],
+          name: ["price", "taxes"],
           component: "Input",
-          
         },
       ],
       [
@@ -220,27 +216,74 @@ const FormPropertyUpdate = (props) => {
   const [form] = Form.useForm();
   const [fields, setFields] = useState(null);
   const history = useHistory();
+  const [ownerId, setOwnerId] = useState(null);
+  const [status, setStatus] = useState(null);
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/property/${idProperty}`).then((res) => {
-        let data = res.data
-        console.log(data);
+        setOwnerId(res.data.ownerId);
+        setStatus(res.data.status);
+        console.log(res.data);
         let array = [];
         res.data.attributes.forEach((t) => {
           array.push({ [t.attributeType]: t.value });
         });
-        delete  res.data.attributes;
+        //delete  res.data.attributes;
         array.forEach((t) => {
-          res.data = { ...res.data, attributes: { ...res.data.attributes, ...t } };
+          res.data = {
+            ...res.data,
+            attributes: { ...res.data.attributes, ...t },
+          };
         });
         console.log(res.data);
-        //[{"typology":"departamento"},{"gym":"1"}]
         form.setFieldsValue(res.data);
       });
     };
     asyncGetUser();
   }, [form, idProperty]);
-  
+
+  useEffect(() => {
+    if (fields) {
+      var atributos = Object.entries(fields.attributes);
+      const attributesFormate = atributos.map((a) => {
+        let json = {
+          attributeType: a[0],
+          value: a[1] ? a[1] : "",
+          weigth: a[2],
+        };
+        return json;
+      });
+
+      let formatedBody = {
+        ...fields,
+        attributes: attributesFormate,
+        ownerId: ownerId,
+        status: status,
+      };
+
+      let bodyReq = formatedBody;
+      console.log(bodyReq);
+      let asyncPut = async () => {
+        await ApiRequest.put(`/property/${idProperty}`, bodyReq).then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            notification.success({
+              message: `Datos Actualizados`,
+              placement: "bottomLeft",
+            });
+            history.push(`/property/${idProperty}`);
+          } else {
+            notification.error({
+              message: `Error: No se pudo actualizar sus datos`,
+              placement: "bottomLeft",
+            });
+          }
+        });
+      };
+      asyncPut();
+    }
+  }, [fields, idProperty, history, ownerId, status]);
+
   return (
     <div>
       <div>Hola mundo: {idProperty}</div>
