@@ -49,7 +49,7 @@ const CustomizedModal = (props) => {
 	const history = useHistory();
 	const [ form ] = Form.useForm();
 	const [ authErr, setAuthErr ] = useState(null);
-	const [ response, setResponse ] = useState(null);
+	const [ user, setUser ] = useState(null);
 
     const postSession = data => {
 		setAuthErr(null)
@@ -67,7 +67,7 @@ const CustomizedModal = (props) => {
 					let nickname = user.username
 					let { data } = await ApiRequest.get(`user/${nickname}`)
 					//TODO: Store user in global state
-					setResponse(data)
+					setUser(data)
 				}catch(e) {
 					notification.error({
 						message: 'No se pudo traer datos del usuario.',
@@ -82,19 +82,20 @@ const CustomizedModal = (props) => {
 			}).catch( e => {
 				setAuthErr(e.message)
 			})
-        }
+		}
 	}
 
     useEffect(() => {
-        if(response){
-			localStorage.setItem("userId", JSON.stringify(response.id))
+        if(user){
+			delete user.userPassword;
+			localStorage.setItem("user", JSON.stringify(user))
 			notification.success({
 				message: '¡Bienvenido a Coalquilando!',
 				placement: 'bottomLeft'
 			});
 			history.push("/user/profile")
 		}
-	}, [response, history])
+	}, [user, history])
     
 	return (
         <Modal 
