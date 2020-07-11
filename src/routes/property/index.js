@@ -20,14 +20,14 @@ const propertyData = {
       ],
       [
         {
-          label: "Dirección",
-          name: ["attributes", "address"],
+          label: "Tipología",
+          name: ["attributes", "typology"],
           component: "Input",
           required: true,
         },
         {
-          label: "Tipología",
-          name: ["attributes", "typology"],
+          label: "Cantidad de personas",
+          name: ["attributes", "amountPeople"],
           component: "Input",
           required: true,
         },
@@ -48,16 +48,76 @@ const propertyData = {
       ],
       [
         {
-          label: "Cantidad de personas",
-          name: ["attributes", "amountPeople"],
+          label: "Dirección",
+          component: "h2",
+        },
+      ],
+      [
+        {
+          label: "Calle",
+          name: ["address", "street"],
           component: "Input",
           required: true,
         },
         {
-          label: "Precio",
-          name: "price",
+          label: "Número",
+          name: ["address", "number"],
           component: "Input",
-          // required: true,
+          required: true,
+        },
+        {
+          label: "Barrio",
+          name: ["address", "neighborhood"],
+          component: "Input",
+          required: true,
+        },
+      ],
+      [
+        {
+          label: "Piso",
+          name: ["address", "floor"],
+          component: "Input",
+        },
+        {
+          label: "Departamento",
+          name: ["address", "apartment"],
+          component: "Input",
+        },
+        {
+          label: "Provincia",
+          name: ["address", "province"],
+          component: "Input",
+          required: true,
+        },
+      ],
+      [
+        {
+          label: "Precio",
+          component: "h2",
+        },
+      ],
+      [
+        {
+          label: "Monto",
+          name: ["price", "rentPrice"],
+          component: "Input",
+          required: true,
+        },
+        {
+          label: "Expensas",
+          name: ["price", "expenses"],
+          component: "Input",
+          required: true,
+        },
+        {
+          label: "Servicios",
+          name: ["price", "services"],
+          component: "Input",
+        },
+        {
+          label: "Impuestos",
+          name: ["price", "taxes"],
+          component: "Input",
         },
       ],
     ],
@@ -154,20 +214,24 @@ const propertyData = {
 
 const usePostProperty = (values) => {
   const [response, setResponse] = useState(null);
-
   useEffect(() => {
     if (values) {
       var atributos = Object.entries(values.attributes);
       const attributesFormate = atributos.map((a) => {
         let json = {
-          attribute: a[0],
-          value: `"${a[1]}"`,
+          attributeType: a[0],
+          value: a[1] ? a[1] : "",
           weigth: 0,
         };
         return json;
       });
 
-      let formatedBody = { ...values, attributes: attributesFormate };
+      let formatedBody = {
+        ...values,
+        attributes: attributesFormate,
+        ownerId: "5f078f662f0f3728ba327956",
+        status: "available",
+      };
 
       let bodyReq = formatedBody;
       let asyncPost = async () => {
