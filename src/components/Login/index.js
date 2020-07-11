@@ -47,10 +47,12 @@ const loginFields = {
 const CustomizedModal = (props) => {
 	const { visible, toggleVisible } = props;
 	const history = useHistory();
-    const [ form ] = Form.useForm();
+	const [ form ] = Form.useForm();
+	const [ authErr, setAuthErr ] = useState(null);
 	const [ response, setResponse ] = useState(null);
 
     const postSession = data => {
+		setAuthErr(null)
         if (data) {
             let asyncSignIn = new Promise ( async (res,rej) => {
 				try {
@@ -75,20 +77,17 @@ const CustomizedModal = (props) => {
 				}
 			}
 			asyncSignIn.then( user => {
+				setAuthErr(null)
 				asyncGetUser(user)
 			}).catch( e => {
-				notification.error({
-					message: 'Error iniciar sesión',
-					description: `Cognito: ${e.message}`,
-					placement: 'bottomLeft'
-				});
+				setAuthErr(e.message)
 			})
         }
 	}
 
     useEffect(() => {
         if(response){
-			localStorage.setItem("userData", JSON.stringify(response))
+			localStorage.setItem("userId", JSON.stringify(response.id))
 			notification.success({
 				message: '¡Bienvenido a Coalquilando!',
 				placement: 'bottomLeft'
@@ -99,19 +98,21 @@ const CustomizedModal = (props) => {
     
 	return (
         <Modal 
-            title="Iniciar Sesión" 
+			title="Iniciar Sesión" 
+			className="loginModal"
             visible={visible} 
             onCancel={toggleVisible} 
 			footer={null} 
 			destroyOnClose={true}
         >
 			<CustomizedForm form={form} data={loginFields} onfinish={postSession}/>
+			{ authErr && <span id="authErr">{authErr}</span> }
         </Modal>
 	);
 };
 
 const Login = () => {
-    const [ visible, setVisible ] = useState(false);
+	const [ visible, setVisible ] = useState(false);
 
 	const toggleVisible = () => {
 		setVisible(!visible);
@@ -120,7 +121,7 @@ const Login = () => {
 	return (
 		<div>
 			<span onClick={() => toggleVisible()}> Iniciar sesión </span>
-			<CustomizedModal visible={visible} toggleVisible={toggleVisible} />
+			<CustomizedModal visible={visible} toggleVisible={toggleVisible}/>
 		</div>
 	);
 };
