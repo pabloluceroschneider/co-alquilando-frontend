@@ -13,8 +13,8 @@ const propertyData = {
     primaries: [
       [
         {
-          label: "Descripción",
-          name: "description",
+          label: "Título",
+          name: "title",
           component: "Input",
           required: true,
         },
@@ -51,6 +51,13 @@ const propertyData = {
           component: "Input",
           required: true,
         },
+      ],
+      [
+        {
+					label: "Descripción",
+					name: "description",
+					component: "Input.TextArea",
+				},
       ],
       [
         {
