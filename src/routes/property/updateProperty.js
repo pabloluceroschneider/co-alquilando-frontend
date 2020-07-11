@@ -23,7 +23,12 @@ const propertyData = {
         {
           label: "Tipología",
           name: ["attributes", "typology"],
-          component: "Input",
+          component: "Select",
+          options: [
+            { name: "Departamento", value: "APARMENT" },
+            { name: "Casa", value: "HOUSE" },
+            { name: "Otro", value: "NOT_DEFINED" },
+          ],
           required: true,
         },
         {
