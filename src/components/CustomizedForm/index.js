@@ -7,30 +7,7 @@ const Row = (props) => {
 	return (
 		<div className={`group${fields.length}`}>
 			{fields.map((element) => {
-				return (
-					<Form.Item
-						key={element.label}
-						label={element.label}
-						name={element.name}
-						dependencies={element.dependencies}
-						hasFeedback={element.hasFeedback}
-						valuePropName={element.valuePropName}
-						rules={ element.validate ?
-							[
-								{
-									required: element.required,
-									message: `Porfavor, ingrese ${element.label}`
-								},
-								element.validate ? element.validate : () => { return Promise.resolve() }
-						] : [{
-							required: element.required,
-							message: `Porfavor, ingrese ${element.label}`
-						}]
-						}
-					>
-						{InputRepository(element)}
-					</Form.Item>
-				);
+				return InputRepository(element)
 			})}
 		</div>
 	);
@@ -38,13 +15,19 @@ const Row = (props) => {
 
 const CustomizedForm = (props) => {
 	const { data, onfinish, form } = props;
-	const { name, layout, fields, btnSubmit } = data;
+	const { name, layout, fields, btnSubmit, className } = data;
 	const { primaries, secondaries, tertiaries } = fields;
 	const [ showSecondary, setShowSecondary ] = useState(false);
 	const [ showTertiary, setShowTertiary ] = useState(false);
+	const [ loading, setLoading ] = useState(false);
+
 
 	const onFinish = (values) => {
-		onfinish(values)
+		setLoading(true);
+		setTimeout( () => { 
+			setLoading(false);
+			onfinish(values);
+		}, 1000);
 	};
 
 	const onFinishFailed = values => {
@@ -115,18 +98,22 @@ const CustomizedForm = (props) => {
 					{showMore()}
 				</div>
 
-				<Form.Item>
-					<Button type="primary" htmlType="submit">
-						{btnSubmit}
-					</Button>
-				</Form.Item>
+				{
+					btnSubmit ? 
+						<Form.Item>
+							<Button loading={loading} type="primary" htmlType="submit">
+								{btnSubmit}
+							</Button>
+						</Form.Item>
+					: null
+				}
 			</Form>
 
 		)
 	}
 
 	return (
-		<div className="customizedForm">
+		<div className={ className ? className : "customizedForm"}>
 			{renderForm()}
 		</div>
 	);
