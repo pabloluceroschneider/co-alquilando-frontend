@@ -20,7 +20,7 @@ class TopNav extends React.Component {
 
 	handleSignOut = async () => {
 		await Auth.signOut()
-		localStorage.removeItem("userId")
+		localStorage.removeItem("user")
 	}
 
 	render() {
