@@ -1,4 +1,5 @@
 @import "./App.css";
+@import "./property.css";
 @import "./customizedForm.css";
 @import "./Footer.css";
 @import "./Header.css";
@@ -6,6 +7,7 @@
 @import "./Carrousel.css";
 @import "./GaleriaTresImagenes.css";
 @import "./Portada.css";
+@import "./Login.css";
 
 body {
   margin: 0;
