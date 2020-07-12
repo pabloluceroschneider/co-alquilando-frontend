@@ -9,21 +9,29 @@ const image =
 
 const Profile = (props) => {
   let { nickname } = useParams();
-  const [data, setData] = useState(null);
+  const [datos, setDatos] = useState(null);
 
   useEffect(() => {
-    if (!data) {
+    if (!datos) {
       const getUser = async () => {
-        const userData = await ApiRequest.get(`/user/${nickname}`);
-        setData(userData.data);
+        const {data} = await ApiRequest.get(`/user/${nickname}`);
+        console.log('Data: ', data);
+        let attr = []
+        data.attributes.forEach( t => {
+        attr = { ...attr, [t.attributeType]:t.value }
+        })
+        setDatos({...data, attributes: attr});
       };
       getUser();
     }
-  }, [nickname, data]);
+    console.log('Datos =>', datos);
+  }, [nickname, datos]);
+
+  
 
   return (
     <>
-      {data ? (
+      {datos ? (
         <div className="profileContent">
           <div className="group2">
             <div className="imageContent">
@@ -36,11 +44,11 @@ const Profile = (props) => {
             <div className="profileMainData">
               <h2>
                 <strong>
-                  {data.userName} {data.userSurname}
+                  {datos.userName} {datos.userSurname}
                 </strong>
               </h2>
               <h4>
-                {data.userCity} - {data.userNationality}
+                {datos.userCity} - {datos.userNationality}
               </h4>
             </div>
           </div>
@@ -51,11 +59,11 @@ const Profile = (props) => {
               </div>
               <div>
                 <p>
-                  Sexo: {data.userSex === "Male" ? "Masculino" : "Femenino"}
+                  Sexo: {datos.userSex === "Male" ? "Masculino" : "Femenino"}
                 </p>
               </div>
               <div>
-                <p>Edad: {calculateAge(data.userBirthDate)}</p>
+                <p>Edad: {calculateAge(datos.userBirthDate)}</p>
               </div>
             </div>
           </div>
@@ -65,16 +73,17 @@ const Profile = (props) => {
         </div>
       ) : null}
 
-      {data && data.userPreferences ? (
+      {datos && datos.attributes ? (
         <div className="profileContent">
-          <h3>Preferencias</h3>
+          <h3>Acerca de</h3>
+          {datos.attributes.pets.value === "no" ? <p>Tengo mascotas</p>  : <p>No tengo mascotas</p> }
         </div>
       ) : null}
 
-      {data && data.userDescription ? (
+      {datos && datos.userDescription ? (
         <div className="profileContent">
-          <h3>Más de {data.userName}</h3>
-          <p>{data.userDescription}</p>
+          <h3>Más sobre {datos.userName}</h3>
+          <p>{datos.userDescription}</p>
         </div>
       ) : null}
     </>
