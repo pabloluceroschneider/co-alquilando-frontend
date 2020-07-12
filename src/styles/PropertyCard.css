@@ -1,13 +1,29 @@
 .content{
-display: grid;
-        grid-template-columns: 50% 50%;
-        column-gap: 5px;
-        width: 70%;
-    };
+    display: grid;
+    grid-template-columns: 50% 50%;
+    column-gap: 5px;
+    width: auto;
+    margin: 50px !important;
+    
+    }
 
-    .content2{
-        display: grid;
-        grid-template-columns: 50% 50%;
-        column-gap: 5px;
-        width: 70%;
-            };
+    .items{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fila {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 60px;
+    }
+
+    .img {
+        width: 10px;
+        height: 10px;
+        margin-right: 17px;
+    }
+   
+    .title {
+        padding-top: 10px;
+    }
