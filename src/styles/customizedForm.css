@@ -16,7 +16,22 @@
 
 .showmore{
     text-align: left;
-    color: rgb(0, 132, 255)
+    color: rgb(0, 132, 255);
+    margin: 0px auto 15px auto;
+    cursor: pointer;
+}
+
+.group2, .group3, .group4{
+    display: grid;
+    grid-template-columns: 100%;
+    text-align: center;
+}
+
+.group2 :first-child, .group3 :first-child, .group4 :first-child{
+    text-align: left;
+}
+.group2 :nth-child(2), .group3 :nth-child(3), .group4 :nth-child(4){
+    text-align: right;
 }
 
 .Checkbox{
@@ -43,20 +58,24 @@
         display: grid;
         grid-template-columns: 50% 50%;
         column-gap: 5px;
+        text-align: justify;
     }
     .group3{
         display: grid;
         grid-template-columns: 33% 33% 33%;
         column-gap: 5px;
+        text-align: justify;
     }
     .group4{
         display: grid;
         grid-template-columns: 25% 25% 25% 25%;
         column-gap: 5px;
+        text-align: justify;
     }
     .group5{
         display: grid;
         grid-template-columns: 20% 20% 20% 20% 20%;
         column-gap: 5px;
+        text-align: justify;
     }
 }
