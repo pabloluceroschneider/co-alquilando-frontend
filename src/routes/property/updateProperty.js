@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Form, notification } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
-import { ApiRequest } from "../../util/ApiRequest";
+import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 
 const propertyData = {
@@ -298,7 +298,6 @@ const FormPropertyUpdate = (props) => {
 
   return (
     <div>
-      <div>Hola mundo: {idProperty}</div>
       <ContentWrapper header footer>
         <CustomizedForm form={form} data={propertyData} onfinish={setFields} />
       </ContentWrapper>
