@@ -23,13 +23,13 @@
 }
 
 @media only screen and (min-width: 600px){
-    .group2{
+    .profileGroup2{
         display: grid;
         grid-template-columns: 50% 50%;
         column-gap: 5px;
     }
 
-    .group3{
+    .profileGroup3{
         display: grid;
         grid-template-columns: 33% 33% 33%;
         column-gap: 5px;

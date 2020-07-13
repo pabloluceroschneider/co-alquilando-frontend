@@ -33,7 +33,7 @@ const Profile = (props) => {
     <>
       {datos ? (
         <div className="profileContent">
-          <div className="group2">
+          <div className="profileGroup2">
             <div className="imageContent">
               <img
                 alt="imagen de perfil"
@@ -53,7 +53,7 @@ const Profile = (props) => {
             </div>
           </div>
           <div className="datosContent">
-            <div className="group3">
+            <div className="profileGroup3">
               <div>
                 <p>Nickname: {nickname}</p>
               </div>
