@@ -5,7 +5,7 @@ import SignIn from "./signIn";
 import Profile from "./profile/index";
 import UpdateForm from "./profile/updateProfile";
 import Property from "./property";
-import PropertyId from './property/property_id'
+import FormPropertyUpdate from './property/updateProperty';
 const Routes = () => {
   return (
     <Router>
@@ -14,7 +14,7 @@ const Routes = () => {
         <Route path="/sign-in" exact component={SignIn} />
         <Route path="/profile/:nickname/update" component={UpdateForm} />
         <Route path="/profile/:nickname" component={Profile} />
-        <Route path="/property/:idProperty/update" component={PropertyId}/>
+        <Route path="/property/:idProperty/update" component={FormPropertyUpdate}/>
         <Route path="/property" exact component={Property} />
       </Switch>
     </Router>
