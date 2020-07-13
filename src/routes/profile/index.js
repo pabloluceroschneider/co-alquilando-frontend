@@ -14,20 +14,18 @@ const Profile = (props) => {
   useEffect(() => {
     if (!datos) {
       const getUser = async () => {
-        const {data} = await ApiRequest.get(`/user/${nickname}`);
-        console.log('Data: ', data);
-        let attr = []
-        data.attributes.forEach( t => {
-        attr = { ...attr, [t.attributeType]:t.value }
-        })
-        setDatos({...data, attributes: attr});
+        const { data } = await ApiRequest.get(`/user/${nickname}`);
+        console.log("Data: ", data);
+        let attr = [];
+        data.attributes.forEach((t) => {
+          attr = { ...attr, [t.attributeType]: t.value };
+        });
+        setDatos({ ...data, attributes: attr });
       };
       getUser();
     }
-    console.log('Datos =>', datos);
+    console.log("Datos =>", datos);
   }, [nickname, datos]);
-
-  
 
   return (
     <>
@@ -76,7 +74,18 @@ const Profile = (props) => {
       {datos && datos.attributes ? (
         <div className="profileContent">
           <h3>Acerca de</h3>
-          {datos.attributes.pets.value === "no" ? <p>Tengo mascotas</p>  : <p>No tengo mascotas</p> }
+          <div className="profileGroup2">
+            {datos.attributes.pets.value === "no" ? (
+              <p>Tengo mascotas</p>
+            ) : (
+              <p>No tengo mascotas</p>
+            )}
+            {datos.attributes.occupation ? (
+              <p>Ocupación: {datos.attributes.occupation.value}</p>
+            ) : (
+              <p>Sin Ocupación</p>
+            )}
+          </div>
         </div>
       ) : null}
 
