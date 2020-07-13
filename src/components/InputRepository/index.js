@@ -79,4 +79,4 @@ const InputRepository = (props) => {
   }
 };
 
-export default InputRepository;
+export default InputRepository

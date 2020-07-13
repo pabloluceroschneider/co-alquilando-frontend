@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Form, notification } from 'antd';
 import { useHistory } from 'react-router-dom';
+import { Form, notification } from 'antd';
+import Auth from '../../util/Auth';
+import ApiRequest from '../../util/ApiRequest';
+import ContentWrapper from '../../components/ContentWrapper';
 import CustomizedForm from '../../components/CustomizedForm';
-import { ApiRequest } from '../../util/ApiRequest';
-import ContentWrapper from '../../components/ContentWrapper'
+import calcAge from '../../util/CalculateAge';
 
 const userData = {
 	name: 'user',
@@ -15,7 +17,8 @@ const userData = {
 				{
 					label: "Nombre de usuario",
 					name: "userNickname",
-					component: "Input"
+					component: "Input",
+					required: true
 				}
 			],
 			[
@@ -85,6 +88,20 @@ const userData = {
 					label: "Fecha de Nacimiento",
 					name: "userBirthDate",
 					component: "DatePicker",
+					dependencies:['userBirthDate'],
+					validate: ({getFieldValue}) => ({
+						validator() {
+							let userBirthDate = getFieldValue("userBirthDate")
+							let age = calcAge(userBirthDate)
+						    if(age < 18){
+								return Promise.reject('Debes ser mayor de 18 años');
+							}else if(age > 100){
+								return Promise.reject('Edad no permitida');
+							}else{
+								return Promise.resolve()
+							}
+						},
+					  }),
 				},				
 				{
 					label: "Número de Celular",
@@ -140,46 +157,61 @@ const userData = {
 	}
 };
 
-const usePostProperty = fields => {
-	const [ response, setResponse ] = useState(null)
+const usePostUser = bodyReq => {
+	const [ user, setUser ] = useState(null)
 	useEffect(() => {
-		if (fields){
-			let bodyReq = fields
-			delete bodyReq.userConfirmEmail
-			delete bodyReq.userConfirmPassword
-			let asyncPost = async() => {
+		if (bodyReq){
+			let asyncAuth = new Promise ( async (res, rej) => {
+				try {
+					let user = await Auth.signUp( bodyReq.userNickname, bodyReq.userPassword, bodyReq.userEmail )
+					res(user)
+				}catch(e){
+					rej(e)
+				}
+			})
+			let asyncPost = async () => {
 				try{
+					delete bodyReq.userConfirmPassword;
+					delete bodyReq.userConfirmEmail;
 					let ok = await ApiRequest.post("/user", bodyReq);
-					setResponse(ok)
+					setUser(ok)
 				}catch(e){
 					notification.error({
-						message: `Error: ${e.message}`,
+						message: 'Error al almacenar usuario ',
+						description: `Api Error: ${e.message}`,
 						placement: 'bottomLeft'
 					});
 				}
 			}
-			asyncPost()
+			asyncAuth.then( user => {
+				asyncPost()
+			}).catch( e => {
+				notification.error({
+					message: 'Error al crear usuario ',
+					description: `Cognito: ${e.message}`,
+					placement: 'bottomLeft'
+				});
+			})
 		}
-	}, [fields])
-	return response;
+	}, [bodyReq])
+	return [user];
 }
 
 const SignIn = () => {
 	const [ fields, setFields ] = useState(null)
-	const [form]= Form.useForm();
 	const history = useHistory();
-	let property = usePostProperty(fields)
+	const [ form ] = Form.useForm();
+	const [ user ] = usePostUser(fields)
 	
 	useEffect( () => {
-		if(property){
-			console.log(property)
+		if(user){
 			notification.success({
 				message: `Usuario registrado`,
 				placement: 'bottomLeft'
 			});
 			history.push('/');
 		}
-	},[property, history])
+	},[user, history])
 
 	return (
 		<ContentWrapper header footer>
