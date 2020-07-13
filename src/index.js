@@ -1,15 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'antd/dist/antd.css';
 import './styles/index.css';
-// import App from './components/App';
-import Routes from './routes'
+import App from './routes';
+import Amplify from 'aws-amplify';
+import config from './config.json'
 import * as serviceWorker from './serviceWorker';
 import 'antd/dist/antd.css';
 
+Amplify.configure({
+  Auth: {
+    mandatorySignId: true,
+    region: config.cognito.REGION,
+    userPoolId: config.cognito.USER_POOL_ID,
+    userPoolWebClientId: config.cognito.APP_CLIENT_ID
+  }
+})
+
 ReactDOM.render(
-  <React.StrictMode>
-    <Routes />
-  </React.StrictMode>,
+  <React.Fragment>
+    <App />
+  </React.Fragment>,
   document.getElementById('root')
 );
 

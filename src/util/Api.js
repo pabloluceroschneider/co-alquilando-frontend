@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const url = {
-    local: "http://localhost:8080/"
+    local: "http://localhost:8080"
 }
 
 export default axios.create({
@@ -10,3 +10,4 @@ export default axios.create({
         'Content-Type':'application/json'
     }
 })
+
