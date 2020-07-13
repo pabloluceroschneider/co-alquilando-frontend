@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ApiRequest } from "../../util/ApiRequest";
+import ApiRequest from "../../util/ApiRequest";
 import calculateAge from "../../util/CalculateAge";
 import { Button } from "antd";
 
