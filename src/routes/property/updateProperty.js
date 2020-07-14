@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import ApiRequest from "../../util/ApiRequest";
+import React, { useEffect, useState } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import { Form, notification } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
+import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 
 const propertyData = {
   name: "property",
   layout: "vertical",
-  btnSubmit: "Registrar Propiedad",
+  btnSubmit: "Actualizar Propiedad",
   fields: {
     primaries: [
       [
@@ -21,15 +22,15 @@ const propertyData = {
       [
         {
           label: "Tipología",
-					name: ["attributes", "typology"],
-					component: "Select",
-					options : [
-						{ name: "Departamento", value: "APARMENT"},
-						{ name: "Casa", value: "HOUSE"},
-						{ name: "Otro", value: "NOT_DEFINED"}
+          name: ["attributes", "typology"],
+          component: "Select",
+          options: [
+            { name: "Departamento", value: "APARMENT" },
+            { name: "Casa", value: "HOUSE" },
+            { name: "Otro", value: "NOT_DEFINED" },
           ],
-          required:true
-				},
+          required: true,
+        },
         {
           label: "Cantidad de personas",
           name: ["attributes", "amountPeople"],
@@ -53,11 +54,10 @@ const propertyData = {
       ],
       [
         {
-          label: "Descripción",
-          name: "description",
-          component: "Input.TextArea",
-          required: true,
-        },
+					label: "Descripción",
+					name: "description",
+					component: "Input.TextArea",
+				},
       ],
       [
         {
@@ -133,8 +133,6 @@ const propertyData = {
           component: "Input",
         },
       ],
-    ],
-    secondaries: [
       [
         {
           label: "Comodidades",
@@ -225,67 +223,86 @@ const propertyData = {
   },
 };
 
-const usePostProperty = (values) => {
-  const [response, setResponse] = useState(null);
+const FormPropertyUpdate = (props) => {
+  let { idProperty } = useParams();
+  const [form] = Form.useForm();
+  const [fields, setFields] = useState(null);
+  const history = useHistory();
+  const [ownerId, setOwnerId] = useState(null);
+  const [status, setStatus] = useState(null);
   useEffect(() => {
-    if (values) {
-      var atributos = Object.entries(values.attributes);
+    let asyncGetUser = async () => {
+      await ApiRequest.get(`/property/${idProperty}`).then((res) => {
+        setOwnerId(res.data.ownerId);
+        setStatus(res.data.status);
+        console.log(res.data);
+        let array = [];
+        res.data.attributes.forEach((t) => {
+          array.push({ [t.attributeType]: t.value });
+        });
+        //delete  res.data.attributes;
+        array.forEach((t) => {
+          res.data = {
+            ...res.data,
+            attributes: { ...res.data.attributes, ...t },
+          };
+        });
+        console.log(res.data);
+        form.setFieldsValue(res.data);
+      });
+    };
+    asyncGetUser();
+  }, [form, idProperty]);
+
+  useEffect(() => {
+    if (fields) {
+      var atributos = Object.entries(fields.attributes);
       const attributesFormate = atributos.map((a) => {
         let json = {
           attributeType: a[0],
           value: a[1] ? a[1] : "",
-          weigth: 0,
+          weigth: a[2],
         };
         return json;
       });
 
       let formatedBody = {
-        ...values,
+        ...fields,
         attributes: attributesFormate,
-        ownerId: "5f010068285a9156b2b4c7dd",
-        status: "available",
+        ownerId: ownerId,
+        status: status,
       };
 
       let bodyReq = formatedBody;
-      let asyncPost = async () => {
-        try {
-          let ok = await ApiRequest.post("/property", bodyReq);
-          setResponse(ok);
-        } catch (e) {
-          notification.error({
-            message: `Error: ${e.message}`,
-            placement: "bottomLeft",
-          });
-        }
+      console.log(bodyReq);
+      let asyncPut = async () => {
+        await ApiRequest.put(`/property/${idProperty}`, bodyReq).then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            notification.success({
+              message: `Datos Actualizados`,
+              placement: "bottomLeft",
+            });
+            history.push(`/property/${idProperty}`);
+          } else {
+            notification.error({
+              message: `Error: No se pudo actualizar sus datos`,
+              placement: "bottomLeft",
+            });
+          }
+        });
       };
-      asyncPost();
+      asyncPut();
     }
-  }, [values]);
-  return response;
-};
-
-const Property = () => {
-  const [values, setValues] = useState(null);
-  const [form] = Form.useForm();
-
-  let property = usePostProperty(values);
-
-  useEffect(() => {
-    if (property) {
-      console.log(property);
-      notification.success({
-        message: `Propiedad Publicada`,
-        placement: "bottomLeft",
-      });
-      form.resetFields();
-    }
-  }, [property,form]);
+  }, [fields, idProperty, history, ownerId, status]);
 
   return (
-    <ContentWrapper header footer>
-      <CustomizedForm form={form} data={propertyData} onfinish={setValues} />
-    </ContentWrapper>
+    <div>
+      <ContentWrapper header footer>
+        <CustomizedForm form={form} data={propertyData} onfinish={setFields} />
+      </ContentWrapper>
+    </div>
   );
 };
 
-export default Property;
+export default FormPropertyUpdate;

@@ -46,6 +46,20 @@
     font-weight: bold;
 }
 
+.Checkbox{
+    border: 1px solid #e4e4e4;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 90% 10%;
+    margin: 0px 2px 15px 2px;
+    padding: 8px;
+}
+
+.label{
+    font-size: 18px;
+    font-weight: bold;
+}
+
 /* pantalla de escritorio */
 @media only screen and (min-width: 600px){
     .customizedForm{

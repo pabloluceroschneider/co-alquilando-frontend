@@ -1,0 +1,56 @@
+.profileContent{
+    text-align: center;
+    border: 1px solid #AFAFAF;
+    border-radius: 20px;
+    text-align: center;
+    margin: 1% 5% 0% 5%;
+    padding: 20px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  
+}
+
+.profileImage{
+    width: 250px;
+    border-radius: 100%;
+    margin: 2%;
+}
+
+#buttonConectar{
+    background-color:#2E86C1 ;
+    color:#F2F3F4 ;
+    font-weight: bold;
+}
+
+@media only screen and (min-width: 600px){
+    .profileGroup2{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        column-gap: 5px;
+    }
+
+    .profileGroup3{
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+        column-gap: 5px;
+    }
+
+    .profileImage{
+        width: 250px;
+        border-radius: 100%;
+    }
+
+    .profileMainData{
+        align-self: center;
+    }
+
+    .datosContent{
+        text-align: start;
+        margin-top: 2%;
+        margin-left: 15%;
+    }
+
+    .profileButton{
+        text-align-last: right;
+    }
+
+}
