@@ -65,7 +65,7 @@ const propertyCard = props => {
                         {attr.elevator ? <label className="icon icon-arrow-circle-1-up" title="Ascensor"></label> : null}
                         {attr.roaster ? <label className="icon icon-barbecue-eat-food-streamline" title="Asador">  </label> : null}
                         {attr.aa ? <label className="icon icon-air" title="Aire Acondcionado"> </label> : null}
-                        {attr.calefaction ? <label className="icon icon-fire"> title="Calefaccion" </label> : null}
+                        {attr.calefaction ? <label className="icon icon-fire" title="Calefaccion" ></label> : null}
                         {attr.pets ? <label className="icon icon-paw" title="Acepta Mascotas">  </label> : null}
 
 
