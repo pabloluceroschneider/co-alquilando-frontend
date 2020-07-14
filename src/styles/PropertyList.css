@@ -1,0 +1,7 @@
+.contentPL{
+    display: flex;
+    column-gap: 5px;
+    margin: 5% !important;
+    flex-direction: row;
+    }
+

@@ -1,29 +1,47 @@
-.content{
-    display: grid;
-    grid-template-columns: 50% 50%;
+.contentPC{
+    display: flex;
     column-gap: 5px;
-    width: auto;
-    margin: 50px !important;
-    
+    margin: 1% !important;
+    flex-direction: row;
+    text-align: center;
+    }
+    .dividerPC{
+        margin: 2px 0 2px 0;
     }
 
-    .items{
+    .cabeceraPC{
+
+        text-align: center;
+    }
+
+   .itemsPC{
         display: flex;
         flex-direction: column;
+        text-align: left;
     }
 
-    .fila {
+    .typologyPC{
+        position:center;
+        font-weight: bold
+    }
+
+    .filaPC {
+        flex-direction: row;
         display: flex;
         flex-wrap: wrap;
-        margin: 0 60px;
+        /* margin: 0 60px; */
     }
 
-    .img {
+    .imgPC {
         width: 10px;
         height: 10px;
         margin-right: 17px;
     }
    
-    .title {
-        padding-top: 10px;
+    .titlePC {
+        padding:0 0 0 0;
+        color: rgb(9, 93, 9);
+        margin: 0 0 0 0;
+        font-size: 30px;
+        font-weight: bold;
     }
