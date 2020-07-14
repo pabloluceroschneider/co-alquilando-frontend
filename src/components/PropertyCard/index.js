@@ -1,15 +1,15 @@
 import React from 'react';
-import Carrousel from '../Carrousel/index';
 import '../../styles/PropertyCard.css'
 import { Card } from 'antd';
 import { Divider } from 'antd';
 import '../../assets/Icons/Icon/styles.css'
+import CarrouselPequeño from '../CarrouselPequeño';
 
 
 const propertyCard = props => {
-    const { description, price, status, address, attributes } = props
+    const { description, price, address, attributes } = props
     const { rentPrice } = price
-    const { street, number, floor, apartment, neighborhood, province } = address
+    const { street, number, province } = address
 
     let attr = []
     attributes.forEach(t => {
@@ -23,29 +23,29 @@ const propertyCard = props => {
     return (
 
         <div className="contentPC">
-
+        
             <Card
                 hoverable
-                style={{ width: 240 }}
+                style={{ width: 260 }}
                 cover={
-                    <Carrousel autoPlay={false} showArrows={true} className="carruselPC" data={[
+                    <CarrouselPequeño className="carruselPC" data={[
                         { imgUrl: "", caption: "", position: "" },
                         { imgUrl: "", caption: "", position: "" },
                         { imgUrl: "", caption: "", position: "" }
                     ]}>
-                    </Carrousel>
+                    </CarrouselPequeño>
                 }
             >
                 <div >
                     <div className="cabeceraPC">
-                        <label className="titlePC"> ${rentPrice}</label>
+                        <label className="titlePC"> ${rentPrice}</label> <br></br>
                         <label className="typologyPC"> {typologies[attr.typology]}</label>
                     </div>
 
                     <div className="itemsPC">
                         <label>{province}</label>
-                        <label>{attr.rooms} habitaciones </label>
-                        <label>Ubicacion: {street}</label>
+                        <label>Ubicacion: {street} {number}</label>
+                        <label>Habitaciones: {attr.rooms}  </label>
                         <label>Baños: {attr.bathrooms}</label>
                         <label>Maximo Inquilinos: {attr.amountPeople}</label>
                         <Divider className="dividerPC"></Divider>
@@ -75,6 +75,7 @@ const propertyCard = props => {
 
             </Card>
 
+                
         </div>
     );
 
