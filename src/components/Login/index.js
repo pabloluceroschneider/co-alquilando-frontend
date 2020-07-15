@@ -5,8 +5,6 @@ import { useHistory } from 'react-router';
 import Auth from '../../util/Auth';
 import ApiRequest from '../../util/ApiRequest';
 import CustomizedForm from '../CustomizedForm';
-import { signInButton } from 'aws-amplify';
-// import { signin } from '../../store/actions/session';
 
 const loginFields = {
 	name: 'login',
@@ -99,7 +97,7 @@ const CustomizedModal = (props) => {
 			});
 			history.push("/user/profile")
 		}
-	}, [user, history])
+	}, [user, history, signin])
     
 	return (
         <Modal 

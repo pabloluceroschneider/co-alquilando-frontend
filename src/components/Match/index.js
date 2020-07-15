@@ -19,7 +19,7 @@ const UserCard = props => {
 				<Meta
 					avatar={<Avatar src={userPhoto}> {!userPhoto && userName[0].toUpperCase() } </Avatar>}
 					title={userName+" "+userSurname}
-					description={userDescription +" "+"Coincidencia 79%"}
+					description={userDescription}
 				/>
 		</Card>
 	);
