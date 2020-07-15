@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Menu } from 'antd';
 // const { SubMenu } = Menu;
 import Login from '../../components/Login';
@@ -63,4 +64,17 @@ class TopNav extends React.Component {
 	}
 }
 
-export default TopNav;
+const mapStateToProps = state => ({
+    user : state.user
+})
+
+const mapDispatchToProps = dispatch => ({
+	signout() {
+		dispatch({
+			type: "SIGN_OUT",
+			payload: null
+		})
+	}
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopNav);
