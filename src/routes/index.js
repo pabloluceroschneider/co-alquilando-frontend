@@ -6,6 +6,8 @@ import Profile from "./profile/index";
 import UpdateForm from "./profile/updateProfile";
 import Property from "./property";
 import FormPropertyUpdate from './property/updateProperty';
+import Match from "../components/Match";
+
 const Routes = () => {
   return (
     <Router>
@@ -16,6 +18,7 @@ const Routes = () => {
         <Route path="/profile/:nickname" component={Profile} />
         <Route path="/property/:idProperty/update" component={FormPropertyUpdate}/>
         <Route path="/property" exact component={Property} />
+        <Route path="/match" exact component={Match} />
       </Switch>
     </Router>
   );

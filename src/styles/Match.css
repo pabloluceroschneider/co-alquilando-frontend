@@ -1,0 +1,47 @@
+
+
+.match .userCard{
+    width: 300px;
+    margin-top: 16px;
+}
+
+.match .user {
+    display: grid;
+    grid-row: 10% 60% 20%;
+    border: 1px solid #AFAFAF;
+    min-height: 33vh;
+    width: auto;
+    margin: 1%;
+}
+
+.match .user .userheader{
+    display: grid;
+    width: auto;
+    border-bottom: 1px solid #FAFAFA;
+}
+
+.match .user .usercontent{
+    width: auto;
+    border-bottom: 1px solid #FAFAFA;
+}
+
+.match .user .userfooter{
+    width: auto;
+}
+
+.match .user .userheader .avatar{
+    display: inline;
+    margin: 10px 10px 0px 10px;
+}
+
+
+.match .user .userheader .nombre{
+    display: inline;
+    margin: 10px 10px 0px 10px;
+}
+
+
+.match .user .userheader .btn{
+    display: inline;
+    margin: 10px 10px 0px 10px;
+}

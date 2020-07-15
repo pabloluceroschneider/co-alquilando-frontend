@@ -9,6 +9,7 @@
 @import "./GaleriaTresImagenes.css";
 @import "./Portada.css";
 @import "./Login.css";
+@import "./Match.css";
 
 body {
   margin: 0;
