@@ -1,7 +1,9 @@
 const SIGN_IN = 'SIGN_IN';
 const SIGN_OUT = 'SIGN_OUT';
 
-const initialState = {}
+const initialState = {
+    user: JSON.parse(localStorage.getItem("user"))
+}
 
 export default function session(state = initialState, action) {
     console.log(action)
