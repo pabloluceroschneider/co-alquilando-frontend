@@ -118,7 +118,6 @@ const CustomizedModal = (props) => {
 
 const Login = props => {
 	const [ visible, setVisible ] = useState(false);
-	console.log("que hay aca -->",props.user)
 
 	const toggleVisible = () => {
 		setVisible(!visible);

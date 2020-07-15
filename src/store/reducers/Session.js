@@ -6,7 +6,6 @@ const initialState = {
 }
 
 export default function session(state = initialState, action) {
-    console.log(action)
     switch (action.type) {
         case SIGN_IN:
           return {...state, user: action.payload}
