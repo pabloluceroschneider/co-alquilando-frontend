@@ -36,7 +36,6 @@
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding-right: 5px;
 }
 
 .icon-easel:before {
@@ -86,4 +85,10 @@
 }
 .icon-fire:before {
   content: "\70";
+}
+.icon-align-justify:before {
+  content: "\71";
+}
+.icon-user:before {
+  content: "\72";
 }
