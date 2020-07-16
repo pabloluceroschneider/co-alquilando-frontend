@@ -1,26 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Avatar } from 'antd';
-import { MessageOutlined, SettingOutlined } from '@ant-design/icons';
+import { MessageOutlined } from '@ant-design/icons';
 import ApiRequest from '../../util/ApiRequest';
 
 const { Meta } = Card;
 
-const UserCard = props => {
-    const [ user ] = useState(props)
-    const { userPhoto, userName, userSurname, userDescription } = user;
+const Description = ({desc}) => {
+	return (
+		<div>
+			<div>{desc}</div>
+		</div>
+	)
+}
+
+const Name = ({name}) => {
+	return (
+		<div className="match name">
+			<span>{name}</span>
+		</div>
+	)
+}
+
+const UserCard = ({ userPhoto, userNickname, userName, userSurname, userDescription }) => {
+	const ViewProfile = ({title}) => { return <a href={`profile/${userNickname}`} rel="noopener noreferrer">{title}</a>}
 	return (
 		<Card
             className="userCard"
 			actions={[
-				<SettingOutlined key="setting" />,
-				<MessageOutlined key="message" />
+				<MessageOutlined key="message" />,
+				<ViewProfile title={"Ver Perfil"} />
 			]}
 		>
-				<Meta
-					avatar={<Avatar src={userPhoto}> {!userPhoto && userName[0].toUpperCase() } </Avatar>}
-					title={userName+" "+userSurname}
-					description={userDescription}
-				/>
+			<Meta
+				avatar={<Avatar src={userPhoto} style={{backgroundColor:"#AED6F1", color:"#154360"}}> {!userPhoto && userName[0].toUpperCase() } </Avatar>}
+				title={<Name name={userName+" "+userSurname} />}
+				description={<Description desc={userDescription} coincidence />}
+			/>
 		</Card>
 	);
 };
