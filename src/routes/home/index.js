@@ -21,7 +21,7 @@ const Home = () => {
     }
     
     return (
-		<ContentWrapper header topnav footer>
+		<ContentWrapper header footer>
             <div>
                 <div >
                     <Carrousel data={[
