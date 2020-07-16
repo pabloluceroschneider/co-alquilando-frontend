@@ -17,20 +17,15 @@ const Header = () => {
     <Menu>
       <Menu.Item>
         <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-          Perfil
+          Registrate
         </a>
       </Menu.Item>
       <Menu.Item>
         <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-          Propiedades
+          Iniciar Sesion
         </a>
       </Menu.Item>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-          Otra cosa que pinte
-        </a>
-      </Menu.Item>
-      <Menu.Item danger>Cerrar Sesion</Menu.Item>
+      <Menu.Item danger>Hola pablo</Menu.Item>
     </Menu>)
 
 
