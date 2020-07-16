@@ -16,7 +16,7 @@ const Header = () => {
    const menu = (
     <Menu>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+        <a target="_blank" rel="noopener noreferrer" href="/singin">
           Registrate
         </a>
       </Menu.Item>
