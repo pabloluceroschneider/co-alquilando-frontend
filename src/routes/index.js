@@ -9,6 +9,7 @@ import UpdateForm from './profile/updateProfile';
 import Property from './property';
 import PropertyList from "./propertyList";
 import FormPropertyUpdate from './property/updateProperty';
+import UserHome from '../routes/userHome'
 
 const Routes = () => {
 	const { user } = store.getState();
@@ -23,6 +24,7 @@ const Routes = () => {
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
 						<Route path="/property" exact component={Property} />
 						<Route path="/property/properties" exact component={PropertyList} />
+						<Route exact path="/userHome" component={UserHome} />
 					</Switch>
 				) : (
 					<Switch>

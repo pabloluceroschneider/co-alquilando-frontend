@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from '../../containers/Header';
-import TopNav from '../../containers/TopNav';
 import Footer from '../../containers/Footer';
+import SideNav from '../../containers/SideNav';
 
 const ContentWrapper = props => {
     return (
         <>
         { props.header ? <Header /> : null }
-        { props.topnav ? <TopNav /> : null }
+        { props.sideNav ? <SideNav /> : null }
         { props.children }
         { props.footer ? <Footer /> : null }
         </>

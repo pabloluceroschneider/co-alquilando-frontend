@@ -95,7 +95,7 @@ const CustomizedModal = (props) => {
 				message: '¡Bienvenido a Coalquilando!',
 				placement: 'bottomLeft'
 			});
-			history.push("/user/profile")
+			history.push("/userHome")
 		}
 	}, [user, history, signin])
     
