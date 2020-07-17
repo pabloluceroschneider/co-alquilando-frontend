@@ -8,6 +8,7 @@
 @import "./GaleriaTresImagenes.css";
 @import "./Portada.css";
 @import "./Login.css";
+@import "./UserPreferencies.css";
 
 body {
   margin: 0;
