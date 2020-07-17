@@ -195,7 +195,7 @@ const UpdatePreferenciesForm = (props) => {
   const [fieldsRoom, setFieldsRoom] = useState(null);
   const [fieldsProp, setFieldsProp] = useState(null);
   let { nickname } = useParams();
-  const [idUser,setIdUser] = useState(null);
+  const [idUser, setIdUser] = useState(null);
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/user/${nickname}`).then((res) => {
@@ -204,29 +204,34 @@ const UpdatePreferenciesForm = (props) => {
         data = data.preferences;
         let arrayRoommate = [];
         let arrayProperty = [];
-        data.roommatePreferences.attributes.forEach((t) => {
-          arrayRoommate.push({ [t.attributeType]: t.value });
-        });
-        data.propertyPreferences.attributes.forEach((t) => {
-          arrayProperty.push({ [t.attributeType]: t.value });
-        });
+        if (data.roommatePreferences ) {
+          data.roommatePreferences.attributes.forEach((t) => {
+            arrayRoommate.push({ [t.attributeType]: t.value });
+          });
+          delete data.roommatePreferences;
+          arrayRoommate.forEach((t) => {
+            data = {
+              roommatePreferences: { ...data.roommatePreferences, ...t },
+            };
+          });
+          formRoom.setFieldsValue(data);
+        }
+        if(data.propertyPreferences){
+          data.propertyPreferences.attributes.forEach((t) => {
+            arrayProperty.push({ [t.attributeType]: t.value });
+          });
 
-        delete data.propertyPreferences;
-        delete data.roommatePreferences;
-        arrayRoommate.forEach((t) => {
-          data = {
-            roommatePreferences: { ...data.roommatePreferences, ...t },
-          };
-        });
-        arrayProperty.forEach((t) => {
-          data = {
-            ...data,
-            propertyPreferences: { ...data.propertyPreferences, ...t },
-          };
-        });
-        console.log(data);
-        formRoom.setFieldsValue(data);
-        formProp.setFieldsValue(data);
+          delete data.propertyPreferences;
+
+          
+          arrayProperty.forEach((t) => {
+            data = {
+              ...data,
+              propertyPreferences: { ...data.propertyPreferences, ...t },
+            };
+          });
+          formProp.setFieldsValue(data);
+        } 
       });
     };
     asyncGetUser();
@@ -242,7 +247,10 @@ const UpdatePreferenciesForm = (props) => {
       let bodyReq = { attributes };
       console.log(bodyReq);
       let asyncPutUser = async () => {
-        await ApiRequest.put(`/user/preferences/roommate/${idUser}`, bodyReq).then((res) => {
+        await ApiRequest.put(
+          `/user/preferences/roommate/${idUser}`,
+          bodyReq
+        ).then((res) => {
           console.log(res);
           if (res.status === 200) {
             notification.success({
@@ -260,12 +268,40 @@ const UpdatePreferenciesForm = (props) => {
       };
       asyncPutUser();
     }
-  }, [fieldsRoom,idUser]);
+  }, [fieldsRoom, idUser]);
   useEffect(() => {
     if (fieldsProp) {
       console.log("PropertyPreferences => ", fieldsProp);
+      var preferencesProperty = Object.entries(fieldsProp.propertyPreferences);
+      preferencesProperty = preferencesProperty.filter((t) => t[1]);
+      const attributes = preferencesProperty.map((a) => {
+        return { attributeType: a[0], value: a[1], weigth: 0 };
+      });
+      let bodyReq = { attributes };
+      console.log(bodyReq);
+      let asyncPutUser = async () => {
+        await ApiRequest.put(
+          `/user/preferences/property/${idUser}`,
+          bodyReq
+        ).then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            notification.success({
+              message: `Datos Actualizados`,
+              placement: "bottomLeft",
+            });
+            //history.push(`/profile/${bodyReq.userNickname}`);
+          } else {
+            notification.error({
+              message: `Error: No se pudo actualizar sus datos`,
+              placement: "bottomLeft",
+            });
+          }
+        });
+      };
+      asyncPutUser();
     }
-  }, [fieldsProp]);
+  }, [fieldsProp, idUser]);
   return (
     <ContentWrapper header footer>
       <CustomizedForm
