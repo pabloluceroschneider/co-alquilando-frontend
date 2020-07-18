@@ -1,17 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../../styles/SideNav.css'
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu } from 'antd';
 import {
   DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
   TeamOutlined,
-  UserOutlined,
 } from '@ant-design/icons';
 
-const { Header, Content, Footer, Sider } = Layout;
+const {Sider } = Layout;
 const { SubMenu } = Menu;
 
 class SiderDemo extends React.Component {

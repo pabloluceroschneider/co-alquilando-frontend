@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import Login from '../../components/Login';
 import Auth from '../../util/Auth';
 import logo from '../../assets/images/Logomenu.jpg'
-import { Layout, Menu, Breadcrumb, Dropdown } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined, DownOutlined } from '@ant-design/icons';
-import { Redirect } from 'react-router-dom';
+import { Layout, Menu, Dropdown } from 'antd';
 import { useHistory } from 'react-router';
 
 
@@ -17,14 +15,13 @@ const Header = (props) => {
 
   const handleSignOut = async () => {
     await Auth.signOut();
-    signout();
+    await signout();
     localStorage.removeItem('user');
-    setTimeout(()=>{ history.push("/")}, 2000)
-    
+    history.push("/")
   };
 
   const { SubMenu } = Menu;
-  const { Header, Content, Footer, Sider } = Layout;
+  const { Header } = Layout;
 
   const menu = (
     <Menu onClick={e => setCurrent(e.key)} selectedKeys={[current]} mode="horizontal">
@@ -60,11 +57,18 @@ const Header = (props) => {
         <div onClick={()=>{history.push("/")}} className="logo">
           <img src={logo} className="imglogo" ></img>
         </div>
+        {props.user ? (
         <Dropdown overlay={menu}>
           <a className="ant-dropdown-link drop" onClick={e => e.preventDefault()}>
-            <label className="icon-align-justify menu" />
+            <label className="icon-user menu"> {props.user.userNickname}</label>
           </a>
         </Dropdown>
+        ):(<Dropdown overlay={menu}>
+          <a className="ant-dropdown-link drop" onClick={e => e.preventDefault()}>
+            <label className="icon-user menu"></label>
+          </a>
+        </Dropdown>)
+        }
       </Header>
     </Layout>
 

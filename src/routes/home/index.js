@@ -32,12 +32,11 @@ const Home = () => {
                     </Carrousel>
                 </div>
 
-
+             
                 <div >
                     <GaleriaTresImagenes imgUrl1={image5} title1="Elegí" imgUrl2={image6} title2="Conecta" imgUrl3={image7} title3="Compartí" />
                 </div>
-                <Divider></Divider>
-
+               
                 <div >
                     <Portada {...portadaProps}/>
                 </div>
