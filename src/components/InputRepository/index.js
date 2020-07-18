@@ -4,6 +4,7 @@ import Select from "./Select";
 import Upload from "./Upload";
 import DatePicker from "./DatePicker";
 import CheckboxGroup from "./CheckboxGroup";
+import SliderForm from "./Slider";
 
 const InputRepository = (props) => {
   const { label, name, component, required } = props;
@@ -46,6 +47,8 @@ const InputRepository = (props) => {
           {props.label}
         </a>
       );
+    case "slider":
+      return <SliderForm key={label} />
     default:
       return (
         <Form.Item

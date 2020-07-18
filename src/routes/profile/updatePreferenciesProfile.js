@@ -30,15 +30,20 @@ const userPreferenciesRoomie = {
           ],
         },
         {
-          label: "Edad Minima",
-          name: ["roommatePreferences", "minAge"],
-          component: "Input",
-        },
-        {
-          label: "Edad Máxima",
-          name: ["roommatePreferences", "maxAge"],
-          component: "Input",
-        },
+          label:"Edad",
+          name:["roommatePreferences", "edad"],
+          component:"slider",
+        }
+        // {
+        //   label: "Edad Minima",
+        //   name: ["roommatePreferences", "minAge"],
+        //   component: "Input",
+        // },
+        // {
+        //   label: "Edad Máxima",
+        //   name: ["roommatePreferences", "maxAge"],
+        //   component: "Input",
+        // },
       ],
       [
         {
@@ -204,34 +209,34 @@ const UpdatePreferenciesForm = (props) => {
         data = data.preferences;
         let arrayRoommate = [];
         let arrayProperty = [];
-        if (data.roommatePreferences ) {
-          data.roommatePreferences.attributes.forEach((t) => {
-            arrayRoommate.push({ [t.attributeType]: t.value });
-          });
-          delete data.roommatePreferences;
-          arrayRoommate.forEach((t) => {
-            data = {
-              roommatePreferences: { ...data.roommatePreferences, ...t },
-            };
-          });
-          formRoom.setFieldsValue(data);
+        if (data) {
+          if (data.roommatePreferences) {
+            data.roommatePreferences.attributes.forEach((t) => {
+              arrayRoommate.push({ [t.attributeType]: t.value });
+            });
+            delete data.roommatePreferences;
+            arrayRoommate.forEach((t) => {
+              data = {...data,
+                roommatePreferences: { ...data.roommatePreferences, ...t },
+              };
+            });
+            console.log(data);
+            formRoom.setFieldsValue(data);
+          }
+          if (data.propertyPreferences) {
+            data.propertyPreferences.attributes.forEach((t) => {
+              arrayProperty.push({ [t.attributeType]: t.value });
+            });
+            delete data.propertyPreferences;
+            arrayProperty.forEach((t) => {
+              data = {
+                ...data,
+                propertyPreferences: { ...data.propertyPreferences, ...t },
+              };
+            });
+            formProp.setFieldsValue(data);
+          }
         }
-        if(data.propertyPreferences){
-          data.propertyPreferences.attributes.forEach((t) => {
-            arrayProperty.push({ [t.attributeType]: t.value });
-          });
-
-          delete data.propertyPreferences;
-
-          
-          arrayProperty.forEach((t) => {
-            data = {
-              ...data,
-              propertyPreferences: { ...data.propertyPreferences, ...t },
-            };
-          });
-          formProp.setFieldsValue(data);
-        } 
       });
     };
     asyncGetUser();
