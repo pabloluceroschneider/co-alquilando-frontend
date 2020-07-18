@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 import ApiRequest from "../../util/ApiRequest";
 import PropertyCard from "../../components/PropertyCard/index";
-import { notification } from "antd";
+import { notification, Pagination } from "antd";
 import "../../styles/PropertyList.css";
 
 const Property = () => {
   const [datos, setDatos] = useState(null);
-  const [page, setPage] = useState(0);
-  const [size, setSize] = useSize(20);
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(10);
+  const [totalItems, setTotalItems] = useState(0)
   useEffect(() => {
     let asyncGet = async () => {
       try {
-        let { content } = await ApiRequest.get(
-          `/property/properties?page=${page}&size${size}`
+        let { data } = await ApiRequest.get(
+          `/property/properties?page=${page - 1}&size=${size}`
         );
-        setDatos(content);
-        console.log(content);
+        console.log('DATA', data);
+        setDatos(data.content);
+        setTotalItems(data.totalElements)
+        console.log(data.content);
       } catch (e) {
         notification.error({
           message: `Error: ${e.message}`,
@@ -24,16 +27,26 @@ const Property = () => {
       }
     };
     asyncGet();
-  }, []);
+  }, [page, size]);
 
+  const onChange = (page) => {
+    console.log(page);
+    setPage(page);
+  }
 
   return (
+    <div>
     <div className="contentPL">
       {datos
         ? datos.map((p) => {
             return <PropertyCard {...p} />;
           })
         : null}
+    </div>
+    <div className="pagination">
+        <Pagination current={page} onChange={onChange} total={totalItems} pageSize={size} />
+    </div>
+
     </div>
   );
 };
