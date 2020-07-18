@@ -8,12 +8,6 @@ const userHome = () => {
     return (
 		<ContentWrapper header sideNav footer>
             <div>
-                
-                <div >
-                </div>
-
-                <Divider></Divider>
-
             </div>
 		</ContentWrapper>
     );

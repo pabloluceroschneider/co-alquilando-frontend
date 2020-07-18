@@ -3,10 +3,14 @@
     }
 
 .LO{
-
-  padding-top: 2px
-};
+  padding-top: 2px;
+  min-Height: 100vh;
+}
 
     .Slide{
       padding-top: 20px;
+    }
+
+    .ant-layout-sider-trigger{
+      position: relative;
     }

@@ -2,24 +2,25 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Login from '../../components/Login';
 import Auth from '../../util/Auth';
-import 'antd/dist/antd.css';
-import '../../styles/Header.css'
-import '../../assets/Icons/Icon/styles.css'
 import logo from '../../assets/images/Logomenu.jpg'
 import { Layout, Menu, Breadcrumb, Dropdown } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, DownOutlined } from '@ant-design/icons';
 import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 
 const Header = (props) => {
 
   const { signout } = props
   const [current, setCurrent] = useState('Inicio');
+  const history = useHistory();
 
   const handleSignOut = async () => {
     await Auth.signOut();
     signout();
     localStorage.removeItem('user');
+    setTimeout(()=>{ history.push("/")}, 2000)
+    
   };
 
   const { SubMenu } = Menu;
@@ -56,7 +57,7 @@ const Header = (props) => {
   return (
     <Layout>
       <Header className="header">
-        <div className="logo">
+        <div onClick={()=>{history.push("/")}} className="logo">
           <img src={logo} className="imglogo" ></img>
         </div>
         <Dropdown overlay={menu}>
