@@ -7,18 +7,16 @@ import "../../styles/PropertyList.css";
 const Property = () => {
   const [datos, setDatos] = useState(null);
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(10);
-  const [totalItems, setTotalItems] = useState(0)
+  const [size] = useState(10);
+  const [totalItems, setTotalItems] = useState(0);
   useEffect(() => {
     let asyncGet = async () => {
       try {
         let { data } = await ApiRequest.get(
           `/property/properties?page=${page - 1}&size=${size}`
         );
-        console.log('DATA', data);
         setDatos(data.content);
-        setTotalItems(data.totalElements)
-        console.log(data.content);
+        setTotalItems(data.totalElements);
       } catch (e) {
         notification.error({
           message: `Error: ${e.message}`,
@@ -30,23 +28,26 @@ const Property = () => {
   }, [page, size]);
 
   const onChange = (page) => {
-    console.log(page);
     setPage(page);
-  }
+  };
 
   return (
     <div>
-    <div className="contentPL">
-      {datos
-        ? datos.map((p) => {
-            return <PropertyCard {...p} />;
-          })
-        : null}
-    </div>
-    <div className="pagination">
-        <Pagination current={page} onChange={onChange} total={totalItems} pageSize={size} />
-    </div>
-
+      <div className="contentPL">
+        {datos
+          ? datos.map((p) => {
+              return <PropertyCard {...p} />;
+            })
+          : null}
+      </div>
+      <div className="pagination">
+        <Pagination
+          current={page}
+          onChange={onChange}
+          total={totalItems}
+          pageSize={size}
+        />
+      </div>
     </div>
   );
 };
