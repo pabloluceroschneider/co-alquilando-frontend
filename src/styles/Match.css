@@ -2,11 +2,11 @@
 
 /* Mobile First */
 .match{
-    margin-left: 5%;
+    margin-left: 5vw;
 }
 
 .match .userCard{
-    width: 90%;
+    width: 90vw;
     margin-top: 16px;
 }
 
@@ -30,7 +30,11 @@
 /* Desktop View */
 @media only screen and (min-width: 600px){
     .match{
-        margin-left: 25%;
+        margin-left: 30vw;
+    }
+    
+    .match .userCard{
+        width: 40vw;
     }
 
     .match .name{
@@ -38,8 +42,5 @@
         grid-template-columns: 80% 20%;
     }
 
-    .match .userCard{
-        width: 50%;
-    }
 
 }
