@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Avatar } from 'antd';
-import { MessageOutlined } from '@ant-design/icons';
+import { connect } from 'react-redux';
+import { Card, Avatar, Tag } from 'antd';
+import { MessageOutlined} from '@ant-design/icons';
 import ApiRequest from '../../util/ApiRequest';
 
 const { Meta } = Card;
 
-const Description = ({desc}) => {
+const handleTagCoincidence = coincidence => {
+	if(coincidence > 90){
+		return "gold"
+	}
+	if(coincidence > 50){
+		return "blue"
+	}
+}
+
+const Description = ({desc, coincidence}) => {
 	return (
 		<div>
 			<div>{desc}</div>
@@ -13,15 +23,17 @@ const Description = ({desc}) => {
 	)
 }
 
-const Name = ({name}) => {
+const Name = ({name, coincidence}) => {
 	return (
-		<div className="match name">
-			<span>{name}</span>
+		<div className="name">
+			<p>{name}</p>
+			<Tag color={handleTagCoincidence(coincidence)}>{parseFloat(coincidence).toFixed(2)} %</Tag>
 		</div>
 	)
 }
 
-const UserCard = ({ userPhoto, userNickname, userName, userSurname, userDescription }) => {
+const UserCard = ({ user, coincidence }) => {
+	const { userPhoto, userNickname, userName, userSurname, userDescription } = user;
 	const ViewProfile = ({title}) => { return <a href={`profile/${userNickname}`} rel="noopener noreferrer">{title}</a>}
 	return (
 		<Card
@@ -33,24 +45,23 @@ const UserCard = ({ userPhoto, userNickname, userName, userSurname, userDescript
 		>
 			<Meta
 				avatar={<Avatar src={userPhoto} style={{backgroundColor:"#AED6F1", color:"#154360"}}> {!userPhoto && userName[0].toUpperCase() } </Avatar>}
-				title={<Name name={userName+" "+userSurname} />}
-				description={<Description desc={userDescription} coincidence />}
+				title={<Name name={userName+" "+userSurname} coincidence={coincidence} />}
+				description={<Description desc={userDescription} coincidence={coincidence} />}
 			/>
 		</Card>
 	);
 };
 
-const Match = () => {
-	const { preferences } = useState(localStorage.getItem('user'));
+const Match = props => {
 	const [ users, setUsers ] = useState(null);
 
 	useEffect(() => {
 		let asyncGet = async () => {
-			let { data } = await ApiRequest.get('/user/users', preferences);
+			let { data } = await ApiRequest.get(`/user/match/${props.user.id}`);
 			setUsers(data);
 		};
 		asyncGet();
-	}, [preferences]);
+	}, [props.user]);
 
 	return (
 		<div className="match">
@@ -62,4 +73,8 @@ const Match = () => {
 	);
 };
 
-export default Match;
+const mapStateToProps = state => ({
+    user : state.user
+})
+
+export default  connect(mapStateToProps)(Match);

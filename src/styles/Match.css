@@ -1,16 +1,34 @@
 
 
+/* Mobile First */
+.match{
+    margin-left: 5%;
+}
+
 .match .userCard{
-    width: 300px;
+    width: 90%;
     margin-top: 16px;
 }
 
-
 .desc.coinc{
-    /* color:#2E86C1; */
     color: #000;
 }
-
-.match.name span{
+.match .name{
+    margin-bottom: 15px;
+}
+.match .name p{
     color: #515A5A;
+    margin-bottom: 0px;
+}
+
+/* Desktop View */
+@media only screen and (min-width: 600px){
+    .match{
+        margin-left: 25%;
+    }
+    
+    .match .userCard{
+        width: 50%;
+    }
+
 }
