@@ -14,6 +14,7 @@
     color: #000;
 }
 .match .name{
+    display: block;
     margin-bottom: 15px;
 }
 .match .name p{
@@ -21,12 +22,22 @@
     margin-bottom: 0px;
 }
 
+.match .name span{
+    padding: 2px;
+    text-align: center;
+}
+
 /* Desktop View */
 @media only screen and (min-width: 600px){
     .match{
         margin-left: 25%;
     }
-    
+
+    .match .name{
+        display: grid;
+        grid-template-columns: 80% 20%;
+    }
+
     .match .userCard{
         width: 50%;
     }
