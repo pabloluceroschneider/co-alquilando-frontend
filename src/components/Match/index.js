@@ -7,15 +7,15 @@ import ApiRequest from '../../util/ApiRequest';
 const { Meta } = Card;
 
 const handleTagCoincidence = coincidence => {
-	if(coincidence > 90){
+	if(coincidence >= 90){
 		return "gold"
 	}
-	if(coincidence > 50){
+	if(coincidence >= 50){
 		return "blue"
 	}
 }
 
-const Description = ({desc, coincidence}) => {
+const Description = ({desc}) => {
 	return (
 		<div>
 			<div>{desc}</div>
