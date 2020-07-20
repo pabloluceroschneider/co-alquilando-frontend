@@ -4,11 +4,11 @@ import { DownOutlined, UpOutlined } from '@ant-design/icons'
 import InputRepository from '../InputRepository';
 
 const Row = (props) => {
-	const { fields } = props;
+	const { fields, form } = props;
 	return (
 		<div className={`group${fields.length}`}>
 			{fields.map((element) => {
-				return InputRepository(element)
+				return InputRepository({element, form})
 			})}
 		</div>
 	);
@@ -73,7 +73,7 @@ const CustomizedForm = (props) => {
 			>
 				{data && (
 					primaries.map((row, index) => {
-						return <Row key={index} fields={row} />;
+						return <Row key={index} fields={row} form={form} />;
 					})
 				)}
 
@@ -81,7 +81,7 @@ const CustomizedForm = (props) => {
 					<>
 					<Divider />
 					{secondaries.map((row, index) => {
-						return <Row key={index} fields={row} />;
+						return <Row key={index} fields={row} form={form} />;
 					})}
 					</>
 				)}
@@ -90,7 +90,7 @@ const CustomizedForm = (props) => {
 					<>
 					<Divider />
 					{tertiaries.map((row, index) => {
-						return <Row key={index} fields={row}/>;
+						return <Row key={index} fields={row} form={form}/>;
 					})}
 					</>
 				)}
