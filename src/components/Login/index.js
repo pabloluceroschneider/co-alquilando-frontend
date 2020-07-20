@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect, useContext } from 'react';
+import { SessionContext, SIGN_IN } from '../../store'
 import { Modal, Form, notification } from 'antd';
 import { useHistory} from 'react-router';
 import Auth from '../../util/Auth';
@@ -47,6 +47,7 @@ const loginFields = {
 };
 
 const CustomizedModal = (props) => {
+	const { dispatch } = useContext(SessionContext);
 	const { visible, toggleVisible, signin } = props;
 	const history = useHistory();
 	const [form] = Form.useForm();
@@ -90,8 +91,7 @@ const CustomizedModal = (props) => {
 	async function forceUpdate(){
 		if (user) {
 			delete user.userPassword;
-			localStorage.setItem("user", JSON.stringify(user))
-			await signin(user);
+			dispatch( SIGN_IN(user) )
 			notification.success({
 				message: '¡Bienvenido a Coalquilando!',
 				placement: 'bottomLeft'
@@ -122,9 +122,8 @@ const CustomizedModal = (props) => {
 	);
 };
 
-const Login = props => {
-	const [visible, setVisible] = useState(false);
-	const [log, login] = useState(false);
+const Login = () => {
+	const [ visible, setVisible ] = useState(false);
 
 	const toggleVisible = () => {
 		setVisible(!visible);
@@ -133,22 +132,9 @@ const Login = props => {
 	return (
 		<div>
 			<span onClick={() => toggleVisible()}> Iniciar sesión </span>
-			<CustomizedModal {...props} visible={visible} toggleVisible={toggleVisible} />
+			<CustomizedModal visible={visible} toggleVisible={toggleVisible}/>
 		</div>
 	);
 };
 
-const mapStateToProps = state => ({
-	user: state.user
-})
-
-const mapDispatchToProps = dispatch => ({
-	signin(user) {
-		dispatch({
-			type: "SIGN_IN",
-			payload: { ...user }
-		})
-	}
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;
