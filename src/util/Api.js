@@ -6,7 +6,7 @@ const url = {
 }
 
 export default axios.create({
-    baseURL: url.pwa,
+    baseURL: url.local,
     headers:{
         'Content-Type':'application/json'
     }
