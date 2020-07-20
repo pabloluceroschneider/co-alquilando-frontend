@@ -1,0 +1,18 @@
+@media only screen and (min-width: 600px){
+.contentPL{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 5px;
+    margin: 5% !important;
+    flex-direction: row;
+    }
+}
+@media only screen and (max-width: 599px){
+    .contentPL{
+        display: flex;
+        column-gap: 5px;
+        margin: 5% !important;
+        flex-direction: column;
+        position: center;
+        }
+    }

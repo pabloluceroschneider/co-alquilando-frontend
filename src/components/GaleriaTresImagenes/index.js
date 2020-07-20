@@ -11,7 +11,7 @@ const GaleriaTresImagenes = props => {
                 style={{ backgroundImage: `url(${imgUrl1})` }}>
                 
             </div>
-           <label className="subtitle">
+           <label className="subtitleG3">
                     {title1}
                 </label>
            </div>
@@ -20,7 +20,7 @@ const GaleriaTresImagenes = props => {
                 style={{ backgroundImage: `url(${imgUrl2})` }}>
                 
             </div>
-           <label className="subtitle">
+           <label className="subtitleG3">
                     {title2}
                 </label>
            </div>
@@ -29,7 +29,7 @@ const GaleriaTresImagenes = props => {
                 style={{ backgroundImage: `url(${imgUrl3})` }}>
                 
             </div>
-           <label className="subtitle">
+           <label className="subtitleG3">
                     {title3}
                 </label>
            </div>

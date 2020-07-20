@@ -17,19 +17,19 @@
       padding-top: 30px;
       text-align: center;
       width: 100%;
-      background-color: rgb(230, 230, 230);
+      background-color: #001529;
       }
    
-      .title {
+      .titleG3 {
         padding-bottom: 15px;
         margin-left: 25px;
         font-size: 30px;
-        color: #707070;
+        color: #f3f3f3e5;
         font-weight: bold;
         padding-top: 35px;
       }
-      .subtitle {
-        color: #707070;
+      .subtitleG3 {
+        color:#f3f3f3e5;
         font-weight: 400;
         margin: 5px 20px 0 25px;
         font-size: 25px;
