@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useContext } from 'react';
+import { SessionContext, SIGN_OUT } from '../../store'
 import Login from '../../components/Login';
 import Auth from '../../util/Auth';
 import 'antd/dist/antd.css';
 import '../../styles/Header.css'
 import '../../assets/Icons/Icon/styles.css'
 import logo from '../../assets/images/Logomenu.jpg'
-import { Layout, Menu, Breadcrumb, Dropdown } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined, DownOutlined } from '@ant-design/icons';
-import { Redirect } from 'react-router-dom';
+import { Layout, Menu, Dropdown } from 'antd';
 
 
 const Header = (props) => {
-
-  const { signout } = props
+	const { state, dispatch } = useContext(SessionContext);
   const [current, setCurrent] = useState('Inicio');
 
   const handleSignOut = async () => {
     await Auth.signOut();
-    signout();
-    localStorage.removeItem('user');
+    dispatch( SIGN_OUT() );
   };
 
   const { SubMenu } = Menu;
@@ -28,9 +24,9 @@ const Header = (props) => {
   const menu = (
     <Menu onClick={e => setCurrent(e.key)} selectedKeys={[current]} mode="horizontal">
 
-      {props.user ? (
+      {state.user ? (
         <Menu.Item key="perfil">
-          <a href={`/profile/${props.user.userNickname}`} rel="noopener noreferrer">
+          <a href={`/profile/${state.user.userNickname}`} rel="noopener noreferrer">
             Perfil
       </a>
         </Menu.Item>
@@ -40,7 +36,7 @@ const Header = (props) => {
               Registrate
       </a>
           </Menu.Item>)}
-    {props.user ? (
+    {state.user ? (
         <Menu.Item key="Sign-out">
           <div onClick={handleSignOut}>Cerrar Sesion</div>
         </Menu.Item>
@@ -70,18 +66,5 @@ const Header = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  user: state.user
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  signout() {
-    dispatch({
-      type: 'SIGN_OUT',
-      payload: null
-    });
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
 

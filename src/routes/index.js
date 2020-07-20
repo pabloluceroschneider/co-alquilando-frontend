@@ -1,6 +1,5 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import store from '../store';
+import React, { useReducer } from 'react';
+import { SessionContext, reducer, initialState } from '../store'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Home from './home';
 import SignIn from './signIn';
@@ -12,11 +11,12 @@ import FormPropertyUpdate from './property/updateProperty';
 import UserHome from '../routes/userHome'
 
 const Routes = () => {
-	const { user } = store.getState();
+	const [state, dispatch] = useReducer(reducer, initialState);
+	console.log( "state -->", state )
 	return (
-		<Provider store={store}>
+		<SessionContext.Provider value={ {state, dispatch} }>
 			<Router>
-				{user ? (
+				{state.user ? (
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route path="/profile/:nickname/update" component={UpdateForm} />
@@ -34,7 +34,7 @@ const Routes = () => {
 					</Switch>
 				)}
 			</Router>
-		</Provider>
+		</SessionContext.Provider>
 	);
 };
 
