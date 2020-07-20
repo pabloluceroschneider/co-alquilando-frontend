@@ -1,16 +1,20 @@
  [data-theme="dark"] .site-layout .site-layout-background {
       background: #141414;
+      
     }
 
 .LO{
   padding-top: 2px;
-  min-Height: 100vh;
+
 }
 
     .Slide{
       padding-top: 20px;
+      min-height: 100%;
     }
 
     .ant-layout-sider-trigger{
-      position: relative;
+      position: absolute;
+      
     }
+    

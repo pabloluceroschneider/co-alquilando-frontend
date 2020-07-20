@@ -18,7 +18,6 @@ const Header = (props) => {
     history.push("/")
   };
 
-  const { SubMenu } = Menu;
   const { Header } = Layout;
 
   const menu = (
@@ -53,16 +52,16 @@ const Header = (props) => {
     <Layout>
       <Header className="header">
         <div onClick={()=>{history.push("/")}} className="logo">
-          <img src={logo} className="imglogo" ></img>
+          <img src={logo} className="imglogo" alt="Error de carga" ></img>
         </div>
         {props.user ? (
         <Dropdown overlay={menu}>
-          <a className="ant-dropdown-link drop" onClick={e => e.preventDefault()}>
+          <a className="ant-dropdown-link drop" href="/" onClick={e => e.preventDefault()}>
             <label className="icon-user menu"> {props.user.userNickname}</label>
           </a>
         </Dropdown>
         ):(<Dropdown overlay={menu}>
-          <a className="ant-dropdown-link drop" onClick={e => e.preventDefault()}>
+          <a className="ant-dropdown-link drop" href="/"  onClick={e => e.preventDefault()}>
             <label className="icon-user menu"></label>
           </a>
         </Dropdown>)

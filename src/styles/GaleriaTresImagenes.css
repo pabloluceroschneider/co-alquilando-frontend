@@ -14,7 +14,7 @@
   box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, .1);
 }
 
-      .content2 {
+.content2 {
         display: flex;
       justify-content: center;
       padding-top: 30px;
@@ -45,4 +45,8 @@
         margin: 40px 20px 0 30px;
         align-items: center;
         text-align: center;
+        border: 1px solid;
+         border-color: #afafaf;
+        border-radius: 15px;
+        border-top: 35px;
       }

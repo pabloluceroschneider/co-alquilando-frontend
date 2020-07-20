@@ -10,7 +10,6 @@ import image6 from '../../assets/images/Home/bloque1_2.jpg'
 import image7 from '../../assets/images/Home/bloque1_3.jpg'
 import GaleriaTresImagenes from '../../components/GaleriaTresImagenes'
 import Portada from '../../components/Portada'
-import { Divider } from 'antd';
 
 const Home = () => {
 

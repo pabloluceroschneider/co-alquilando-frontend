@@ -7,7 +7,7 @@ import {
   TeamOutlined,
 } from '@ant-design/icons';
 
-const {Sider } = Layout;
+const {Sider} = Layout;
 const { SubMenu } = Menu;
 
 class SiderDemo extends React.Component {
@@ -22,7 +22,7 @@ class SiderDemo extends React.Component {
 
   render() {
     return (
-      <Layout className="LO">
+      <div className="LO">
         <Sider className="Slide" collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1" icon={<TeamOutlined/>}>
@@ -38,8 +38,9 @@ class SiderDemo extends React.Component {
             </SubMenu>
   
           </Menu>
-        </Sider>
-      </Layout>
+        </Sider> 
+         
+       </div>
     );
   }
 }

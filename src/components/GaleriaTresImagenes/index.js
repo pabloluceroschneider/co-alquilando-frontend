@@ -12,7 +12,7 @@ const GaleriaTresImagenes = props => {
                 <Card
                     hoverable
                     style={{ width: 240 }}
-                    cover={<img src={imgUrl1} />}
+                    cover={<img src={imgUrl1} alt="Error de carga" />}
                 >
                     <Meta title={title1}/>
                 </Card>
@@ -21,7 +21,7 @@ const GaleriaTresImagenes = props => {
             <Card
                     hoverable
                     style={{ width: 240 }}
-                    cover={<img src={imgUrl2} />}
+                    cover={<img src={imgUrl2} alt="Error de carga" />}
                 >
                     <Meta title={title2}/>
                 </Card>
@@ -30,7 +30,7 @@ const GaleriaTresImagenes = props => {
             <Card
                     hoverable
                     style={{ width: 240 }}
-                    cover={<img src={imgUrl3} />}
+                    cover={<img src={imgUrl3} alt="Error de carga" />}
                 >
                     <Meta title={title3}/>
                 </Card>
