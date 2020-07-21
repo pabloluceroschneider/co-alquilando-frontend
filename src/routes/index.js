@@ -9,7 +9,6 @@ import Property from './property';
 import PropertyList from "./propertyList";
 import FormPropertyUpdate from './property/updateProperty';
 import UserHome from '../routes/userHome'
-import Match from '../components/Match';
 
 const Routes = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
@@ -25,8 +24,7 @@ const Routes = () => {
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
 						<Route path="/property" exact component={Property} />
 						<Route path="/property/properties" exact component={PropertyList} />
-						<Route exact path="/userHome" component={UserHome} />
-						<Route exact path="/match" component={Match} />
+						<Redirect from="*" to="/"/>
 					</Switch>
 				) : (
 					<Switch>

@@ -41,7 +41,7 @@ const UserCard = ({ user, coincidence }) => {
             className="userCard"
 			actions={[
 				<MessageOutlined key="message" />,
-				<ViewProfile title={"Ver Perfil"} />
+				<ViewProfile key="viewProfile" title={"Ver Perfil"} />
 			]}
 		>
 			<Meta
@@ -53,7 +53,7 @@ const UserCard = ({ user, coincidence }) => {
 	);
 };
 
-const Match = props => {
+const Match = () => {
 	const [ users, setUsers ] = useState(null);
 	const { state } = useContext(SessionContext);
 
@@ -64,7 +64,7 @@ const Match = props => {
 			setUsers(data);
 		};
 		asyncGet();
-	}, [props.user]);
+	}, [state.user]);
 
 	return (
 		<div className="match">

@@ -11,6 +11,7 @@ const {Sider} = Layout;
 const { SubMenu } = Menu;
 
 const SiderDemo = props => {
+  const { setContent } = props;
   const [ collapsed, setCollapsed ] = useState(false);
 
   return (
@@ -21,7 +22,7 @@ const SiderDemo = props => {
           Conversaciones
         </Menu.Item>
         <SubMenu key="sub1" icon={<DesktopOutlined/>} title="Iniciar busqueda">
-          <Menu.Item key="3">Buscar compañeros</Menu.Item>
+          <Menu.Item key="3" onClick={() => setContent("matchUsers")}>Buscar compañeros</Menu.Item>
           <Menu.Item key="4">Vivir solo</Menu.Item>
         </SubMenu>
         <SubMenu key="sub2" icon={<DesktopOutlined/>} title="Propiedades">
