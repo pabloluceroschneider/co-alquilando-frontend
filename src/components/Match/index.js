@@ -70,8 +70,8 @@ const Match = () => {
 		<div className="match">
 			<h1>Listado de usuarios por preferencias</h1>
 			{users &&
-				users.map((u) => {
-					return <UserCard key={u.id} {...u} />;
+				users.map( (u, index) => {
+					return <UserCard key={index} {...u} />;
 				})}
 		</div>
 	);
