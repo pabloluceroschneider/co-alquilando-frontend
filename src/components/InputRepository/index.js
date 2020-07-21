@@ -7,7 +7,13 @@ import CheckboxGroup from "./CheckboxGroup";
 import SliderForm from "./Slider";
 
 const InputRepository = props => {
-  const {element, form} = props
+  const {element, form} = props;
+
+  const onChange = value => {
+		form.setFieldsValue({
+			[element.name] : value
+		})
+	}
 
   const pickInput = () => {
     switch (element.component) {
@@ -32,7 +38,7 @@ const InputRepository = props => {
       case "Upload":
         return <Upload />;
       case "slider":
-        return <SliderForm {...props} key={element.label} />
+        return <SliderForm onChange={onChange} key={element.label} />
       default:
         return <Input />;
     }

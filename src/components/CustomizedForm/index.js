@@ -5,6 +5,7 @@ import InputRepository from '../InputRepository';
 
 const Row = (props) => {
 	const { fields, form } = props;
+
 	return (
 		<div className={`group${fields.length}`}>
 			{fields.map((element) => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ContentWrapper from "../../components/ContentWrapper";
 import CustomizedForm from "../../components/CustomizedForm";
 import { Form, notification } from "antd";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ApiRequest from "../../util/ApiRequest";
 
 const userPreferenciesRoomie = {
