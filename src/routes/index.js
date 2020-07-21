@@ -12,7 +12,7 @@ import UserHome from '../routes/userHome'
 
 const Routes = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
-	console.log( "state -->", state )
+
 	return (
 		<SessionContext.Provider value={ {state, dispatch} }>
 			<Router>
