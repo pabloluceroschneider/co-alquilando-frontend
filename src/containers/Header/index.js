@@ -1,36 +1,31 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useContext } from 'react';
+import { SessionContext, SIGN_OUT } from '../../store'
 import Login from '../../components/Login';
 import Auth from '../../util/Auth';
-import 'antd/dist/antd.css';
-import '../../styles/Header.css'
-import '../../assets/Icons/Icon/styles.css'
 import logo from '../../assets/images/Logomenu.jpg'
-import { Layout, Menu, Breadcrumb, Dropdown } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined, DownOutlined } from '@ant-design/icons';
-import { Redirect } from 'react-router-dom';
+import { Layout, Menu, Dropdown } from 'antd';
+import { useHistory } from 'react-router';
 
 
 const Header = (props) => {
-
-  const { signout } = props
+	const { state, dispatch } = useContext(SessionContext);
   const [current, setCurrent] = useState('Inicio');
+  const history = useHistory();
 
   const handleSignOut = async () => {
     await Auth.signOut();
-    signout();
-    localStorage.removeItem('user');
+    dispatch( SIGN_OUT() );
+    history.push("/")
   };
 
-  const { SubMenu } = Menu;
-  const { Header, Content, Footer, Sider } = Layout;
+  const { Header } = Layout;
 
   const menu = (
-    <Menu onClick={e => setCurrent(e.key)} selectedKeys={[current]} mode="horizontal">
+    <Menu onClick={e => setCurrent(e.key)} selectedKeys={[current]}>
 
-      {props.user ? (
+      {state.user ? (
         <Menu.Item key="perfil">
-          <a href={`/profile/${props.user.userNickname}`} rel="noopener noreferrer">
+          <a href={`/profile/${state.user.userNickname}`} rel="noopener noreferrer">
             Perfil
       </a>
         </Menu.Item>
@@ -40,7 +35,7 @@ const Header = (props) => {
               Registrate
       </a>
           </Menu.Item>)}
-    {props.user ? (
+    {state.user ? (
         <Menu.Item key="Sign-out">
           <div onClick={handleSignOut}>Cerrar Sesion</div>
         </Menu.Item>
@@ -56,32 +51,26 @@ const Header = (props) => {
   return (
     <Layout>
       <Header className="header">
-        <div className="logo">
-          <img src={logo} className="imglogo" ></img>
+        <div onClick={()=>{history.push("/")}} className="logo">
+          <img src={logo} className="imglogo" alt="Error de carga" ></img>
         </div>
+        {props.user ? (
         <Dropdown overlay={menu}>
-          <a className="ant-dropdown-link drop" onClick={e => e.preventDefault()}>
-            <label className="icon-align-justify menu" />
+          <a className="ant-dropdown-link drop" href="/" onClick={e => e.preventDefault()}>
+            <label className="icon-user menu"> {props.user.userNickname}</label>
           </a>
         </Dropdown>
+        ):(<Dropdown overlay={menu}>
+          <a className="ant-dropdown-link drop" href="/"  onClick={e => e.preventDefault()}>
+            <label className="icon-user menu"></label>
+          </a>
+        </Dropdown>)
+        }
       </Header>
     </Layout>
 
   )
 }
 
-const mapStateToProps = (state) => ({
-  user: state.user
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  signout() {
-    dispatch({
-      type: 'SIGN_OUT',
-      payload: null
-    });
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
 

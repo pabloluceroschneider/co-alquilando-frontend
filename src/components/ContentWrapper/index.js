@@ -1,17 +1,28 @@
-import React from 'react';
-import Header from '../../containers/Header';
+import React, { useState, useEffect } from 'react';
+import CustomHeader from '../../containers/Header';
 import Footer from '../../containers/Footer';
-import SideNav from '../../containers/SideNav';
+import CustomSideNav from '../../containers/SideNav';
+import { Layout } from 'antd';
+import '../../styles/ContentWrapper.css';
 
-const ContentWrapper = props => {
-    return (
-        <>
-        { props.header ? <Header /> : null }
-        { props.sideNav ? <SideNav /> : null }
-        { props.children }
-        { props.footer ? <Footer /> : null }
-        </>
-    )
-}
+const { Content } = Layout;
+
+const ContentWrapper = (props) => {
+    const [ content, setContent ] = useState(props.children)
+	return (
+		<Layout>
+			{props.header ? <CustomHeader /> : null}
+
+			{props.content ? (
+				<Layout>
+					<CustomSideNav /> 
+					<Content className="site-layout-background">{content}</Content>
+				</Layout>
+			) : props.children }
+
+			{props.footer ? <Footer /> : null}
+		</Layout>
+	);
+};
 
 export default ContentWrapper;

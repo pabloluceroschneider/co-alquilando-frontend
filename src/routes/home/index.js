@@ -10,7 +10,6 @@ import image6 from '../../assets/images/Home/bloque1_2.jpg'
 import image7 from '../../assets/images/Home/bloque1_3.jpg'
 import GaleriaTresImagenes from '../../components/GaleriaTresImagenes'
 import Portada from '../../components/Portada'
-import { Divider } from 'antd';
 
 const Home = () => {
 
@@ -32,12 +31,11 @@ const Home = () => {
                     </Carrousel>
                 </div>
 
-
+             
                 <div >
                     <GaleriaTresImagenes imgUrl1={image5} title1="Elegí" imgUrl2={image6} title2="Conectá" imgUrl3={image7} title3="Compartí" />
                 </div>
-                <Divider></Divider>
-
+               
                 <div >
                     <Portada {...portadaProps}/>
                 </div>

@@ -10,6 +10,8 @@
 @import "./Portada.css";
 @import "./Login.css";
 @import "./Match.css";
+@import './Header.css';
+@import '../assets/Icons/Icon/styles.css';
 
 body {
   margin: 0;

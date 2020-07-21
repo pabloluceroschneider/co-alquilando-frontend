@@ -1,6 +1,5 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import store from '../store';
+import React, { useReducer } from 'react';
+import { SessionContext, reducer, initialState } from '../store'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Home from './home';
 import SignIn from './signIn';
@@ -13,13 +12,14 @@ import UserHome from '../routes/userHome'
 import Match from '../components/Match';
 
 const Routes = () => {
-	const { user } = store.getState();
+	const [state, dispatch] = useReducer(reducer, initialState);
+
 	return (
-		<Provider store={store}>
+		<SessionContext.Provider value={ {state, dispatch} }>
 			<Router>
-				{user ? (
+				{state.user ? (
 					<Switch>
-						<Route exact path="/" component={Home} />
+						<Route exact path="/" component={UserHome} />
 						<Route path="/profile/:nickname/update" component={UpdateForm} />
 						<Route path="/profile/:nickname" component={Profile} />
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
@@ -36,7 +36,7 @@ const Routes = () => {
 					</Switch>
 				)}
 			</Router>
-		</Provider>
+		</SessionContext.Provider>
 	);
 };
 

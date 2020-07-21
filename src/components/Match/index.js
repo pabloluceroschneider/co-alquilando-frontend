@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect, useContext } from 'react';
+import { SessionContext } from '../../store'
 import { Card, Avatar, Tag } from 'antd';
 import { MessageOutlined} from '@ant-design/icons';
 import ApiRequest from '../../util/ApiRequest';
@@ -55,10 +55,12 @@ const UserCard = ({ user, coincidence }) => {
 
 const Match = props => {
 	const [ users, setUsers ] = useState(null);
+	const { state } = useContext(SessionContext);
+
 
 	useEffect(() => {
 		let asyncGet = async () => {
-			let { data } = await ApiRequest.get(`/user/match/${props.user.id}`);
+			let { data } = await ApiRequest.get(`/user/match/${state.user.id}`);
 			setUsers(data);
 		};
 		asyncGet();
@@ -74,8 +76,4 @@ const Match = props => {
 	);
 };
 
-const mapStateToProps = state => ({
-    user : state.user
-})
-
-export default  connect(mapStateToProps)(Match);
+export default  Match
