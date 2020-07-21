@@ -4,14 +4,12 @@
 	margin: 40px 35px 0 35px;
 	box-shadow: 6px 6px 6px 6px rgba(0, 0, 0, .1);
 }
-.images2 {
-	height: 250px;
-	width: 250px;
-	align-self: center;
+.images {
+	width: 50%;
 	background-size: cover;
-	background-repeat: no-repeat;
-}
-
+  background-repeat: no-repeat;
+  }
+  
 .content {
 	display: flex;
 	flex-direction: column;

@@ -1,6 +1,5 @@
 import React from 'react';
-import GaleriaTresImagenes from '../../components/GaleriaTresImagenes'
-import { Divider } from 'antd'
+import ImgPortada from '../../assets/images/LOGO.jpg'
 import ContentWrapper from '../../components/ContentWrapper';
 const userHome = () => {
 
@@ -8,16 +7,10 @@ const userHome = () => {
     return (
 		<ContentWrapper header sideNav footer>
             <div>
-                
-                <div >
-                </div>
-
-                <Divider></Divider>
-
-            </div>
+            <img src={ImgPortada} alt="Error de carga"></img>
+          </div>
 		</ContentWrapper>
     );
-
 }
 
 export default userHome;
