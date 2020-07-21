@@ -30,20 +30,10 @@ const userPreferenciesRoomie = {
           ],
         },
         {
-          label:"Edad",
-          name:["roommatePreferences", "edad"],
-          component:"slider",
+          label: "Ocupación",
+          name: ["roommatePreferences", "occupation"],
+          component: "Input",
         }
-        // {
-        //   label: "Edad Minima",
-        //   name: ["roommatePreferences", "minAge"],
-        //   component: "Input",
-        // },
-        // {
-        //   label: "Edad Máxima",
-        //   name: ["roommatePreferences", "maxAge"],
-        //   component: "Input",
-        // },
       ],
       [
         {
@@ -59,9 +49,9 @@ const userPreferenciesRoomie = {
       ],
       [
         {
-          label: "Ocupación",
-          name: ["roommatePreferences", "occupation"],
-          component: "Input",
+          label:"Edad",
+          name:["roommatePreferences", "age"],
+          component:"slider",
         },
         {
           label: "Mascotas",
@@ -211,15 +201,32 @@ const UpdatePreferenciesForm = (props) => {
         let arrayProperty = [];
         if (data) {
           if (data.roommatePreferences) {
+            console.log(data.roommatePreferences);
             data.roommatePreferences.attributes.forEach((t) => {
               arrayRoommate.push({ [t.attributeType]: t.value });
             });
             delete data.roommatePreferences;
+            let rangeAge = [0,0];
             arrayRoommate.forEach((t) => {
-              data = {...data,
-                roommatePreferences: { ...data.roommatePreferences, ...t },
-              };
+              console.log(t);
+              if(Object.keys(t)[0]==="minAge"){
+                rangeAge[0]=Object.values(t)[0];
+              }
+              if(Object.keys(t)[0]==="maxAge"){
+                rangeAge[1]=Object.values(t)[0];
+              }
+              else{
+                data = {...data,
+                  roommatePreferences: { ...data.roommatePreferences, ...t },
+                };
+              }
             });
+            data =  {...data,
+              roommatePreferences: { ...data.roommatePreferences, age:rangeAge },
+            };
+            delete data.roommatePreferences.minAge
+            delete data.roommatePreferences.maxAge
+
             console.log(data);
             formRoom.setFieldsValue(data);
           }
@@ -246,8 +253,14 @@ const UpdatePreferenciesForm = (props) => {
       console.log("RoommatePreferences => ", fieldsRoom);
       var preferencesRoomate = Object.entries(fieldsRoom.roommatePreferences);
       preferencesRoomate = preferencesRoomate.filter((t) => t[1]);
-      const attributes = preferencesRoomate.map((a) => {
-        return { attributeType: a[0], value: a[1], weigth: 0 };
+      let attributes =[] 
+      preferencesRoomate.map((a) => {
+        if(a[0]==="age"){
+          return attributes = [...attributes,{attributeType:"minAge",value:a[1][0]},{attributeType:"maxAge",value:a[1][1]}]
+
+        }else{
+          return attributes = [...attributes,{ attributeType: a[0], value: a[1], weigth: 0 }];
+        }
       });
       let bodyReq = { attributes };
       console.log(bodyReq);

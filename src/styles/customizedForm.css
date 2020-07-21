@@ -47,6 +47,10 @@
     font-size: 18px;
     font-weight: bold;
 }
+.ant-slider-mark-text{
+    transform: translateX(0%);
+    left: -2%;
+}
 
 /* pantalla de escritorio */
 @media only screen and (min-width: 600px){
@@ -78,4 +82,5 @@
         column-gap: 5px;
         text-align: justify;
     }
+    
 }
