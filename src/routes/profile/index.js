@@ -15,7 +15,6 @@ const Profile = (props) => {
     if (!datos) {
       const getUser = async () => {
         const { data } = await ApiRequest.get(`/user/${nickname}`);
-        console.log("Data: ", data);
         let attr = [];
         data.attributes.forEach((t) => {
           attr = { ...attr, [t.attributeType]: t.value };
@@ -46,7 +45,7 @@ const Profile = (props) => {
                 </strong>
               </h2>
               <h4>
-                {datos.userCity} - {datos.userNationality}
+                {datos.attributes.nationality} - {datos.attributes.city}
               </h4>
             </div>
           </div>
@@ -57,7 +56,8 @@ const Profile = (props) => {
               </div>
               <div>
                 <p>
-                  Sexo: {datos.userSex === "Male" ? "Masculino" : "Femenino"}
+                  Sexo:{" "}
+                  {datos.attributes.sex === "Male" ? "Masculino" : "Femenino"}
                 </p>
               </div>
               <div>
@@ -81,7 +81,7 @@ const Profile = (props) => {
               <p>No tengo mascotas</p>
             )}
             {datos.attributes.occupation ? (
-              <p>Ocupación: {datos.attributes.occupation.value}</p>
+              <p>Ocupación: {datos.attributes.occupation === 'student' ? 'Estudiante' : 'Trabajo' }</p>
             ) : (
               <p>Sin Ocupación</p>
             )}
@@ -92,7 +92,7 @@ const Profile = (props) => {
       {datos && datos.userDescription ? (
         <div className="profileContent">
           <h3>Más sobre {datos.userName}</h3>
-          <p>{datos.userDescription}</p>
+          {datos.userDescription}
         </div>
       ) : null}
     </>
