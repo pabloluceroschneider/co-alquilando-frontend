@@ -21,7 +21,7 @@ const Header = (props) => {
   const { Header } = Layout;
 
   const menu = (
-    <Menu onClick={e => setCurrent(e.key)} selectedKeys={[current]} mode="horizontal">
+    <Menu onClick={e => setCurrent(e.key)} selectedKeys={[current]}>
 
       {state.user ? (
         <Menu.Item key="perfil">
