@@ -27,7 +27,6 @@ const ContentWrapper = (props) => {
 				<Layout>
 					<CustomSideNav setContent={setContent} /> 
 					<Content className="site-layout-background">
-                        <h1>Listado de usuarios por preferencias</h1>
                         {renderContent()}
                     </Content>
 				</Layout>

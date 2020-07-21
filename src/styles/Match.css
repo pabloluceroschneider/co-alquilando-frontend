@@ -2,7 +2,8 @@
 
 /* Mobile First */
 .match{
-    margin-left: 5vw;
+    margin: 5vh 0vw 5vh 5vw;
+    text-align: left;
 }
 
 .match .userCard{
@@ -29,12 +30,10 @@
 
 /* Desktop View */
 @media only screen and (min-width: 600px){
-    .match{
-        margin-left: 30vw;
-    }
     
     .match .userCard{
         width: 40vw;
+        margin-left: 5vw;
     }
 
     .match .name{

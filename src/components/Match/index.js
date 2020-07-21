@@ -68,6 +68,7 @@ const Match = () => {
 
 	return (
 		<div className="match">
+			<h1>Listado de usuarios por preferencias</h1>
 			{users &&
 				users.map((u) => {
 					return <UserCard key={u.id} {...u} />;
