@@ -1,40 +1,42 @@
 import React from 'react';
+import { Card } from 'antd';
+
 
 const GaleriaTresImagenes = props => {
     const { imgUrl1, title1, imgUrl2, title2, imgUrl3, title3, } = props
-
+    const { Meta } = Card;
     return (
 
-        <div className="col-sm-12 body1">
-           <div className="content2">
-           <div className="images2 col-sm-4"
-                style={{ backgroundImage: `url(${imgUrl1})` }}>
-                
+        <div className="col-sm-12 body2 col-sm-12 row">
+            <div className="content2 col-sm-4">
+                <Card
+                    hoverable
+                    style={{ width: 240 }}
+                    cover={<img src={imgUrl1} alt="Error de carga" />}
+                >
+                    <Meta title={title1}/>
+                </Card>
             </div>
-           <label className="subtitle">
-                    {title1}
-                </label>
-           </div>
-           <div className="content2">
-           <div className="images2 col-sm-4"
-                style={{ backgroundImage: `url(${imgUrl2})` }}>
-                
+            <div className="content2 col-sm-4">
+            <Card
+                    hoverable
+                    style={{ width: 240 }}
+                    cover={<img src={imgUrl2} alt="Error de carga" />}
+                >
+                    <Meta title={title2}/>
+                </Card>
             </div>
-           <label className="subtitle">
-                    {title2}
-                </label>
-           </div>
-           <div className="content2">
-           <div className="images2 col-sm-4"
-                style={{ backgroundImage: `url(${imgUrl3})` }}>
-                
+            <div className="content2 col-sm-4">
+            <Card
+                    hoverable
+                    style={{ width: 240 }}
+                    cover={<img src={imgUrl3} alt="Error de carga" />}
+                >
+                    <Meta title={title3}/>
+                </Card>
             </div>
-           <label className="subtitle">
-                    {title3}
-                </label>
-           </div>
-            
-           
+
+
 
         </div>
     );

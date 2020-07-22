@@ -1,17 +1,28 @@
-.site-page-header{
-    /* background-color: rgb(0, 0, 51); */
-    background-color: #2E86C1;
-    display: block;
-    height: 55px;
-    width: 100%;
-    color: rgba(255, 255, 255, 0.856);
-    font-size: 20px;
-    padding-left: 10px;
-    padding-top: 10px;
-    font-weight: 500;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    border-top: 8px;
-};
-.link{
-position: right;
-};
+.logo {
+    width: 120px;
+    height: 31px;
+    float: left;
+  }
+  .logo :hover{
+    cursor: pointer;
+  }
+  .site-layout-background {
+    background: #fff;
+  }
+
+  .imglogo{
+     
+     height: 60px; 
+     width: 70px;
+     padding-bottom: 2px;
+  }
+
+  .drop{
+    float:right;
+  }
+  .menu{
+   color: ivory; 
+   float:right;
+   padding-right: 100px !important;
+  }
+

@@ -6,13 +6,14 @@
     line-height: 160px;
     background: #364d79;
     overflow: hidden;
+
   }
   
   .ant-carousel .slick-slide h3 {
     color: #fff;
   }
   
-  .image {
+  .imageCarrousel {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -21,6 +22,7 @@
   .carousel  .slider-wrapper  .slider {
     height: 350px;
     width: 100%;
+    padding-top: 30px;
   }
   .slide  div {
     height: 100%;
@@ -42,4 +44,20 @@
     font-weight: 400;
     position: relative;
     top: 34%;
+  }
+  .title {
+    padding-bottom: 15px;
+    margin-left: 25px;
+    font-size: 30px;
+    color: #f3f3f3e5;
+    font-weight: bold;
+    padding-top: 35px;
+  }
+  .subtitle {
+    color:#f3f3f3e5;;
+    font-weight: 400;
+    margin: 5px 20px 0 25px;
+    font-size: 25px;
+    line-height: 26px;
+    margin-block-end: 15px;
   }

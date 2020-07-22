@@ -4,20 +4,19 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import '../../styles/Carrousel.css'
 
 
-const CustomizedCarrousel = props => {
+const CarrouselPequeño = props => {
     const {data={}} = props
-
     return (
         <div>
             <Carousel 
             infiniteLoop={true}
-            autoPlay={true}
-            showArrows={false}
+            autoPlay={false}
+            showArrows={true}
             showThumbs={false}
             showStatus={false}
             >
-             {data.map(({ imgUrl, caption, position}, index) => (    
-                <div className="image" key={index}
+             {data.map(({ imgUrl, caption, position}) => (    
+                <div className="imageCarrousel"
                 style={{ backgroundImage:`url(${imgUrl})`}}
                 >
                   {caption && (
@@ -35,4 +34,4 @@ const CustomizedCarrousel = props => {
 
 }
 
-export default CustomizedCarrousel;
+export default CarrouselPequeño;
