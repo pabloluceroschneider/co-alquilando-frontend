@@ -77,7 +77,7 @@ const userData = {
         },
         {
           label: "Sexo",
-          name: "userSex",
+          name: ["attributes", "sex"],
           component: "Select",
           options: [
             { name: "Femenino", value: "FEMALE" },
@@ -89,12 +89,12 @@ const userData = {
       [
         {
           label: "Nacionalidad",
-          name: "userNationality",
+          name: ["attributes", "nationality"],
           component: "Input",
         },
         {
           label: "Ciudad",
-          name: "userCity",
+          name: ["attributes", "city"],
           component: "Input",
         },
       ],
@@ -110,6 +110,12 @@ const userData = {
           component: "Upload",
         },
       ],
+      [
+        {
+          label: "Preferencias",
+          component: "link",
+        },
+      ]
     ],
   },
 };
@@ -124,11 +130,20 @@ const UpdateForm = (props) => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/user/${nickname}`).then((res) => {
         let { data } = res;
+        let attributes = {};
+        if (data.attributes) {
+          data.attributes.forEach((t) => {
+            attributes = { ...attributes, [t.attributeType]: t.value };
+          });
+        }
         let formated = {
           ...data,
           userBirthDate: data.userBirthDate ? moment(data.userBirthDate) : null,
           userConfirmEmail: data.userEmail,
         };
+        delete formated.attributes;
+        formated = { ...formated, attributes };
+        console.log(formated);
         form.setFieldsValue(formated);
         setIdUser(formated.id);
       });
@@ -137,7 +152,15 @@ const UpdateForm = (props) => {
   }, [form, nickname]);
   useEffect(() => {
     if (fields) {
-      let bodyReq = fields;
+      console.log(fields);
+      var attributes = Object.entries(fields.attributes);
+      console.log(attributes);
+      let arrayAttributes = [];
+      attributes.map((t) => {
+       return arrayAttributes.push({ attributeType: t[0], value: t[1] });
+      });
+      let bodyReq = { ...fields, attributes: arrayAttributes };
+      console.log(bodyReq);
       delete bodyReq.userConfirmEmail;
       delete bodyReq.userConfirmPassword;
       let asyncPutUser = async () => {
@@ -159,11 +182,11 @@ const UpdateForm = (props) => {
       };
       asyncPutUser();
     }
-  }, [fields, idUser,history]);
+  }, [fields, idUser, history]);
   return (
-      <ContentWrapper header footer>
-        <CustomizedForm form={form} data={userData} onfinish={setFields} />
-      </ContentWrapper>
+    <ContentWrapper header footer>
+      <CustomizedForm form={form} data={userData} onfinish={setFields} />
+    </ContentWrapper>
   );
 };
 
