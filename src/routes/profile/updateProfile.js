@@ -143,7 +143,6 @@ const UpdateForm = (props) => {
         };
         delete formated.attributes;
         formated = { ...formated, attributes };
-        console.log(formated);
         form.setFieldsValue(formated);
         setIdUser(formated.id);
       });
@@ -154,13 +153,11 @@ const UpdateForm = (props) => {
     if (fields) {
       console.log(fields);
       var attributes = Object.entries(fields.attributes);
-      console.log(attributes);
       let arrayAttributes = [];
       attributes.map((t) => {
        return arrayAttributes.push({ attributeType: t[0], value: t[1] });
       });
       let bodyReq = { ...fields, attributes: arrayAttributes };
-      console.log(bodyReq);
       delete bodyReq.userConfirmEmail;
       delete bodyReq.userConfirmPassword;
       let asyncPutUser = async () => {
