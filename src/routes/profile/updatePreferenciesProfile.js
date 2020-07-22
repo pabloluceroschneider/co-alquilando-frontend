@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ContentWrapper from "../../components/ContentWrapper";
 import CustomizedForm from "../../components/CustomizedForm";
 import { Form, notification } from "antd";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import ApiRequest from "../../util/ApiRequest";
 
 const userPreferenciesRoomie = {
@@ -33,7 +33,7 @@ const userPreferenciesRoomie = {
           label: "Ocupación",
           name: ["roommatePreferences", "occupation"],
           component: "Input",
-        }
+        },
       ],
       [
         {
@@ -49,9 +49,9 @@ const userPreferenciesRoomie = {
       ],
       [
         {
-          label:"Edad",
-          name:["roommatePreferences", "age"],
-          component:"slider",
+          label: "Edad",
+          name: ["roommatePreferences", "age"],
+          component: "slider",
         },
         {
           label: "Mascotas",
@@ -191,6 +191,7 @@ const UpdatePreferenciesForm = (props) => {
   const [fieldsProp, setFieldsProp] = useState(null);
   let { nickname } = useParams();
   const [idUser, setIdUser] = useState(null);
+  const history = useHistory();
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/user/${nickname}`).then((res) => {
@@ -201,33 +202,33 @@ const UpdatePreferenciesForm = (props) => {
         let arrayProperty = [];
         if (data) {
           if (data.roommatePreferences) {
-            console.log(data.roommatePreferences);
             data.roommatePreferences.attributes.forEach((t) => {
               arrayRoommate.push({ [t.attributeType]: t.value });
             });
             delete data.roommatePreferences;
-            let rangeAge = [0,0];
+            let rangeAge = [0, 0];
             arrayRoommate.forEach((t) => {
-              console.log(t);
-              if(Object.keys(t)[0]==="minAge"){
-                rangeAge[0]=Object.values(t)[0];
+              if (Object.keys(t)[0] === "minAge") {
+                rangeAge[0] = Object.values(t)[0];
               }
-              if(Object.keys(t)[0]==="maxAge"){
-                rangeAge[1]=Object.values(t)[0];
-              }
-              else{
-                data = {...data,
+              if (Object.keys(t)[0] === "maxAge") {
+                rangeAge[1] = Object.values(t)[0];
+              } else {
+                data = {
+                  ...data,
                   roommatePreferences: { ...data.roommatePreferences, ...t },
                 };
               }
             });
-            data =  {...data,
-              roommatePreferences: { ...data.roommatePreferences, age:rangeAge },
+            data = {
+              ...data,
+              roommatePreferences: {
+                ...data.roommatePreferences,
+                age: rangeAge,
+              },
             };
-            delete data.roommatePreferences.minAge
-            delete data.roommatePreferences.maxAge
-
-            console.log(data);
+            delete data.roommatePreferences.minAge;
+            delete data.roommatePreferences.maxAge;
             formRoom.setFieldsValue(data);
           }
           if (data.propertyPreferences) {
@@ -250,32 +251,34 @@ const UpdatePreferenciesForm = (props) => {
   }, [formRoom, nickname, formProp]);
   useEffect(() => {
     if (fieldsRoom) {
-      console.log("RoommatePreferences => ", fieldsRoom);
       var preferencesRoomate = Object.entries(fieldsRoom.roommatePreferences);
       preferencesRoomate = preferencesRoomate.filter((t) => t[1]);
-      let attributes =[] 
+      let attributes = [];
       preferencesRoomate.map((a) => {
-        if(a[0]==="age"){
-          return attributes = [...attributes,{attributeType:"minAge",value:a[1][0]},{attributeType:"maxAge",value:a[1][1]}]
-
-        }else{
-          return attributes = [...attributes,{ attributeType: a[0], value: a[1], weigth: 0 }];
+        if (a[0] === "age") {
+          return (attributes = [
+            ...attributes,
+            { attributeType: "minAge", value: a[1][0] },
+            { attributeType: "maxAge", value: a[1][1] },
+          ]);
+        } else {
+          return (attributes = [
+            ...attributes,
+            { attributeType: a[0], value: a[1], weigth: 0 },
+          ]);
         }
       });
       let bodyReq = { attributes };
-      console.log(bodyReq);
       let asyncPutUser = async () => {
         await ApiRequest.put(
           `/user/preferences/roommate/${idUser}`,
           bodyReq
         ).then((res) => {
-          console.log(res);
           if (res.status === 200) {
             notification.success({
-              message: `Datos Actualizados`,
+              message: `Preferencias de Roommie Actualizadas`,
               placement: "bottomLeft",
             });
-            //history.push(`/profile/${bodyReq.userNickname}`);
           } else {
             notification.error({
               message: `Error: No se pudo actualizar sus datos`,
@@ -289,26 +292,23 @@ const UpdatePreferenciesForm = (props) => {
   }, [fieldsRoom, idUser]);
   useEffect(() => {
     if (fieldsProp) {
-      console.log("PropertyPreferences => ", fieldsProp);
       var preferencesProperty = Object.entries(fieldsProp.propertyPreferences);
       preferencesProperty = preferencesProperty.filter((t) => t[1]);
       const attributes = preferencesProperty.map((a) => {
         return { attributeType: a[0], value: a[1], weigth: 0 };
       });
       let bodyReq = { attributes };
-      console.log(bodyReq);
       let asyncPutUser = async () => {
         await ApiRequest.put(
           `/user/preferences/property/${idUser}`,
           bodyReq
         ).then((res) => {
-          console.log(res);
           if (res.status === 200) {
             notification.success({
-              message: `Datos Actualizados`,
+              message: `Preferencias de Propiedades Actualizadas`,
               placement: "bottomLeft",
             });
-            //history.push(`/profile/${bodyReq.userNickname}`);
+            history.push(`/profile/${nickname}/update`);
           } else {
             notification.error({
               message: `Error: No se pudo actualizar sus datos`,
@@ -319,7 +319,7 @@ const UpdatePreferenciesForm = (props) => {
       };
       asyncPutUser();
     }
-  }, [fieldsProp, idUser]);
+  }, [fieldsProp, idUser,history,nickname]);
   return (
     <ContentWrapper header footer>
       <CustomizedForm
