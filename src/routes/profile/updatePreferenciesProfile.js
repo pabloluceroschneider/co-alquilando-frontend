@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import {SessionContext} from '../../store';
 import ContentWrapper from "../../components/ContentWrapper";
 import CustomizedForm from "../../components/CustomizedForm";
 import { Form, notification } from "antd";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ApiRequest from "../../util/ApiRequest";
 
 const userPreferenciesRoomie = {
@@ -189,12 +190,12 @@ const UpdatePreferenciesForm = (props) => {
   const [formProp] = Form.useForm();
   const [fieldsRoom, setFieldsRoom] = useState(null);
   const [fieldsProp, setFieldsProp] = useState(null);
-  let { nickname } = useParams();
   const [idUser, setIdUser] = useState(null);
   const history = useHistory();
+  const { state } = useContext(SessionContext);
   useEffect(() => {
     let asyncGetUser = async () => {
-      await ApiRequest.get(`/user/${nickname}`).then((res) => {
+      await ApiRequest.get(`/user/${state.user.userNickname}`).then((res) => {
         let { data } = res;
         setIdUser(data.id);
         data = data.preferences;
@@ -248,7 +249,7 @@ const UpdatePreferenciesForm = (props) => {
       });
     };
     asyncGetUser();
-  }, [formRoom, nickname, formProp]);
+  }, [formRoom, state, formProp]);
   useEffect(() => {
     if (fieldsRoom) {
       var preferencesRoomate = Object.entries(fieldsRoom.roommatePreferences);
@@ -308,7 +309,7 @@ const UpdatePreferenciesForm = (props) => {
               message: `Preferencias de Propiedades Actualizadas`,
               placement: "bottomLeft",
             });
-            history.push(`/profile/${nickname}/update`);
+            history.push(`/profile/update`);
           } else {
             notification.error({
               message: `Error: No se pudo actualizar sus datos`,
@@ -319,7 +320,7 @@ const UpdatePreferenciesForm = (props) => {
       };
       asyncPutUser();
     }
-  }, [fieldsProp, idUser,history,nickname]);
+  }, [fieldsProp, idUser,history,state]);
   return (
     <ContentWrapper header footer>
       <CustomizedForm

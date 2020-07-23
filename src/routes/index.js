@@ -21,7 +21,7 @@ const Routes = () => {
 					<Switch>
 						<Route exact path="/" component={UserHome} />
 						<Route path="/profile/:nickname/update" component={UpdateForm} />
-						<Route path="/profile/:nickname/updatePreferencies" component={UpdatePreferenciesForm} />
+						<Route path="/profile/updatePreferencies" component={UpdatePreferenciesForm} />
 						<Route path="/profile/:nickname" component={Profile} />
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
 						<Route path="/property" exact component={Property} />
