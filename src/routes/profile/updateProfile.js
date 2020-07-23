@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import {SessionContext} from '../../store'
+import { useHistory } from "react-router-dom";
 import { Form, notification } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
 import ApiRequest from "../../util/ApiRequest";
@@ -124,11 +125,12 @@ const UpdateForm = (props) => {
   const [form] = Form.useForm();
   const [fields, setFields] = useState(null);
   const [idUser, setIdUser] = useState(null);
-  let { nickname } = useParams();
   const history = useHistory();
+  const { state } = useContext(SessionContext);
   useEffect(() => {
     let asyncGetUser = async () => {
-      await ApiRequest.get(`/user/${nickname}`).then((res) => {
+      console.log(state);
+      await ApiRequest.get(`/user/${state.user.userNickname}`).then((res) => {
         let { data } = res;
         let attributes = {};
         if (data.attributes) {
@@ -148,7 +150,7 @@ const UpdateForm = (props) => {
       });
     };
     asyncGetUser();
-  }, [form, nickname]);
+  }, [form,state]);
   useEffect(() => {
     if (fields) {
       console.log(fields);
