@@ -92,3 +92,12 @@
 .icon-user:before {
   content: "\72";
 }
+.icon-map-marker:before {
+  content: "\73";
+}
+.icon-map:before {
+  content: "\74";
+}
+.icon-globe:before {
+  content: "\75";
+}

@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../styles/PropertyCard.css'
 import { Card } from 'antd';
 import { Divider } from 'antd';
 import '../../assets/Icons/Icon/styles.css'
+import Mapa from '../../components/Map/index'
 import CarrouselPequeño from '../CarrouselPequeño';
+import { Modal, Button } from 'antd';
 
+const [ visible, setVisible ] = useState(false);
+
+const toggleVisible = () => {
+    setVisible(!visible);
+}
 
 const propertyCard = props => {
     const { description, price, address, attributes } = props
@@ -20,10 +27,17 @@ const propertyCard = props => {
         "HOUSE": "Casa"
     }
 
+    const location = {
+        address: 'Cordoba,Achaval Rodriguez 70',
+        lat: -31.425286,
+        lng: -64.188848,
+    }
+ 
+
     return (
 
         <div className="contentPC">
-        
+
             <Card
                 hoverable
                 style={{ width: 260 }}
@@ -71,11 +85,25 @@ const propertyCard = props => {
 
                     </div>
 
+                    <>
+                <Button type="primary" onClick={() => toggleVisible()}>
+                    Open Modal
+                </Button>
+                <Modal
+                   title="Ubicacion" 
+                   className="loginModal"
+                   visible={visible} 
+                   onCancel={toggleVisible} 
+                   destroyOnClose={true}
+                >
+                    <Mapa location={location} zoomLevel={17} />
+                </Modal>
+            </>
+
                 </div>
 
             </Card>
 
-                
         </div>
     );
 
@@ -83,3 +111,4 @@ const propertyCard = props => {
 }
 
 export default propertyCard;
+

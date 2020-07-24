@@ -4,7 +4,10 @@ import PropertyCard from '../../components/PropertyCard/index'
 import {notification} from 'antd'
 import '../../styles/PropertyList.css'
 
+
 const Property = () => {
+  
+
     const [datos, setDatos] = useState(null)
     useEffect(
         () => {
@@ -33,10 +36,8 @@ const Property = () => {
                     <PropertyCard {...p} />
                 )
             }  ):null}
-           
         </div>
         
-
     )
 }
 
