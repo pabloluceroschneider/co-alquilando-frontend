@@ -15,8 +15,9 @@ const LocationPin = ({ text }) => (
 const Mapa = ({ location, zoomLevel }) => (
   
   <div className="map">
-    <div className="google-map">
-      <GoogleMapReact
+    
+    <div style={{ height: '350px', width: '250px' }}>
+      <GoogleMapReact 
         bootstrapURLKeys={{ key: 'AIzaSyDzoLTHAJKj5xymA3iBqJxxQl-MYG9R_ag' }}
         defaultCenter={location}
         defaultZoom={zoomLevel}
@@ -27,6 +28,7 @@ const Mapa = ({ location, zoomLevel }) => (
           text={location.address}
         />
       </GoogleMapReact>
+   
     </div>
   </div>
  

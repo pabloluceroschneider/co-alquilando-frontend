@@ -5,18 +5,13 @@ import { Divider } from 'antd';
 import '../../assets/Icons/Icon/styles.css'
 import Mapa from '../../components/Map/index'
 import CarrouselPequeño from '../CarrouselPequeño';
-import { Modal, Button } from 'antd';
+import ModalMapa from '../Modal';
 
-const [ visible, setVisible ] = useState(false);
-
-const toggleVisible = () => {
-    setVisible(!visible);
-}
 
 const propertyCard = props => {
     const { description, price, address, attributes } = props
     const { rentPrice } = price
-    const { street, number, province } = address
+    // const { street, number, province } = address
 
     let attr = []
     attributes.forEach(t => {
@@ -57,8 +52,8 @@ const propertyCard = props => {
                     </div>
 
                     <div className="itemsPC">
-                        <label>{province}</label>
-                        <label>Ubicacion: {street} {number}</label>
+                        {/* <label>{province}</label>
+                        <label>Ubicacion: {street} {number}</label> */}
                         <label>Habitaciones: {attr.rooms}  </label>
                         <label>Baños: {attr.bathrooms}</label>
                         <label>Maximo Inquilinos: {attr.amountPeople}</label>
@@ -86,7 +81,8 @@ const propertyCard = props => {
                     </div>
 
                     <>
-                <Button type="primary" onClick={() => toggleVisible()}>
+                    <ModalMapa/>
+                {/* <Button type="primary" onClick={() => toggleVisible()}>
                     Open Modal
                 </Button>
                 <Modal
@@ -97,8 +93,8 @@ const propertyCard = props => {
                    destroyOnClose={true}
                 >
                     <Mapa location={location} zoomLevel={17} />
-                </Modal>
-            </>
+                </Modal> */}
+                    </>
 
                 </div>
 
