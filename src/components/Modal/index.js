@@ -25,7 +25,6 @@ const ModalMap = (props) => {
   };
 
   const location = {
-    address: "Cordoba,Achaval Rodriguez 70",
     lat: -31.425286,
     lng: -64.188848,
   };
@@ -40,12 +39,19 @@ const ModalMap = (props) => {
         closable={true}
         onCancel={handleCancel}
         footer={[
-            <Button type="primary" key="close" onClick={handleCancel}>
-              Cerrar
-            </Button>,
-          ]}
+          <Button type="primary" key="close" onClick={handleCancel}>
+            Cerrar
+          </Button>,
+        ]}
       >
-        <Mapa location={location} zoomLevel={17} />
+        <Mapa
+          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDzoLTHAJKj5xymA3iBqJxxQl-MYG9R_ag"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `400px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+          location={location}
+          zoomLevel={17}
+        />
       </Modal>
     </>
   );
