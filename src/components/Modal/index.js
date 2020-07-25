@@ -42,7 +42,7 @@ const {latitude, length} = coordinates;
           containerElement={<div style={{ height: `400px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
           location={location}
-          zoomLevel={17}
+          zoomLevel={15}
         />
       </Modal>
     </>
