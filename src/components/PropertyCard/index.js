@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../../styles/PropertyCard.css'
 import { Card } from 'antd';
 import { Divider } from 'antd';
-import '../../assets/Icons/Icon/styles.css'
-import Mapa from '../../components/Map/index'
+import '../../assets/Icons/Icon/styles.css';
 import CarrouselPequeño from '../CarrouselPequeño';
 import ModalMapa from '../Modal';
 
 
 const propertyCard = props => {
-    const { description, price, address, attributes } = props
-    const { rentPrice } = price
+    const { description, price, address, attributes } = props;
+    const { rentPrice } = price;
+    const {coordinates} = address;
     // const { street, number, province } = address
 
     let attr = []
@@ -22,12 +22,7 @@ const propertyCard = props => {
         "HOUSE": "Casa"
     }
 
-    const location = {
-        address: 'Cordoba,Achaval Rodriguez 70',
-        lat: -31.425286,
-        lng: -64.188848,
-    }
- 
+    
 
     return (
 
@@ -81,19 +76,7 @@ const propertyCard = props => {
                     </div>
 
                     <>
-                    <ModalMapa/>
-                {/* <Button type="primary" onClick={() => toggleVisible()}>
-                    Open Modal
-                </Button>
-                <Modal
-                   title="Ubicacion" 
-                   className="loginModal"
-                   visible={visible} 
-                   onCancel={toggleVisible} 
-                   destroyOnClose={true}
-                >
-                    <Mapa location={location} zoomLevel={17} />
-                </Modal> */}
+                    <ModalMapa coordinates={coordinates}/>
                     </>
 
                 </div>

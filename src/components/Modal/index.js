@@ -3,31 +3,23 @@ import { Modal, Button } from "antd";
 import Mapa from "../Map";
 
 const ModalMap = (props) => {
+const {coordinates} = props;
+const {latitude, length} = coordinates;
   const [visible, setVisible] = useState(false);
-  const footerModal = () => {
-    return (
-      <Button key="back" onClick={handleCancel}>
-        Cerrar
-      </Button>
-    );
-  };
 
   const showModal = () => {
     setVisible(true);
   };
 
-  const handleOk = () => {
-    setVisible(false);
-  };
 
   const handleCancel = () => {
     setVisible(false);
   };
-
   const location = {
-    lat: -31.425286,
-    lng: -64.188848,
-  };
+    lat: parseFloat(latitude),
+    lng: parseFloat(length),
+}
+
   return (
     <>
       <Button type="primary" onClick={showModal}>

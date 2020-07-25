@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import ApiRequest from "../../util/ApiRequest"
-import PropertyCard from '../../components/PropertyCard/index'
-import {notification} from 'antd'
-import '../../styles/PropertyList.css'
+import React, { useEffect, useState, useContext } from 'react';
+import ApiRequest from "../../util/ApiRequest";
+import PropertyCard from '../../components/PropertyCard/index';
+import {notification} from 'antd';
+import '../../styles/PropertyList.css';
+import {SessionContext} from '../../store';
+
 
 
 const Property = () => {
   
 
     const [datos, setDatos] = useState(null)
+    const {state} = useContext(SessionContext);
     useEffect(
         () => {
             let asyncGet = async () => {
                 try {
-                    let{data} = await ApiRequest.get("/property/properties");
+                    let{data} = await ApiRequest.get(`/property/properties/owner/${state.user.id}`);
                     setDatos(data)
                     console.log(data)
                 } catch (e) {
@@ -25,7 +28,7 @@ const Property = () => {
             }
             asyncGet()
 
-        }, []
+        }, [state]
     )
 
     return (
