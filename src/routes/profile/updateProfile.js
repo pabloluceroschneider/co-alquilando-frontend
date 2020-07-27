@@ -129,7 +129,6 @@ const UpdateForm = (props) => {
   const { state } = useContext(SessionContext);
   useEffect(() => {
     let asyncGetUser = async () => {
-      console.log(state);
       await ApiRequest.get(`/user/${state.user.userNickname}`).then((res) => {
         let { data } = res;
         let attributes = {};
@@ -153,7 +152,6 @@ const UpdateForm = (props) => {
   }, [form,state]);
   useEffect(() => {
     if (fields) {
-      console.log(fields);
       var attributes = Object.entries(fields.attributes);
       let arrayAttributes = [];
       attributes.map((t) => {
@@ -164,7 +162,6 @@ const UpdateForm = (props) => {
       delete bodyReq.userConfirmPassword;
       let asyncPutUser = async () => {
         await ApiRequest.put(`/user/${idUser}`, bodyReq).then((res) => {
-          console.log(res);
           if (res.status === 200) {
             notification.success({
               message: `Datos Actualizados`,
