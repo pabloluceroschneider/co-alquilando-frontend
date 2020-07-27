@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ApiRequest from "../../util/ApiRequest";
 import { Form, notification } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
 import ContentWrapper from "../../components/ContentWrapper";
+import SessionContext from "../../store";
 
 const propertyData = {
   name: "property",
@@ -227,6 +228,7 @@ const propertyData = {
 
 const usePostProperty = (values) => {
   const [response, setResponse] = useState(null);
+  const { state } = useContext(SessionContext);
   useEffect(() => {
     if (values) {
       var atributos = Object.entries(values.attributes);
@@ -242,7 +244,7 @@ const usePostProperty = (values) => {
       let formatedBody = {
         ...values,
         attributes: attributesFormate,
-        ownerId: "5f010068285a9156b2b4c7dd",
+        ownerId: state.user.id,
         status: "available",
       };
 
