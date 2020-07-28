@@ -2,14 +2,16 @@ import React from 'react';
 import '../../styles/PropertyCard.css'
 import { Card } from 'antd';
 import { Divider } from 'antd';
-import '../../assets/Icons/Icon/styles.css'
+import '../../assets/Icons/Icon/styles.css';
 import CarrouselPequeño from '../CarrouselPequeño';
+import ModalMapa from '../Modal';
 
 
 const propertyCard = props => {
-    const { description, price, address, attributes } = props
-    const { rentPrice } = price
-    const { street, number, province } = address
+    const { description, price, address, attributes } = props;
+    const { rentPrice } = price;
+    const {coordinates} = address;
+    // const { street, number, province } = address
 
     let attr = []
     attributes.forEach(t => {
@@ -20,10 +22,12 @@ const propertyCard = props => {
         "HOUSE": "Casa"
     }
 
+    
+
     return (
 
         <div className="contentPC">
-        
+
             <Card
                 hoverable
                 style={{ width: 260 }}
@@ -43,8 +47,8 @@ const propertyCard = props => {
                     </div>
 
                     <div className="itemsPC">
-                        <label>{province}</label>
-                        <label>Ubicacion: {street} {number}</label>
+                        {/* <label>{province}</label>
+                        <label>Ubicacion: {street} {number}</label> */}
                         <label>Habitaciones: {attr.rooms}  </label>
                         <label>Baños: {attr.bathrooms}</label>
                         <label>Maximo Inquilinos: {attr.amountPeople}</label>
@@ -69,13 +73,18 @@ const propertyCard = props => {
                         {attr.pets ? <label className="icon icon-paw" title="Acepta Mascotas">  </label> : null}
 
 
+                    </div >
+
+                    <>
+                    <div className="button-place">
+                    <ModalMapa coordinates={coordinates}/>
                     </div>
+                    </>
 
                 </div>
 
             </Card>
 
-                
         </div>
     );
 
@@ -83,3 +92,4 @@ const propertyCard = props => {
 }
 
 export default propertyCard;
+
