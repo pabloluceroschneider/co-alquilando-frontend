@@ -7,6 +7,12 @@ import { Button } from "antd";
 const image =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
 
+let genders = {
+    "MALE": "Masculino",
+    "FEMALE": "Femenino",
+    "OTHER": "Otro"
+}
+
 const Profile = (props) => {
   let { nickname } = useParams();
   const [datos, setDatos] = useState(null);
@@ -57,7 +63,7 @@ const Profile = (props) => {
               <div>
                 <p>
                   Sexo:{" "}
-                  {datos.attributes.sex === "Male" ? "Masculino" : "Femenino"}
+                  {genders[datos.attributes.sex]}
                 </p>
               </div>
               <div>
@@ -75,13 +81,13 @@ const Profile = (props) => {
         <div className="profileContent">
           <h3>Acerca de</h3>
           <div className="profileGroup2">
-            {datos.attributes.pets.value === "no" ? (
+            {datos.attributes.pets === "true" ? (
               <p>Tengo mascotas</p>
             ) : (
               <p>No tengo mascotas</p>
             )}
             {datos.attributes.occupation ? (
-              <p>Ocupación: {datos.attributes.occupation === 'student' ? 'Estudiante' : 'Trabajo' }</p>
+              <p>Ocupación: {datos.attributes.occupation} </p>
             ) : (
               <p>Sin Ocupación</p>
             )}

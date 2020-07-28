@@ -3,7 +3,7 @@ import ApiRequest from "../../util/ApiRequest";
 import { Form, notification } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
 import ContentWrapper from "../../components/ContentWrapper";
-import SessionContext from "../../store";
+import { SessionContext } from "../../store";
 
 const propertyData = {
   name: "property",
@@ -262,7 +262,7 @@ const usePostProperty = (values) => {
       };
       asyncPost();
     }
-  }, [values]);
+  }, [values, state.user.id]);
   return response;
 };
 
