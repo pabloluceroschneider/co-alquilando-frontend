@@ -8,9 +8,9 @@ const { Meta } = Card;
 
 const handleTagCoincidence = coincidence => {
 	if(coincidence >= 90){
-		return "gold"
+		return "green"
 	}
-	if(coincidence >= 50){
+	if(coincidence >= 70){
 		return "blue"
 	}
 }
