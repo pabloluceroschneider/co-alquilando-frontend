@@ -73,10 +73,12 @@ const propertyCard = props => {
                         {attr.pets ? <label className="icon icon-paw" title="Acepta Mascotas">  </label> : null}
 
 
-                    </div>
+                    </div >
 
                     <>
+                    <div className="button-place">
                     <ModalMapa coordinates={coordinates}/>
+                    </div>
                     </>
 
                 </div>
