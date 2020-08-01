@@ -5,6 +5,7 @@ import Upload from "./Upload";
 import DatePicker from "./DatePicker";
 import CheckboxGroup from "./CheckboxGroup";
 import SliderForm from "./Slider";
+import ClickeableMap from "../../components/ClickeableMap"
 
 const InputRepository = props => {
   const {element, form} = props;
@@ -39,12 +40,25 @@ const InputRepository = props => {
         return <Upload />;
       case "slider":
         return <SliderForm onChange={onChange} {...props} key={element.label} />
-      default:
+        case "Map":
+          return <div id="formMap" style={{ height: `300px`, width: `100%` }}>
+          <ClickeableMap 
+          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDzoLTHAJKj5xymA3iBqJxxQl-MYG9R_ag"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `300px`, width: `300px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+          zoomLevel={10}
+          onChange={onChange}
+        />
+        </div>
+      default: 
         return <Input />;
+
     }
   };
 
   switch (element.component) {
+  
     case "label":
       return <label className="label" key={element.label}>{element.label}</label>;
     case "h2":

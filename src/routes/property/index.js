@@ -105,13 +105,20 @@ const propertyData = {
       ],
       [
         {
+          label:"Geolocalizacion",
+          name: ["address","coordinates"],
+          component: "Map",
+      }
+    ],
+      [
+        {
           label: "Precio",
           component: "h2",
         },
       ],
       [
         {
-          label: "Monto",
+          label: "Alquiler",
           name: ["price", "rentPrice"],
           component: "Input",
           required: true,
@@ -269,7 +276,7 @@ const Property = () => {
   const [form] = Form.useForm();
 
   let property = usePostProperty(values);
-
+  console.log("asdasdasda", values)
   useEffect(() => {
     if (property) {
       console.log(property);
