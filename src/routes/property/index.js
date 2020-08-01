@@ -58,6 +58,12 @@ const propertyData = {
           component: "Input.TextArea",
           required: true,
         },
+        {
+          label: "Cargar Imagen",
+          name: "propertyPhoto",
+          component: "Upload",
+          required: true,
+        },
       ],
       [
         {

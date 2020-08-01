@@ -57,7 +57,12 @@ const propertyData = {
 					label: "Descripción",
 					name: "description",
 					component: "Input.TextArea",
-				},
+        },
+        {
+          label: "Cargar Imagen",
+          name: "photos",
+          component: "Upload",
+        },
       ],
       [
         {
@@ -230,11 +235,13 @@ const FormPropertyUpdate = (props) => {
   const history = useHistory();
   const [ownerId, setOwnerId] = useState(null);
   const [status, setStatus] = useState(null);
+  const [images, setImages] = useState(null);
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/property/${idProperty}`).then((res) => {
         setOwnerId(res.data.ownerId);
         setStatus(res.data.status);
+        setImages(res.data.photos)
         console.log(res.data);
         let array = [];
         res.data.attributes.forEach((t) => {
@@ -258,12 +265,14 @@ const FormPropertyUpdate = (props) => {
     if (fields) {
       var atributos = Object.entries(fields.attributes);
       const attributesFormate = atributos.map((a) => {
-        let json = {
-          attributeType: a[0],
-          value: a[1] ? a[1] : "",
-          weigth: a[2],
-        };
-        return json;
+        if (a != "photos") {
+          let json = {
+            attributeType: a[0],
+            value: a[1] ? a[1] : "",
+            weigth: a[2],
+          };
+          return json;
+        }
       });
 
       let formatedBody = {
@@ -295,6 +304,41 @@ const FormPropertyUpdate = (props) => {
       asyncPut();
     }
   }, [fields, idProperty, history, ownerId, status]);
+
+  useEffect(() => {
+    if (fields && fields.photos) {
+
+      let ph = fields.photos.originFileObj;
+
+      const formData = new FormData();
+      formData.append('type', 'file')
+      formData.append("photos", ph)
+
+      let header = {
+        'Content-Type': 'multipart/form-data'
+      }
+
+      let asyncPutPhoto = async () => {
+        await ApiRequest.multipartPut(`/property/${idProperty}/photos`, formData, header).then((res) =>  {
+          setImages(res.data.photos);
+          console.log(res);
+          if (res.status === 200) {
+            notification.success({
+              message: `Datos Actualizados`,
+              placement: "bottomLeft",
+            });
+            history.push(`/property/${idProperty}/update`);
+          } else {
+            notification.error({
+              message: `Error: No se pudo actualizar sus datos`,
+              placement: "bottomLeft",
+            });
+          }
+        });
+      };
+      asyncPutPhoto();
+    }
+  }, [idProperty, history, fields]);
 
   return (
     <div>

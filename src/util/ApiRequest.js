@@ -34,6 +34,18 @@ export default class ApiRequest {
         })
     }
 
+    static multipartPut = async (endpoint, body, header) => {
+        return new Promise( async (res, rej) => {
+            try{
+                console.log("Headers" + header)
+                let data = await axios.put(endpoint, body, header)
+                res(data)
+            }catch(err){
+                rej(err)
+            }
+        })
+    }
+
     static put = async (endpoint, body) => {
         return new Promise( async (res, rej) => {
             try{

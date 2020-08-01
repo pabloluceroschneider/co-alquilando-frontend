@@ -36,7 +36,7 @@ const InputRepository = props => {
       case "Select":
         return Select(element);
       case "Upload":
-        return <Upload />;
+        return <Upload onChange={onChange} {...props} key={element.label} />;
       case "slider":
         return <SliderForm onChange={onChange} {...props} key={element.label} />
       default:
