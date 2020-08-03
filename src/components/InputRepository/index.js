@@ -13,7 +13,7 @@ const InputRepository = props => {
   const onChange = value => {
 		form.setFieldsValue({
 			[element.name] : value
-		})
+    })
 	}
 
   const pickInput = () => {

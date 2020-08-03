@@ -9,7 +9,9 @@ const ClickeableMap = (props) => {
     
     const onMapClicked = (param, map, e) => {
         setPosition({ lat: e.latLng.lat(), lng: e.latLng.lng() });
-        props.onChange({latitude:e.latLng.lat(),length: e.latLng.lng()})
+        props.onChange( {
+            latitude: JSON.stringify( e.latLng.lat() ),
+            length: JSON.stringify( e.latLng.lng())})
     }
 
 

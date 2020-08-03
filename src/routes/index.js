@@ -26,7 +26,6 @@ const Routes = () => {
 						<Route path="/profile/:nickname" component={Profile} />
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
 						<Route path="/property" exact component={Property} />
-						<Route path="/property/map" exact component={FormClickeableMap} />
 						<Route path="/property/properties" exact component={PropertyList} />
 					</Switch>
 				) : (
