@@ -303,7 +303,7 @@ const Property = () => {
 	);
 
 	return (
-		<ContentWrapper header footer>
+		<ContentWrapper topNav footer>
 			<CustomizedForm form={form} data={propertyData} onfinish={setValues} />
 		</ContentWrapper>
 	);

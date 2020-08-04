@@ -5,7 +5,7 @@ const userHome = () => {
 
     
     return (
-		<ContentWrapper header sideNav footer>
+		<ContentWrapper topNav optionsNav footer>
             <div>
             <img src={ImgPortada} alt="Error de carga"></img>
           </div>

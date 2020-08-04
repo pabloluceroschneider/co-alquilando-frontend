@@ -1,7 +1,9 @@
+@import '../assets/Icons/Icon/styles.css';
 @import "./App.css";
 @import "./Profile.css";
 @import "./property.css";
 @import "./customizedForm.css";
+@import './ContentWrapper.css';
 @import "./Footer.css";
 @import "./Header.css";
 @import "./TopNav.css";
@@ -11,7 +13,10 @@
 @import "./Login.css";
 @import "./UserPreferencies.css";
 @import './Header.css';
-@import '../assets/Icons/Icon/styles.css';
+@import './Nav.css';
+@import './OptionsNav.css';
+@import './PropertyList.css';
+
 
 body {
   margin: 0;
@@ -21,8 +26,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  background-color: rgb(230, 230, 230);
-
 }
 
 code {

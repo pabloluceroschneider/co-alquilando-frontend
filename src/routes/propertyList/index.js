@@ -1,17 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { SessionContext } from '../../store';
 import ApiRequest from "../../util/ApiRequest";
+import { notification } from 'antd';
+import ContentWrapper from '../../components/ContentWrapper';
 import PropertyCard from '../../components/PropertyCard/index';
-import {notification} from 'antd';
-import '../../styles/PropertyList.css';
-import {SessionContext} from '../../store';
-
-
 
 const Property = () => {
-  
-
     const [datos, setDatos] = useState(null)
     const {state} = useContext(SessionContext);
+
     useEffect(
         () => {
             let asyncGet = async () => {
@@ -31,6 +28,8 @@ const Property = () => {
     )
 
     return (
+		<ContentWrapper topNav optionsNav>
+
 
         <div className="contentPL" >
             {datos? datos.map((p)=>{
@@ -39,6 +38,8 @@ const Property = () => {
                 )
             }  ):null}
         </div>
+		</ContentWrapper>
+
         
     )
 }
