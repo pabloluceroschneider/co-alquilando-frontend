@@ -18,7 +18,6 @@ const Property = () => {
                 try {
                     let{data} = await ApiRequest.get(`/property/properties/owner/${state.user.id}`);
                     setDatos(data)
-                    console.log(data)
                 } catch (e) {
                     notification.error({
                         message: `Error: ${e.message}`,
@@ -36,7 +35,7 @@ const Property = () => {
         <div className="contentPL" >
             {datos? datos.map((p)=>{
                 return(
-                    <PropertyCard {...p} />
+                    <PropertyCard key={p.id} {...p} />
                 )
             }  ):null}
         </div>
