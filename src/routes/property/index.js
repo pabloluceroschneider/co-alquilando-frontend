@@ -238,46 +238,45 @@ const usePostProperty = (values) => {
   const [ response, setResponse ] = useState(null);
   const { state } = useContext(SessionContext);
 
-	useEffect(
-		() => {
-			if (values) {
-        values.address = {...values.address, coordinates: values.coordinates };
-        delete values.coordinates;
-        let atributos = Object.entries(values.attributes);
-        console.log("values", values)
-        console.log("atributos", atributos)
-				const attributesFormate = atributos.map((a) => {
-					let json = {
-						attributeType: a[0],
-						value: a[1] ? a[1] : '',
-						weigth: 0
-					};
-					return json;
-				});
-
-				let formatedBody = {
-					...values,
-					attributes: attributesFormate,
-					ownerId: state.user.id,
-					status: 'available'
+	useEffect( () => {
+		if (values) {
+			values.address = {...values.address, coordinates: values.coordinates };
+			delete values.coordinates;
+			let atributos = Object.entries(values.attributes);
+			console.log("values", values)
+			console.log("atributos", atributos)
+			const attributesFormate = atributos.map((a) => {
+				let json = {
+					attributeType: a[0],
+					value: a[1] ? a[1] : '',
+					weigth: 0
 				};
+				return json;
+			});
 
-				let bodyReq = formatedBody;
-				let asyncPost = async () => {
-					try {
-						let ok = await ApiRequest.post('/property', bodyReq);
-						setResponse(ok);
-					} catch (e) {
-						notification.error({
-							message: `Error: ${e.message}`,
-							placement: 'bottomLeft'
-						});
-					}
-				};
-				asyncPost();
+			let formatedBody = {
+				...values,
+				attributes: attributesFormate,
+				ownerId: state.user.id,
+				status: 'available'
+			};
+
+			let bodyReq = formatedBody;
+			let asyncPost = async () => {
+				try {
+					let ok = await ApiRequest.post('/property', bodyReq);
+					setResponse(ok);
+				} catch (e) {
+					notification.error({
+						message: `Error: ${e.message}`,
+						placement: 'bottomLeft'
+					});
+				}
+			};
+		asyncPost();
 			}
 		},
-		[ values ]
+		[ values, state ]
 	);
 	return response;
 };

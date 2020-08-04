@@ -100,9 +100,9 @@ const Nav = () => {
 			</>):
 			<>
 				<li style={{ float: 'right' }}>
-					<a rel="noopener noreferrer">
+					<span className="no-link">
 						<Login />
-					</a>
+					</span>
 				</li>
 				<li style={{ float: 'right' }}>
 					<a href="/sign-in">

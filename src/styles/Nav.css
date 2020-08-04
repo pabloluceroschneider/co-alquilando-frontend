@@ -17,7 +17,7 @@ ul.principalNav {
     
 }
 
-.principalNav li a {
+.principalNav li a, .principalNav li span.no-link {
 	display: block;
     color: rgba(0, 0, 0, 0.6);
 	text-align: center;
