@@ -18,6 +18,7 @@ const CarrouselPequeño = props => {
              {data.map(({ imgUrl, caption, position}) => (    
                 <div className="imageCarrousel"
                 style={{ backgroundImage:`url(${imgUrl})`}}
+                key={position}
                 >
                   {caption && (
                     <p style={{textAlign:position}} className="caption">
