@@ -112,7 +112,7 @@ const userFields = {
 				},
 				{
 					label: "Sexo",
-					name: "userSex",
+					name: ["attributes","sex"],
 					component: "Select",
 					options : [
 						{ name: "Femenino", value: "FEMALE"},
@@ -124,12 +124,12 @@ const userFields = {
 			[
 				{
 					label: "Nacionalidad",
-					name: "userNationality",
+					name: ["attributes","nationality"],
 					component: "Input",
 				},
 				{
 					label: "Ciudad",
-					name: "userCity",
+					name: ["attributes","city"],
 					component: "Input",
 				}
 			],

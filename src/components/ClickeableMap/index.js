@@ -3,7 +3,6 @@ import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 
 const ClickeableMap = (props) => {
-    const {onChange} = props
     const [position, setPosition] = useState({ lat: -31.428029453393027, lng: -64.20570002235915 })
     
     

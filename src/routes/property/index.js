@@ -277,7 +277,7 @@ const usePostProperty = (values) => {
 				asyncPost();
 			}
 		},
-		[ values ]
+		[ values, state ]
 	);
 	return response;
 };
