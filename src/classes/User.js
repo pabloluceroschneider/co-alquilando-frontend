@@ -5,6 +5,10 @@ class User {
 		this.user = user;
     }
 
+    /**
+     * attributes in : { sex : "male", etc },
+     * attributes out: [ {attributeType: "sex", value: "male", weight: 0}, {etc}]
+     */
     mapAttributesToRequest(attributes={}){
         let attr = Object.entries(attributes);
         let newAttributes = [];
@@ -16,6 +20,10 @@ class User {
         return newAttributes.length ? newAttributes : null;
     }
 
+    /**
+     * Creates the json that backend expects
+     * @returns user ready to be created
+     */
     mapFormToRequest(){
         let formatedUser = {
             ...this.user,
