@@ -3,7 +3,7 @@ import ApiRequest from "../../util/ApiRequest";
 import PropertyCard from '../../components/PropertyCard/index';
 import {notification} from 'antd';
 import '../../styles/PropertyList.css';
-import {SessionContext} from '../../store';
+import { SessionContext } from '../../store';
 
 
 
