@@ -235,13 +235,11 @@ const FormPropertyUpdate = (props) => {
   const history = useHistory();
   const [ownerId, setOwnerId] = useState(null);
   const [status, setStatus] = useState(null);
-  const [images, setImages] = useState(null);
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/property/${idProperty}`).then((res) => {
         setOwnerId(res.data.ownerId);
         setStatus(res.data.status);
-        setImages(res.data.photos)
         console.log(res.data);
         let array = [];
         res.data.attributes.forEach((t) => {
@@ -307,36 +305,39 @@ const FormPropertyUpdate = (props) => {
 
   useEffect(() => {
     if (fields && fields.photos) {
+      var plist = fields.photos.file.fileList;
+      for (const ph in plist) {
+        console.log(plist[ph].originFileObj) 
+        let phLast = plist[ph].originFileObj
+      
 
-      let ph = fields.photos.originFileObj;
+        const formData = new FormData();
+        formData.append('type', 'file')
+        formData.append("photos", phLast)
 
-      const formData = new FormData();
-      formData.append('type', 'file')
-      formData.append("photos", ph)
+        let header = {
+          'Content-Type': 'multipart/form-data'
+        }
 
-      let header = {
-        'Content-Type': 'multipart/form-data'
+        let asyncPutPhoto = async () => {
+          await ApiRequest.multipartPut(`/property/${idProperty}/photos`, formData, header).then((res) =>  {
+            console.log(res);
+            if (res.status === 200) {
+              notification.success({
+                message: `Datos Actualizados`,
+                placement: "bottomLeft",
+              });
+              history.push(`/property/${idProperty}/update`);
+            } else {
+              notification.error({
+                message: `Error: No se pudo actualizar sus datos`,
+                placement: "bottomLeft",
+              });
+            }
+          });
+        };
+        asyncPutPhoto();
       }
-
-      let asyncPutPhoto = async () => {
-        await ApiRequest.multipartPut(`/property/${idProperty}/photos`, formData, header).then((res) =>  {
-          setImages(res.data.photos);
-          console.log(res);
-          if (res.status === 200) {
-            notification.success({
-              message: `Datos Actualizados`,
-              placement: "bottomLeft",
-            });
-            history.push(`/property/${idProperty}/update`);
-          } else {
-            notification.error({
-              message: `Error: No se pudo actualizar sus datos`,
-              placement: "bottomLeft",
-            });
-          }
-        });
-      };
-      asyncPutPhoto();
     }
   }, [idProperty, history, fields]);
 

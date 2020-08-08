@@ -4,14 +4,18 @@ import { UploadOutlined } from '@ant-design/icons';
 
 const CustomUpload = (props) => {
 
-    const handlePhoto = (value) => {
-        if(value) {
-            props.onChange(value.file)
+    const handlePhoto = (file) => {
+        if(file) {
+            props.onChange({file }); {
+                if (file.status !== 'uploading') {
+                    console.log(file);
+                  }
+            }
         }
     }
 
     return (
-        <Upload onChange={handlePhoto}
+        <Upload onChange={handlePhoto} method={NaN}
         
         >
             <div>
