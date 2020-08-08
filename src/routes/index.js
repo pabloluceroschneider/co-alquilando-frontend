@@ -9,7 +9,8 @@ import Property from './property';
 import UpdatePreferenciesForm from './profile/updatePreferenciesProfile';
 import PropertyList from "./propertyList";
 import FormPropertyUpdate from './property/updateProperty';
-import UserHome from '../routes/userHome'
+import UserHome from '../routes/userHome';
+import FormClickeableMap from '../routes/property/formClickeableMap';
 
 const Routes = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
