@@ -306,14 +306,15 @@ const FormPropertyUpdate = (props) => {
   useEffect(() => {
     if (fields && fields.photos) {
       var plist = fields.photos.file.fileList;
+
+      const formData = new FormData();
+      formData.append('type', 'file')
       for (const ph in plist) {
         console.log(plist[ph].originFileObj) 
         let phLast = plist[ph].originFileObj
       
-
-        const formData = new FormData();
-        formData.append('type', 'file')
         formData.append("photos", phLast)
+      }
 
         let header = {
           'Content-Type': 'multipart/form-data'
@@ -338,7 +339,7 @@ const FormPropertyUpdate = (props) => {
         };
         asyncPutPhoto();
       }
-    }
+    
   }, [idProperty, history, fields]);
 
   return (
