@@ -1,0 +1,45 @@
+
+
+/* Mobile First */
+.match{
+    margin: 5vh 0vw 5vh 5vw;
+    text-align: left;
+}
+
+.match .userCard{
+    width: 90vw;
+    margin-top: 16px;
+}
+
+.desc.coinc{
+    color: #000;
+}
+.match .name{
+    display: block;
+    margin-bottom: 15px;
+}
+.match .name p{
+    color: #515A5A;
+    margin-bottom: 0px;
+}
+
+.match .name span{
+    padding: 2px;
+    text-align: center;
+}
+
+/* Desktop View */
+@media only screen and (min-width: 600px){
+    
+    .match .userCard{
+        width: 40vw;
+        margin-left: 5vw;
+    }
+
+    .match .name{
+        display: grid;
+        grid-template-columns: 80% 20%;
+    }
+
+
+}

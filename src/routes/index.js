@@ -27,6 +27,7 @@ const Routes = () => {
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
 						<Route path="/property" exact component={Property} />
 						<Route path="/property/properties" exact component={PropertyList} />
+						<Redirect from="*" to="/"/>
 					</Switch>
 				) : (
 					<Switch>
