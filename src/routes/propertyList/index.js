@@ -1,47 +1,55 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { SessionContext } from '../../store';
+import React, { useEffect, useState } from "react";
 import ApiRequest from "../../util/ApiRequest";
-import { notification } from 'antd';
-import ContentWrapper from '../../components/ContentWrapper';
-import PropertyCard from '../../components/PropertyCard/index';
+import PropertyCard from "../../components/PropertyCard/index";
+import { notification, Pagination } from "antd";
+import "../../styles/PropertyList.css";
 
 const Property = () => {
-    const [datos, setDatos] = useState(null)
-    const {state} = useContext(SessionContext);
+  const [datos, setDatos] = useState(null);
+  const [page, setPage] = useState(1);
+  const [size] = useState(10);
+  const [totalItems, setTotalItems] = useState(0);
+  useEffect(() => {
+    let asyncGet = async () => {
+      try {
+        let { data } = await ApiRequest.get(
+          `/property/properties?page=${page - 1}&size=${size}`
+        );
+        setDatos(data.content);
+        setTotalItems(data.totalElements);
+      } catch (e) {
+        notification.error({
+          message: `Error: ${e.message}`,
+          placement: "bottomLeft",
+        });
+      }
+    };
+    asyncGet();
+  }, [page, size]);
 
-    useEffect(
-        () => {
-            let asyncGet = async () => {
-                try {
-                    let{data} = await ApiRequest.get(`/property/properties/owner/${state.user.id}`);
-                    setDatos(data)
-                } catch (e) {
-                    notification.error({
-                        message: `Error: ${e.message}`,
-                        placement: 'bottomLeft'
-                    });
-                }
-            }
-            asyncGet()
+  const onChange = (page) => {
+    setPage(page);
+  };
 
-        }, [state]
-    )
-
-    return (
-		<ContentWrapper topNav optionsNav>
-
-
-        <div className="contentPL" >
-            {datos? datos.map((p)=>{
-                return(
-                    <PropertyCard key={p.id} {...p} />
-                )
-            }  ):null}
-        </div>
-		</ContentWrapper>
-
-        
-    )
-}
+  return (
+    <div>
+      <div className="contentPL">
+        {datos
+          ? datos.map((p) => {
+              return <PropertyCard key={p.id} {...p} />;
+            })
+          : null}
+      </div>
+      <div className="pagination">
+        <Pagination
+          current={page}
+          onChange={onChange}
+          total={totalItems}
+          pageSize={size}
+        />
+      </div>
+    </div>
+  );
+};
 
 export default Property;

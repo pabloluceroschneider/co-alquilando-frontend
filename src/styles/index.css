@@ -11,12 +11,13 @@
 @import "./GaleriaTresImagenes.css";
 @import "./Portada.css";
 @import "./Login.css";
+@import "./Match.css";
 @import "./UserPreferencies.css";
 @import './Header.css';
 @import './Nav.css';
 @import './OptionsNav.css';
 @import './PropertyList.css';
-
+@import './ContentWrapper.css';
 
 body {
   margin: 0;
