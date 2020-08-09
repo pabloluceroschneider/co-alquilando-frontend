@@ -82,6 +82,7 @@ const userFields = {
 					name: "userBirthDate",
 					component: "DatePicker",
 					dependencies:['userBirthDate'],
+					required: true,
 					validate: ({getFieldValue}) => ({
 						validator() {
 							let userBirthDate = getFieldValue("userBirthDate")
@@ -95,12 +96,18 @@ const userFields = {
 							}
 						},
 					  }),
-				},				
+				},	
 				{
-					label: "Número de Celular",
-					name: "userPhone",
-					component: "Input"
-				}
+					label: "Sexo",
+					name: ["attributes","sex"],
+					component: "Select",
+					options : [
+						{ name: "Femenino", value: "FEMALE"},
+						{ name: "Masculino", value: "MALE"},
+						{ name: "Otro", value: "NOT_DEFINED"}
+					],
+					required: true,
+				}			
 			]
 		],
 		secondaries: [
@@ -111,15 +118,10 @@ const userFields = {
 					component: "Input",
 				},
 				{
-					label: "Sexo",
-					name: ["attributes","sex"],
-					component: "Select",
-					options : [
-						{ name: "Femenino", value: "FEMALE"},
-						{ name: "Masculino", value: "MALE"},
-						{ name: "Otro", value: "NOT_DEFINED"}
-					]
-				}
+					label: "Número de Celular",
+					name: "userPhone",
+					component: "Input"
+				}				
 			],
 			[
 				{
