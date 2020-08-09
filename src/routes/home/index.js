@@ -10,34 +10,32 @@ import image6 from '../../assets/images/Home/bloque1_2.jpg'
 import image7 from '../../assets/images/Home/bloque1_3.jpg'
 import GaleriaTresImagenes from '../../components/GaleriaTresImagenes'
 import Portada from '../../components/Portada'
-import { Divider } from 'antd';
 
 const Home = () => {
 
     const portadaProps = {
         imgUrl : image4,
         title: "Bienvenido",
-        subtitle:"Co-Alquilando es tu oportunidad de encontrar compañero de vivienda de una manera rapida y sensilla"
+        subtitle:"Co-Alquilando es tu oportunidad de encontrar compañero de vivienda de una manera rápida y sensilla"
     }
     
     return (
-		<ContentWrapper header topnav footer>
+		<ContentWrapper header footer>
             <div>
                 <div >
                     <Carrousel data={[
                         { imgUrl: image1, caption: "", position: "" },
-                        { imgUrl: image2, caption: "Encontra tu lugar", position: "left" },
-                        { imgUrl: image3, caption: "Desde donde estes", position: "end" }
+                        { imgUrl: image2, caption: "Encontrá tu lugar", position: "left" },
+                        { imgUrl: image3, caption: "Desde donde estés", position: "end" }
                     ]}>
                     </Carrousel>
                 </div>
 
-
+             
                 <div >
-                    <GaleriaTresImagenes imgUrl1={image5} title1="Elegí" imgUrl2={image6} title2="Conecta" imgUrl3={image7} title3="Compartí" />
+                    <GaleriaTresImagenes imgUrl1={image5} title1="Elegí" imgUrl2={image6} title2="Conectá" imgUrl3={image7} title3="Compartí" />
                 </div>
-                <Divider></Divider>
-
+               
                 <div >
                     <Portada {...portadaProps}/>
                 </div>

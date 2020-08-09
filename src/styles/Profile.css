@@ -6,6 +6,7 @@
     margin: 1% 5% 0% 5%;
     padding: 20px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    word-wrap: break-word;
   
 }
 
@@ -51,6 +52,11 @@
 
     .profileButton{
         text-align-last: right;
+    }
+
+    .profileContent{
+        width: 60%;
+        margin-left: 20%;
     }
 
 }

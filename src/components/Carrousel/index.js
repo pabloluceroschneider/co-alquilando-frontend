@@ -16,8 +16,8 @@ const CustomizedCarrousel = props => {
             showThumbs={false}
             showStatus={false}
             >
-             {data.map(({ imgUrl, caption, position}) => (    
-                <div className="image"
+             {data.map(({ imgUrl, caption, position}, index) => (    
+                <div className="image" key={index}
                 style={{ backgroundImage:`url(${imgUrl})`}}
                 >
                   {caption && (

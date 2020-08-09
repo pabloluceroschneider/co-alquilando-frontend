@@ -1,17 +1,40 @@
-import React from 'react';
-import Header from '../../containers/Header';
-import TopNav from '../../containers/TopNav';
+import React, { useState } from 'react';
+import CustomHeader from '../../containers/Header';
 import Footer from '../../containers/Footer';
+import CustomSideNav from '../../containers/SideNav';
+import Match from '../Match';
+import { Layout } from 'antd';
 
-const ContentWrapper = props => {
-    return (
-        <>
-        { props.header ? <Header /> : null }
-        { props.topnav ? <TopNav /> : null }
-        { props.children }
-        { props.footer ? <Footer /> : null }
-        </>
-    )
-}
+const { Content } = Layout;
+
+const ContentWrapper = (props) => {
+    const [ content, setContent ] = useState("children");
+
+    const renderContent = () => {
+        switch (content){
+            case "matchUsers":
+                return <Match />
+            default:
+                return props.children
+        }
+    }
+
+	return (
+		<Layout>
+			{props.header ? <CustomHeader /> : null}
+
+			{props.content ? (
+				<Layout>
+					<CustomSideNav setContent={setContent} /> 
+					<Content className="site-layout-background">
+                        {renderContent()}
+                    </Content>
+				</Layout>
+			) : props.children }
+
+			{props.footer ? <Footer /> : null}
+		</Layout>
+	);
+};
 
 export default ContentWrapper;

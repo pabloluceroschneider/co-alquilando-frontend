@@ -36,7 +36,7 @@ const Property = () => {
       <div className="contentPL">
         {datos
           ? datos.map((p) => {
-              return <PropertyCard {...p} />;
+              return <PropertyCard key={p.id} {...p} />;
             })
           : null}
       </div>
