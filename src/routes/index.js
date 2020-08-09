@@ -8,9 +8,9 @@ import UpdateForm from './profile/updateProfile';
 import Property from './property';
 import UpdatePreferenciesForm from './profile/updatePreferenciesProfile';
 import PropertyList from "./propertyList";
+import MyProperties from "./my-properties";
 import FormPropertyUpdate from './property/updateProperty';
 import UserHome from '../routes/userHome';
-import FormClickeableMap from '../routes/property/formClickeableMap';
 
 const Routes = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
@@ -26,7 +26,8 @@ const Routes = () => {
 						<Route path="/profile/:nickname" component={Profile} />
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
 						<Route path="/property" exact component={Property} />
-						<Route path="/property/properties" exact component={PropertyList} />
+						<Route path="/properties" exact component={PropertyList} />
+						<Route path="/my-properties" exact component={MyProperties} />
 						<Redirect from="*" to="/"/>
 					</Switch>
 				) : (
