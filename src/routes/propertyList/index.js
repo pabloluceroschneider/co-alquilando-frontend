@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ApiRequest from "../../util/ApiRequest";
-import PropertyCard from "../../components/PropertyCard/index";
+import ContentWrapper from "../../components/ContentWrapper";
+import PropertyCard from "../../components/PropertyCard";
 import { notification, Pagination } from "antd";
 import "../../styles/PropertyList.css";
 
@@ -32,7 +33,7 @@ const Property = () => {
   };
 
   return (
-    <div>
+    <ContentWrapper topNav optionsNav>
       <div className="contentPL">
         {datos
           ? datos.map((p) => {
@@ -48,7 +49,7 @@ const Property = () => {
           pageSize={size}
         />
       </div>
-    </div>
+    </ContentWrapper>
   );
 };
 

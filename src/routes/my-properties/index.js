@@ -1,7 +1,8 @@
 
 import React, { useEffect, useState, useContext } from 'react';
 import ApiRequest from "../../util/ApiRequest";
-import PropertyCard from '../../components/PropertyCard/index';
+import ContentWrapper from "../../components/ContentWrapper";
+import PropertyCard from '../../components/PropertyCard';
 import {notification} from 'antd';
 import '../../styles/PropertyList.css';
 import { SessionContext } from '../../store';
@@ -32,7 +33,7 @@ const Property = () => {
     )
 
   return (
-    <div>
+    <ContentWrapper topNav>
       <div className="contentPL">
         {datos
           ? datos.map((p) => {
@@ -40,7 +41,7 @@ const Property = () => {
             })
           : null}
       </div>
-    </div>
+    </ContentWrapper>
   );
 };
 
