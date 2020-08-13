@@ -1,35 +1,15 @@
 import React, { useState } from "react";
-import { Button, Upload } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import {Upload } from 'antd';
+import ImgCrop from 'antd-img-crop';
+import ApiRequest from "../../../util/ApiRequest";
 
 const CustomUpload = (props) => {
-
-    /*
-      beforeUpload: file => {
-        this.setState(state => ({
-          fileList: [...state.fileList, file],
-        }));
-        return false;
-      },
-      fileList,
-    };
-    */
-
-
-
-    /*const beforeUpload = file => {
-        setFileList([...fileList, file]);
-        props.onChange(fileList); {
-            if (file.status !== 'uploading') {
-                console.log(file);
-            }
-        }
-        console.log(fileList);
-    };*/
 
     const [fileList, setFileList] = useState([]);
 
     const handlePhoto = (file) => {
+        console.log("DATOS:" + props.value)
+        setFileList(file.fileList);
         if (file) {
             props.onChange({ file }); {
                 if (file.status !== 'uploading') {
@@ -39,6 +19,21 @@ const CustomUpload = (props) => {
         };
     }
 
+    const onPreview = async file => {
+        let src = file.url;
+        if (!src) {
+          src = await new Promise(resolve => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file.originFileObj);
+            reader.onload = () => resolve(reader.result);
+          });
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src);
+        imgWindow.document.write(image.outerHTML);
+      };
+
     const onRemove = ({ file }) => {
         const index = fileList.indexOf(file);
         const newFileList = fileList.slice();
@@ -46,17 +41,43 @@ const CustomUpload = (props) => {
         setFileList(newFileList);
     };
 
+    const action = (file) => {
+        const f =file;
+        console.log("ACTION:")
+        const actualFiles = props.value;
+        let src 
+        if (actualFiles) {
+            actualFiles.forEach(element => {
+                let asyncGetUser = async () => {
+                    src = await ApiRequest.get(`/property/5f1c584b07f2c81aa45c12c5/${element}`)
+                }
+                asyncGetUser();
+            });
+        } else {
+            src = "https://www.mocky.io/v2/5cc8019d300000980a055e76";
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src);
+        imgWindow.document.write(image.outerHTML);
+    }
 
-return (
-    <Upload onChange={handlePhoto} onRemove={onRemove}>
-        <div>
-            <Button>
-                <UploadOutlined /> Subir
-                </Button>
 
-        </div>
-    </Upload>
-);
+    return (
+        <ImgCrop rotate>
+          <Upload
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+
+            listType="picture-card"
+            fileList={fileList}
+            onChange={handlePhoto}
+            onPreview={onPreview}
+            onRemove={onRemove}
+          >
+            {fileList.length < 5 && '+ Upload'}
+          </Upload>
+        </ImgCrop>
+      );
 };
 
 export default CustomUpload

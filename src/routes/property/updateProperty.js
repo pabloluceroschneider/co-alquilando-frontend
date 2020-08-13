@@ -235,11 +235,13 @@ const FormPropertyUpdate = (props) => {
   const history = useHistory();
   const [ownerId, setOwnerId] = useState(null);
   const [status, setStatus] = useState(null);
+  const [photosUpdate, setPhotosUpdate] = useState(null);
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/property/${idProperty}`).then((res) => {
         setOwnerId(res.data.ownerId);
         setStatus(res.data.status);
+        setPhotosUpdate(res.data.photos)
         console.log(res.data);
         let array = [];
         res.data.attributes.forEach((t) => {
@@ -263,7 +265,7 @@ const FormPropertyUpdate = (props) => {
     if (fields) {
       var atributos = Object.entries(fields.attributes);
       const attributesFormate = atributos.map((a) => {
-        if (a != "photos") {
+        if (a) {
           let json = {
             attributeType: a[0],
             value: a[1] ? a[1] : "",
@@ -328,7 +330,6 @@ const FormPropertyUpdate = (props) => {
                 message: `Datos Actualizados`,
                 placement: "bottomLeft",
               });
-              history.push(`/property/${idProperty}/update`);
             } else {
               notification.error({
                 message: `Error: No se pudo actualizar sus datos`,

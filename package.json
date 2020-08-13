@@ -10,6 +10,7 @@
     "@types/markerclustererplus": "^2.1.33",
     "@types/react": "^16.8.24",
     "antd": "^4.3.4",
+    "antd-img-crop": "^3.9.0",
     "aws-amplify": "^3.0.19",
     "axios": "^0.19.2",
     "google-map-react": "^1.1.7",
