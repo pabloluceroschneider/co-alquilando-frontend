@@ -1,9 +1,11 @@
 import React from 'react';
 import ImgPortada from '../../assets/images/LOGO.jpg'
 import ContentWrapper from '../../components/ContentWrapper';
-const userHome = () => {
+import serviceWorker  from '../../sw.js'
 
-    
+const userHome = () => {
+	serviceWorker.register();
+
     return (
 		<ContentWrapper topNav optionsNav footer>
             <div>

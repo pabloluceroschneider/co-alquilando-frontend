@@ -6,7 +6,6 @@ import App from './routes';
 import Amplify from 'aws-amplify';
 import config from './config.json'
 import * as serviceWorker from './serviceWorker';
-import 'antd/dist/antd.css';
 
 Amplify.configure({
   Auth: {
