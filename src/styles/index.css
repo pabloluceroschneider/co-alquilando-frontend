@@ -9,8 +9,10 @@
 @import "./GaleriaTresImagenes.css";
 @import "./Portada.css";
 @import "./Login.css";
+@import "./Match.css";
 @import "./UserPreferencies.css";
 @import './Header.css';
+@import './ContentWrapper.css';
 @import '../assets/Icons/Icon/styles.css';
 
 body {
@@ -21,7 +23,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  background-color: rgb(230, 230, 230);
 
 }
 
