@@ -15,20 +15,26 @@ const OptionsNav = () => {
 			title: 'Buscar Propiedad',
 			className: 'search_property',
 			link: '/properties'
+		},
+		{
+			title: 'Publicar Propiedad',
+			className: 'publish_property',
+			link: '/property'
 		}
 	];
 	return (
-		<div className="nav-container">
+		<div className="options-container">
 			{list.map((element) => {
 				return (
 					<div
-						className={`link-component ${element.className} ${path === element.link ? 'current' : ''}`}
+						// className={`link-component ${element.className} ${path === element.link ? 'current' : ''}`}
+						className={`link-component ${path === element.link ? 'current' : ''}`}
 						onClick={() => {
 							history.push(element.link);
 						}}
 						key={element.link}
 					>
-						<h3>{element.title}</h3>
+						<span>{element.title}</span>
 					</div>
 				);
 			})}
