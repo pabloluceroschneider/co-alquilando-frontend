@@ -309,7 +309,7 @@ const UpdatePreferenciesForm = (props) => {
               message: `Preferencias de Propiedades Actualizadas`,
               placement: "bottomLeft",
             });
-            history.push(`/profile/update`);
+            history.push(`/my-profile`);
           } else {
             notification.error({
               message: `Error: No se pudo actualizar sus datos`,
