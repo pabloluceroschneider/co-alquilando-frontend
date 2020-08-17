@@ -1,0 +1,74 @@
+.nav-container{
+	align-items: baseline;
+}
+
+.link-component {
+	position: relative;
+	width: 80%;
+	height: 100px;
+
+	margin-top: 40px;
+	margin-left: 10%;
+	padding: 10px;
+
+	border: 0.5px solid #dddddd;
+	border-radius: 2px;
+	color: rgba(0, 0, 0, 0.6);
+	opacity: 1;
+}
+
+.link-component:hover {
+	box-shadow: 2px 2px 10px #aaaaaa;
+}
+
+.link-component h3 {
+	margin-top: 50px;
+	color: whitesmoke;
+	opacity: 1;
+	font-size: 1.5em;
+	text-shadow: 0 0 5px #000000;
+}
+
+.link-component.current {
+	box-shadow: 2px 2px 10px #12558b;
+	height: 106px;
+}
+
+.link-component.search_roommate {
+	background-image: url('../assets/images/search_roommate.jpg');
+	background-size: 308px;
+}
+
+.link-component.search_property {
+	background-image: url('../assets/images/search_apartment.jpg');
+	background-size: 308px;
+}
+
+/* Transiciónes */
+@media only screen and (min-width: 400px) and (max-width: 1000px) {
+	.link-component {
+		margin-top: 0px;
+	}
+	.link-component.search_roommate {
+		background-image: url('../assets/images/search_roommate_md.jpg');
+		background-size: 230px;
+	}
+}
+
+@media only screen and (min-width: 600px) {
+	.nav-container {
+		width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+	}
+
+	.link-component {
+		position: relative;
+		width: 300px;
+    height: 100px;
+    margin: 2%;
+    margin-top: 2%;
+	}
+}

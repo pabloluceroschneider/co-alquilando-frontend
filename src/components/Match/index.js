@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { SessionContext } from '../../store'
+import React from 'react';
 import { Card, Avatar, Tag } from 'antd';
 import { MessageOutlined} from '@ant-design/icons';
-import ApiRequest from '../../util/ApiRequest';
 
 const { Meta } = Card;
 
@@ -53,28 +51,4 @@ const UserCard = ({ user, coincidence }) => {
 	);
 };
 
-const Match = () => {
-	const [ users, setUsers ] = useState(null);
-	const { state } = useContext(SessionContext);
-
-
-	useEffect(() => {
-		let asyncGet = async () => {
-			let { data } = await ApiRequest.get(`/user/match/${state.user.id}`);
-			setUsers(data);
-		};
-		asyncGet();
-	}, [state.user]);
-
-	return (
-		<div className="match">
-			<h1>Listado de usuarios por preferencias</h1>
-			{users &&
-				users.map( (u, index) => {
-					return <UserCard key={index} {...u} />;
-				})}
-		</div>
-	);
-};
-
-export default  Match
+export default UserCard;

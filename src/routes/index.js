@@ -9,6 +9,7 @@ import Property from './property';
 import UpdatePreferenciesForm from './profile/updatePreferenciesProfile';
 import PropertyList from "./propertyList";
 import MyProperties from "./my-properties";
+import Roommates from "./roommates";
 import FormPropertyUpdate from './property/updateProperty';
 import UserHome from '../routes/userHome';
 
@@ -28,6 +29,7 @@ const Routes = () => {
 						<Route path="/property" exact component={Property} />
 						<Route path="/properties" exact component={PropertyList} />
 						<Route path="/my-properties" exact component={MyProperties} />
+						<Route path="/roommates" exact component={Roommates} />
 						<Redirect from="*" to="/"/>
 					</Switch>
 				) : (
