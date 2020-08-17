@@ -51,7 +51,7 @@ const Nav = () => {
 	const profileSignedIn = (
 		<Menu>
 			<Menu.Item key="0">
-					<a rel="noopener noreferrer" href="/profile">
+					<a rel="noopener noreferrer" href="/my-profile">
 						Mi Perfil
 					</a>
 				</Menu.Item> 

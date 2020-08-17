@@ -180,7 +180,7 @@ const UpdateForm = (props) => {
     }
   }, [fields, idUser, history]);
   return (
-    <ContentWrapper header footer>
+    <ContentWrapper topNav>
       <CustomizedForm form={form} data={userData} onfinish={setFields} />
     </ContentWrapper>
   );
