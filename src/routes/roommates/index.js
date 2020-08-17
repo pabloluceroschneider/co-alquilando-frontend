@@ -21,9 +21,8 @@ const Match = () => {
 	);
 
 	return (
-		<ContentWrapper topNav optionsNav>
+		<ContentWrapper topNav optionsNav title="Listado de usuarios por preferencias">
 			<div className="match">
-				<h1>Listado de usuarios por preferencias</h1>
 				{users &&
 					users.map((u, index) => {
 						return <UserCard key={index} {...u} />;
