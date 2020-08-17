@@ -322,7 +322,7 @@ const UpdatePreferenciesForm = (props) => {
     }
   }, [fieldsProp, idUser,history,state]);
   return (
-    <ContentWrapper header footer>
+    <ContentWrapper topNav>
       <CustomizedForm
         form={formRoom}
         data={userPreferenciesRoomie}
