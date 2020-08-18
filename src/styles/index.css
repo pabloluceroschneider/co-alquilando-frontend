@@ -17,6 +17,7 @@
 @import './Nav.css';
 @import './OptionsNav.css';
 @import './PropertyList.css';
+@import './PropertyCard.css';
 @import './ContentWrapper.css';
 
 body {

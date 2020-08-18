@@ -1,18 +1,18 @@
 import React from 'react';
-import '../../styles/PropertyCard.css'
-import { Card } from 'antd';
-import { Divider } from 'antd';
-import '../../assets/Icons/Icon/styles.css';
+import { useHistory, useRouteMatch } from 'react-router';
+import { Card, Divider, Button } from 'antd';
 import CarrouselPequeño from '../CarrouselPequeño';
 import ModalMapa from '../Modal';
 
 
-const propertyCard = props => {
-    const { description, price, address, attributes } = props;
+const PropertyCard = props => {
+    const { description, price, address, attributes, id } = props;
     const { rentPrice } = price;
     const {coordinates} = address;
+    const history = useHistory();
+	const { path } = useRouteMatch();
     // const { street, number, province } = address
-
+console.log(path)
     let attr = []
     attributes.forEach(t => {
         attr = { ...attr, [t.attributeType]: t.value }
@@ -22,7 +22,9 @@ const propertyCard = props => {
         "HOUSE": "Casa"
     }
 
-    
+    const onEdit = () => {
+        history.push(`/property/${id}/update`)
+    }
 
     return (
 
@@ -77,7 +79,12 @@ const propertyCard = props => {
 
                     <>
                     <div className="button-place">
-                    <ModalMapa coordinates={coordinates}/>
+                        <ModalMapa coordinates={coordinates}/>
+                        {path === "/my-properties" &&
+                            <Button onClick={() => onEdit()}>
+                                Editar
+                            </Button>
+                        }
                     </div>
                     </>
 
@@ -91,5 +98,5 @@ const propertyCard = props => {
 
 }
 
-export default propertyCard;
+export default PropertyCard;
 
