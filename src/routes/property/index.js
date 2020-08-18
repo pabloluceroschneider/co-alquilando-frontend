@@ -303,8 +303,10 @@ const Property = () => {
 	);
 
 	return (
-		<ContentWrapper topNav optionsNav title="Publicar Propiedad">
-			<CustomizedForm form={form} data={propertyData} onfinish={setValues} />
+		<ContentWrapper topNav optionsNav>
+			<div className="form-property">
+				<CustomizedForm form={form} data={propertyData} onfinish={setValues} />
+			</div>
 		</ContentWrapper>
 	);
 };

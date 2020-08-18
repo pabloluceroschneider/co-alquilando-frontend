@@ -4,7 +4,7 @@
 	justify-items: center;
 	width: 90vw;
 	margin-left: 5vw;
-	border-bottom: 1px solid #FAFAFA;
+	border-bottom: 1px solid var(--dark-grey);
 	cursor: pointer;
 }
 
@@ -22,8 +22,9 @@
 	opacity: 0.8;
 }
 .options-container .link-component.current{
-	background: linear-gradient(-45deg, #85C1E9, #4c7792);
-	color: #FFF;
+	background: var(--secondary-blue);
+	font-weight: bold;
+	color: var(--grey);
 	box-shadow: 2px 2px 5px #FAFAFA;
 }
 
@@ -36,6 +37,8 @@
 	.options-container{
 		display: grid;
 		grid-template-columns: auto auto auto;
+		margin-top: 2%;
+		padding-bottom: 1%;
 	}
 }
 

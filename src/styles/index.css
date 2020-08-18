@@ -21,6 +21,11 @@
 @import './ContentWrapper.css';
 
 body {
+  --principal-blue: rgb(58,78,122);
+  --secondary-blue: rgb(94,131,186);
+  --tertiary-blue: rgb(194,210,233);
+  --grey: #FAFAFA;
+  --dark-grey: rgb(216, 216, 216);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
