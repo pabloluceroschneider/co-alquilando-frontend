@@ -11,8 +11,7 @@ const PropertyCard = props => {
     const {coordinates} = address;
     const history = useHistory();
 	const { path } = useRouteMatch();
-    // const { street, number, province } = address
-console.log(path)
+
     let attr = []
     attributes.forEach(t => {
         attr = { ...attr, [t.attributeType]: t.value }
