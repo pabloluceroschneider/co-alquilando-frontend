@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { SessionContext } from '../../store';
 import ApiRequest from "../../util/ApiRequest";
-import calculateAge from "../../util/CalculateAge";
 import ContentWrapper from "../../components/ContentWrapper";
-import { Button } from "antd";
+import calculateAge from "../../util/CalculateAge";
+
 
 const image =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
@@ -14,14 +14,15 @@ let genders = {
     "OTHER": "Otro"
 }
 
-const Profile = (props) => {
-  let { nickname } = useParams();
+const MyProfile = (props) => {
+  const {state} = useContext(SessionContext);
   const [datos, setDatos] = useState(null);
+
 
   useEffect(() => {
     if (!datos) {
       const getUser = async () => {
-        const { data } = await ApiRequest.get(`/user/${nickname}`);
+        const { data } = await ApiRequest.get(`/user/${state.user.userNickname}`);
         let attr = [];
         data.attributes.forEach((t) => {
           attr = { ...attr, [t.attributeType]: t.value };
@@ -30,7 +31,7 @@ const Profile = (props) => {
       };
       getUser();
     }
-  }, [nickname, datos]);
+  }, [state, datos]);
 
   return (
     <ContentWrapper topNav>
@@ -58,7 +59,7 @@ const Profile = (props) => {
           <div className="datosContent">
             <div className="profileGroup3">
               <div>
-                <p>Nickname: {nickname}</p>
+                <p>Nickname: {state.user.userNickname}</p>
               </div>
               <div>
                 <p>
@@ -72,7 +73,8 @@ const Profile = (props) => {
             </div>
           </div>
           <div className="profileButton">
-            <Button id="buttonConectar">Conectar</Button>
+            <button className="buttonEdit"><a href="/my-profile/update">Editar Datos</a></button>
+            <button className="buttonEdit"><a href="/my-profile/updatePreferencies">Editar Preferencias</a></button>
           </div>
         </div>
       ) : null}
@@ -105,4 +107,4 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;
+export default MyProfile;
