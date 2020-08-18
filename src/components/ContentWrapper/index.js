@@ -10,6 +10,7 @@ const ContentWrapper = props => {
 
         { props.topNav && <Nav />  }
         { props.optionsNav && <OptionsNav /> }
+        { props.title && <span className="content-wrapper">{props.title}</span> }
         { props.children }
 
         </>

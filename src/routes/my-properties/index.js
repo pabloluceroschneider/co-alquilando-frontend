@@ -33,7 +33,7 @@ const Property = () => {
     )
 
   return (
-    <ContentWrapper topNav>
+    <ContentWrapper topNav title="Mis Propiedades">
       <div className="contentPL">
         {datos
           ? datos.map((p) => {
