@@ -5,7 +5,8 @@ const Chat = () =>{
     
 
     useEffect (() => {
-        ws = new WebSocket('linkDelCosito')
+        const ws = new WebSocket('ws://localhost:8080/chat-messaging')
+        // const ws = new WebSocket('/ws')
         ws.onopen = () => {
             // on connecting, do nothing but log it to the console
             console.log('connected')
