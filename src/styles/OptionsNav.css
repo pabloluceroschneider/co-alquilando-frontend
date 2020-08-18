@@ -5,6 +5,7 @@
 	width: 90vw;
 	margin-left: 5vw;
 	border-bottom: 1px solid #FAFAFA;
+	cursor: pointer;
 }
 
 .options-container .link-component{
@@ -17,6 +18,9 @@
 	border-radius: 10px;
 }
 
+.options-container .link-component:hover{
+	opacity: 0.8;
+}
 .options-container .link-component.current{
 	background: linear-gradient(-45deg, #85C1E9, #4c7792);
 	color: #FFF;

@@ -3,7 +3,7 @@
 .customizedForm{
     border: 1px solid #FAFAFA;
     text-align: center;
-    margin: 5% 5% 5% 5%;
+    margin: 0% 5% 5% 5%;
     padding: 20px 20px 0px 20px;
     box-shadow: 1px 1px 5px #AFAFAF;
 }
@@ -27,9 +27,6 @@
 
 .group2 :first-child, .group3 :first-child, .group4 :first-child{
     text-align: left;
-}
-.group2 :nth-child(2), .group3 :nth-child(3), .group4 :nth-child(4){
-    text-align: right;
 }
 
 .Checkbox{
@@ -67,7 +64,7 @@
 /* pantalla de escritorio */
 @media only screen and (min-width: 600px){
     .customizedForm{
-        margin: 5% 20% 10% 20%;
+        margin: 0% 20% 10% 20%;
     }
 
     .group2{
