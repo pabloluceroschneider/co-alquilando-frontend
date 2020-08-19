@@ -8,7 +8,6 @@ const Chat = () =>{
       const ws = new WebSocket('ws://localhost:8080/chat-messaging') 
 
     useEffect (() => {
-        
         // const ws = new WebSocket('/ws')
         ws.onopen = () => {
             // on connecting, do nothing but log it to the console
