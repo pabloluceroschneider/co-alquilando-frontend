@@ -1,11 +1,14 @@
-import React, { useEffect} from 'react';
+import React, { useEffect , Component} from 'react';
 import ApiRequest from '../../util/ApiRequest';
+import { Widget } from 'react-chat-widget';
+import 'react-chat-widget/lib/styles.css';
 
 const Chat = () =>{
-    
+
+      const ws = new WebSocket('ws://localhost:8080/chat-messaging') 
 
     useEffect (() => {
-        const ws = new WebSocket('ws://localhost:8080/chat-messaging')
+        
         // const ws = new WebSocket('/ws')
         ws.onopen = () => {
             // on connecting, do nothing but log it to the console
@@ -26,11 +29,18 @@ const Chat = () =>{
 
     })
 
-    return(
-        <div>
-            <label>Esto parece que anda</label>
-        </div>
-    )
+ 
+      const handleNewUserMessage = (newMessage) => {
+            console.log(`New message incomig! ${newMessage}`);
+            ws.onmessage(newMessage)
+           }
+   
+       return (
+       <div>
+         <Widget handleNewUserMessage={handleNewUserMessage} />
+       </div>
+     );
+ 
 }
 export default Chat;
 
