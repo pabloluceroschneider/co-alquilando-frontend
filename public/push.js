@@ -57,20 +57,22 @@ function subscribe() {
 }
 
 function sendSubscriptionToServer(subscription) {
-    var key = subscription.getKey ? subscription.getKey('p256dh') : '';
-    var auth = subscription.getKey ? subscription.getKey('auth') : '';
-
-    console.log({
+    let key = subscription.getKey ? subscription.getKey('p256dh') : '';
+    let auth = subscription.getKey ? subscription.getKey('auth') : '';
+    let { id } = JSON.parse(localStorage.getItem("user"))
+    let devicetoken = {
+        user: id,
         endpoint: subscription.endpoint,
         key: key ? btoa(String.fromCharCode.apply(null, new Uint8Array(key))) : '',
         auth: auth ? btoa(String.fromCharCode.apply(null, new Uint8Array(auth))) : ''
-    });
+    }
 
+    console.log(devicetoken);
 
     // Normally, you would actually send the subscription to the server:
     let formData = new FormData();
-    formData.append('subscriptionJson', subscription);
-    return fetch('http://localhost:8080/notifications/send', {
+    formData.append('subscriptionJson', devicetoken);
+    fetch('http://localhost:8080/notifications/ok', {
         method: 'POST',
         body: formData
     });
