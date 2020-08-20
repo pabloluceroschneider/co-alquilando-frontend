@@ -27,12 +27,13 @@ self.addEventListener('push', function (event) {
         var title = data.title;
         var message = data.message;
     } else {
-        var title = 'Push Message';
+        var title = 'Coalquilando';
         var message = data;
     }
 
     return self.registration.showNotification(title, {
-        body: 'Hello'
+        body: data,
+        icon: "./LOGO.jpg"
     });
 });
 

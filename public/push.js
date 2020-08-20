@@ -67,10 +67,10 @@ function sendSubscriptionToServer(subscription) {
 	let devicetoken = {
 		id,
 		endpoint: subscription.endpoint,
-		key: {
+		key: JSON.stringify({
 			p256dh: key ? btoa(String.fromCharCode.apply(null, new Uint8Array(key))) : '',
 			auth: auth ? btoa(String.fromCharCode.apply(null, new Uint8Array(auth))) : ''
-		}
+		})
 	};
 	subscription = JSON.stringify(subscription);
 	devicetoken = JSON.stringify(devicetoken);
