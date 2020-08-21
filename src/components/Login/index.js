@@ -92,7 +92,7 @@ const CustomizedModal = (props) => {
 			delete user.userPassword;
 			dispatch( SIGN_IN(user) )
 			notification.success({
-				message: '¡Bienvenido a Coalquilando!',
+				message: `¡ ${user.userName}, Bienvenido a Coalquilando!`,
 				placement: 'bottomLeft'
 			});
 			history.push("/")

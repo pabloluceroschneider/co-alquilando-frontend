@@ -4,6 +4,7 @@ import { Menu, Avatar, Badge, Dropdown } from 'antd';
 import { LogoutOutlined, BellOutlined, TeamOutlined } from '@ant-design/icons';
 import Login from '../../components/Login';
 import Auth from '../../util/Auth';
+import ApiRequest from '../../util/ApiRequest';
 
 let not = [
 	{ id: 1123, type: 'GROUP_SEND_INVITATION', from: 12312123213, to: 12312123123 },
@@ -13,7 +14,10 @@ let not = [
 	{ id: 2314, type: 'GROUP_SEND_INVITATION', from: 12312123213, to: 12312123123 }
 ];
 
-const getNotifications = () => {
+const getNotifications = async () => {
+	let { id } = JSON.parse(localStorage.getItem("user"));
+	let { data } = await ApiRequest.get(`/notifications/user/${id}`)
+	return data?.map( ntf => <div>{ntf.type}</div>)
 	return not.map((t) => {
 		return (
 			<Menu.Item key={t.id}>
@@ -86,11 +90,14 @@ const Nav = () => {
 					</Dropdown>
 				</li>
 				<li style={{ float: 'right' }}>
-					<Dropdown overlay={notificationList} placement="bottomRight" trigger="click">
+					<a rel="noopener noreferrer" className="ant-dropdown-link" href="/notifications">
+						<Ring />
+					</a>
+					{/* <Dropdown overlay={notificationList} placement="bottomRight" trigger="click">
 						<a rel="noopener noreferrer" className="ant-dropdown-link" href="/">
 							<Ring />
 						</a>
-					</Dropdown>
+					</Dropdown> */}
 				</li>
 				<li style={{ float: 'right' }}>
 					<a href="/groups">

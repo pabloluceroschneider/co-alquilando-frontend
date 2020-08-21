@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { Card, Avatar, Tag } from 'antd';
+import { Card, Avatar, Tag, notification } from 'antd';
 import Notification from '../../classes/Notification';
-import ApiRequest from '../../util/ApiRequest'
+import ApiRequest from '../../util/ApiRequest';
 import { SessionContext } from '../../store';
 
 const { Meta } = Card;
@@ -39,13 +39,16 @@ const UserCard = ({ user, coincidence }) => {
 	
 	
 	const handleConnect = async () => {
-		let notification = new Notification(
+		let bodyReq = new Notification(
 			state.user.id,
 			id,
 			"group_send_invitation"
 		);
-		let res = await ApiRequest.post("/notifications/send", notification);
-		console.log(res)
+		await ApiRequest.post("/notifications/send", bodyReq);
+		notification.success({
+			message: `¡Tu solicitud fue enviada con éxito!`,
+			placement: 'bottomLeft'
+		});
 	}
 	
 	const ViewProfile = ({title}) => { return <a href={`profile/${userNickname}`} rel="noopener noreferrer">{title}</a>}

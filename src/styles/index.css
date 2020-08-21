@@ -19,6 +19,7 @@
 @import './PropertyList.css';
 @import './PropertyCard.css';
 @import './ContentWrapper.css';
+@import './Notifications.css';
 
 body {
   --principal-blue: rgb(58,78,122);
