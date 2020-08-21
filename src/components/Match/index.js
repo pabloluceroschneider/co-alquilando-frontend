@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Card, Avatar, Tag } from 'antd';
-import { MessageOutlined} from '@ant-design/icons';
+import Notification from '../../classes/Notification';
+import ApiRequest from '../../util/ApiRequest'
+import { SessionContext } from '../../store';
 
 const { Meta } = Card;
 
@@ -31,14 +33,28 @@ const Name = ({name, coincidence}) => {
 }
 
 const UserCard = ({ user, coincidence }) => {
-	const { userPhoto, userNickname, userName, userSurname, userDescription } = user;
+	const { id, userPhoto, userNickname, userName, userSurname, userDescription } = user;
 	const { photoId } = userPhoto;
+	const { state } = useContext(SessionContext);
+	
+	
+	const handleConnect = async () => {
+		let notification = new Notification(
+			state.user.id,
+			id,
+			"group_send_invitation"
+		);
+		let res = await ApiRequest.post("/notifications/send", notification);
+		console.log(res)
+	}
+	
 	const ViewProfile = ({title}) => { return <a href={`profile/${userNickname}`} rel="noopener noreferrer">{title}</a>}
+	
 	return (
 		<Card
             className="userCard"
 			actions={[
-				<MessageOutlined key="message" />,
+				<span onClick={ () => handleConnect() }>Conectar</span>,
 				<ViewProfile key="viewProfile" title={"Ver Perfil"} />
 			]}
 		>
