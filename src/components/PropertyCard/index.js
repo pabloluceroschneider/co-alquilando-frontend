@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useRouteMatch } from 'react-router';
 import { Card, Divider, Button } from 'antd';
 import CarrouselPequeño from '../CarrouselPequeño';
@@ -6,11 +6,12 @@ import ModalMapa from '../Modal';
 
 
 const PropertyCard = props => {
-    const { description, price, address, attributes, id } = props;
+    const { description, price, address, attributes, id, photos } = props;
     const { rentPrice } = price;
     const {coordinates} = address;
     const history = useHistory();
-	const { path } = useRouteMatch();
+    const { path } = useRouteMatch();
+    const [ photoList, setPhotoList ] = useState([]);
 
     let attr = []
     attributes.forEach(t => {
@@ -20,6 +21,23 @@ const PropertyCard = props => {
         "APARMENT": "Departamento",
         "HOUSE": "Casa"
     }
+
+    useEffect(() => {
+        let asyncGet = async () => {
+          photos.forEach( async (photo, index) => {
+            let photoJson = {
+                caption: "", 
+                position: "",
+                imgUrl: `http://localhost:8080/property/${id}/photos/${photo}`
+            }
+            setPhotoList(photoList => [...photoList, photoJson])
+          })
+        }
+        if(!photoList.length){
+          asyncGet();
+        }
+      },[])
+  
 
     const onEdit = () => {
         history.push(`/property/${id}/update`)
@@ -33,11 +51,7 @@ const PropertyCard = props => {
                 hoverable
                 style={{ width: 260 }}
                 cover={
-                    <CarrouselPequeño className="carruselPC" data={[
-                        { imgUrl: "", caption: "", position: "" },
-                        { imgUrl: "", caption: "", position: "" },
-                        { imgUrl: "", caption: "", position: "" }
-                    ]}>
+                    <CarrouselPequeño className="carruselPC" data={photoList}>
                     </CarrouselPequeño>
                 }
             >
