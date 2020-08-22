@@ -8,7 +8,7 @@ import ContentWrapper from "../../components/ContentWrapper";
 const propertyData = {
   name: "property",
   layout: "vertical",
-  btnSubmit: "Propiedad",
+  btnSubmit: "Actualizar Propiedad",
   fields: {
     primaries: [
       [
