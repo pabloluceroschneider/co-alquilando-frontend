@@ -31,8 +31,7 @@ const Name = ({name, coincidence}) => {
 }
 
 const UserCard = ({ user, coincidence }) => {
-	const { userPhoto, userNickname, userName, userSurname, userDescription } = user;
-	const { photoId } = userPhoto;
+	const { photo , userNickname, userName, userSurname, userDescription } = user;
 	const ViewProfile = ({title}) => { return <a href={`profile/${userNickname}`} rel="noopener noreferrer">{title}</a>}
 	return (
 		<Card
@@ -43,7 +42,7 @@ const UserCard = ({ user, coincidence }) => {
 			]}
 		>
 			<Meta
-				avatar={<Avatar src={photoId} style={{backgroundColor:"#AED6F1", color:"#154360"}}> {userName[0].toUpperCase()} </Avatar>}
+				avatar={<Avatar src={photo?.photoId} style={{backgroundColor:"#AED6F1", color:"#154360"}}> {userName[0].toUpperCase()} </Avatar>}
 				title={<Name name={userName+" "+userSurname} coincidence={coincidence} />}
 				description={<Description desc={userDescription} coincidence={coincidence} />}
 			/>
