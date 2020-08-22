@@ -58,6 +58,8 @@ const propertyData = {
 					name: "description",
 					component: "Input.TextArea",
         },
+      ],
+      [
         {
           label: "Cargar Imagen",
           name: "photos",
