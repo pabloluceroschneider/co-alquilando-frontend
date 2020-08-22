@@ -15,8 +15,8 @@ let not = [
 ];
 
 const getNotifications = async () => {
-	let { id } = JSON.parse(localStorage.getItem("user"));
-	let { data } = await ApiRequest.get(`/notifications/user/${id}`)
+	let user = JSON.parse(localStorage.getItem("user"));
+	let { data } = await ApiRequest.get(`/notifications/user/${user?.id}`)
 	return data?.map( ntf => <div>{ntf.type}</div>)
 	return not.map((t) => {
 		return (
