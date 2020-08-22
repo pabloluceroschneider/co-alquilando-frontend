@@ -309,7 +309,7 @@ const UpdatePreferenciesForm = (props) => {
               message: `Preferencias de Propiedades Actualizadas`,
               placement: "bottomLeft",
             });
-            history.push(`/profile/update`);
+            history.push(`/my-profile`);
           } else {
             notification.error({
               message: `Error: No se pudo actualizar sus datos`,
@@ -322,7 +322,7 @@ const UpdatePreferenciesForm = (props) => {
     }
   }, [fieldsProp, idUser,history,state]);
   return (
-    <ContentWrapper header footer>
+    <ContentWrapper topNav>
       <CustomizedForm
         form={formRoom}
         data={userPreferenciesRoomie}

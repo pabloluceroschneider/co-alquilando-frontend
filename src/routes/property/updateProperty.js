@@ -256,7 +256,6 @@ const FormPropertyUpdate = (props) => {
             attributes: { ...res.data.attributes, ...t },
           };
         });
-        console.log(res.data);
         form.setFieldsValue(res.data);
       });
     };
@@ -347,7 +346,7 @@ const FormPropertyUpdate = (props) => {
 
   return (
     <div>
-      <ContentWrapper header footer>
+      <ContentWrapper topNav title="Actualizar Propiedad">
         <CustomizedForm form={form} data={propertyData} onfinish={setFields} />
       </ContentWrapper>
     </div>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import {Upload } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import ApiRequest from "../../../util/ApiRequest";
@@ -6,6 +7,7 @@ import ApiRequest from "../../../util/ApiRequest";
 const CustomUpload = (props) => {
 
     const [fileList, setFileList] = useState([]);
+    let { idProperty } = useParams();
 
     const handlePhoto = (file) => {
         console.log("DATOS:" + props.value)
@@ -18,6 +20,22 @@ const CustomUpload = (props) => {
             }
         };
     }
+
+    useEffect(() => {
+      let asyncGet = async () => {
+        props.value.forEach( async (photo, index) => {
+          let photoJson = {
+            uid: index,
+            name: photo,
+            url: `http://localhost:8080/property/${idProperty}/photos/${photo}`
+          }
+          setFileList(fileList => [...fileList, photoJson])
+        })
+      }
+      if(props.value && !fileList.length){
+        asyncGet();
+      }
+    },[props.value])
 
     const onPreview = async file => {
         let src = file.url;

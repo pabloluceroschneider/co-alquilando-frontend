@@ -1,40 +1,43 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, notification } from 'antd';
 import Auth from '../../util/Auth';
 import ApiRequest from '../../util/ApiRequest';
+import User from '../../classes/User';
 import ContentWrapper from '../../components/ContentWrapper';
 import CustomizedForm from '../../components/CustomizedForm';
-import userFields from '../../forms/POST_USER'
+import userFields from '../../forms/POST_USER';
 
-const usePostUser = bodyReq => {
-	const [ user, setUser ] = useState(null)
+const usePostUser = (bodyReq) => {
+	const [ responseUser, setResponseUser ] = useState(null);
+
 	useEffect(() => {
-		if (bodyReq){
+		if (bodyReq) {
+			
+			let user = new User(bodyReq).mapFormToRequest();
+
 			let asyncAuth = new Promise ( async (res, rej) => {
 				try {
-					let user = await Auth.signUp( bodyReq.userNickname, bodyReq.userPassword, bodyReq.userEmail )
-					res(user)
+					let cognUser = await Auth.signUp( user.userNickname, user.userPassword, user.userEmail )
+					res(cognUser)
 				}catch(e){
 					rej(e)
 				}
 			})
 			let asyncPost = async () => {
-				try{
-					delete bodyReq.userConfirmPassword;
-					delete bodyReq.userConfirmEmail;
-					let ok = await ApiRequest.post("/user", bodyReq);
-					setUser(ok)
-				}catch(e){
+				try {
+					let ok = await ApiRequest.post('/user', user);
+					setResponseUser(ok);
+				} catch (e) {
 					notification.error({
 						message: 'Error al almacenar usuario ',
 						description: `Api Error: ${e.message}`,
 						placement: 'bottomLeft'
 					});
 				}
-			}
+			};
 			asyncAuth.then( user => {
-				asyncPost()
+				asyncPost();
 			}).catch( e => {
 				notification.error({
 					message: 'Error al crear usuario ',
@@ -42,33 +45,35 @@ const usePostUser = bodyReq => {
 					placement: 'bottomLeft'
 				});
 			})
-		}
-	}, [bodyReq])
-	return [user];
-}
+			}
+		},[ bodyReq ]);
+	return [ responseUser ];
+};
 
 const SignIn = () => {
-	const [ fields, setFields ] = useState(null)
+	const [ fields, setFields ] = useState(null);
 	const history = useHistory();
 	const [ form ] = Form.useForm();
-	const [ user ] = usePostUser(fields)
-	
-	useEffect( () => {
-		if(user){
-			notification.success({
-				message: `Usuario registrado`,
-				placement: 'bottomLeft'
-			});
-			history.push('/');
-		}
-	},[user, history])
+	const [ user ] = usePostUser(fields);
+
+	useEffect(
+		() => {
+			if (user) {
+				notification.success({
+					message: `Usuario registrado`,
+					placement: 'bottomLeft'
+				});
+				history.push('/');
+			}
+		},
+		[ user, history ]
+	);
 
 	return (
-		<ContentWrapper header footer>
+		<ContentWrapper topNav footer>
 			<CustomizedForm form={form} data={userFields} onfinish={setFields} />
 		</ContentWrapper>
 	);
-
 };
 
 export default SignIn;
