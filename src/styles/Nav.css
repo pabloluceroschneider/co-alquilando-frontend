@@ -2,7 +2,7 @@
 ul.principalNav {
 	position: sticky;
 	top: 0px;
-	z-index: 1;
+	z-index: 10;
 	list-style-type: none;
 	overflow: hidden;
 	background-color: var(--principal-blue);

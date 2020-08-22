@@ -33,8 +33,15 @@ const PropertyCard = props => {
             setPhotoList(photoList => [...photoList, photoJson])
           })
         }
-        if(!photoList.length){
+        if(photos){
           asyncGet();
+        }else{
+            let photoJson = {
+                caption: "", 
+                position: "",
+                imgUrl: ""
+            }
+            setPhotoList(photoList => [...photoList, photoJson])
         }
       },[])
   
