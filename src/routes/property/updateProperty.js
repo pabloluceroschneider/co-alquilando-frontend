@@ -347,15 +347,26 @@ const FormPropertyUpdate = (props) => {
  // Delete photos
  useEffect(() => {
   if (fields && fields.photos) {
-    var plist = fields.photos.file.fileList;
+    var listPhoto = fields.photos.file.fileList;
     console.log("photosUpdate -->", photosUpdate);
-    console.log("plist -->", plist);
+    console.log("listPhoto -->", listPhoto);
 
-    
+    var auxListPhoto = [];
+    listPhoto.forEach((photo, index) => {
+      if(!photo.originFileObj) {
+        auxListPhoto.push(photo);
+      }
+    });
+    console.log("auxListPhoto -->", auxListPhoto);
+
+    auxListPhoto.forEach((photoAux, indexAux) => {
     photosUpdate.forEach((photo, index) => {
-      console.log("PHOTO", photo, 'INDEX', index);
-      if (!plist.includes(photo)) {
+      console.log("photoAux -->", photoAux.name);
+      console.log("photo -->", photo);
+
+      if (photoAux.name === photo) {
         let asyncPutPhoto = async () => {
+          console.log("Photo a eliminar: " , photo)
           await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`).then((res) => {
             console.log(res);
             if (res.status === 200) {
@@ -374,6 +385,7 @@ const FormPropertyUpdate = (props) => {
         asyncPutPhoto();
       }
     })
+  })
   }
 }, [idProperty, history, fields]);
 
