@@ -46,10 +46,10 @@ export default class ApiRequest {
         })
     }
 
-    static put = async (endpoint, body) => {
+    static delete = async (endpoint) => {
         return new Promise( async (res, rej) => {
             try{
-                let data = await axios.put(endpoint, body)
+                let data = await axios.delete(endpoint)
                 res(data)
             }catch(err){
                 rej(err)

@@ -344,6 +344,40 @@ const FormPropertyUpdate = (props) => {
     
   }, [idProperty, history, fields]);
 
+ // Delete photos
+ useEffect(() => {
+  if (fields && fields.photos) {
+    var plist = fields.photos.file.fileList;
+    console.log("photosUpdate -->", photosUpdate);
+    console.log("plist -->", plist);
+
+    
+    photosUpdate.forEach((photo, index) => {
+      console.log("PHOTO", photo, 'INDEX', index);
+      if (!plist.includes(photo)) {
+        let asyncPutPhoto = async () => {
+          await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`).then((res) => {
+            console.log(res);
+            if (res.status === 200) {
+              notification.success({
+                message: "Datos Actualizados",
+                placement: "bottomLeft",
+              });
+            } else {
+              notification.error({
+                message: "Error: No se pudo actualizar sus datos",
+                placement: "bottomLeft",
+              });
+            }
+          });
+        };
+        asyncPutPhoto();
+      }
+    })
+  }
+}, [idProperty, history, fields]);
+
+
   return (
     <div>
       <ContentWrapper topNav title="Actualizar Propiedad">
