@@ -19,14 +19,16 @@ class webSocket extends React.Component {
   }
 
   onMessageReceive = (msg, topic) => {
+    console.log("Recibiendo mensaje")
     this.setState(prevState => ({
       messages: [...prevState.messages, msg]
     }));
   }
 
   sendMessage = (msg, selfMsg) => {
+    console.log("Enviando mensaje",selfMsg)
     try {
-      this.clientRef.sendMessage("chat/app/all", JSON.stringify(selfMsg));
+      this.clientRef.sendMessage("/app/all", JSON.stringify(selfMsg));
       return true;
     } catch(e) {
       return false;
@@ -34,7 +36,7 @@ class webSocket extends React.Component {
   }
 
     componentWillMount() {
-      Fetch("http://localhost:8080/chat/history", {
+      Fetch("http://localhost:8080/history", {
         method: "GET"
       }).then((response) => {
         this.setState({ messages: response.body });
@@ -49,7 +51,7 @@ class webSocket extends React.Component {
           currentUser={ this.randomUserName } messages={ this.state.messages }
           onSendMessage={ this.sendMessage } connected={ this.state.clientConnected }/> }
 
-        <SockJsClient url={ wsSourceUrl } topics={["/chat/topic/all"]}
+        <SockJsClient url={ wsSourceUrl } topics={["/topic/all"]}
           onMessage={ this.onMessageReceive } ref={ (client) => { this.clientRef = client }}
           onConnect={ () => { this.setState({ clientConnected: true }) } }
           onDisconnect={ () => { this.setState({ clientConnected: false }) } }
