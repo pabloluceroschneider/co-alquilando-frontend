@@ -8,7 +8,7 @@ import ContentWrapper from "../../components/ContentWrapper";
 const propertyData = {
   name: "property",
   layout: "vertical",
-  btnSubmit: "Propiedad",
+  btnSubmit: "Actualizar Propiedad",
   fields: {
     primaries: [
       [
@@ -57,7 +57,14 @@ const propertyData = {
 					label: "Descripción",
 					name: "description",
 					component: "Input.TextArea",
-				},
+        },
+      ],
+      [
+        {
+          label: "Cargar Imagen",
+          name: "photos",
+          component: "Upload",
+        },
       ],
       [
         {
@@ -230,11 +237,14 @@ const FormPropertyUpdate = (props) => {
   const history = useHistory();
   const [ownerId, setOwnerId] = useState(null);
   const [status, setStatus] = useState(null);
+  const [photosUpdate, setPhotosUpdate] = useState(null);
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/property/${idProperty}`).then((res) => {
         setOwnerId(res.data.ownerId);
         setStatus(res.data.status);
+        setPhotosUpdate(res.data.photos)
+        console.log(res.data);
         let array = [];
         res.data.attributes.forEach((t) => {
           array.push({ [t.attributeType]: t.value });
@@ -255,13 +265,15 @@ const FormPropertyUpdate = (props) => {
   useEffect(() => {
     if (fields) {
       var atributos = Object.entries(fields.attributes);
-      const attributesFormate = atributos.map((a) => {
-        let json = {
-          attributeType: a[0],
-          value: a[1] ? a[1] : "",
-          weigth: a[2],
-        };
-        return json;
+      const attributesFormate = atributos.forEach((a) => {
+        if (a) {
+          let json = {
+            attributeType: a[0],
+            value: a[1] ? a[1] : "",
+            weigth: a[2],
+          };
+          return json;
+        }
       });
 
       let formatedBody = {
@@ -293,6 +305,90 @@ const FormPropertyUpdate = (props) => {
       asyncPut();
     }
   }, [fields, idProperty, history, ownerId, status]);
+
+  useEffect(() => {
+    if (fields && fields.photos) {
+      var plist = fields.photos.file.fileList;
+
+      const formData = new FormData();
+      formData.append('type', 'file')
+      for (const ph in plist) {
+        console.log(plist[ph].originFileObj) 
+        let phLast = plist[ph].originFileObj
+      
+        formData.append("photos", phLast)
+      }
+
+        let header = {
+          'Content-Type': 'multipart/form-data'
+        }
+
+        let asyncPutPhoto = async () => {
+          await ApiRequest.multipartPut(`/property/${idProperty}/photos`, formData, header).then((res) =>  {
+            console.log(res);
+            if (res.status === 200) {
+              notification.success({
+                message: `Datos Actualizados`,
+                placement: "bottomLeft",
+              });
+            } else {
+              notification.error({
+                message: `Error: No se pudo actualizar sus datos`,
+                placement: "bottomLeft",
+              });
+            }
+          });
+        };
+        asyncPutPhoto();
+      }
+    
+  }, [idProperty, history, fields]);
+
+ // Delete photos
+ useEffect(() => {
+  if (fields && fields.photos) {
+    var listPhoto = fields.photos.file.fileList;
+    console.log("photosUpdate -->", photosUpdate);
+    console.log("listPhoto -->", listPhoto);
+
+    var auxListPhoto = [];
+    listPhoto.forEach((photo, index) => {
+      if(!photo.originFileObj) {
+        auxListPhoto.push(photo);
+      }
+    });
+    console.log("auxListPhoto -->", auxListPhoto);
+
+    auxListPhoto.forEach((photoAux, indexAux) => {
+    photosUpdate.forEach((photo, index) => {
+      console.log("photoAux -->", photoAux.name);
+      console.log("photo -->", photo);
+
+      if (photoAux.name === photo) {
+        let asyncPutPhoto = async () => {
+          console.log("Photo a eliminar: " , photo)
+          await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`).then((res) => {
+            console.log(res);
+            if (res.status === 200) {
+              notification.success({
+                message: "Datos Actualizados",
+                placement: "bottomLeft",
+              });
+            } else {
+              notification.error({
+                message: "Error: No se pudo actualizar sus datos",
+                placement: "bottomLeft",
+              });
+            }
+          });
+        };
+        asyncPutPhoto();
+      }
+    })
+  })
+  }
+}, [idProperty, history, fields, photosUpdate]);
+
 
   return (
     <div>
