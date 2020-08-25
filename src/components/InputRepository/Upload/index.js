@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Upload } from "antd";
 import ImgCrop from "antd-img-crop";
-import ApiRequest from "../../../util/ApiRequest";
 
 const CustomUpload = (props) => {
   const [fileList, setFileList] = useState([]);
@@ -14,10 +13,8 @@ const CustomUpload = (props) => {
 
     if (file) {
       props.onChange({ file });
-      {
-        if (file.status !== "uploading") {
-          console.log("File:", file);
-        }
+      if (file.status !== "uploading") {
+        console.log("File:", file);
       }
     }
   };
@@ -39,7 +36,7 @@ const CustomUpload = (props) => {
       }
     };
     asyncGet();
-  }, [props.value]);
+  }, [props.value, fileList, idProperty ]);
 
   const onPreview = async (file) => {
     let src = file.url;
@@ -63,28 +60,30 @@ const CustomUpload = (props) => {
     setFileList(newFileList);
   };
 
-  const action = (file) => {
-    const f = file;
-    console.log("ACTION:");
-    const actualFiles = props.value;
-    let src;
-    if (actualFiles) {
-      actualFiles.forEach((element) => {
-        let asyncGetUser = async () => {
-          src = await ApiRequest.get(
-            `/property/5f1c584b07f2c81aa45c12c5/${element}`
-          );
-        };
-        asyncGetUser();
-      });
-    } else {
-      src = "https://www.mocky.io/v2/5cc8019d300000980a055e76";
-    }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow.document.write(image.outerHTML);
-  };
+  // Bloque Comentado porque no se está Utilizando
+  // TODO: Analizar si es necesario
+  // const action = (file) => {
+  //   const f = file;
+  //   console.log("ACTION:");
+  //   const actualFiles = props.value;
+  //   let src;
+  //   if (actualFiles) {
+  //     actualFiles.forEach((element) => {
+  //       let asyncGetUser = async () => {
+  //         src = await ApiRequest.get(
+  //           `/property/5f1c584b07f2c81aa45c12c5/${element}`
+  //         );
+  //       };
+  //       asyncGetUser();
+  //     });
+  //   } else {
+  //     src = "https://www.mocky.io/v2/5cc8019d300000980a055e76";
+  //   }
+  //   const image = new Image();
+  //   image.src = src;
+  //   const imgWindow = window.open(src);
+  //   imgWindow.document.write(image.outerHTML);
+  // };
 
   return (
     <ImgCrop rotate>

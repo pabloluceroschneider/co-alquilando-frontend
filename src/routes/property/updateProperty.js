@@ -265,7 +265,7 @@ const FormPropertyUpdate = (props) => {
   useEffect(() => {
     if (fields) {
       var atributos = Object.entries(fields.attributes);
-      const attributesFormate = atributos.map((a) => {
+      const attributesFormate = atributos.forEach((a) => {
         if (a) {
           let json = {
             attributeType: a[0],
@@ -387,7 +387,7 @@ const FormPropertyUpdate = (props) => {
     })
   })
   }
-}, [idProperty, history, fields]);
+}, [idProperty, history, fields, photosUpdate]);
 
 
   return (

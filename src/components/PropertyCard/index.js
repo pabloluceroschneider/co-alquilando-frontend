@@ -43,7 +43,7 @@ const PropertyCard = props => {
             }
             setPhotoList(photoList => [...photoList, photoJson])
         }
-      },[])
+      },[id, photos])
   
 
     const onEdit = () => {
