@@ -15,7 +15,7 @@ const Notifications = props => {
             console.log(data)
         }
         asyncGet();
-    },[])
+    },[state.user.id])
     return (
         <ContentWrapper topNav title="Notificaciones">
 			<div className="notifications">

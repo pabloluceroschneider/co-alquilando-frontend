@@ -58,9 +58,9 @@ const UserCard = ({ user, coincidence }) => {
 
   const handleConnect = () => {
     confirm({
-	  title: "¿Quieres enviar la solicitud de grupo?",
-	  okText: "Confirmar",
-	  className: "notificationModal",
+      title: "¿Quieres enviar la solicitud de grupo?",
+      okText: "Confirmar",
+      className: "notificationModal",
       icon: <UsergroupAddOutlined />,
       content: `${userName} recibirá tu invitación`,
       onOk() {
@@ -83,6 +83,7 @@ const UserCard = ({ user, coincidence }) => {
 
   return (
     <Card
+      hoverable
       className="userCard"
       actions={[
         <span onClick={() => handleConnect()}>Conectar</span>,
