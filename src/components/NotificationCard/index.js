@@ -36,6 +36,7 @@ const NotificationCard = props => {
 
 	return (
 		<Card
+			hoverable
             className={`notificationCard ${props.type}`}
 			actions={actions[props.type]}
 		>

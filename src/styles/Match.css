@@ -1,5 +1,3 @@
-
-
 /* Mobile First */
 .match{
     text-align: -webkit-center !important;
@@ -28,6 +26,10 @@
 .match .name span{
     padding: 2px;
     text-align: center;
+}
+
+.notificationModal svg{
+    color: var(--principal-blue);
 }
 
 /* Desktop View */
