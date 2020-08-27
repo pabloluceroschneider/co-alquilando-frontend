@@ -33,7 +33,10 @@ self.addEventListener('push', function (event) {
 
     return self.registration.showNotification(title, {
         body: data,
-        icon: "./LOGO.jpg"
+        icon: "./LOGO.jpg",
+        data: {
+            click_url: '/notifications'          
+          },
     });
 });
 

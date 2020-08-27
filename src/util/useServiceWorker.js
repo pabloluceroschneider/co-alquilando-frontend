@@ -47,6 +47,7 @@ function subscribe() {
 	);
 
 	navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+		console.log('50 serviceWorkerRegistration -->', serviceWorkerRegistration);
 		serviceWorkerRegistration.pushManager
 			.subscribe({
 				userVisibleOnly: true,
@@ -65,49 +66,68 @@ function subscribe() {
 	});
 }
 const useServiceWorker = () => {
-	register('/sw.js', {
-		registrationOptions: { scope: './' },
-		ready(registration) {
-			console.log('Service worker is active.');
-		},
-		registered(registration) {
-			console.log('Service worker has been registered.');
-			navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-				console.log('serviceWorkerRegistration: ', serviceWorkerRegistration);
-				serviceWorkerRegistration.pushManager
-					.getSubscription()
-					.then(function(subscription) {
-						if (!subscription) {
-							subscribe();
-							return;
+	Notification.requestPermission(function(result) {
+		if (result === 'denied') {
+			console.log("Permission wasn't granted. Allow a retry.");
+			return;
+		} else if (result === 'default') {
+			console.log('The permission request was dismissed.');
+			return;
+		}
+
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker
+				.register('./sw.js')
+				.then(function(registration) {
+					console.log('Service Worker Registered', registration);
+					// El usuario permitió Notificaciones.
+					register('/sw.js', {
+						registrationOptions: { scope: './' },
+						ready(registration) {
+							console.log('Service worker is active.');
+						},
+						registered(registration) {
+							console.log('Service worker has been registered.', registration);
+							navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+								console.log('serviceWorkerRegistration: ', serviceWorkerRegistration);
+								serviceWorkerRegistration.pushManager
+									.getSubscription()
+									.then(function(subscription) {
+										console.log('subscription -->', subscription);
+										if (!subscription) {
+											subscribe();
+											return;
+										}
+										// Keep your server in sync with the latest subscriptionId
+										// sendSubscriptionToServer(subscription);
+									})
+									.catch(function(err) {
+										console.warn('Error during getSubscription()', err);
+									});
+							});
+						},
+						cached(registration) {
+							console.log('Content has been cached for offline use.');
+						},
+						updatefound(registration) {
+							console.log('New content is downloading.');
+						},
+						updated(registration) {
+							console.log('New content is available; please refresh.');
+						},
+						offline() {
+							console.log('No internet connection found. App is running in offline mode.');
+						},
+						error(error) {
+							console.error('Error during service worker registration:', error);
 						}
-		
-						// Keep your server in sync with the latest subscriptionId
-						// sendSubscriptionToServer(subscription);
-						console.log('subscription -->', subscription);
-					})
-					.catch(function(err) {
-						console.warn('Error during getSubscription()', err);
 					});
-			});
-		},
-		cached(registration) {
-			console.log('Content has been cached for offline use.');
-		},
-		updatefound(registration) {
-			console.log('New content is downloading.');
-		},
-		updated(registration) {
-			console.log('New content is available; please refresh.');
-		},
-		offline() {
-			console.log('No internet connection found. App is running in offline mode.');
-		},
-		error(error) {
-			console.error('Error during service worker registration:', error);
+				})
+				.catch(function(err) {
+					console.log('Service Worker Failed to Register', err);
+				});
 		}
 	});
-
-}
+};
 
 export default useServiceWorker;
