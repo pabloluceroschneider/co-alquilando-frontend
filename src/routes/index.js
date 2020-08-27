@@ -11,8 +11,7 @@ import PropertyList from "./propertyList";
 import MyProperties from "./my-properties";
 import FormPropertyUpdate from './property/updateProperty';
 import UserHome from '../routes/userHome';
-import webSocket from '../components/WebSocket/webSocket';
-//import Chat from '.../components/chat;
+import Chat from '../components/Chat';
 
 const Routes = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
@@ -29,8 +28,7 @@ const Routes = () => {
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
 						<Route path="/property" exact component={Property} />
 						<Route path="/properties" exact component={PropertyList} />
-						<Route path="/chat" exact component={webSocket} />
-						{/* <Route path="/chat" exact component={Chat} /> */}
+						<Route path="/chat" exact component={Chat} />
 						<Route path="/my-properties" exact component={MyProperties} />
 						<Redirect from="*" to="/"/>
 					</Switch>

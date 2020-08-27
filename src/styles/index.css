@@ -14,6 +14,8 @@
 @import './Header.css';
 @import './ContentWrapper.css';
 @import '../assets/Icons/Icon/styles.css';
+@import '../styles/Chat.css';
+
 
 body {
   margin: 0;

@@ -6,7 +6,7 @@ import { TalkBox } from "react-talk";
 
 const randomstring = require("randomstring");
 
-class webSocket extends React.Component {
+class WebSocket extends React.Component {
   constructor(props) {
     super(props);
     // randomUserId is used to emulate a unique user id for this demo usage
@@ -61,4 +61,4 @@ class webSocket extends React.Component {
   }
 }
 
-export default webSocket;
+export default WebSocket;
