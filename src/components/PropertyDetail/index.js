@@ -2,7 +2,6 @@ import React from 'react'
 import { Carousel, Tag } from 'antd';
 import { useTranslation } from 'react-i18next';
 import ClickeableMap from '../ClickeableMap';
-import LOGO from '../../assets/images/LOGO.jpg'
 
 const statusColor = {
     available: "green",
@@ -77,6 +76,8 @@ const FullAddress = ({province, neighborhood, street,
 }
 
 const MapSection = props => {
+    if( !props.latitude || props.length ) return <div className="section box">Geolocalización no disponible</div>
+    
     return (
         <div className="section map">
             <span>Ver Ubicación</span>
@@ -86,8 +87,8 @@ const MapSection = props => {
                 containerElement={<div style={{ height: `auto`, width: `auto` }} />}
                 mapElement={<div style={{ height: `auto` }} />}
                 zoomLevel={10}
-                {...props}
                 notClickeable
+                {...props}
             />
         </div>
     )
