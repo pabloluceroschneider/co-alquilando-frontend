@@ -19,6 +19,8 @@
 @import './PropertyList.css';
 @import './PropertyCard.css';
 @import './ContentWrapper.css';
+@import './Groups.css';
+@import './SideList.css';
 
 body {
   --principal-blue: rgb(58,78,122);

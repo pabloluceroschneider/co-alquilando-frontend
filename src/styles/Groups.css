@@ -1,0 +1,10 @@
+
+.groups-container{
+    display: grid;
+    place-items: center;
+    grid-template-columns: auto auto;
+}
+
+.groups-container div{
+    height: 85vh;
+}
