@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Carousel, Tag } from 'antd';
+import Property from '../../classes/Property';
 import ClickeableMap from '../ClickeableMap';
 import ModalShareProperty from '../ModalShareProperty';
 
@@ -24,12 +25,9 @@ const Header = ({status, typology}) => {
 }
 
 const PhotoSection = ({photos, alt}) => {
-    function onChange(a, b, c) {
-        console.log(a, b, c);
-    }
     return (
         <div className="section carrousel">
-            <Carousel afterChange={onChange}>
+            <Carousel>
                 {photos.map( url => {
                     return <img key={alt} src={url} alt={alt} />
                 })}
@@ -79,7 +77,7 @@ const FullAddress = ({province, neighborhood, street,
 }
 
 const MapSection = props => {
-    if( !props.latitude || props.length ) return <div className="section box">Geolocalización no disponible</div>
+    if( !props.latitude || !props.length ) return <div className="section box">Geolocalización no disponible</div>
     
     return (
         <div className="section map">
@@ -99,10 +97,11 @@ const MapSection = props => {
 
 const Attributes = ({attributes}) => {
     const { t } = useTranslation();
+    let attrArray = Property.mapJsonToArray(attributes);
     return (
         <div className="section box attributes">
             <span>Comodidades</span>
-            {attributes?.map( (attr, index) => {
+            {attrArray?.map( (attr, index) => {
                 return (
                     <div key={index} className="row">
                         <div>{ t(attr.attributeType) }</div>
@@ -117,7 +116,7 @@ const Attributes = ({attributes}) => {
 const PropertyDetail = props => {
     return (
         <div className="propertyDetail">
-            <Header status={props.status} typology={props.typology}/>
+            <Header status={props.status} typology={props.attributes?.typology}/>
             <PhotoSection photos={props.photos} alt={props.description} />
             <TitleSection title={props.title} description={props.description} />
             <PriceSection {...props.price} />
@@ -129,7 +128,7 @@ const PropertyDetail = props => {
 }
 
 PhotoSection.defaultProps = {
-    photos: ["https://omegamma.com.au/wp-content/uploads/2017/04/default-image-720x530.jpg"],
+    photos: ["https://omegamma.com.au/wp-content/uploads/2017/04/default-image-720x530.jpg", "https://omegamma.com.au/wp-content/uploads/2017/04/default-image-720x530.jpg"],
     alt: "No image"
 }
 
