@@ -1,11 +1,9 @@
-
-
-class Attribute {
-	constructor(from, to, type) {
-		this.from = from;
-		this.to = to;
-		this.type = type;
-    }
+class Notification {
+  constructor(from, to, type) {
+    this.from = from;
+    this.to = to;
+    this.type = type;
+  }
 }
 
-export default Attribute
+export default Notification;
