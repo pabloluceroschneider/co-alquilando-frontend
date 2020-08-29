@@ -5,9 +5,7 @@
 }
 
 .propertyDetail .section{
-    /* border: 1px solid black; */
     width: 95vw;
-    /* min-height: 50px; */
     margin-bottom: 10px;
 }
 
@@ -22,7 +20,6 @@
 /* map */
 .propertyDetail .section.map{
     display: grid;
-    align-items: center;
     justify-items: right;
     overflow: hidden;
     border: 1px solid var(--letter);
@@ -83,11 +80,47 @@
 /* pantalla de escritorio */
 @media only screen and (min-width: 600px){
     .propertyDetail{
-        grid-template-columns: auto;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        align-items: center;
+        justify-items: center;
     }
     
     .propertyDetail .section{
-        border: 1px solid black;
-        height: 90vh;
+        width: 45vw;
     }
+    
+    .propertyDetail .section.carrousel{
+        grid-column: 1;
+        grid-row: 1 / span 5;
+    }
+    .propertyDetail .section.map{
+        grid-column: 1;
+        grid-row: 6 / span 3;
+    }
+
+   
+    .propertyDetail .section.header{
+        grid-column: 2;
+        grid-row: 1;
+    }
+    .propertyDetail .section.description{
+        grid-column: 2;
+        grid-row: 2;
+    }
+    .propertyDetail .section.fullAddress{
+        grid-column: 2;
+        grid-row: 3;
+    }
+    .propertyDetail .section.price{
+        grid-column: 2;
+        grid-row: 4;
+    }
+    .propertyDetail .section.attributes{
+        grid-column: 2;
+        grid-row: 5 / span 2;
+    }
+   
+
+
 }

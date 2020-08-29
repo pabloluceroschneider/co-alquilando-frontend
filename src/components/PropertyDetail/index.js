@@ -8,7 +8,7 @@ const statusColor = {
 }
 
 const Header = ({status, typology}) => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <div className="section header"> 
             <Tag> {t(typology)} </Tag>
@@ -77,14 +77,14 @@ const MapSection = ({latitude, length}) => {
     return (
         <div className="section map">
             <span>Ver Ubicación</span>
-            <span>{latitude}</span>
-            <span>{length}</span>
+            {/* <span>{latitude}</span>
+            <span>{length}</span> */}
         </div>
     )
 }
 
 const Attributes = ({attributes}) => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <div className="section attributes">
             <span>Comodidades</span>
