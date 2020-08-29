@@ -24,6 +24,7 @@
     display: grid;
     align-items: center;
     justify-items: right;
+    overflow: hidden;
     border: 1px solid var(--letter);
     height: 50px;
     transition: height 1s;
@@ -45,7 +46,6 @@
     grid-template-columns: auto auto auto auto;
 }
 
-
 /* description */
 .propertyDetail .section.description{
     display: grid;
@@ -60,7 +60,17 @@
     display: grid;
     text-align: left;
 }
+.propertyDetail .section.fullAddress div{
+    margin-left: 10%;
+}
 
+/* attributes */
+.propertyDetail .section.attributes{
+    width: 80%;
+}
+.propertyDetail .section.attributes span{
+    margin-left: -10%;
+}
 .propertyDetail .section.attributes .row{
     display: grid;
     grid-template-columns: 65% 35%;

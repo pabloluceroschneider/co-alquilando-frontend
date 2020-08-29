@@ -45,15 +45,18 @@ const TitleSection = ({title, description}) => {
 const validPrice = price => price ? price : "-"
 const PriceSection = ({services, taxes, expenses, rentPrice }) => {
     return (
-        <div className="section price">
-            <div>Servicios</div>
-            <div>Impuesto</div>
-            <div>Expensas</div>
-            <div>Alquiler</div>
-            <div>${validPrice(services)}</div>
-            <div>${validPrice(taxes)}</div>
-            <div>${validPrice(expenses)}</div>
-            <div>${validPrice(rentPrice)}</div>
+        <div>
+            <span>Precios</span>
+            <div className="section price">
+                <div>Servicios</div>
+                <div>Impuesto</div>
+                <div>Expensas</div>
+                <div>Alquiler</div>
+                <div>${validPrice(services)}</div>
+                <div>${validPrice(taxes)}</div>
+                <div>${validPrice(expenses)}</div>
+                <div>${validPrice(rentPrice)}</div>
+            </div>
         </div>
     )
 }
@@ -62,17 +65,29 @@ const FullAddress = ({province, neighborhood, street,
     number, floor, apartment, description }) => {
         return (
             <div className="section fullAddress">
-                <span>{province}, Bº {neighborhood}</span>
-                <span>{street}, {number}. {floor}º {apartment}</span>
-                <span>{description}</span>
+                <span>Dirección</span>
+                <div>{province}, Bº {neighborhood}</div>
+                <div>{street}, {number}. {floor}º {apartment}</div>
+                <div>{description}</div>
             </div>
         )
+}
+
+const MapSection = ({latitude, length}) => {
+    return (
+        <div className="section map">
+            <span>Ver Ubicación</span>
+            <span>{latitude}</span>
+            <span>{length}</span>
+        </div>
+    )
 }
 
 const Attributes = ({attributes}) => {
     const { t, i18n } = useTranslation();
     return (
         <div className="section attributes">
+            <span>Comodidades</span>
             {attributes?.map( (attr, index) => {
                 return (
                     <div key={index} className="row">
@@ -86,6 +101,7 @@ const Attributes = ({attributes}) => {
 }
 
 const PropertyDetail = props => {
+    console.log(props.address?.coordinates)
     return (
         <div className="propertyDetail">
             <Header status={props.status} typology={props.typology}/>
@@ -93,7 +109,7 @@ const PropertyDetail = props => {
             <TitleSection title={props.title} description={props.description} />
             <PriceSection {...props.price} />
             <FullAddress {...props.address} />
-            <div className="section map"><span>Ver Ubicación</span></div>
+            <MapSection {...props.address?.coordinates} />
             <Attributes attributes={props.attributes} />
         </div>
     )
