@@ -28,7 +28,8 @@ class WebSocket extends React.Component {
   sendMessage = (msg, selfMsg) => {
     console.log("Enviando mensaje",selfMsg)
     try {
-      this.clientRef.sendMessage("/app/all", JSON.stringify(selfMsg));
+      selfMsg = {...selfMsg, groupId: "groupId"}
+      this.clientRef.sendMessage("/app/all-interno", JSON.stringify(selfMsg));
       return true;
     } catch(e) {
       return false;
