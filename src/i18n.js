@@ -7,12 +7,15 @@ const resources = {
   en: {
     translation: {
       "Welcome to React": "Welcome to React and react-i18next",
+
       "typology": "Tipología",
       "APARMENT": "Departamento",
       "HOUSE": "Casa",
-
-      "pre_rented": "Reservada",
       "available": "Disponible",
+      "disabled": "No disponible",
+      "pre_rented": "Reservada",
+      "rented": "Rentada",
+
       "amountPeople": "Cantidad de personas",
       "rooms": "Habitaciones",
       "bathrooms": "Baños",
@@ -28,6 +31,7 @@ const resources = {
       "sum": "Salon de usos múltiples",
       "calefaction": "Calefacción",
       "pets": "Acepta mascotas",
+      "security": "Seguridad",
       "true": "Sí",
       "false": "No"
     }
