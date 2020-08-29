@@ -1,6 +1,7 @@
 import React from 'react'
 import { Carousel, Tag } from 'antd';
 import { useTranslation } from 'react-i18next';
+import ClickeableMap from '../ClickeableMap';
 
 const statusColor = {
     pre_rented: "magenta",
@@ -73,13 +74,19 @@ const FullAddress = ({province, neighborhood, street,
         )
 }
 
-const MapSection = ({latitude, length}) => {
+const MapSection = props => {
     return (
         <div className="section map">
             <span>Ver Ubicación</span>
-            <img key={latitude} src={"https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2018/08/fotos-perfil-whatsapp_16.jpg?itok=fl2H3Opv"} alt={latitude} />
-            {/* <span>{latitude}</span>
-            <span>{length}</span> */}
+            <ClickeableMap 
+                googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDzoLTHAJKj5xymA3iBqJxxQl-MYG9R_ag"
+                loadingElement={<div style={{ height: `100%` }} />}
+                containerElement={<div style={{ height: `auto`, width: `auto` }} />}
+                mapElement={<div style={{ height: `auto` }} />}
+                zoomLevel={10}
+                {...props}
+                notClickeable
+            />
         </div>
     )
 }
@@ -102,7 +109,6 @@ const Attributes = ({attributes}) => {
 }
 
 const PropertyDetail = props => {
-    console.log(props.address?.coordinates)
     return (
         <div className="propertyDetail">
             <Header status={props.status} typology={props.typology}/>

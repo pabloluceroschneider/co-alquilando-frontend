@@ -27,10 +27,8 @@
 
 /* map */
 .propertyDetail .section.map{
-    border: 1px solid black;
     position: relative;
-    display: grid;
-    justify-items: right;
+    box-shadow: 2px 2px 5px var(--dark-grey);
     overflow: hidden;
     height: 50px;
     transition: height 1s;
@@ -130,4 +128,8 @@
     .propertyDetail .section.price .table.price div{
         padding-right: 25px;
     }
+    .propertyDetail .section.map{
+        height: 400px;
+    }
+
 }
