@@ -1,0 +1,83 @@
+
+.propertyDetail{
+    display: grid;
+    place-items: center;
+}
+
+.propertyDetail .section{
+    /* border: 1px solid black; */
+    width: 95vw;
+    /* min-height: 50px; */
+    margin-bottom: 10px;
+}
+
+/* header */
+.propertyDetail .section.header{
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-items: center;
+}
+
+/* map */
+.propertyDetail .section.map{
+    display: grid;
+    align-items: center;
+    justify-items: right;
+    border: 1px solid var(--letter);
+    height: 50px;
+    transition: height 1s;
+}
+
+.propertyDetail .section.map:hover{
+    height: 400px;
+}
+
+.propertyDetail .section.map span{
+    margin-right: 40px;
+}
+
+/* price */
+.propertyDetail .section.price{
+    display: grid;
+    align-items: center;
+    justify-items: right;
+    grid-template-columns: auto auto auto auto;
+}
+
+
+/* description */
+.propertyDetail .section.description{
+    display: grid;
+    place-items: center;
+    /* background-color: var(--tertiary-blue); */
+    color: var(--letter);
+}
+
+
+/* fullAddress */
+.propertyDetail .section.fullAddress{
+    display: grid;
+    text-align: left;
+}
+
+.propertyDetail .section.attributes .row{
+    display: grid;
+    grid-template-columns: 65% 35%;
+    align-items: center;
+    justify-items: left;
+}
+
+
+
+/* pantalla de escritorio */
+@media only screen and (min-width: 600px){
+    .propertyDetail{
+        grid-template-columns: auto;
+    }
+    
+    .propertyDetail .section{
+        border: 1px solid black;
+        height: 90vh;
+    }
+}

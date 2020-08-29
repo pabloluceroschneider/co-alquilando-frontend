@@ -14,12 +14,14 @@ class Property{
 
     mapURLphotos(){
         let photos = [];
-        let url = "http://localhost:8080"
-        let endpoint = `/property/${this.property.id}/photos/`
-        this.property.photos.forEach( id => {
-            let photoUrl = url + endpoint + id
-            photos = [...photos, photoUrl]
-        })
+        if(this.property.photos){
+            let url = "http://localhost:8080"
+            let endpoint = `/property/${this.property.id}/photos/`
+            this.property.photos.forEach( id => {
+                let photoUrl = url + endpoint + id
+                photos = [...photos, photoUrl]
+            })
+        }
         return photos
     }
 
@@ -29,7 +31,6 @@ class Property{
             ...this.mapArrayToJson(),
             photos: this.mapURLphotos()
         }
-        delete formatedProperty.attributes
         return formatedProperty
     }
 }

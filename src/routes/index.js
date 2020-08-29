@@ -28,8 +28,8 @@ const Routes = () => {
 						<Route path="/my-profile/update" exact component={UpdateForm} />
 						<Route path="/my-profile" exact component={MyProfile} />
 						<Route path="/profile/:nickname" component={Profile} />
-						<Route path="/property/:idProperty" component={PropertyDetail} />
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
+						<Route path="/property/:idProperty" component={PropertyDetail} />
 						<Route path="/property" exact component={Property} />
 						<Route path="/properties" exact component={PropertyList} />
 						<Route path="/my-properties" exact component={MyProperties} />
