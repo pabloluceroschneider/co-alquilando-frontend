@@ -47,7 +47,6 @@
 .propertyDetail .section.description{
     display: grid;
     place-items: center;
-    /* background-color: var(--tertiary-blue); */
     color: var(--letter);
 }
 
@@ -62,15 +61,10 @@
 }
 
 /* attributes */
-.propertyDetail .section.attributes{
-    width: 80%;
-}
-.propertyDetail .section.attributes span{
-    margin-left: -10%;
-}
 .propertyDetail .section.attributes .row{
     display: grid;
-    grid-template-columns: 65% 35%;
+    grid-template-columns: 60% 40%;
+    margin-left: 10%;
     align-items: center;
     justify-items: left;
 }
@@ -80,16 +74,15 @@
 /* pantalla de escritorio */
 @media only screen and (min-width: 600px){
     .propertyDetail{
-        display: grid;
         grid-template-columns: 50% 50%;
-        align-items: center;
-        justify-items: center;
     }
-    
+
     .propertyDetail .section{
         width: 45vw;
     }
-    
+
+
+    /* primera columna */
     .propertyDetail .section.carrousel{
         grid-column: 1;
         grid-row: 1 / span 5;
@@ -99,7 +92,8 @@
         grid-row: 6 / span 3;
     }
 
-   
+
+    /* segunda columna */
     .propertyDetail .section.header{
         grid-column: 2;
         grid-row: 1;
