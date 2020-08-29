@@ -2,32 +2,34 @@ import React from 'react'
 import { Carousel, Tag } from 'antd';
 import { useTranslation } from 'react-i18next';
 import ClickeableMap from '../ClickeableMap';
+import LOGO from '../../assets/images/LOGO.jpg'
 
 const statusColor = {
-    pre_rented: "magenta",
-    available: "green"
+    available: "green",
+    disabled: "error",
+    pre_rented: "orange",
+    rented: "error",
 }
 
 const Header = ({status, typology}) => {
     const { t } = useTranslation();
     return (
         <div className="section header"> 
-            <Tag> {t(typology)} </Tag>
+            <Tag>{ t(typology) }</Tag>
             <Tag color={statusColor[status]}>{ t(status) }</Tag>
         </div>
     )
 }
 
 const PhotoSection = ({photos, alt}) => {
-    let fake = [1]
     function onChange(a, b, c) {
         console.log(a, b, c);
     }
     return (
         <div className="section carrousel">
             <Carousel afterChange={onChange}>
-                {fake.map( url => {
-                    return <img key={alt} src={"https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2018/08/fotos-perfil-whatsapp_16.jpg?itok=fl2H3Opv"} alt={alt} />
+                {photos.map( url => {
+                    return <img key={alt} src={url} alt={alt} />
                 })}
             </Carousel>
         </div>
@@ -50,7 +52,7 @@ const PriceSection = ({services, taxes, expenses, rentPrice }) => {
             <span>Precios</span>
             <div className="table price">
                 <div>Servicios</div>
-                <div>Impuesto</div>
+                <div>Impuestos</div>
                 <div>Expensas</div>
                 <div>Alquiler</div>
                 <div>${validPrice(services)}</div>
@@ -68,7 +70,7 @@ const FullAddress = ({province, neighborhood, street,
             <div className="section box fullAddress">
                 <span>Dirección</span>
                 <div>{province}, Bº {neighborhood}</div>
-                <div>{street}, {number}. {floor}º {apartment}</div>
+                <div>{street}, {number} - {floor}º {apartment}</div>
                 <div>{description}</div>
             </div>
         )
@@ -120,6 +122,11 @@ const PropertyDetail = props => {
             <Attributes attributes={props.attributes} />
         </div>
     )
+}
+
+PhotoSection.defaultProps = {
+    photos: ["https://omegamma.com.au/wp-content/uploads/2017/04/default-image-720x530.jpg"],
+    alt: "No image"
 }
 
 export default PropertyDetail;

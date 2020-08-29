@@ -22,7 +22,7 @@ class Property{
                 photos = [...photos, photoUrl]
             })
         }
-        return photos
+        return photos.length ? photos : undefined;
     }
 
     mapResponseToJson(){
