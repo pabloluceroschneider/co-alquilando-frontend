@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ContentWrapper from '../../components/ContentWrapper';
 import SideList from '../../components/SideList';
-import ChatList from '../../components/ChatList';
+import ScrollableHorizontalList from '../../components/ScrollableHorizontalList';
 import Chat from '../../components/Chat';
 
 const Groups = () => {
@@ -9,7 +9,7 @@ const Groups = () => {
         <ContentWrapper topNav >
             <SideList />
             <div className="groups-container">
-                <ChatList />
+                <ScrollableHorizontalList />
                 <Chat />
             </div>
         </ContentWrapper>

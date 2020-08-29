@@ -2,9 +2,9 @@
 .groups-container{
     display: grid;
     place-items: center;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto;
 }
 
-.groups-container div{
+/* .groups-container div{
     height: 85vh;
-}
+} */
