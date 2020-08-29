@@ -8,6 +8,10 @@ import Property from '../../classes/Property';
 const PropertyDetailRoute = () => {
 	let { idProperty } = useParams();
 	const [ property, setProperty ] = useState(null);
+	let breadscrumb = [
+		{ "Listado de Propiedades": "/properties" },
+		{ [property?.title] : [property?.id] }
+	]
 
 	useEffect(() => {
 			let asyncGetUser = async () => {
@@ -19,7 +23,7 @@ const PropertyDetailRoute = () => {
 		},[ idProperty ]);
 
 	return (
-			<ContentWrapper topNav>
+			<ContentWrapper topNav breadscrumb={breadscrumb}>
 				<PropertyDetail {...property} />
 			</ContentWrapper>
 	);

@@ -8,6 +8,7 @@
 .propertyDetail .section{
     width: 95vw;
     margin-bottom: 10px;
+    cursor: default;
 }
 
 .propertyDetail .section.box{
@@ -32,11 +33,9 @@
     height: 50px;
     transition: height 1s;
 }
-
 .propertyDetail .section.map:hover{
     height: 400px;
 }
-
 .propertyDetail .section.map span{
     margin-right: 40px;
 }
@@ -123,9 +122,8 @@
         grid-row: 5 / span 2;
     }
    
+    /* table price */
     .propertyDetail .section.price .table.price div{
         padding-right: 25px;
     }
-
-
 }
