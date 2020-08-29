@@ -35,7 +35,7 @@ const PhotoSection = ({photos, alt}) => {
 
 const TitleSection = ({title, description}) => {
     return (
-        <div className="section description"> 
+        <div className="section box description"> 
             <h3>{title}</h3>
             <div>{description} </div>
         </div>
@@ -45,9 +45,9 @@ const TitleSection = ({title, description}) => {
 const validPrice = price => price ? price : "-"
 const PriceSection = ({services, taxes, expenses, rentPrice }) => {
     return (
-        <div>
+        <div className="section box price">
             <span>Precios</span>
-            <div className="section price">
+            <div className="table price">
                 <div>Servicios</div>
                 <div>Impuesto</div>
                 <div>Expensas</div>
@@ -64,7 +64,7 @@ const PriceSection = ({services, taxes, expenses, rentPrice }) => {
 const FullAddress = ({province, neighborhood, street, 
     number, floor, apartment, description }) => {
         return (
-            <div className="section fullAddress">
+            <div className="section box fullAddress">
                 <span>Dirección</span>
                 <div>{province}, Bº {neighborhood}</div>
                 <div>{street}, {number}. {floor}º {apartment}</div>
@@ -75,7 +75,7 @@ const FullAddress = ({province, neighborhood, street,
 
 const MapSection = ({latitude, length}) => {
     return (
-        <div className="section map">
+        <div className="section box map">
             <span>Ver Ubicación</span>
             {/* <span>{latitude}</span>
             <span>{length}</span> */}
@@ -86,7 +86,7 @@ const MapSection = ({latitude, length}) => {
 const Attributes = ({attributes}) => {
     const { t } = useTranslation();
     return (
-        <div className="section attributes">
+        <div className="section box attributes">
             <span>Comodidades</span>
             {attributes?.map( (attr, index) => {
                 return (

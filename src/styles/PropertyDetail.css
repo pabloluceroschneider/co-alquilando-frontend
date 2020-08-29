@@ -2,11 +2,18 @@
 .propertyDetail{
     display: grid;
     place-items: center;
+    margin-top: 10px;
 }
 
 .propertyDetail .section{
     width: 95vw;
     margin-bottom: 10px;
+}
+
+.propertyDetail .section.box{
+    box-shadow: 2px 2px 5px var(--dark-grey);
+    color: var(--letter);
+    padding: 2%;
 }
 
 /* header */
@@ -22,7 +29,6 @@
     display: grid;
     justify-items: right;
     overflow: hidden;
-    border: 1px solid var(--letter);
     height: 50px;
     transition: height 1s;
 }
@@ -35,21 +41,22 @@
     margin-right: 40px;
 }
 
+/* description */
+.propertyDetail .section.description{
+    display: grid;
+    place-items: center;
+}
+
 /* price */
-.propertyDetail .section.price{
+.propertyDetail .section.price .table.price{
     display: grid;
     align-items: center;
     justify-items: right;
     grid-template-columns: auto auto auto auto;
 }
-
-/* description */
-.propertyDetail .section.description{
-    display: grid;
-    place-items: center;
-    color: var(--letter);
+.propertyDetail .section.price .table.price div{
+    border-right: 1px solid var(--grey);
 }
-
 
 /* fullAddress */
 .propertyDetail .section.fullAddress{
@@ -67,6 +74,7 @@
     margin-left: 10%;
     align-items: center;
     justify-items: left;
+    border-bottom: 1px solid var(--grey);
 }
 
 
@@ -115,6 +123,9 @@
         grid-row: 5 / span 2;
     }
    
+    .propertyDetail .section.price .table.price div{
+        padding-right: 25px;
+    }
 
 
 }
