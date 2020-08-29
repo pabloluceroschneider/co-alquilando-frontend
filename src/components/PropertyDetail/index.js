@@ -1,7 +1,8 @@
-import React from 'react'
-import { Carousel, Tag } from 'antd';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Carousel, Tag } from 'antd';
 import ClickeableMap from '../ClickeableMap';
+import ModalShareProperty from '../ModalShareProperty';
 
 const statusColor = {
     available: "green",
@@ -12,10 +13,12 @@ const statusColor = {
 
 const Header = ({status, typology}) => {
     const { t } = useTranslation();
+
     return (
         <div className="section header"> 
             <Tag>{ t(typology) }</Tag>
             <Tag color={statusColor[status]}>{ t(status) }</Tag>
+            <ModalShareProperty />
         </div>
     )
 }
