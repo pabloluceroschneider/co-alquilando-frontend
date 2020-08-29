@@ -110,6 +110,9 @@
     .button-place{
         padding-top: 5%;
     }
+    .button-place button{
+        margin-left: 8px;
+    }
 }
 
 

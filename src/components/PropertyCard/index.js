@@ -1,17 +1,17 @@
-import React from 'react';
-import '../../styles/PropertyCard.css'
-import { Card } from 'antd';
-import { Divider } from 'antd';
-import '../../assets/Icons/Icon/styles.css';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useRouteMatch } from 'react-router';
+import { Card, Divider, Button } from 'antd';
 import CarrouselPequeño from '../CarrouselPequeño';
 import ModalMapa from '../Modal';
 
 
-const propertyCard = props => {
-    const { description, price, address, attributes } = props;
+const PropertyCard = props => {
+    const { description, price, address, attributes, id, photos } = props;
     const { rentPrice } = price;
     const {coordinates} = address;
-    // const { street, number, province } = address
+    const history = useHistory();
+    const { path } = useRouteMatch();
+    const [ photoList, setPhotoList ] = useState([]);
 
     let attr = []
     attributes.forEach(t => {
@@ -22,7 +22,33 @@ const propertyCard = props => {
         "HOUSE": "Casa"
     }
 
-    
+    useEffect(() => {
+        let asyncGet = async () => {
+          photos.forEach( async (photo, index) => {
+            let photoJson = {
+                caption: "", 
+                position: "",
+                imgUrl: `http://localhost:8080/property/${id}/photos/${photo}`
+            }
+            setPhotoList(photoList => [...photoList, photoJson])
+          })
+        }
+        if(photos){
+          asyncGet();
+        }else{
+            let photoJson = {
+                caption: "", 
+                position: "",
+                imgUrl: ""
+            }
+            setPhotoList(photoList => [...photoList, photoJson])
+        }
+      },[id, photos])
+  
+
+    const onEdit = () => {
+        history.push(`/property/${id}/update`)
+    }
 
     return (
 
@@ -32,11 +58,7 @@ const propertyCard = props => {
                 hoverable
                 style={{ width: 260 }}
                 cover={
-                    <CarrouselPequeño className="carruselPC" data={[
-                        { imgUrl: "", caption: "", position: "" },
-                        { imgUrl: "", caption: "", position: "" },
-                        { imgUrl: "", caption: "", position: "" }
-                    ]}>
+                    <CarrouselPequeño className="carruselPC" data={photoList}>
                     </CarrouselPequeño>
                 }
             >
@@ -77,7 +99,12 @@ const propertyCard = props => {
 
                     <>
                     <div className="button-place">
-                    <ModalMapa coordinates={coordinates}/>
+                        <ModalMapa coordinates={coordinates}/>
+                        {path === "/my-properties" &&
+                            <Button onClick={() => onEdit()}>
+                                Editar
+                            </Button>
+                        }
                     </div>
                     </>
 
@@ -91,5 +118,5 @@ const propertyCard = props => {
 
 }
 
-export default propertyCard;
+export default PropertyCard;
 

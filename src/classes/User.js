@@ -27,6 +27,7 @@ class User {
     mapFormToRequest(){
         let formatedUser = {
             ...this.user,
+            userNickname: this.user.userNickname.toLowerCase(),
             attributes: this.mapAttributesToRequest(this.user.attributes)
         }
         delete formatedUser.userConfirmPassword;

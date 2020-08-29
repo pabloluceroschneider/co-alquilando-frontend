@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { SessionContext } from '../../store'
+import React from 'react';
 import { Card, Avatar, Tag } from 'antd';
 import { MessageOutlined} from '@ant-design/icons';
-import ApiRequest from '../../util/ApiRequest';
 
 const { Meta } = Card;
 
@@ -33,8 +31,7 @@ const Name = ({name, coincidence}) => {
 }
 
 const UserCard = ({ user, coincidence }) => {
-	const { userPhoto, userNickname, userName, userSurname, userDescription } = user;
-	const { photoId } = userPhoto;
+	const { photo , userNickname, userName, userSurname, userDescription } = user;
 	const ViewProfile = ({title}) => { return <a href={`profile/${userNickname}`} rel="noopener noreferrer">{title}</a>}
 	return (
 		<Card
@@ -45,7 +42,7 @@ const UserCard = ({ user, coincidence }) => {
 			]}
 		>
 			<Meta
-				avatar={<Avatar src={photoId} style={{backgroundColor:"#AED6F1", color:"#154360"}}> {userName[0].toUpperCase()} </Avatar>}
+				avatar={<Avatar src={photo?.photoId} style={{backgroundColor:"#AED6F1", color:"#154360"}}> {userName[0].toUpperCase()} </Avatar>}
 				title={<Name name={userName+" "+userSurname} coincidence={coincidence} />}
 				description={<Description desc={userDescription} coincidence={coincidence} />}
 			/>
@@ -53,28 +50,4 @@ const UserCard = ({ user, coincidence }) => {
 	);
 };
 
-const Match = () => {
-	const [ users, setUsers ] = useState(null);
-	const { state } = useContext(SessionContext);
-
-
-	useEffect(() => {
-		let asyncGet = async () => {
-			let { data } = await ApiRequest.get(`/user/match/${state.user.id}`);
-			setUsers(data);
-		};
-		asyncGet();
-	}, [state.user]);
-
-	return (
-		<div className="match">
-			<h1>Listado de usuarios por preferencias</h1>
-			{users &&
-				users.map( (u, index) => {
-					return <UserCard key={index} {...u} />;
-				})}
-		</div>
-	);
-};
-
-export default  Match
+export default UserCard;

@@ -4,11 +4,13 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import Home from './home';
 import SignIn from './signIn';
 import Profile from './profile/index';
+import MyProfile from './profile/myProfile';
 import UpdateForm from './profile/updateProfile';
 import Property from './property';
 import UpdatePreferenciesForm from './profile/updatePreferenciesProfile';
 import PropertyList from "./propertyList";
 import MyProperties from "./my-properties";
+import Roommates from "./roommates";
 import FormPropertyUpdate from './property/updateProperty';
 import UserHome from '../routes/userHome';
 import Chat from '../components/Chat';
@@ -22,14 +24,16 @@ const Routes = () => {
 				{state.user ? (
 					<Switch>
 						<Route exact path="/" component={UserHome} />
-						<Route path="/profile/updatePreferencies" exact component={UpdatePreferenciesForm} />
-						<Route path="/profile/update" exact component={UpdateForm} />
-						<Route path="/profile/:nickname" component={Profile} />
+						<Route path="/my-profile/updatePreferencies" exact component={UpdatePreferenciesForm} />
+						<Route path="/my-profile/update" exact component={UpdateForm} />
+						<Route path="/my-profile" exact component={MyProfile} />
+						<Route path="/profile/:nickname" exact component={Profile} />
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
 						<Route path="/property" exact component={Property} />
 						<Route path="/properties" exact component={PropertyList} />
 						<Route path="/chat" exact component={Chat} />
 						<Route path="/my-properties" exact component={MyProperties} />
+						<Route path="/roommates" exact component={Roommates} />
 						<Redirect from="*" to="/"/>
 					</Switch>
 				) : (
