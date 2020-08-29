@@ -75,8 +75,9 @@ const FullAddress = ({province, neighborhood, street,
 
 const MapSection = ({latitude, length}) => {
     return (
-        <div className="section box map">
+        <div className="section map">
             <span>Ver Ubicación</span>
+            <img key={latitude} src={"https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2018/08/fotos-perfil-whatsapp_16.jpg?itok=fl2H3Opv"} alt={latitude} />
             {/* <span>{latitude}</span>
             <span>{length}</span> */}
         </div>

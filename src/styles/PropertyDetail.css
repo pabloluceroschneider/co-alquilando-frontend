@@ -27,6 +27,8 @@
 
 /* map */
 .propertyDetail .section.map{
+    border: 1px solid black;
+    position: relative;
     display: grid;
     justify-items: right;
     overflow: hidden;
@@ -37,7 +39,9 @@
     height: 400px;
 }
 .propertyDetail .section.map span{
-    margin-right: 40px;
+    position: absolute;
+    margin: 15px 40px 0px 0px;
+    color: white;
 }
 
 /* description */
