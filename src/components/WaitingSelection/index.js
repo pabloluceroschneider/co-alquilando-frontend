@@ -1,12 +1,10 @@
 import React from 'react';
-import { SendOutlined } from '@ant-design/icons';
 
-
-const WaitingSelection = ({message, render}) => {
+const WaitingSelection = ({message, render, icon}) => {
     return (
         <div className={`waiting-selection ${!!render}`}>
             <div className="container">
-                <SendOutlined />
+                {icon}
                 <div>{message}</div>
             </div>
         </div>
