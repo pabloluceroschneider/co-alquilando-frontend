@@ -10,10 +10,10 @@ const Group = ({name, link}) => {
         history.push(`/groups/${link}`);
     }
     return (
-        <div className="detail">
+        <div className="detail" onClick={handleClick} >
             <div className="header">
                 <div className="name">{name}</div>
-                <ArrowRightOutlined onClick={handleClick} />
+                <ArrowRightOutlined />
             </div>
             <div className="info">
                 <div>

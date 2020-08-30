@@ -25,6 +25,7 @@
 @import './GroupList.css';
 @import './GroupDetail.css';
 @import './Chat.css';
+@import './WaitingSelection.css';
 
 body {
   --principal-blue: rgb(58,78,122);

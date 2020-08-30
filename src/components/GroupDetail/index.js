@@ -7,7 +7,7 @@ const Item = ({ name, link }) => {
 	let history = useHistory();
 
 	const handleClick = () => {
-		history.push(`/groups/${link}`);
+		history.push(`/groups/${link}/chat/${link}`);
 	};
 
 	function date() {
@@ -17,7 +17,7 @@ const Item = ({ name, link }) => {
 		return h + ':' + m;
 	}
 	return (
-		<div className="item">
+		<div className="item" onClick={handleClick}>
 			<Avatar />
 			<div className="name-msg">
 				<div className="name">Name</div>
@@ -29,8 +29,11 @@ const Item = ({ name, link }) => {
 };
 
 const Votation = () => {
+	const handleClick = () => {
+		alert("Funcionalidad En Contrucción!")
+	};
 	return (
-		<div className="item">
+		<div className="item" onClick={handleClick}>
 			<StarFilled />
 			<div className="name-msg">
 				<div className="name">Votaciones</div>

@@ -3,14 +3,13 @@
     display: grid;
     place-items: center;
     grid-template-columns: auto;
-}
-
-/* .groups-container div{
+    align-items: center;
+    justify-items: center;
     height: 85vh;
-} */
+}
 
 @media only screen and (min-width: 600px){
     .groups-container{
-        grid-template-columns: auto auto auto;
+        grid-template-columns: 30% 35% 35%;
     }
 }
