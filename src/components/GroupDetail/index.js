@@ -48,9 +48,10 @@ const Info = () => {
         </div>);
 };
 
-const GroupList = () => {
+const GroupDetail = ({render}) => {
+	console.log("GroupDetail -->",render)
 	return (
-		<div className="group-detail">
+		<div className={`group-detail ${!!render}`}>
 			<Info />
 			<Votation />
 			<Item name={'Grupo 1'} link="1" />
@@ -59,4 +60,4 @@ const GroupList = () => {
 		</div>
 	);
 };
-export default GroupList;
+export default GroupDetail;

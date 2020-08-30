@@ -1,8 +1,12 @@
 
+.group-detail.false{
+    display: none; 
+}
 .group-detail{
     display: grid; 
     grid-template-columns: auto;
     place-items: center;
+    width: 100%;
 }
 
 .group-detail .info{
@@ -19,7 +23,7 @@
     grid-template-columns: 15% 75% 10%;
     place-items: center;
     min-height: 10vh;
-    width: 90vw;
+    width: 90%;
     border-bottom: 1px solid var(--dark-grey);
     padding: 2%;
     margin-bottom: 2%;
@@ -44,7 +48,11 @@
     align-items: baseline;
 }
 
-
+@media only screen and (min-width: 600px){
+    .group-detail.false{
+        display: grid; 
+    }
+}
 
 
 

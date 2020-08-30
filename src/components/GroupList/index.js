@@ -24,9 +24,10 @@ const Group = ({name, link}) => {
 }
 
 
-const GroupList = () => {
+const GroupList = ({render}) => {
+    console.log("GroupList -->",render)
     return (
-        <div className="group-list">
+        <div className={`group-list ${!!render}`}>
             <Group name={"Grupo 1"} link="1"/>
             <Group name={"Grupo 2"} link="2"/>
             <Group name={"Grupo 3"} link="3"/>

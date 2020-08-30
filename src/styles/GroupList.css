@@ -1,14 +1,18 @@
 
+.group-list.false{
+    display: none; 
+}
 .group-list{
     display: grid; 
     grid-template-columns: auto;
     place-items: center;
+    width: 100%;
 }
 
 .group-list .detail{
     display: grid; 
     min-height: 10vh;
-    width: 85vw;
+    width: 85%;
     margin: 2%;
     padding: 2%;
     border-bottom: 1px solid var(--dark-grey);
@@ -27,3 +31,8 @@
     color: var(--primary-blue)
 }
 
+@media only screen and (min-width: 600px){
+    .group-list.false{
+        display: grid; 
+    }
+}
