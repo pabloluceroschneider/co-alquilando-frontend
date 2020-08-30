@@ -30,7 +30,8 @@
     width: 100%;
     border-bottom: 1px solid var(--dark-grey);
     padding: 2%;
-    margin-bottom: 2%;
+    margin: 0% 2% 0% 2%;
+
 }
 
 .group-detail .item .name-msg{

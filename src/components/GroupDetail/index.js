@@ -17,7 +17,7 @@ const Item = ({ name, link }) => {
 		return h + ':' + m;
 	}
 	return (
-		<div className="item" onClick={handleClick}>
+		<div className="item clickeable" onClick={handleClick}>
 			<Avatar />
 			<div className="name-msg">
 				<div className="name">Name</div>

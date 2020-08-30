@@ -17,7 +17,7 @@
     display: grid; 
     min-height: 10vh;
     width: 100%;
-    margin: 2%;
+    margin: 0% 2% 0% 2%;
     padding: 2%;
     border-bottom: 1px solid var(--dark-grey);
 }
