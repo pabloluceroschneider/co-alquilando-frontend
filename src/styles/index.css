@@ -22,6 +22,8 @@
 @import './Groups.css';
 @import './SideList.css';
 @import './H-Scroll-List.css';
+@import './GroupList.css';
+@import './GroupDetail.css';
 
 body {
   --principal-blue: rgb(58,78,122);

@@ -1,0 +1,29 @@
+
+.group-list{
+    display: grid; 
+    grid-template-columns: auto;
+    place-items: center;
+}
+
+.group-list .detail{
+    display: grid; 
+    min-height: 10vh;
+    width: 85vw;
+    margin: 2%;
+    padding: 2%;
+    border-bottom: 1px solid var(--dark-grey);
+}
+.group-list .detail .header{
+    display: grid;
+    grid-template-columns: 90% 10%;
+    align-items:center;
+    justify-items: left;
+}
+.group-list .detail .header .name{
+    font-size: 2em;
+}
+.group-list .detail .header span{
+    font-size: 2em;
+    color: var(--primary-blue)
+}
+

@@ -1,0 +1,50 @@
+
+.group-detail{
+    display: grid; 
+    grid-template-columns: auto;
+    place-items: center;
+}
+
+.group-detail .info{
+    display: grid; 
+    place-items: center;
+    width: 90%;
+    border: 1px solid #dbdbdb;
+    padding: 5%;
+    box-shadow: 0px 0px 2px var(--dark-grey);
+}
+
+.group-detail .item{
+    display: grid; 
+    grid-template-columns: 15% 75% 10%;
+    place-items: center;
+    min-height: 10vh;
+    width: 90vw;
+    border-bottom: 1px solid var(--dark-grey);
+    padding: 2%;
+    margin-bottom: 2%;
+}
+
+.group-detail .item .name-msg{
+    display: grid;
+    width: 100%;
+    align-items: center;
+    justify-items: left;
+}
+
+.group-detail .item .name-msg .name{
+    font-size: 1.1em ;
+
+}
+.group-detail .item .name-msg .msg{
+    font-size: 0.9em ;
+}
+
+.group-detail .item .hour{
+    align-items: baseline;
+}
+
+
+
+
+
