@@ -6,6 +6,7 @@
     align-items: center;
     justify-items: center;
     height: 85vh;
+    cursor: default;
 }
 
 @media only screen and (min-width: 600px){
