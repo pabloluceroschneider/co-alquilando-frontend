@@ -12,8 +12,11 @@
 }
 .waiting-selection .container span{
     font-size: 2em;
-
 }
+.waiting-selection .container span[aria-label="send"]{
+    transform: rotate(-30deg);
+}
+
 .waiting-selection .container div{
     font-size: 2em;
 }
