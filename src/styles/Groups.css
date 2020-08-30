@@ -11,6 +11,6 @@
 
 @media only screen and (min-width: 600px){
     .groups-container{
-        grid-template-columns: auto auto;
+        grid-template-columns: auto auto auto;
     }
 }

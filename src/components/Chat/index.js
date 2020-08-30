@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 
-const App = () => {
+const ChatContainer = ({render}) => {
     return (
-        <div>Chat</div>
+        <div className={`chat-container ${!!render}`}>
+            ChatContainer
+        </div>
     )
 }
-export default App;
+export default ChatContainer;

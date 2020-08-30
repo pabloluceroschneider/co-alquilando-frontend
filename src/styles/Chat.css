@@ -1,0 +1,10 @@
+
+.chat-container.false{
+    display: none;
+}
+
+@media only screen and (min-width: 600px){
+    .chat-container.false{
+        display: grid;
+    }
+}
