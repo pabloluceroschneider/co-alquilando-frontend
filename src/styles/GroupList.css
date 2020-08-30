@@ -5,15 +5,18 @@
 .group-list{
     display: grid; 
     grid-template-columns: auto;
-    place-items: center;
-    width: 100%;
+    align-items: baseline;
+    justify-items: center;
+    width: 95%;
     height: 100%;
 }
-
+.group-list .container{
+    width: 100%;
+}
 .group-list .detail{
     display: grid; 
     min-height: 10vh;
-    width: 85%;
+    width: 100%;
     margin: 2%;
     padding: 2%;
     border-bottom: 1px solid var(--dark-grey);

@@ -55,11 +55,13 @@ const GroupDetail = ({render}) => {
 	console.log("GroupDetail -->",render)
 	return (
 		<div className={`group-detail ${!!render}`}>
-			<Info />
-			<Votation />
-			<Item name={'Grupo 1'} link="1" />
-			<Item name={'Grupo 2'} link="2" />
-			<Item name={'Grupo 3'} link="3" />
+            <div className="container">
+				<Info />
+				<Votation />
+				<Item name={'Grupo 1'} link="1" />
+				<Item name={'Grupo 2'} link="2" />
+				<Item name={'Grupo 3'} link="3" />
+			</div>
 		</div>
 	);
 };
