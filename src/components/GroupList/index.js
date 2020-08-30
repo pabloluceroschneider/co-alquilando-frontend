@@ -13,7 +13,7 @@ const Group = ({name, link}) => {
         <div className="detail">
             <div className="header">
                 <div className="name">{name}</div>
-                <ArrowRightOutlined onClick={handleClick} style={{color:"#5e83ba"}} />
+                <ArrowRightOutlined onClick={handleClick} />
             </div>
             <div className="info">
                 <div>

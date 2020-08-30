@@ -28,7 +28,7 @@
 }
 .group-list .detail .header span{
     font-size: 2em;
-    color: var(--primary-blue)
+    color: #5e83ba;
 }
 
 @media only screen and (min-width: 600px){
