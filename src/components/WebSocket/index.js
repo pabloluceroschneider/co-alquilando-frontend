@@ -28,8 +28,8 @@ class WebSocket extends React.Component {
   sendMessage = (msg, selfMsg) => {
     console.log("Enviando mensaje",selfMsg)
     try {
-      selfMsg = {...selfMsg, groupId: "groupId"}
-      this.clientRef.sendMessage("/app/all-interno", JSON.stringify(selfMsg));
+      selfMsg = {...selfMsg, groupId: "groupId"} /**Debemos enviar el groupId al back */
+      this.clientRef.sendMessage("/app/all-interno", JSON.stringify(selfMsg));  /**Este topico donde se publica se debe customizar -> groupId-intern  // groupId-owner  */
       return true;
     } catch(e) {
       return false;
@@ -52,7 +52,7 @@ class WebSocket extends React.Component {
           currentUser={ this.randomUserName } messages={ this.state.messages }
           onSendMessage={ this.sendMessage } connected={ this.state.clientConnected }/> }
 
-        <SockJsClient url={ wsSourceUrl } topics={["/topic/all"]}
+        <SockJsClient url={ wsSourceUrl } topics={["/topic/all"]} /**Este topico se debe customizar donde se escuchen los msj -> groupId-intern  // groupId-owner  */
           onMessage={ this.onMessageReceive } ref={ (client) => { this.clientRef = client }}
           onConnect={ () => { this.setState({ clientConnected: true }) } }
           onDisconnect={ () => { this.setState({ clientConnected: false }) } }
