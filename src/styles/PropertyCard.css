@@ -108,7 +108,8 @@
         padding-right: 3%;
     }
     .button-place{
-        padding-top: 5%;
+        display: grid;
+        grid-template-columns: auto auto auto;
     }
     .button-place button{
         margin-left: 8px;
