@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Checkbox } from "antd";
+import { Form, Input, Checkbox, InputNumber } from "antd";
 import Select from "./Select";
 import Upload from "./Upload";
 import DatePicker from "./DatePicker";
@@ -22,8 +22,10 @@ const InputRepository = props => {
         return <Input />;
       case "Input.Password":
         return <Input.Password />;
-      case "Input.Number":
-        return <Input.Number />;
+      case "InputNumber":
+        return <InputNumber />
+      case "Input.Currency":
+        return <Input prefix="$" />
       case "Input.TextArea":
         return <Input.TextArea />;
       case "Checkbox":
