@@ -13,7 +13,8 @@ import MyProperties from "./my-properties";
 import Roommates from "./roommates";
 import FormPropertyUpdate from './property/updateProperty';
 import UserHome from '../routes/userHome';
-import Chat from '../components/chat';
+import Chat from '../components/Chat';
+import Groups from './groups';
 
 const Routes = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
@@ -31,9 +32,11 @@ const Routes = () => {
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
 						<Route path="/property" exact component={Property} />
 						<Route path="/properties" exact component={PropertyList} />
-						<Route path="/chat" exact component={Chat} />
 						<Route path="/my-properties" exact component={MyProperties} />
 						<Route path="/roommates" exact component={Roommates} />
+						<Route path="/groups/:group/chat/:chat" component={Groups} />
+						<Route path="/groups/:group" component={Groups} />
+						<Route path="/groups" exact component={Groups} />
 						<Redirect from="*" to="/"/>
 					</Switch>
 				) : (

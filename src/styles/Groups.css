@@ -1,0 +1,16 @@
+
+.groups-container{
+    display: grid;
+    place-items: center;
+    grid-template-columns: auto;
+    align-items: center;
+    justify-items: center;
+    height: 85vh;
+    cursor: default;
+}
+
+@media only screen and (min-width: 600px){
+    .groups-container{
+        grid-template-columns: 30% 35% 35%;
+    }
+}

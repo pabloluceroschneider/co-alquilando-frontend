@@ -31,12 +31,12 @@ const Chat = ()=>{
 
   return(
     <div className="chatContainer">
-      <div className="groupContainer">
+      {/* <div className="groupContainer">
        
       </div>
       <div className="talkContainer">
       
-      </div>
+      </div> */}
       <div className="msgContainer">
         <WebSocket name={state.user.userNickname} id={state.user.id}/>
       </div>
@@ -47,4 +47,11 @@ const Chat = ()=>{
 
 }
 
-export default Chat
+const ChatContainer = ({render}) => {
+    return (
+        <div className={`chat-container ${!!render}`}>
+            <Chat />
+        </div>
+    )
+}
+export default ChatContainer;
