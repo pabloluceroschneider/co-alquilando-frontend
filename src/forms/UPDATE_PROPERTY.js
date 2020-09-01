@@ -1,3 +1,5 @@
+import provinces from '../util/provinces.js'
+
 const propertyFields = {
 	name: 'property',
 	layout: 'vertical',
@@ -99,7 +101,16 @@ const propertyFields = {
 				{
 					label: 'Provincia',
 					name: [ 'address', 'province' ],
-					component: 'Input',
+					component: 'Select',
+					options: provinces,
+					required: true
+				}
+			],
+			[
+				{
+					label: 'Geolocalizacion',
+					name: 'coordinates',
+					component: 'Map',
 					required: true
 				}
 			],
