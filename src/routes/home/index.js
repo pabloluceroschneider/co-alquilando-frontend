@@ -20,7 +20,7 @@ const Home = () => {
     }
     
     return (
-		<ContentWrapper header footer>
+		<ContentWrapper topNav footer>
             <div>
                 <div >
                     <Carrousel data={[

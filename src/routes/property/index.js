@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { SessionContext } from "../../store";
 import ApiRequest from "../../util/ApiRequest";
 import { Form, notification } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
@@ -21,15 +22,15 @@ const propertyData = {
       [
         {
           label: "Tipología",
-					name: ["attributes", "typology"],
-					component: "Select",
-					options : [
-						{ name: "Departamento", value: "APARMENT"},
-						{ name: "Casa", value: "HOUSE"},
-						{ name: "Otro", value: "NOT_DEFINED"}
+          name: ["attributes", "typology"],
+          component: "Select",
+          options: [
+            { name: "Departamento", value: "APARMENT" },
+            { name: "Casa", value: "HOUSE" },
+            { name: "Otro", value: "NOT_DEFINED" },
           ],
-          required:true
-				},
+          required: true,
+        },
         {
           label: "Cantidad de personas",
           name: ["attributes", "amountPeople"],
@@ -56,13 +57,13 @@ const propertyData = {
           label: "Descripción",
           name: "description",
           component: "Input.TextArea",
-          required: true,
         },
+      ],
+      [
         {
           label: "Cargar Imagen",
-          name: "propertyPhoto",
+          name: "photos",
           component: "Upload",
-          required: true,
         },
       ],
       [
@@ -111,13 +112,21 @@ const propertyData = {
       ],
       [
         {
+          label: "Geolocalizacion",
+          name: "coordinates",
+          component: "Map",
+          required: true,
+        },
+      ],
+      [
+        {
           label: "Precio",
           component: "h2",
         },
       ],
       [
         {
-          label: "Monto",
+          label: "Alquiler",
           name: ["price", "rentPrice"],
           component: "Input",
           required: true,
@@ -233,9 +242,15 @@ const propertyData = {
 
 const usePostProperty = (values) => {
   const [response, setResponse] = useState(null);
+  const { state } = useContext(SessionContext);
+
   useEffect(() => {
     if (values) {
-      var atributos = Object.entries(values.attributes);
+      values.address = { ...values.address, coordinates: values.coordinates };
+      delete values.coordinates;
+      let atributos = Object.entries(values.attributes);
+      console.log("values", values);
+      console.log("atributos", atributos);
       const attributesFormate = atributos.map((a) => {
         let json = {
           attributeType: a[0],
@@ -248,25 +263,67 @@ const usePostProperty = (values) => {
       let formatedBody = {
         ...values,
         attributes: attributesFormate,
-        ownerId: "5f010068285a9156b2b4c7dd",
+        ownerId: state.user.id,
         status: "available",
       };
 
-      let bodyReq = formatedBody;
-      let asyncPost = async () => {
+	  let bodyReq = formatedBody;
+	  delete bodyReq.photos
+
+      let createProperty = new Promise(async (res, rej) => {
         try {
           let ok = await ApiRequest.post("/property", bodyReq);
-          setResponse(ok);
+          res(ok);
         } catch (e) {
-          notification.error({
-            message: `Error: ${e.message}`,
-            placement: "bottomLeft",
-          });
+          rej(e);
         }
-      };
-      asyncPost();
+      });
+
+      createProperty.then((property) => {
+        console.log("Property ->", property, "Body request ->", bodyReq);
+
+        if (values && values.photos) {
+          var plist = values.photos.file.fileList;
+
+          const formData = new FormData();
+          formData.append("type", "file");
+          for (const ph in plist) {
+            console.log(plist[ph].originFileObj);
+            let phLast = plist[ph].originFileObj;
+
+            formData.append("photos", phLast);
+          }
+
+          let header = {
+            "Content-Type": "multipart/form-data",
+          };
+
+          let asyncPutPhoto = async () => {
+            await ApiRequest.multipartPut(
+              `/property/${property.data.id}/photos`,
+              formData,
+              header
+            ).then((res) => {
+			  console.log(res);
+			  setResponse(res)
+              if (res.status === 200) {
+                notification.success({
+                  message: `Datos Actualizados`,
+                  placement: "bottomLeft",
+                });
+              } else {
+                notification.error({
+                  message: `Error: No se pudo actualizar sus datos`,
+                  placement: "bottomLeft",
+                });
+              }
+            });
+          };
+          asyncPutPhoto();
+        }
+      });
     }
-  }, [values]);
+  }, [values, state]);
   return response;
 };
 
@@ -275,7 +332,7 @@ const Property = () => {
   const [form] = Form.useForm();
 
   let property = usePostProperty(values);
-
+  console.log("asdasdasda", values);
   useEffect(() => {
     if (property) {
       console.log(property);
@@ -285,11 +342,13 @@ const Property = () => {
       });
       form.resetFields();
     }
-  }, [property,form]);
+  }, [property, form]);
 
   return (
-    <ContentWrapper header footer>
-      <CustomizedForm form={form} data={propertyData} onfinish={setValues} />
+    <ContentWrapper topNav optionsNav>
+      <div className="form-property">
+        <CustomizedForm form={form} data={propertyData} onfinish={setValues} />
+      </div>
     </ContentWrapper>
   );
 };

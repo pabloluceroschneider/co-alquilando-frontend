@@ -4,7 +4,6 @@ import Mapa from "../Map";
 
 const ModalMap = (props) => {
 const {coordinates} = props;
-const {latitude, length} = coordinates;
   const [visible, setVisible] = useState(false);
 
   const showModal = () => {
@@ -16,8 +15,8 @@ const {latitude, length} = coordinates;
     setVisible(false);
   };
   const location = {
-    lat: parseFloat(latitude),
-    lng: parseFloat(length),
+    lat: parseFloat(coordinates?.latitude),
+    lng: parseFloat(coordinates?.length),
 }
 
   return (

@@ -4,3 +4,15 @@
     min-Height: 610px;
     text-align: center;
 }
+
+span.content-wrapper{
+    display: block;
+    margin: 20px;
+    margin-left: 10%;
+    font-size: 2em;
+}
+
+/* pantalla de escritorio */
+@media only screen and (min-width: 600px){
+
+}

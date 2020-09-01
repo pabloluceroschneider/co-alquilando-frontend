@@ -182,7 +182,7 @@ const UpdateForm = (props) => {
               message: `Datos Actualizados`,
               placement: "bottomLeft",
             });
-            history.push(`/profile/${bodyReq.userNickname}`);
+            history.push(`/my-profile`);
           } else {
             notification.error({
               message: `Error: No se pudo actualizar sus datos`,
@@ -232,7 +232,7 @@ const UpdateForm = (props) => {
   }, [idUser, history, fields]);
 
   return (
-    <ContentWrapper header footer>
+    <ContentWrapper topNav>
       <CustomizedForm form={form} data={userData} onfinish={setFields} />
     </ContentWrapper>
   );
