@@ -27,7 +27,7 @@ const propertyFields = {
 				{
 					label: 'Cantidad de personas',
 					name: [ 'attributes', 'amountPeople' ],
-					component: 'Input',
+					component: 'InputNumber',
 					required: true
 				}
 			],
@@ -42,17 +42,7 @@ const propertyFields = {
 					label: 'Baños',
 					name: [ 'attributes', 'bathrooms' ],
 					component: 'InputNumber',
-                    required: true,
-                    validate: ({ getFieldValue }) => ({
-						validator() {
-                            let bathrooms = getFieldValue([ 'attributes', 'bathrooms' ])
-						    if( typeof parseInt(bathrooms) !== "number"){
-								return Promise.reject('Ingrese valor numérico');
-							}else{
-								return Promise.resolve()
-							}
-                        },
-                    })
+                    required: true
 				}
 			],
 			[
