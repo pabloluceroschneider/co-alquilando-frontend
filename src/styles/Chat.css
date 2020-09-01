@@ -1,22 +1,24 @@
-.chatContainer{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+
+.talk-box-wrapper.custom{
+    height: 85vh;
+    width: 90%;
+    margin-left: 5%;
 }
 
-.groupContainer{
-    width: 25%;
-    border: solid 2px;
+.talk-box-wrapper.custom .talk-box-header{
+    height: 10%;
 }
 
-.talkContainer{
-    width: 25%;
-    border: solid 2px;
+.talk-box-wrapper.custom .talk-box-body{
+    height: 80%;
 }
 
-.msgContainer{
-    width: 50%;
-    border: solid 2px;
+.talk-box-wrapper.custom .talk-input-wrapper{
+    height: 10%;
+}
+
+.talk-box-wrapper.custom .talk-input-wrapper .talk-input-raw{
+    height: 100%;
 }
 
 .chat-container.false{
