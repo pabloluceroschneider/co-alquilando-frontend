@@ -34,7 +34,7 @@ const OptionsNav = () => {
 						}}
 						key={element.link}
 					>
-						<span>{element.title}</span>
+						<span className="itemMenuTitle">{element.title}</span>
 					</div>
 				);
 			})}

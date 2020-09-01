@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useRouteMatch } from 'react-router';
 import { Card, Divider, Button } from 'antd';
+import { EditOutlined, EyeOutlined } from '@ant-design/icons'
 import CarrouselPequeño from '../CarrouselPequeño';
 import ModalMapa from '../Modal';
 
@@ -14,9 +15,11 @@ const PropertyCard = props => {
     const [ photoList, setPhotoList ] = useState([]);
 
     let attr = []
-    attributes.forEach(t => {
-        attr = { ...attr, [t.attributeType]: t.value }
-    })
+    if(attributes){
+        attributes.forEach(t => {
+            attr = { ...attr, [t.attributeType]: t.value }
+        })
+    }
     let typologies = {
         "APARMENT": "Departamento",
         "HOUSE": "Casa"
@@ -48,6 +51,10 @@ const PropertyCard = props => {
 
     const onEdit = () => {
         history.push(`/property/${id}/update`)
+    }
+
+    const redirectDetail = () => {
+        history.push(`/property/${id}`)
     }
 
     return (
@@ -102,9 +109,12 @@ const PropertyCard = props => {
                         <ModalMapa coordinates={coordinates}/>
                         {path === "/my-properties" &&
                             <Button onClick={() => onEdit()}>
-                                Editar
+                                <EditOutlined />
                             </Button>
                         }
+                        <Button onClick={() => redirectDetail()}>
+                            <EyeOutlined />
+                        </Button>
                     </div>
                     </>
 
