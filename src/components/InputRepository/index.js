@@ -22,8 +22,8 @@ const InputRepository = props => {
         return <Input />;
       case "Input.Password":
         return <Input.Password />;
-      case "Input.Number":
-        return <Input.Number />;
+      case "Input.Currency":
+        return <Input prefix="$" />
       case "Input.TextArea":
         return <Input.TextArea />;
       case "Checkbox":
