@@ -13,7 +13,7 @@ import MyProperties from "./my-properties";
 import Roommates from "./roommates";
 import FormPropertyUpdate from './property/updateProperty';
 import UserHome from '../routes/userHome';
-import Chat from '../components/Chat';
+import Chat from '../components/chat';
 
 const Routes = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);

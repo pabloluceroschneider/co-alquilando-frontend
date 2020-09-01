@@ -10,8 +10,6 @@ class WebSocket extends React.Component {
   constructor(props) {
     super(props);
     // randomUserId is used to emulate a unique user id for this demo usage
-    this.randomUserName = UsernameGenerator.generateUsername("-");
-    this.randomUserId = randomstring.generate();
     this.state = {
       clientConnected: false,
       messages: []
@@ -28,7 +26,7 @@ class WebSocket extends React.Component {
   sendMessage = (msg, selfMsg) => {
     console.log("Enviando mensaje",selfMsg)
     try {
-      selfMsg = {...selfMsg, groupId: "groupId"} /**Debemos enviar el groupId al back */
+      selfMsg = {...selfMsg, groupId: "5f4d92950d66e7547ab1306d"} /**Debemos enviar el groupId al back */
       this.clientRef.sendMessage("/app/all-interno", JSON.stringify(selfMsg));  /**Este topico donde se publica se debe customizar -> groupId-intern  // groupId-owner  */
       return true;
     } catch(e) {
@@ -48,11 +46,11 @@ class WebSocket extends React.Component {
     const wsSourceUrl = "http://localhost:8080/handler";
     return (
       <div>
-        { <TalkBox topic="react-websocket-template" currentUserId={ this.randomUserId }
-          currentUser={ this.randomUserName } messages={ this.state.messages }
+        { <TalkBox topic="react-websocket-template" currentUserId={ this.props.id }
+          currentUser={ this.props.name } messages={ this.state.messages }
           onSendMessage={ this.sendMessage } connected={ this.state.clientConnected }/> }
 
-        <SockJsClient url={ wsSourceUrl } topics={["/topic/all"]} /**Este topico se debe customizar donde se escuchen los msj -> groupId-intern  // groupId-owner  */
+<SockJsClient url={ wsSourceUrl } topics={["/topic/all"]} /**Este topico se debe customizar donde se escuchen los msj -> groupId-intern  // groupId-owner  */
           onMessage={ this.onMessageReceive } ref={ (client) => { this.clientRef = client }}
           onConnect={ () => { this.setState({ clientConnected: true }) } }
           onDisconnect={ () => { this.setState({ clientConnected: false }) } }
