@@ -25,6 +25,11 @@
     justify-items: center;
 }
 
+/* carrousel */
+.propertyDetail .section.carrousel img{
+    max-height: 400px;
+}
+
 /* map */
 .propertyDetail .section.map{
     position: relative;
