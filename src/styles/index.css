@@ -19,7 +19,7 @@
 @import './PropertyList.css';
 @import './PropertyCard.css';
 @import './PropertyDetail.css';
-@import './ModalShareProperty.css';
+@import './ModalAsyncList.css';
 @import './ContentWrapper.css';
 
 body {

@@ -1,9 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Carousel, Tag } from 'antd';
+import { SendOutlined, TeamOutlined } from '@ant-design/icons';
 import Property from '../../classes/Property';
 import ClickeableMap from '../ClickeableMap';
-import ModalShareProperty from '../ModalShareProperty';
+import ModalAsyncList from '../ModalAsyncList';
 
 const statusColor = {
     available: "green",
@@ -19,7 +20,12 @@ const Header = ({status, typology}) => {
         <div className="section header"> 
             <Tag>{ t(typology) }</Tag>
             <Tag color={statusColor[status]}>{ t(status) }</Tag>
-            <ModalShareProperty />
+            <ModalAsyncList 
+                label={<Tag icon={<SendOutlined />} color="#5e83ba">Compartir en Grupo</Tag>} 
+                title={<div><TeamOutlined />Seleccione Grupo</div>}
+                endpoint={`/user/users`}
+                itemTitle="userName"
+                />
         </div>
     )
 }
