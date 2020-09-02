@@ -1,7 +1,6 @@
 .options-container{
-	display: grid;
-	grid-template-columns: auto auto;
-	justify-items: center;
+	display: flex;
+	flex-direction: column;
 	width: 90vw;
 	margin-left: 5vw;
 	border-bottom: 1px solid var(--dark-grey);
@@ -10,26 +9,40 @@
 
 .options-container .link-component{
 	display: flex;
-    align-items: center;
+	align-items: center;
+	
+	font-size: 18px;
 	justify-content: center;
 	min-height: 45px;
 	width: 95%;
 	margin-bottom: 10px;
-	border-radius: 5px 10px;
+}
+
+.itemMenuTitle {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+	font-weight: 600 !important;
+	letter-spacing: 0.6px;
+	width: 100%;
+	text-align: center;
+}
+
+.options-container .link-component .itemMenuTitle:hover{
+	font-weight: 700 !important;
 }
 
 .options-container .link-component:hover{
-	opacity: 0.8;
+	
+	box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
 }
 .options-container .link-component.current{
-	background: var(--secondary-blue);
-	font-weight: bold;
-	color: var(--grey);
+	background: var(--principal-blue);
+	
+	color: #f5f5f5;
 	box-shadow: 2px 2px 5px #FAFAFA;
 }
 
 .options-container .link-component{
-	background: linear-gradient(-45deg, #FAFAFA, #b9b9b9);
+	background:  #dddddd;
 }
 
 /* Desktop View  */

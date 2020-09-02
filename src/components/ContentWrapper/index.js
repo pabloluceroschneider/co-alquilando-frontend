@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from '../../containers/Nav';
+import Breadscrumb from '../Breadscrumb';
 import OptionsNav from '../../containers/OptionsNav';
 
 
@@ -10,6 +11,7 @@ const ContentWrapper = props => {
 
         { props.topNav && <Nav />  }
         { props.optionsNav && <OptionsNav /> }
+        { props.breadscrumb && <Breadscrumb paths={props.breadscrumb}/> }
         { props.title && <span className="content-wrapper">{props.title}</span> }
         { props.children }
 

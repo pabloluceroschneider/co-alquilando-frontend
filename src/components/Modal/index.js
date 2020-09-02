@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button } from "antd";
+import { PushpinOutlined } from '@ant-design/icons';
 import Mapa from "../Map";
 
 const ModalMap = (props) => {
@@ -21,8 +22,8 @@ const {coordinates} = props;
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Ver Ubicación
+      <Button onClick={showModal}>
+        <PushpinOutlined />
       </Button>
       <Modal
         title="Ubicación"
