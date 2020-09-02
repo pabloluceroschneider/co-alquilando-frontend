@@ -22,7 +22,7 @@ const {coordinates} = props;
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button onClick={showModal}>
         <PushpinOutlined />
       </Button>
       <Modal

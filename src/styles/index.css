@@ -18,14 +18,17 @@
 @import './OptionsNav.css';
 @import './PropertyList.css';
 @import './PropertyCard.css';
+@import './PropertyDetail.css';
+@import './ModalAsyncList.css';
 @import './ContentWrapper.css';
 
 body {
-  --principal-blue: rgb(58,78,122);
-  --secondary-blue: rgb(94,131,186);
-  --tertiary-blue: rgb(194,210,233);
+  --principal-blue: #3a4e7a;
+  --secondary-blue: #5e83ba;
+  --tertiary-blue: #c2d2e9;
   --grey: #FAFAFA;
-  --dark-grey: rgb(216, 216, 216);
+  --dark-grey: #d8d8d8;
+  --letter: #000000a6;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

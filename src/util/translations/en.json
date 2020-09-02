@@ -1,0 +1,30 @@
+{
+	"Welcome to React": "Welcome to React and react-i18next",
+
+	"typology": "Tipología",
+	"APARMENT": "Departamento",
+	"HOUSE": "Casa",
+	"available": "Disponible",
+	"disabled": "No disponible",
+	"pre_rented": "Reservada",
+	"rented": "Rentada",
+
+	"amountPeople": "Cantidad de personas",
+	"rooms": "Habitaciones",
+	"bathrooms": "Baños",
+	"gym": "Gimnacio",
+	"pool": "Pileta",
+	"playroom": "Salon de juegos",
+	"roaster": "Asador",
+	"garage": "Garage",
+	"balcony": "Balcón",
+	"elevator": "Ascensor",
+	"furnished": "Amoblado",
+	"aa": "Aire acondicionado",
+	"sum": "Salon de usos múltiples",
+	"calefaction": "Calefacción",
+	"pets": "Acepta mascotas",
+	"security": "Seguridad",
+	"true": "Sí",
+	"false": "No"
+}
