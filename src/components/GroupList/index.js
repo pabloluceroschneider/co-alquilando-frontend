@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect , useContext} from 'react'
 import { useHistory } from "react-router-dom";
 import { ArrowRightOutlined } from '@ant-design/icons';
+import ApiRequest from "../../util/ApiRequest";
+import { SessionContext } from '../../store';
 
 
 const Group = ({name, link}) => {
@@ -25,13 +27,30 @@ const Group = ({name, link}) => {
 
 
 const GroupList = ({render}) => {
+    const {state} = useContext(SessionContext);
+    const [data, setData] = useState(null); 
+
+    useEffect( () => {
+
+            const getGroupInformation = async () => {
+                const { data } = await ApiRequest.get(`/group/user/${state.user.id}`);
+                console.log("DATA" + data);
+                setData(data);
+              };
+            getGroupInformation();
+    }, []
+    )
+
     console.log("GroupList -->",render)
     return (
         <div className={`group-list ${!!render}`}>
             <div className="container">
-                <Group name={"Grupo 1"} link="1"/>
-                <Group name={"Grupo 2"} link="2"/>
-                <Group name={"Grupo 3"} link="3"/>
+                { data ?
+                    data.map( (grupo) => {
+                       return <Group name={grupo.name} key={grupo.id} link={grupo.id}/>
+                    }) : null
+                } 
+
             </div>
         </div>
     )
