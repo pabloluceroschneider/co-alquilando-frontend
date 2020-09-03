@@ -20,7 +20,7 @@ const RadioGroup = ({ radio, setRadio }) => {
   
     return (
       <>
-        <Radio.Group value={radio}>
+        <Radio.Group className="radioGroup" value={radio}>
           <Radio onChange={onChange} value={1}>
             Nuevo Grupo
           </Radio>
@@ -172,7 +172,7 @@ const RadioGroup = ({ radio, setRadio }) => {
             {user.userName}?
           </p>
           <h3>Seleccione un grupo existe o cree un nuevo grupo</h3>
-          <RadioGroup radio={radio} setRadio={setRadio}></RadioGroup>
+          <RadioGroup  radio={radio} setRadio={setRadio}></RadioGroup>
   
           {radio === 1 ? (
             <NewGroupForm input={input} setInput={setInput} />
