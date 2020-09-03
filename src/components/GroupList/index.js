@@ -31,14 +31,12 @@ const GroupList = ({render}) => {
     const [data, setData] = useState(null); 
 
     useEffect( () => {
-
-            const getGroupInformation = async () => {
-                const { data } = await ApiRequest.get(`/group/user/${state.user.id}`);
-                setData(data);
-              };
-            getGroupInformation();
-    }, []
-    )
+        const getGroupInformation = async () => {
+            const { data } = await ApiRequest.get(`/group/user/${state.user.id}`);
+            setData(data);
+            };
+        getGroupInformation();
+    }, [state.user.id])
 
     return (
         <div className={`group-list ${!!render}`}>

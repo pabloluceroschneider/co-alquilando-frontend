@@ -5,8 +5,6 @@ import { StarFilled } from '@ant-design/icons';
 import ApiRequest from "../../util/ApiRequest";
 import { SessionContext } from '../../store';
 
-
-
 const Item = ({ name, link }) => {
 	let history = useHistory();
 
@@ -58,7 +56,7 @@ const Info = () => {
 
 
 const GroupDetail = ({render, group}) => {
-	const {state} = useContext(SessionContext);
+	const { state } = useContext(SessionContext);
 	const [data, setData] = useState(null);
 	const [groupId, setGroupId] = useState(null);
 

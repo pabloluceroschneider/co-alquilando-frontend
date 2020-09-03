@@ -13,7 +13,6 @@ import MyProperties from "./my-properties";
 import Roommates from "./roommates";
 import FormPropertyUpdate from './property/updateProperty';
 import UserHome from '../routes/userHome';
-import Chat from '../components/Chat';
 import Groups from './groups';
 
 const Routes = () => {

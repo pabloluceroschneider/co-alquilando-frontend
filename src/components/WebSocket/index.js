@@ -1,21 +1,15 @@
 import React from "react";
 import SockJsClient from "react-stomp";
-import UsernameGenerator from "username-generator";
-import Fetch from "json-fetch";
 import { TalkBox } from "react-talk";
-
-const randomstring = require("randomstring");
 
 class WebSocket extends React.Component {
   constructor(props) {
     super(props);
-    // randomUserId is used to emulate a unique user id for this demo usage
     this.state = {
       clientConnected: false,
       messages: [],
     };
   }
-
 
   onMessageReceive = (msg, topic) => {
     console.log("Recibiendo mensaje")
@@ -48,9 +42,15 @@ class WebSocket extends React.Component {
     const wsSourceUrl = "http://localhost:8080/handler";
     return (
       <div>
-        { <TalkBox topic={this.props.channel} currentUserId={ this.props.id }
-          currentUser={ this.props.name } messages={ this.state.messages }
-          onSendMessage={ this.sendMessage } connected={ this.state.clientConnected }/> }
+
+         <TalkBox 
+            topic={this.props.channel} 
+            currentUserId={ this.props.id }
+            currentUser={ this.props.name } 
+            messages={ this.state.messages }
+            onSendMessage={ this.sendMessage } 
+            connected={ this.state.clientConnected }
+            />
 
           <SockJsClient 
             url={ wsSourceUrl } 
@@ -59,9 +59,12 @@ class WebSocket extends React.Component {
             ref={ (client) => { this.clientRef = client }}
             onConnect={ () => { this.setState({ clientConnected: true }) } }
             onDisconnect={ () => { this.setState({ clientConnected: false , channel:null}) } }
-            debug={ false }/>
+            debug={ false }
+            />
+
       </div>
     );
+
   }
 }
 
