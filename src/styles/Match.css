@@ -32,6 +32,23 @@
     color: var(--principal-blue);
 }
 
+.notificationModal .item{
+    border: 1px solid white;
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 5px;
+    cursor: default;
+    transition: border 0.4s;
+}
+
+.notificationModal .item:hover{
+    border: 1px solid var(--dark-grey);
+}
+
+.notificationModal .item.selected{
+    border: 1px solid var(--secondary-blue);
+}
+
 /* Desktop View */
 @media only screen and (min-width: 600px){
     
