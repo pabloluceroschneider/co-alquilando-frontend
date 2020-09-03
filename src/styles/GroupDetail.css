@@ -7,7 +7,7 @@
     grid-template-columns: auto;
     align-items: baseline;
     justify-items: center;
-    width: 95%;
+    width: 90%;
     height: 100%;
 }
 .group-detail .container{
@@ -30,7 +30,6 @@
     width: 100%;
     border-bottom: 1px solid var(--dark-grey);
     padding: 2%;
-    margin: 0% 2% 0% 2%;
 
 }
 
