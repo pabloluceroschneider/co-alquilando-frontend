@@ -44,12 +44,10 @@ const Votation = () => {
 	);
 };
 
-const Info = () => {
+const Info = ({name}) => {
 	return (
         <div className="info">
-            <div>Info de Grupo</div>
-            <div>Miembros</div>
-            <div>Etc</div>
+            <div>{name}</div>
 		</div>
 	);
 };
@@ -71,7 +69,7 @@ const GroupDetail = ({render, group}) => {
 	return (
 		<div className={`group-detail ${!!render}`}>
             <div className="container">
-				<Info />
+				<Info name={detail?.name} />
 				<Votation />
 				{detail?.channels?.map( ch => {
 					return <Item key={ch} name={detail?.id} channel={ch} />
