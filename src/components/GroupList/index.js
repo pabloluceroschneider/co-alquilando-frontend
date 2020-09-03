@@ -1,25 +1,22 @@
 import React, { useState, useEffect , useContext} from 'react'
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { ArrowRightOutlined } from '@ant-design/icons';
 import ApiRequest from "../../util/ApiRequest";
 import { SessionContext } from '../../store';
 
 
 const Group = ({name, link}) => {
-    let history = useHistory();
+    const { group } = useParams();
+    const history = useHistory();
 
     const handleClick = () => {
         history.push(`/groups/${link}`);
     }
     return (
-        <div className="detail clickeable" onClick={handleClick} >
+        <div className={`detail  ${group===link}`} onClick={handleClick} >
             <div className="header">
                 <div className="name">{name}</div>
-                <ArrowRightOutlined />
-            </div>
-            <div className="info">
-                <div>
-                </div>
+                <ArrowRightOutlined className={`${group===link}`} />
             </div>
         </div>
     )

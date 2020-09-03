@@ -27,11 +27,16 @@
     align-items:center;
     justify-items: left;
 }
+
 .group-list .detail .header .name{
-    font-size: 2em;
+    font-size: 1.5em;
 }
-.group-list .detail .header span{
-    font-size: 2em;
+.group-list .detail .header .anticon{
+    visibility: hidden;
+}
+.group-list .detail .header .anticon.true{
+    visibility: visible;
+    font-size: 1.5em;
     color: #5e83ba;
 }
 
