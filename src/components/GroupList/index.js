@@ -34,14 +34,12 @@ const GroupList = ({render}) => {
 
             const getGroupInformation = async () => {
                 const { data } = await ApiRequest.get(`/group/user/${state.user.id}`);
-                console.log("DATA" + data);
                 setData(data);
               };
             getGroupInformation();
     }, []
     )
 
-    console.log("GroupList -->",render)
     return (
         <div className={`group-list ${!!render}`}>
             <div className="container">

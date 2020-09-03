@@ -32,12 +32,6 @@ const Chat = ({render, groupId, channel})=>{
 
   return(
     <div className="chatContainer">
-      {/* <div className="groupContainer">
-       
-      </div>
-      <div className="talkContainer">
-      
-      </div> */}
       <div className="msgContainer">
         <WebSocket name={state.user.userNickname} id={state.user.id} groupId={groupId} channel={channel}/>
       </div>
@@ -50,7 +44,7 @@ const Chat = ({render, groupId, channel})=>{
 
 const ChatContainer = ({render, groupId, channel}) => {
     return (
-        <div className={`chat-container ${!!render}`}>
+        <div key={channel} className={`chat-container ${!!render}`}>
             <Chat groupId={groupId} channel={channel}/>
         </div>
     )

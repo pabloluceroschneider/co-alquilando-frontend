@@ -61,7 +61,7 @@ const GroupDetail = ({render, group}) => {
 	const {state} = useContext(SessionContext);
 	const [data, setData] = useState(null);
 	const [groupId, setGroupId] = useState(null);
-	console.log("GroupDetail -->",render)
+
 	useEffect( () => {
 		let getGroupInformation = async () => {
 			await ApiRequest.get(`/group/` + group + `/detail`).then((res) => {
@@ -72,7 +72,7 @@ const GroupDetail = ({render, group}) => {
 			});
 		  };
 		getGroupInformation();
-	}, []
+	}, [group]
 	)
 	return (
 		<div className={`group-detail ${!!render}`}>

@@ -13,15 +13,9 @@ class WebSocket extends React.Component {
     this.state = {
       clientConnected: false,
       messages: [],
-      channel: this.props.channel
     };
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.channel !== prevProps.channel) {
-        this.setState({channel: this.props.channel})
-    }
-  }
 
   onMessageReceive = (msg, topic) => {
     console.log("Recibiendo mensaje")
@@ -54,15 +48,18 @@ class WebSocket extends React.Component {
     const wsSourceUrl = "http://localhost:8080/handler";
     return (
       <div>
-        { <TalkBox topic="react-websocket-template" currentUserId={ this.props.id }
+        { <TalkBox topic={this.props.channel} currentUserId={ this.props.id }
           currentUser={ this.props.name } messages={ this.state.messages }
           onSendMessage={ this.sendMessage } connected={ this.state.clientConnected }/> }
 
-          <SockJsClient url={ wsSourceUrl } topics={[`/topic/${this.state.channel}`]} /**Este topico se debe customizar donde se escuchen los msj -> groupId-intern  // groupId-owner  */
-          onMessage={ this.onMessageReceive } ref={ (client) => { this.clientRef = client }}
-          onConnect={ () => { this.setState({ clientConnected: true }) } }
-          onDisconnect={ () => { this.setState({ clientConnected: false , channel:null}) } }
-          debug={ false }/>
+          <SockJsClient 
+            url={ wsSourceUrl } 
+            topics={[`/topic/${this.props.channel}`]} /**Este topico se debe customizar donde se escuchen los msj -> groupId-intern  // groupId-owner  */
+            onMessage={ this.onMessageReceive } 
+            ref={ (client) => { this.clientRef = client }}
+            onConnect={ () => { this.setState({ clientConnected: true }) } }
+            onDisconnect={ () => { this.setState({ clientConnected: false , channel:null}) } }
+            debug={ false }/>
       </div>
     );
   }
