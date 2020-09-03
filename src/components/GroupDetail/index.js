@@ -11,7 +11,7 @@ const Item = ({ name, link }) => {
 	let history = useHistory();
 
 	const handleClick = () => {
-		history.push(`/groups/${link}/chat/${link}`);
+		history.push(`/groups/${name}/chat/${link}`);
 	};
 
 	function date() {
@@ -60,19 +60,17 @@ const Info = () => {
 const GroupDetail = ({render, group}) => {
 	const {state} = useContext(SessionContext);
 	const [data, setData] = useState(null);
+	const [groupId, setGroupId] = useState(null);
 	console.log("GroupDetail -->",render)
 	useEffect( () => {
 		let getGroupInformation = async () => {
-			await ApiRequest.get(`/group/user/${state.user.id}`).then((res) => {
-				console.log("RES" +  Object.entries(res.data))
-				console.log("RES" + res.data)
+			await ApiRequest.get(`/group/` + group + `/detail`).then((res) => {
+				let groupId = res.data.id
+				setGroupId(groupId)
+				let datos = res.data.channels
+				setData(datos);
 			});
-			//let datos = data.filter((t) => t.id);
-			console.log("DATA antes" + data);
-
-			setData(data);
 		  };
-		  console.log("DATA fin" + data);
 		getGroupInformation();
 	}, []
 	)
@@ -81,11 +79,11 @@ const GroupDetail = ({render, group}) => {
             <div className="container">
 				<Info />
 				<Votation />
-
-	
-				<Item name={'Grupo 1'} link="1" />
-				<Item name={'Grupo 2'} link="2" />
-				<Item name={'Grupo 3'} link="3" />
+				{ data ?
+                    data.map( (channels) => {
+                       return <Item name={groupId} key={channels} link={channels}/>
+                    }) : null
+                }
 			</div>
 		</div>
 	);

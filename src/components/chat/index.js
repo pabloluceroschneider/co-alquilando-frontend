@@ -3,14 +3,14 @@ import { SessionContext } from '../../store';
 import WebSocket from '../WebSocket';
 import ApiRequest from "../../util/ApiRequest";
 import {notification} from 'antd';
+import { configConsumerProps } from 'antd/lib/config-provider';
 
 
 
-const Chat = ()=>{
+const Chat = ({render, groupId, channel})=>{
 
   const [datos, setDatos] = useState(null)
   const {state} = useContext(SessionContext);
-  console.log("asdsdas", state)
   useEffect(
     () => {
         let asyncGet = async () => {
@@ -29,6 +29,7 @@ const Chat = ()=>{
     }, [state]
 )
 
+
   return(
     <div className="chatContainer">
       {/* <div className="groupContainer">
@@ -38,7 +39,7 @@ const Chat = ()=>{
       
       </div> */}
       <div className="msgContainer">
-        <WebSocket name={state.user.userNickname} id={state.user.id}/>
+        <WebSocket name={state.user.userNickname} id={state.user.id} groupId={groupId} channel={channel}/>
       </div>
     </div>
   )
@@ -47,10 +48,10 @@ const Chat = ()=>{
 
 }
 
-const ChatContainer = ({render}) => {
+const ChatContainer = ({render, groupId, channel}) => {
     return (
         <div className={`chat-container ${!!render}`}>
-            <Chat />
+            <Chat groupId={groupId} channel={channel}/>
         </div>
     )
 }

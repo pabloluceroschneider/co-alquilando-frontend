@@ -10,13 +10,6 @@ import { SendOutlined, TeamOutlined } from '@ant-design/icons';
 const Groups = () => {
     let { group, chat } = useParams();
 
-
-    console.log("GRUPO" + group)
-    console.log("CHAT" + chat)
-
-
-
-
     return (
         <ContentWrapper topNav >
             <div className="groups-container">
@@ -28,7 +21,7 @@ const Groups = () => {
                 }
                 { 
                     group && chat ?  
-                    <Chat render={ group && chat } /> 
+                    <Chat render={ group && chat } groupId={group} channel={chat}/> 
                     : <WaitingSelection message="Seleccione Chat"  render={ group && chat } icon={<SendOutlined />} /> 
                 }
             </div>
