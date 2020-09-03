@@ -5,11 +5,11 @@ import { StarFilled } from '@ant-design/icons';
 import ApiRequest from "../../util/ApiRequest";
 import { SessionContext } from '../../store';
 
-const Item = ({ name, link }) => {
+const Item = ({ name, channel }) => {
 	let history = useHistory();
 
 	const handleClick = () => {
-		history.push(`/groups/${name}/chat/${link}`);
+		history.push(`/groups/${name}/chat/${channel}`);
 	};
 
 	function date() {
@@ -22,7 +22,7 @@ const Item = ({ name, link }) => {
 		<div className="item clickeable" onClick={handleClick}>
 			<Avatar />
 			<div className="name-msg">
-				<div className="name">Name</div>
+				<div className="name">{channel}</div>
 				<div className="msg">last message</div>
 			</div>
 			<div className="time">{date()}</div>
@@ -38,7 +38,7 @@ const Votation = () => {
 		<div className="item" onClick={handleClick}>
 			<StarFilled />
 			<div className="name-msg">
-				<div className="name">Votaciones</div>
+				<div className="">Votaciones</div>
 			</div>
 		</div>
 	);
@@ -50,38 +50,32 @@ const Info = () => {
             <div>Info de Grupo</div>
             <div>Miembros</div>
             <div>Etc</div>
-        </div>);
+		</div>
+	);
 };
 
 
 
 const GroupDetail = ({render, group}) => {
 	const { state } = useContext(SessionContext);
-	const [data, setData] = useState(null);
-	const [groupId, setGroupId] = useState(null);
+	const [detail, setDetail] = useState(null)
 
 	useEffect( () => {
 		let getGroupInformation = async () => {
-			await ApiRequest.get(`/group/` + group + `/detail`).then((res) => {
-				let groupId = res.data.id
-				setGroupId(groupId)
-				let datos = res.data.channels
-				setData(datos);
-			});
-		  };
+			let { data } = await ApiRequest.get(`/group/${group}/detail`)
+			setDetail(data);
+		};
 		getGroupInformation();
-	}, [group]
-	)
+	}, [group])
+
 	return (
 		<div className={`group-detail ${!!render}`}>
             <div className="container">
 				<Info />
 				<Votation />
-				{ data ?
-                    data.map( (channels) => {
-                       return <Item name={groupId} key={channels} link={channels}/>
-                    }) : null
-                }
+				{detail?.channels?.map( ch => {
+					return <Item key={ch} name={detail?.id} channel={ch} />
+				})}
 			</div>
 		</div>
 	);
