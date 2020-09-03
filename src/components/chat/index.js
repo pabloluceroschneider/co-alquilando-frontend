@@ -26,7 +26,7 @@ const Chat = ({render, groupId, channel})=>{
         }
         asyncGet()
 
-    }, [state]
+    }, [state, channel]
 )
 
 
