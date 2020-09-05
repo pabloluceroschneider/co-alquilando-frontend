@@ -73,7 +73,7 @@ const Nav = () => {
 	return (
 		<ul className="principalNav">
 			<li>
-				<a href="/">Coalquilando</a>
+				<a href="/">CoAlquilando</a>
 			</li>
 			{ state?.user ? (
 
