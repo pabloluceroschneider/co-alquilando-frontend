@@ -244,7 +244,10 @@ const FormPropertyUpdate = (props) => {
         setOwnerId(res.data.ownerId);
         setStatus(res.data.status);
         setPhotosUpdate(res.data.photos)
-        console.log(res.data);
+        console.log("las fotos que vinieron... ", res.data.photos);
+        
+        console.log("guardando las fotos..." , photosUpdate);
+        
         let array = [];
         res.data.attributes.forEach((t) => {
           array.push({ [t.attributeType]: t.value });
@@ -257,6 +260,8 @@ const FormPropertyUpdate = (props) => {
           };
         });
         form.setFieldsValue(res.data);
+        console.log("fields ", fields);
+
       });
     };
     asyncGetUser();
@@ -343,7 +348,7 @@ const FormPropertyUpdate = (props) => {
       }
     
   }, [idProperty, history, fields]);
-
+ 
  // Delete photos
  useEffect(() => {
   if (fields && fields.photos) {

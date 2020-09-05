@@ -5,7 +5,7 @@ import ImgCrop from "antd-img-crop";
 
 const CustomUpload = (props) => {
   const [fileList, setFileList] = useState([]);
-  let { idProperty } = useParams();
+  let { idProperty, userId } = useParams();
 
   const handlePhoto = (file) => {
     console.log("DATOS:" + props.value);
@@ -21,25 +21,43 @@ const CustomUpload = (props) => {
 
   useEffect(() => {
     let asyncGet = async () => {
-      console.log('Use Effect');
-      if (props.value && !fileList.length) {
-        console.log("props value -->", props.value);
-        console.log("File list -->", fileList);
-        props.value.forEach(async (photo, index) => {
-          let photoJson = {
-            uid: index,
-            name: photo,
-            url: `http://localhost:8080/property/${idProperty}/photos/${photo}`,
-          };
-          setFileList((fileList) => [...fileList, photoJson]);
-        });
+      console.log("props value -->", props.value);
+      if (!fileList.length) {
+        if (String(props.id) === "property_photos" && props.value) {
+
+          console.log("ACA 1")
+          props.value.forEach(async (photo, index) => {
+            let photoJson = {
+              uid: index,
+              name: photo,
+              url: `http://localhost:8080/property/${idProperty}/photos/${photo}`,
+            };
+            setFileList((fileList) => [...fileList, photoJson]);
+          });
+        } else {
+          if (String(props.id) === "user_userPhoto" && props.value) {
+            console.log("File list user-->", fileList);
+            console.log("ACA")
+            props.value.forEach(async (photo, index) => {
+              let photoJson = {
+                uid: index,
+                name: photo,
+                url: `http://localhost:8080/user/${userId}/photos/${photo}`,
+              };
+              setFileList((fileList) => [...fileList, photoJson]);
+            });
+          }
+        }
       }
     };
     asyncGet();
-  }, [props.value, fileList, idProperty ]);
+  }, [props, props.value, fileList, idProperty, userId, props.id]);
+
+
 
   const onPreview = async (file) => {
     let src = file.url;
+    console.log("OnPreview")
     if (!src) {
       src = await new Promise((resolve) => {
         const reader = new FileReader();
@@ -60,30 +78,6 @@ const CustomUpload = (props) => {
     setFileList(newFileList);
   };
 
-  // Bloque Comentado porque no se está Utilizando
-  // TODO: Analizar si es necesario
-  // const action = (file) => {
-  //   const f = file;
-  //   console.log("ACTION:");
-  //   const actualFiles = props.value;
-  //   let src;
-  //   if (actualFiles) {
-  //     actualFiles.forEach((element) => {
-  //       let asyncGetUser = async () => {
-  //         src = await ApiRequest.get(
-  //           `/property/5f1c584b07f2c81aa45c12c5/${element}`
-  //         );
-  //       };
-  //       asyncGetUser();
-  //     });
-  //   } else {
-  //     src = "https://www.mocky.io/v2/5cc8019d300000980a055e76";
-  //   }
-  //   const image = new Image();
-  //   image.src = src;
-  //   const imgWindow = window.open(src);
-  //   imgWindow.document.write(image.outerHTML);
-  // };
 
   return (
     <ImgCrop rotate>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import {SessionContext} from '../../store'
-import { useHistory } from "react-router-dom";
+import {useParams, useHistory } from "react-router-dom";
 import { Form, notification, DatePicker } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
 import ApiRequest from "../../util/ApiRequest";
@@ -123,17 +123,19 @@ const userData = {
 const UpdateForm = (props) => {
   const [form] = Form.useForm();
   const [fields, setFields] = useState(null);
-  const [idUser, setIdUser] = useState(null);
-  const [photosList, setPhotosList] = useState(null);
+  let { idUser } = useParams();
+  //const [idUser, setIdUser] = useState(null);
   const history = useHistory();
   const { state } = useContext(SessionContext);
+  const [photosUpdate, setPhotosUpdate] = useState(null);
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/user/${state.user.userNickname}`).then((res) => {
         let { data } = res;
         let attributes = {};
-        console.log(data.attributes)
-        if (data.attributes && data.attributes != 'photos') {
+        console.log("DATA" , res.data);
+        setPhotosUpdate(res.data.photos)
+        if (data.attributes && data.attributes !== 'photos') {
           data.attributes.forEach((t) => {
             attributes = { ...attributes, [t.attributeType]: t.value };
           });
@@ -143,27 +145,17 @@ const UpdateForm = (props) => {
           userBirthDate: data.userBirthDate ? moment(data.userBirthDate) : null,
           userConfirmEmail: data.userEmail,
         };
+
         delete formated.attributes;
         formated = { ...formated, attributes };
         form.setFieldsValue(formated);
-        setPhotosList(formated.photos);
-        setIdUser(formated.id);
+        console.log("fields ", fields);
+        
+        //setIdUser(formated.id);
       });
     };
     asyncGetUser();
-  }, [form,state]);
-
-  useEffect(() => {
-    for (const ph in photosList) {
-      let asyncGetUserPhoto = async () => {
-        await ApiRequest.get(`/user/${idUser}/photos/`+ ph).then((res) => {
-          let { data } = res;
-          console.log("RESPONSE: " + data)
-        });
-      };
-      asyncGetUserPhoto();
-    }
-  }, [form,state]);
+  }, [form, state, idUser]);
 
   useEffect(() => {
     if (fields) {
@@ -195,32 +187,79 @@ const UpdateForm = (props) => {
     }
   }, [fields, idUser, history]);
 
-  useEffect(() => {
-    if (fields && fields.userPhoto) {
-      var plist = fields.userPhoto.file.fileList;
-      for (const ph in plist) {
-        console.log(plist[ph].originFileObj) 
-        let phLast = plist[ph].originFileObj
-      
-        const formData = new FormData();
-        formData.append('type', 'file')
-        formData.append("photos", phLast)
 
-        let header = {
-          'Content-Type': 'multipart/form-data'
-        }
+useEffect(() => {
+  if (fields && fields.photos) {
+    var plist = fields.photos.file.fileList;
 
+    const formData = new FormData();
+    formData.append('type', 'file')
+    for (const ph in plist) {
+      console.log(plist[ph].originFileObj) 
+      let phLast = plist[ph].originFileObj
+    
+      formData.append("photos", phLast)
+    }
+
+      let header = {
+        'Content-Type': 'multipart/form-data'
+      }
+
+      let asyncPutPhoto = async () => {
+        await ApiRequest.multipartPut(`/user/${idUser}/photos`, formData, header).then((res) =>  {
+          console.log(res);
+          if (res.status === 200) {
+            notification.success({
+              message: `Datos Actualizados`,
+              placement: "bottomLeft",
+            });
+          } else {
+            notification.error({
+              message: `Error: No se pudo actualizar sus datos`,
+              placement: "bottomLeft",
+            });
+          }
+        });
+      };
+      asyncPutPhoto();
+    }
+  
+}, [idUser, history, fields]);
+
+
+  // Delete photos
+ useEffect(() => {
+  if (fields && fields.photos) {
+    var listPhoto = fields.photos.file.fileList;
+    console.log("photosUpdate -->", photosUpdate);
+    console.log("listPhoto -->", listPhoto);
+
+    var auxListPhoto = [];
+    listPhoto.forEach((photo, index) => {
+      if(!photo.originFileObj) {
+        auxListPhoto.push(photo);
+      }
+    });
+    console.log("auxListPhoto -->", auxListPhoto);
+
+    auxListPhoto.forEach((photoAux, indexAux) => {
+    photosUpdate.forEach((photo, index) => {
+      console.log("photoAux -->", photoAux.name);
+      console.log("photo -->", photo);
+
+      if (photoAux.name === photo) {
         let asyncPutPhoto = async () => {
-          await ApiRequest.multipartPut(`/user/${idUser}/photos`, formData, header).then((res) =>  {
+          console.log("Photo a eliminar: " , photo)
+          await ApiRequest.delete(`/user/${idUser}/photos/${photo}`).then((res) => {
             console.log(res);
             if (res.status === 200) {
               notification.success({
-                message: `Datos Actualizados`,
+                message: "Datos Actualizados",
                 placement: "bottomLeft",
               });
             } else {
               notification.error({
-                message: `Error: No se pudo actualizar sus datos`,
+                message: "Error: No se pudo actualizar sus datos",
                 placement: "bottomLeft",
               });
             }
@@ -228,8 +267,12 @@ const UpdateForm = (props) => {
         };
         asyncPutPhoto();
       }
-    }
-  }, [idUser, history, fields]);
+    })
+  })
+  }
+}, [idUser, history, fields, photosUpdate]);
+
+
 
   return (
     <ContentWrapper topNav>
