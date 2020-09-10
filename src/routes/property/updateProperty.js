@@ -17,12 +17,11 @@ const FormPropertyUpdate = (props) => {
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/property/${idProperty}`).then((res) => {
+        console.log("haciendo el get");
+
         setOwnerId(res.data.ownerId);
         setStatus(res.data.status);
-        setPhotosUpdate(res.data.photos)
-        console.log("las fotos que vinieron... ", res.data.photos);
-        
-        console.log("guardando las fotos..." , photosUpdate);
+        setPhotosUpdate(res.data.photos);
         
         let array = [];
         res.data.attributes.forEach((t) => {
@@ -36,8 +35,6 @@ const FormPropertyUpdate = (props) => {
           };
         });
         form.setFieldsValue(res.data);
-        console.log("fields ", fields);
-
       });
     };
     asyncGetUser();
@@ -46,7 +43,8 @@ const FormPropertyUpdate = (props) => {
   useEffect(() => {
     if (fields) {
       var atributos = Object.entries(fields.attributes);
-      const attributesFormate = atributos.forEach((a) => {
+      const attributesFormate = atributos.forEach((a) =>
+       {
         if (a) {
           let json = {
             attributeType: a[0],

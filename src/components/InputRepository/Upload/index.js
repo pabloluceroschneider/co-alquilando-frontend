@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Upload } from "antd";
 import ImgCrop from "antd-img-crop";
+import { SessionContext } from '../../../store'
+
 
 const CustomUpload = (props) => {
+
+  const { state } = useContext(SessionContext);
+
   const [fileList, setFileList] = useState([]);
-  let { idProperty, userId } = useParams();
+  let { idProperty } = useParams();
 
   const handlePhoto = (file) => {
     console.log("DATOS:" + props.value);
@@ -21,11 +26,8 @@ const CustomUpload = (props) => {
 
   useEffect(() => {
     let asyncGet = async () => {
-      console.log("props value -->", props.value);
-      if (!fileList.length) {
+      if (!fileList.length && props && props.value) {
         if (String(props.id) === "property_photos" && props.value) {
-
-          console.log("ACA 1")
           props.value.forEach(async (photo, index) => {
             let photoJson = {
               uid: index,
@@ -35,23 +37,25 @@ const CustomUpload = (props) => {
             setFileList((fileList) => [...fileList, photoJson]);
           });
         } else {
-          if (String(props.id) === "user_userPhoto" && props.value) {
-            console.log("File list user-->", fileList);
-            console.log("ACA")
-            props.value.forEach(async (photo, index) => {
-              let photoJson = {
-                uid: index,
-                name: photo,
-                url: `http://localhost:8080/user/${userId}/photos/${photo}`,
-              };
-              setFileList((fileList) => [...fileList, photoJson]);
-            });
+
+          console.log(props.value)
+          if (String(props.id) === "user_photos" && props.value) {
+            if (Array.isArray(props.value)) {
+              props.value.forEach(async (photo, index) => {
+                let photoJson = {
+                  uid: index,
+                  name: photo,
+                  url: `http://localhost:8080/user/${state.user.id}/photos/${photo}`,
+                };
+                setFileList((fileList) => [...fileList, photoJson]);
+              });
+            }
           }
         }
       }
     };
     asyncGet();
-  }, [props, props.value, fileList, idProperty, userId, props.id]);
+  }, [props.value]);
 
 
 
@@ -89,7 +93,11 @@ const CustomUpload = (props) => {
         onPreview={onPreview}
         onRemove={onRemove}
       >
-        {fileList.length < 5 && "+ Upload"}
+        {
+          String(props.id) === "property_photos" ?
+            fileList.length < 8 && "+ Upload" :
+            fileList.length < 1 && "+ Upload"
+        }
       </Upload>
     </ImgCrop>
   );

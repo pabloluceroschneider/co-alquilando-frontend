@@ -17,6 +17,8 @@ let genders = {
 const MyProfile = (props) => {
   const {state} = useContext(SessionContext);
   const [datos, setDatos] = useState(null);
+  const [photosUpdate, setPhotosUpdate] = useState(null);
+
 
 
   useEffect(() => {
@@ -27,7 +29,9 @@ const MyProfile = (props) => {
         data.attributes.forEach((t) => {
           attr = { ...attr, [t.attributeType]: t.value };
         });
+        console.log(data)
         setDatos({ ...data, attributes: attr });
+        setPhotosUpdate(data.photos);
       };
       getUser();
     }
@@ -35,13 +39,13 @@ const MyProfile = (props) => {
 
   return (
     <ContentWrapper topNav>
-      {datos ? (
+      {datos && photosUpdate ? (
         <div className="profileContent">
           <div className="profileGroup2">
             <div className="imageContent">
               <img
                 alt="imagen de perfil"
-                src={image}
+                src={(state.user.id && photosUpdate) ? `http://localhost:8080/user/${state.user.id}/photos/${photosUpdate}` : image }
                 className="profileImage"
               />
             </div>
