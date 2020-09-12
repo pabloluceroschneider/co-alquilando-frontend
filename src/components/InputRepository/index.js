@@ -2,19 +2,20 @@ import React from "react";
 import { Form, Input, Checkbox, InputNumber } from "antd";
 import Select from "./Select";
 import Upload from "./Upload";
+import InfoTooltip from "./../InfoTooltip";
 import DatePicker from "./DatePicker";
 import CheckboxGroup from "./CheckboxGroup";
 import SliderForm from "./Slider";
 import ClickeableMap from "../../components/ClickeableMap"
 
 const InputRepository = props => {
-  const {element, form} = props;
+  const { element, form } = props;
 
   const onChange = value => {
-		form.setFieldsValue({
-			[element.name] : value
+    form.setFieldsValue({
+      [element.name]: value
     })
-	}
+  }
 
   const pickInput = () => {
     switch (element.component) {
@@ -42,27 +43,29 @@ const InputRepository = props => {
         return <Upload onChange={onChange} {...props} key={element.label} />;
       case "slider":
         return <SliderForm onChange={onChange} {...props} key={element.label} />
-        case "Map":
-          return <div id="formMap" style={{ height: `300px`, width: `100%` }}>
-          <ClickeableMap 
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDzoLTHAJKj5xymA3iBqJxxQl-MYG9R_ag"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `300px`, width: `300px` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-          zoomLevel={10}
-          onChange={onChange}
-        />
+      case "Map":
+        return <div id="formMap" style={{ height: `300px`, width: `100%` }}>
+          <ClickeableMap
+            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDzoLTHAJKj5xymA3iBqJxxQl-MYG9R_ag"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `300px`, width: `300px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            zoomLevel={10}
+            onChange={onChange}
+          />
         </div>
-      default: 
+      default:
         return <Input />;
 
     }
   };
 
   switch (element.component) {
-  
+
     case "label":
       return <label className="label" key={element.label}>{element.label}</label>;
+    //case "infoTooltip":
+    //  return <InfoTooltip title={element.description} color={element.color} />;
     case "h2":
       return <h2 className="h2" key={element.label}>{element.label}</h2>;
     case "link":
@@ -84,18 +87,18 @@ const InputRepository = props => {
           rules={
             element.validate
               ? [
-                  {
-                    required: element.required,
-                    message: `Porfavor, ingrese ${element.label}`,
-                  },
-                  element.validate,
-                ]
+                {
+                  required: element.required,
+                  message: `Porfavor, ingrese ${element.label}`,
+                },
+                element.validate,
+              ]
               : [
-                  {
-                    required: element.required,
-                    message: `Porfavor, ingrese ${element.label}`,
-                  },
-                ]
+                {
+                  required: element.required,
+                  message: `Porfavor, ingrese ${element.label}`,
+                },
+              ]
           }
         >
           {pickInput()}

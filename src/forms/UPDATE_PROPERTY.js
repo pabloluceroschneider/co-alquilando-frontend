@@ -17,7 +17,7 @@ const propertyFields = {
 			[
 				{
 					label: 'Tipología',
-					name: [ 'attributes', 'typology' ],
+					name: ['attributes', 'typology'],
 					component: 'Select',
 					options: [
 						{ name: 'Departamento', value: 'APARMENT' },
@@ -28,7 +28,7 @@ const propertyFields = {
 				},
 				{
 					label: 'Cantidad de personas',
-					name: [ 'attributes', 'amountPeople' ],
+					name: ['attributes', 'amountPeople'],
 					component: 'InputNumber',
 					required: true
 				}
@@ -36,13 +36,13 @@ const propertyFields = {
 			[
 				{
 					label: 'Habitaciones',
-					name: [ 'attributes', 'rooms' ],
+					name: ['attributes', 'rooms'],
 					component: 'InputNumber',
 					required: true
 				},
 				{
 					label: 'Baños',
-					name: [ 'attributes', 'bathrooms' ],
+					name: ['attributes', 'bathrooms'],
 					component: 'InputNumber',
 					required: true
 				}
@@ -70,19 +70,19 @@ const propertyFields = {
 			[
 				{
 					label: 'Calle',
-					name: [ 'address', 'street' ],
+					name: ['address', 'street'],
 					component: 'Input',
 					required: true
 				},
 				{
 					label: 'Número',
-					name: [ 'address', 'number' ],
+					name: ['address', 'number'],
 					component: 'InputNumber',
 					required: true
 				},
 				{
 					label: 'Barrio',
-					name: [ 'address', 'neighborhood' ],
+					name: ['address', 'neighborhood'],
 					component: 'Input',
 					required: true
 				}
@@ -90,17 +90,17 @@ const propertyFields = {
 			[
 				{
 					label: 'Piso',
-					name: [ 'address', 'floor' ],
+					name: ['address', 'floor'],
 					component: 'InputNumber'
 				},
 				{
 					label: 'Departamento',
-					name: [ 'address', 'apartment' ],
+					name: ['address', 'apartment'],
 					component: 'Input'
 				},
 				{
 					label: 'Provincia',
-					name: [ 'address', 'province' ],
+					name: ['address', 'province'],
 					component: 'Select',
 					options: provinces,
 					required: true
@@ -123,24 +123,24 @@ const propertyFields = {
 			[
 				{
 					label: 'Monto',
-					name: [ 'price', 'rentPrice' ],
+					name: ['price', 'rentPrice'],
 					component: 'Input.Currency',
 					required: true
 				},
 				{
 					label: 'Expensas',
-					name: [ 'price', 'expenses' ],
+					name: ['price', 'expenses'],
 					component: 'Input.Currency',
 					required: true
 				},
 				{
 					label: 'Servicios',
-					name: [ 'price', 'services' ],
+					name: ['price', 'services'],
 					component: 'Input.Currency'
 				},
 				{
 					label: 'Impuestos',
-					name: [ 'price', 'taxes' ],
+					name: ['price', 'taxes'],
 					component: 'Input.Currency'
 				}
 			],
@@ -153,19 +153,19 @@ const propertyFields = {
 			[
 				{
 					label: 'Gimnasio',
-					name: [ 'attributes', 'gym' ],
+					name: ['attributes', 'gym'],
 					valuePropName: 'checked',
 					component: 'Checkbox'
 				},
 				{
 					label: 'Pileta',
-					name: [ 'attributes', 'pool' ],
+					name: ['attributes', 'pool'],
 					valuePropName: 'checked',
 					component: 'Checkbox'
 				},
 				{
 					label: 'Playroom',
-					name: [ 'attributes', 'playroom' ],
+					name: ['attributes', 'playroom'],
 					valuePropName: 'checked',
 					component: 'Checkbox'
 				}
@@ -173,19 +173,19 @@ const propertyFields = {
 			[
 				{
 					label: 'Asador',
-					name: [ 'attributes', 'roaster' ],
+					name: ['attributes', 'roaster'],
 					valuePropName: 'checked',
 					component: 'Checkbox'
 				},
 				{
 					label: 'Cochera',
-					name: [ 'attributes', 'garage' ],
+					name: ['attributes', 'garage'],
 					valuePropName: 'checked',
 					component: 'Checkbox'
 				},
 				{
 					label: 'Balcón',
-					name: [ 'attributes', 'balcony' ],
+					name: ['attributes', 'balcony'],
 					valuePropName: 'checked',
 					component: 'Checkbox'
 				}
@@ -193,19 +193,19 @@ const propertyFields = {
 			[
 				{
 					label: 'Ascensor',
-					name: [ 'attributes', 'elevator' ],
+					name: ['attributes', 'elevator'],
 					valuePropName: 'checked',
 					component: 'Checkbox'
 				},
 				{
 					label: 'Amoblado Incluido',
-					name: [ 'attributes', 'furnished' ],
+					name: ['attributes', 'furnished'],
 					valuePropName: 'checked',
 					component: 'Checkbox'
 				},
 				{
 					label: 'Aire acondicionado',
-					name: [ 'attributes', 'aa' ],
+					name: ['attributes', 'aa'],
 					valuePropName: 'checked',
 					component: 'Checkbox'
 				}
@@ -213,24 +213,40 @@ const propertyFields = {
 			[
 				{
 					label: 'Salon de usos múltiples',
-					name: [ 'attributes', 'sum' ],
+					name: ['attributes', 'sum'],
 					valuePropName: 'checked',
 					component: 'Checkbox'
 				},
 				{
 					label: 'Calefacción',
-					name: [ 'attributes', 'calefaction' ],
+					name: ['attributes', 'calefaction'],
 					valuePropName: 'checked',
 					component: 'Checkbox'
 				},
 				{
 					label: 'Acepta Mascotas',
-					name: [ 'attributes', 'pets' ],
+					name: ['attributes', 'pets'],
 					valuePropName: 'checked',
 					component: 'Checkbox'
 				}
+			],
+			[
+				{
+					label: 'Informacion de pago',
+					component: 'h2'
+				}
+			],
+			[
+				{
+					label: 'Link de pago por Pre Alquier',
+					//infoTooltip: 'Link de pago por Pre Alquier de Mercado Pago',
+					name: ['payingLink'],
+					description: 'a title',
+					color: '#FF5733'
+				}
 			]
-		]
+		],
+		
 	}
 };
 
