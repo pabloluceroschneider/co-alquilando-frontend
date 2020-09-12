@@ -23,27 +23,14 @@ const Group = ({name, link}) => {
 }
 
 
-const GroupList = ({render}) => {
-    const {state} = useContext(SessionContext);
-    const [data, setData] = useState(null); 
-
-    useEffect( () => {
-        const getGroupInformation = async () => {
-            const { data } = await ApiRequest.get(`/group/user/${state.user.id}`);
-            setData(data);
-            };
-        getGroupInformation();
-    }, [state.user.id])
+const GroupList = ({groups, render}) => {
 
     return (
         <div className={`group-list ${!!render}`}>
             <div className="container">
-                { data ?
-                    data.map( (grupo) => {
+                {groups?.map( (grupo) => {
                        return <Group name={grupo.name} key={grupo.id} link={grupo.id}/>
-                    }) : null
-                } 
-
+                })}
             </div>
         </div>
     )
