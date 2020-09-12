@@ -148,6 +148,9 @@ const UpdateForm = (props) => {
         form.setFieldsValue(formated);
         setIdUser(formated.id);
         setPhotosUpdate(res.data.photos);
+
+
+
       });
     };
     asyncGetUser();
@@ -167,28 +170,69 @@ const UpdateForm = (props) => {
 
       console.log("BODY", bodyReq);
       
-      let asyncPutUser = async () => {
+      let asyncPutUser = new Promise(async (res, rej) => {
         await ApiRequest.put(`/user/${idUser}`, bodyReq).then((res) => {
           if (res.status === 200) {
             notification.success({
               message: `Datos Actualizados`,
               placement: "bottomLeft",
             });
-            history.push(`/my-profile`);
           } else {
             notification.error({
               message: `Error: No se pudo actualizar sus datos`,
               placement: "bottomLeft",
             });
           }
-        });
-      };
-      asyncPutUser();
+        })
+
+
+        if (fields && fields.photos && fields.photos.file) {
+          var plist = fields.photos.file.fileList;
+
+          const formData = new FormData();
+          formData.append('type', 'file')
+          let hasFile = false;
+          for (const ph in plist) {
+            hasFile = true;
+            if (plist[ph].originFileObj) {
+              let phLast = plist[ph].originFileObj
+              formData.append("photos", phLast)
+            }
+          }
+
+          let header = {
+            'Content-Type': 'multipart/form-data'
+          }
+
+          if (hasFile) {
+            await ApiRequest.multipartPut(`/user/${idUser}/photos`, formData, header).then((res) => {
+              console.log(res);
+              if (res.status === 200) {
+                notification.success({
+                  message: `Datos Actualizados`,
+                  placement: "bottomLeft",
+                });
+              } else {
+                notification.error({
+                  message: `Error: No se pudo actualizar sus datos`,
+                  placement: "bottomLeft",
+                });
+              }
+            });
+          }
+        }
+        res()
+      }
+
+      );
+      asyncPutUser.then(() => {
+        history.push(`/my-profile`);
+      });
     }
   }, [fields, idUser, history]);
 
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (fields && fields.photos && fields.photos.file) {
       var plist = fields.photos.file.fileList;
 
@@ -208,7 +252,7 @@ const UpdateForm = (props) => {
       }
 
       if (hasFile) {
-        let asyncPutPhoto = async () => {
+          let asyncPutUser = new Promise(async (res, rej) => {
           await ApiRequest.multipartPut(`/user/${idUser}/photos`, formData, header).then((res) => {
             console.log(res);
             if (res.status === 200) {
@@ -223,16 +267,19 @@ const UpdateForm = (props) => {
               });
             }
           });
-        };
-        asyncPutPhoto();
+          res()
+        })
+        asyncPutUser.then(() => {
+          history.push(`/my-profile`);
+        });
       }
     }
-  }, [idUser, fields, history]);
+  }, [idUser, fields, history]);*/
 
 
   // Delete photos
   useEffect(() => {
-    if (fields && fields.photos) {
+    if (fields && fields.photos && fields.photos.file) {
       var listPhoto = fields.photos.file.fileList;
       console.log("photosUpdate -->", photosUpdate);
       console.log("listPhoto -->", listPhoto);

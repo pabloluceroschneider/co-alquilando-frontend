@@ -21,7 +21,7 @@ const MyProfile = (props) => {
 
 
 
-  useEffect(() => {
+  useEffect(() => {        
     if (!datos) {
       const getUser = async () => {
         const { data } = await ApiRequest.get(`/user/${state.user.userNickname}`);
@@ -37,9 +37,12 @@ const MyProfile = (props) => {
     }
   }, [state, datos]);
 
+  console.log("ID",state.user.id, "PHOTO", photosUpdate);
+  
+
   return (
     <ContentWrapper topNav>
-      {datos && photosUpdate ? (
+      {datos ? (
         <div className="profileContent">
           <div className="profileGroup2">
             <div className="imageContent">
