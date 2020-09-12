@@ -4,6 +4,7 @@ import { Menu, Avatar, Badge, Dropdown } from 'antd';
 import { LogoutOutlined, BellOutlined, TeamOutlined } from '@ant-design/icons';
 import Login from '../../components/Login';
 import Auth from '../../util/Auth';
+
 import ApiRequest from "../../util/ApiRequest";
 
 
@@ -15,7 +16,10 @@ let not = [
 	{ id: 2314, type: 'GROUP_SEND_INVITATION', from: 12312123213, to: 12312123123 }
 ];
 
-const getNotifications = () => {
+const getNotifications = async () => {
+	let user = JSON.parse(localStorage.getItem("user"));
+	let { data } = await ApiRequest.get(`/notifications/user/${user?.id}`)
+	return data?.map( ntf => <div>{ntf.type}</div>)
 	return not.map((t) => {
 		return (
 			<Menu.Item key={t.id}>
