@@ -1,0 +1,47 @@
+
+
+/* Mobile First */
+.notifications{
+    text-align: -webkit-center !important;
+    margin: 5vh 0vw 5vh 0vw;
+    text-align: left;
+}
+
+.notifications .notificationCard{
+    text-align: left;
+    width: 90vw;
+    margin-top: 16px;
+}
+
+.desc.coinc{
+    color: #000;
+}
+.notifications .name{
+    display: block;
+    margin-bottom: 15px;
+}
+.notifications .name p{
+    color: #515A5A;
+    margin-bottom: 0px;
+}
+
+.notifications .name span{
+    padding: 2px;
+    text-align: center;
+}
+
+/* Desktop View */
+@media only screen and (min-width: 600px){
+    
+    .notifications .notificationCard{
+        width: 40vw;
+        margin-left: 5vw;
+    }
+
+    .match .name{
+        display: grid;
+        grid-template-columns: 80% 20%;
+    }
+
+
+}
