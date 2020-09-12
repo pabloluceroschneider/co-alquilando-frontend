@@ -29,7 +29,7 @@ const Groups = () => {
     if (!data?.length) return (
         <ContentWrapper topNav breadscrumb={breadscrumb} >
             <div className="no-groups">
-                <WaitingSelection  message="No tienes grupos!" icon={<TeamOutlined />} />
+                <WaitingSelection  message="No tienes grupos!" render={!group && !chat} icon={<TeamOutlined />} />
             </div>
         </ContentWrapper>
     )
