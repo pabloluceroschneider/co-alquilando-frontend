@@ -15,17 +15,21 @@ const FormPropertyUpdate = (props) => {
   const [ownerId, setOwnerId] = useState(null);
   const [status, setStatus] = useState(null);
   const [photosUpdate, setPhotosUpdate] = useState(null);
+  const [payingLink, setPayingLink] = useState(null);
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/property/${idProperty}`).then((res) => {
         setOwnerId(res.data.ownerId);
         setStatus(res.data.status);
-        setPhotosUpdate(res.data.photos)
+        setPhotosUpdate(res.data.photos);
+        setPayingLink(res.data.payingLink);
         console.log(res.data);
         let array = [];
-        res.data.attributes.forEach((t) => {
-          array.push({ [t.attributeType]: t.value });
-        });
+        if (res.data.attributes) {
+          res.data.attributes.forEach((t) => {
+            array.push({ [t.attributeType]: t.value });
+          });
+        }
         //delete  res.data.attributes;
         array.forEach((t) => {
           res.data = {
@@ -33,7 +37,7 @@ const FormPropertyUpdate = (props) => {
             attributes: { ...res.data.attributes, ...t },
           };
         });
-        form.setFieldsValue(res.data);        
+        form.setFieldsValue(res.data);
       });
     };
     asyncGetUser();
@@ -53,6 +57,7 @@ const FormPropertyUpdate = (props) => {
         }
       });
 
+      console.log("FIELDS", fields)
       let formatedBody = {
         ...fields,
         attributes: attributesFormate,
@@ -60,8 +65,10 @@ const FormPropertyUpdate = (props) => {
         status: status,
       };
 
+      console.log("BODY", formatedBody);
+
       let bodyReq = formatedBody;
-      console.log(bodyReq);
+      console.log("BODY", bodyReq);
       let asyncPut = async () => {
         await ApiRequest.put(`/property/${idProperty}`, bodyReq).then((res) => {
           console.log(res);
@@ -84,7 +91,7 @@ const FormPropertyUpdate = (props) => {
   }, [fields, idProperty, history, ownerId, status]);
 
   useEffect(() => {
-    if (fields && fields.photos) {
+    if (fields && fields.photos && fields.photos.file) {
       var plist = fields.photos.file.fileList;
 
       const formData = new FormData();
@@ -123,7 +130,7 @@ const FormPropertyUpdate = (props) => {
 
   // Delete photos
   useEffect(() => {
-    if (fields && fields.photos) {
+    if (fields && fields.photos && fields.photos.file) {
       var listPhoto = fields.photos.file.fileList;
       console.log("photosUpdate -->", photosUpdate);
       console.log("listPhoto -->", listPhoto);

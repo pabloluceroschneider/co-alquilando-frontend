@@ -5,15 +5,15 @@ import { Tooltip, Divider } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 
 
-const InfoTooltip = ({ color, title }) => {
+const InfoTooltip = ({ color, description, label}) => {
     return (
-        <div className="info-tooltip">
-            <div>
-                <Tooltip title={title} color={color}>
-                    <InfoCircleOutlined />
-                </Tooltip>
-            </div>
-        </div>
+        <>
+                <label className="label" key={label}>{label}
+                    <Tooltip placement="right" title={description} color={color}>
+                        <InfoCircleOutlined />
+                    </Tooltip>
+                </label>
+                </>
     );
 }
 

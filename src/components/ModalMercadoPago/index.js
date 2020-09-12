@@ -8,7 +8,7 @@ const ModalMercadoPago = () => {
     
     return (
         <div className="modal-async-mercado-pago"> 
-            <Button type="primary" onClick={() => setVisible(true)}>
+            <Button onClick={() => setVisible(true)}>
                 Registrar link de pago
              </Button>
             <Modal

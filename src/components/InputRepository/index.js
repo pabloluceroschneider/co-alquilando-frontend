@@ -64,8 +64,13 @@ const InputRepository = props => {
 
     case "label":
       return <label className="label" key={element.label}>{element.label}</label>;
-    //case "infoTooltip":
-    //  return <InfoTooltip title={element.description} color={element.color} />;
+    case "infoTooltip":
+      return (
+        <>
+          <InfoTooltip description={element.description} color={element.color} label={element.label} />
+          <Input />
+        </>
+      );
     case "h2":
       return <h2 className="h2" key={element.label}>{element.label}</h2>;
     case "link":

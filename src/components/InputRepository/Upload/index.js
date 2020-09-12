@@ -21,7 +21,6 @@ const CustomUpload = (props) => {
 
   useEffect(() => {
     let asyncGet = async () => {
-      console.log('Use Effect');
       if (props.value && !fileList.length) {
         console.log("props value -->", props.value);
         console.log("File list -->", fileList);
