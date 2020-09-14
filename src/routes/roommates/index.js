@@ -6,27 +6,38 @@ import UserCard from '../../components/Match';
 import ApiRequest from '../../util/ApiRequest';
 
 const Match = () => {
+	const [ matched, setMatched ] = useState(null);
 	const [ users, setUsers ] = useState(null);
 	const { state } = useContext(SessionContext);
 
-	useEffect(
-		() => {
+	useEffect(() => {
 			let asyncGet = async () => {
-				let { data } = await ApiRequest.get(`/user/match/${state.user.id}`);
-				setUsers(data);
+				try {
+					let { data } = await ApiRequest.get(`/user/match/${state.user.id}`);
+					setMatched(data);
+				} catch (error) {
+					let { data } = await ApiRequest.get(`/user/users`);
+					setUsers(data);
+				}
 			};
 			asyncGet();
-		},
-		[ state.user ]
-	);
+		},[ state.user ]);
 
 	return (
 		<ContentWrapper topNav optionsNav>
 			<div className="match">
-				{users &&
-					users.map((u, index) => {
+				{matched?.map((u, index) => {
 						return <UserCard key={index} {...u} />;
-					})}
+				})}
+
+				{users &&
+					<div>
+						No hemos encontrado coincidencias para ti. Carga tus preferencias <a href="/my-profile/updatePreferencies">aqui</a>
+						{users.map((u, index) => {
+							return <UserCard key={index} user={{...u}}/>;
+						})} 
+					</div>
+				}
 			</div>
 		</ContentWrapper>
 	);

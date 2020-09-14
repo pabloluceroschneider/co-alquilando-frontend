@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import { SessionContext, reducer, initialState } from '../store'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import useServiceWorker from '../util/useServiceWorker';
 import Home from './home';
 import SignIn from './signIn';
 import Profile from './profile/index';
@@ -17,6 +18,7 @@ import FormPropertyUpdate from './property/updateProperty';
 import UserHome from '../routes/userHome';
 
 const Routes = () => {
+	useServiceWorker();
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	return (
