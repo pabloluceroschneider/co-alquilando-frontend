@@ -29,25 +29,22 @@ const Name = ({ name, coincidence }) => {
   return (
     <div className="name">
       <p>{name}</p>
-      <Tag color={handleTagCoincidence(coincidence)}>
-        {parseFloat(coincidence).toFixed(2)} %
-      </Tag>
+      {
+        coincidence && 
+        <Tag color={handleTagCoincidence(coincidence)}>
+          {parseFloat(coincidence).toFixed(2)} %
+        </Tag>
+      }
     </div>
   );
 };
 
-const UserCard = ({ user, coincidence }) => {
-  const {
-    photo,
-    userNickname,
-    userName,
-    userSurname,
-    userDescription
-  } = user;
+const UserCard = ({ user, coincidence } ) => {
+  console.log(user)
 
   const ViewProfile = ({ title }) => {
     return (
-      <a href={`profile/${userNickname}`} rel="noopener noreferrer">
+      <a href={`profile/${user?.userNickname}`} rel="noopener noreferrer">
         {title}
       </a>
     );
@@ -65,18 +62,18 @@ const UserCard = ({ user, coincidence }) => {
       <Meta
         avatar={
           <Avatar
-            src={photo?.photoId}
+            src={user?.photo?.photoId}
             style={{ backgroundColor: "#AED6F1", color: "#154360" }}
           >
             {" "}
-            {userName[0].toUpperCase()}{" "}
+            {user?.userName[0].toUpperCase()}{" "}
           </Avatar>
         }
         title={
-          <Name name={userName + " " + userSurname} coincidence={coincidence} />
+          <Name name={user?.userName + " " + user?.userSurname} coincidence={coincidence} />
         }
         description={
-          <Description desc={userDescription} coincidence={coincidence} />
+          <Description desc={user?.userDescription} coincidence={coincidence} />
         }
       />
     </Card>
