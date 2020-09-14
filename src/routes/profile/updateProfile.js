@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import {SessionContext} from '../../store'
-import { useHistory } from "react-router-dom";
-import { Form, notification } from "antd";
+import { SessionContext } from '../../store'
+import { useParams, useHistory } from "react-router-dom";
+import { Form, notification, DatePicker } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
 import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
@@ -107,7 +107,7 @@ const userData = {
         },
         {
           label: "Cargar Imagen",
-          name: "userPhoto",
+          name: "photos",
           component: "Upload",
         },
       ],
@@ -120,19 +120,20 @@ const userData = {
     ],
   },
 };
-
 const UpdateForm = (props) => {
   const [form] = Form.useForm();
   const [fields, setFields] = useState(null);
   const [idUser, setIdUser] = useState(null);
   const history = useHistory();
   const { state } = useContext(SessionContext);
+  const [photosUpdate, setPhotosUpdate] = useState(null);
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/user/${state.user.userNickname}`).then((res) => {
         let { data } = res;
         let attributes = {};
-        if (data.attributes) {
+
+        if (data.attributes && data.attributes !== 'photos') {
           data.attributes.forEach((t) => {
             attributes = { ...attributes, [t.attributeType]: t.value };
           });
@@ -146,41 +147,185 @@ const UpdateForm = (props) => {
         formated = { ...formated, attributes };
         form.setFieldsValue(formated);
         setIdUser(formated.id);
+        setPhotosUpdate(res.data.photos);
+
+
+
       });
     };
     asyncGetUser();
-  }, [form,state]);
+  }, [form, state, idUser, history]);
+
   useEffect(() => {
     if (fields) {
       var attributes = Object.entries(fields.attributes);
       let arrayAttributes = [];
       attributes.map((t) => {
-       return arrayAttributes.push({ attributeType: t[0], value: t[1] });
+        return arrayAttributes.push({ attributeType: t[0], value: t[1] });
       });
       let bodyReq = { ...fields, attributes: arrayAttributes };
       delete bodyReq.userConfirmEmail;
       delete bodyReq.userConfirmPassword;
-      let asyncPutUser = async () => {
+      delete bodyReq.photos;
+
+      console.log("BODY", bodyReq);
+      
+      let asyncPutUser = new Promise(async (res, rej) => {
         await ApiRequest.put(`/user/${idUser}`, bodyReq).then((res) => {
           if (res.status === 200) {
             notification.success({
               message: `Datos Actualizados`,
               placement: "bottomLeft",
             });
-            history.push(`/my-profile`);
           } else {
             notification.error({
               message: `Error: No se pudo actualizar sus datos`,
               placement: "bottomLeft",
             });
           }
-        });
-      };
-      asyncPutUser();
+        })
+
+
+        if (fields && fields.photos && fields.photos.file) {
+          var plist = fields.photos.file.fileList;
+
+          const formData = new FormData();
+          formData.append('type', 'file')
+          let hasFile = false;
+          for (const ph in plist) {
+            hasFile = true;
+            if (plist[ph].originFileObj) {
+              let phLast = plist[ph].originFileObj
+              formData.append("photos", phLast)
+            }
+          }
+
+          let header = {
+            'Content-Type': 'multipart/form-data'
+          }
+
+          if (hasFile) {
+            await ApiRequest.multipartPut(`/user/${idUser}/photos`, formData, header).then((res) => {
+              console.log(res);
+              if (res.status === 200) {
+                notification.success({
+                  message: `Datos Actualizados`,
+                  placement: "bottomLeft",
+                });
+              } else {
+                notification.error({
+                  message: `Error: No se pudo actualizar sus datos`,
+                  placement: "bottomLeft",
+                });
+              }
+            });
+          }
+        }
+        res()
+      }
+
+      );
+      asyncPutUser.then(() => {
+        history.push(`/my-profile`);
+      });
     }
   }, [fields, idUser, history]);
+
+
+  /*useEffect(() => {
+    if (fields && fields.photos && fields.photos.file) {
+      var plist = fields.photos.file.fileList;
+
+      const formData = new FormData();
+      formData.append('type', 'file')
+      let hasFile = false;
+      for (const ph in plist) {
+        hasFile = true;
+        if (plist[ph].originFileObj) {
+          let phLast = plist[ph].originFileObj
+          formData.append("photos", phLast)
+        }
+      }
+
+      let header = {
+        'Content-Type': 'multipart/form-data'
+      }
+
+      if (hasFile) {
+          let asyncPutUser = new Promise(async (res, rej) => {
+          await ApiRequest.multipartPut(`/user/${idUser}/photos`, formData, header).then((res) => {
+            console.log(res);
+            if (res.status === 200) {
+              notification.success({
+                message: `Datos Actualizados`,
+                placement: "bottomLeft",
+              });
+            } else {
+              notification.error({
+                message: `Error: No se pudo actualizar sus datos`,
+                placement: "bottomLeft",
+              });
+            }
+          });
+          res()
+        })
+        asyncPutUser.then(() => {
+          history.push(`/my-profile`);
+        });
+      }
+    }
+  }, [idUser, fields, history]);*/
+
+
+  // Delete photos
+  useEffect(() => {
+    if (fields && fields.photos && fields.photos.file) {
+      var listPhoto = fields.photos.file.fileList;
+      console.log("photosUpdate -->", photosUpdate);
+      console.log("listPhoto -->", listPhoto);
+
+      var auxListPhoto = [];
+      listPhoto.forEach((photo, index) => {
+        if (!photo.originFileObj) {
+          auxListPhoto.push(photo);
+        }
+      });
+      console.log("auxListPhoto -->", auxListPhoto);
+
+      auxListPhoto.forEach((photoAux, indexAux) => {
+        photosUpdate.forEach((photo, index) => {
+          console.log("photoAux -->", photoAux.name);
+          console.log("photo -->", photo);
+
+          if (photoAux.name === photo) {
+            let asyncPutPhoto = async () => {
+              console.log("Photo a eliminar: ", photo)
+              await ApiRequest.delete(`/user/${idUser}/photos/${photo}`).then((res) => {
+                console.log(res);
+                if (res.status === 200) {
+                  notification.success({
+                    message: "Datos Actualizados",
+                    placement: "bottomLeft",
+                  });
+                } else {
+                  notification.error({
+                    message: "Error: No se pudo actualizar sus datos",
+                    placement: "bottomLeft",
+                  });
+                }
+              });
+            };
+            asyncPutPhoto();
+          }
+        })
+      })
+    }
+  }, [idUser, history, fields, photosUpdate]);
+
+
+
   return (
-    <ContentWrapper topNav>
+    <ContentWrapper topNav title="Actualizar Perfil">
       <CustomizedForm form={form} data={userData} onfinish={setFields} />
     </ContentWrapper>
   );

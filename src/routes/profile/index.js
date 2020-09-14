@@ -55,10 +55,13 @@ const Profile = (props) => {
       const getUser = async () => {
         const { data } = await ApiRequest.get(`/user/${nickname}`);
         let attr = [];
-        data.attributes.forEach((t) => {
-          attr = { ...attr, [t.attributeType]: t.value };
-        });
-        setDatos({ ...data, attributes: attr });
+        if (data.attributes) { 
+            data.attributes.forEach((t) => {
+            attr = { ...attr, [t.attributeType]: t.value };
+          });
+        }
+        console.log("attr =>", attr);
+        setDatos({ attributes: attr });
       };
       getUser();
     }
