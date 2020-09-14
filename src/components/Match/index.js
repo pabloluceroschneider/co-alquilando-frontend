@@ -42,8 +42,7 @@ const UserCard = ({ user, coincidence }) => {
     userNickname,
     userName,
     userSurname,
-    userDescription,
-    id,
+    userDescription
   } = user;
 
   const ViewProfile = ({ title }) => {

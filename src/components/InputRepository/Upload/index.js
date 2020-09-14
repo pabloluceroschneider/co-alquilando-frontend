@@ -55,7 +55,7 @@ const CustomUpload = (props) => {
       }
     };
     asyncGet();
-  }, [props.value]);
+  }, [state, props, fileList, idProperty]);
 
 
 
