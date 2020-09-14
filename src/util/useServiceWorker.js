@@ -47,7 +47,7 @@ function subscribe() {
 	);
 
 	navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-		console.log('50 serviceWorkerRegistration -->', serviceWorkerRegistration);
+		//console.log('50 serviceWorkerRegistration -->', serviceWorkerRegistration);
 		serviceWorkerRegistration.pushManager
 			.subscribe({
 				userVisibleOnly: true,
@@ -79,21 +79,20 @@ const useServiceWorker = () => {
 			navigator.serviceWorker
 				.register('./sw.js')
 				.then(function(registration) {
-					console.log('Service Worker Registered', registration);
+					//console.log('Service Worker Registered', registration);
 					// El usuario permitió Notificaciones.
 					register('/sw.js', {
 						registrationOptions: { scope: './' },
 						ready(registration) {
-							console.log('Service worker is active.');
+							//console.log('Service worker is active.');
 						},
 						registered(registration) {
-							console.log('Service worker has been registered.', registration);
+							//console.log('Service worker has been registered.', registration);
 							navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-								console.log('serviceWorkerRegistration: ', serviceWorkerRegistration);
+								//console.log('serviceWorkerRegistration: ', serviceWorkerRegistration);
 								serviceWorkerRegistration.pushManager
 									.getSubscription()
 									.then(function(subscription) {
-										console.log('subscription -->', subscription);
 										if (!subscription) {
 											subscribe();
 											return;
