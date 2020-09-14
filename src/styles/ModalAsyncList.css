@@ -1,0 +1,28 @@
+
+.modal-async-list .title{
+    padding: 10px;
+    font-size: 1.5em;
+    border-bottom: 1px solid var(--dark-grey);
+    margin-bottom: 5px;
+}
+
+.modal-async-list .title span.anticon{
+    margin-right: 1em;
+}
+
+.modal-async-list .item{
+    border: 1px solid white;
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 5px;
+    cursor: default;
+    transition: border 0.4s;
+}
+
+.modal-async-list .item:hover{
+    border: 1px solid var(--dark-grey);
+}
+
+.modal-async-list .item.selected{
+    border: 1px solid var(--secondary-blue);
+}

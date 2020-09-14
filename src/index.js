@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
-import './styles/index.css';
+import './i18n';
 import App from './routes';
-import Amplify from 'aws-amplify';
 import config from './config.json'
+import Amplify from 'aws-amplify';
 import * as serviceWorker from './serviceWorker';
+import './styles/index.css';
+import 'antd/dist/antd.css';
 
 Amplify.configure({
   Auth: {

@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
-import { Card, Avatar, Tag, notification, Modal } from "antd";
-import { UsergroupAddOutlined } from "@ant-design/icons";
-import Notification from "../../classes/Notification";
-import ApiRequest from "../../util/ApiRequest";
-import { SessionContext } from "../../store";
+import React from "react";
+import {
+  Card,
+  Avatar,
+  Tag,
+} from "antd";
+import ModalGroup from "../ModalGroup";
 
 const { Meta } = Card;
 
@@ -44,34 +45,6 @@ const UserCard = ({ user, coincidence }) => {
     userDescription,
     id,
   } = user;
-  const { state } = useContext(SessionContext);
-  const { confirm } = Modal;
-
-  const handleConfirm = async () => {
-    let bodyReq = new Notification(state.user.id, id, "group_send_invitation");
-    await ApiRequest.post("/notifications/send", bodyReq);
-    notification.success({
-      message: `¡Tu solicitud fue enviada con éxito!`,
-      placement: "bottomLeft",
-    });
-  };
-
-  const handleConnect = () => {
-    confirm({
-      title: "¿Quieres enviar la solicitud de grupo?",
-      okText: "Confirmar",
-      className: "notificationModal",
-      icon: <UsergroupAddOutlined />,
-      content: `${userName} recibirá tu invitación`,
-      onOk() {
-        console.log("OK");
-        handleConfirm();
-      },
-      onCancel() {
-        console.log("Cancel");
-      },
-    });
-  };
 
   const ViewProfile = ({ title }) => {
     return (
@@ -86,7 +59,7 @@ const UserCard = ({ user, coincidence }) => {
       hoverable
       className="userCard"
       actions={[
-        <span onClick={() => handleConnect()}>Conectar</span>,
+        <ModalGroup user={user} itemTitle="name" />,
         <ViewProfile key="viewProfile" title={"Ver Perfil"} />,
       ]}
     >
