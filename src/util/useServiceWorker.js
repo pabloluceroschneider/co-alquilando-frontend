@@ -2,7 +2,7 @@ import { register } from 'register-service-worker';
 
 function base64UrlToUint8Array(base64UrlData) {
 	const padding = '='.repeat((4 - base64UrlData.length % 4) % 4);
-	const base64 = (base64UrlData + padding).replace(/\-/g, '+').replace(/_/g, '/');
+	const base64 = (base64UrlData + padding).replace(/-/g, '+').replace(/_/g, '/');
 
 	const rawData = atob(base64);
 	const buffer = new Uint8Array(rawData.length);
