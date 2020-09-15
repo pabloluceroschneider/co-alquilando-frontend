@@ -22,6 +22,8 @@
 @import './ModalAsyncList.css';
 @import './ContentWrapper.css';
 @import './Notifications.css';
+@import './Filters.css';
+
 
 body {
   --principal-blue: #3a4e7a;

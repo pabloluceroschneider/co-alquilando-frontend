@@ -1,0 +1,10 @@
+
+.wrapper-filter{
+    display: grid;
+    place-items: center;
+}
+
+.wrapper-filter .panel{
+    width: 100%;
+    background-color: #dddddd;
+}
