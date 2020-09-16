@@ -1,0 +1,16 @@
+
+.h-scroll-list{
+    width: 80%;
+    margin-left: 20%;
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.h-scroll-list div{
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}

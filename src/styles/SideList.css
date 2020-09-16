@@ -1,0 +1,38 @@
+
+.side-list{
+    color: var(--letter);
+}
+
+/* hamburger icon */
+.side-list .hamburger{
+    position: fixed;
+    z-index: 10;
+    left: 1%;
+    font-size: 2em;
+    border: 1px solid var(--dark-grey);
+    background-color: white;
+    padding: 3px;
+    margin: 3px;
+    transition: left 1s;
+}
+.side-list .hamburger.true{
+    left: 80%;
+}
+
+/* list */
+.side-list .items{
+    position: fixed;
+    display: grid;
+    place-items: center;
+    grid-template-columns: auto;
+    visibility: hidden;
+    opacity: 0;
+    background-color: var(--dark-grey);
+    width: 0%;
+    transition: width 1s ease, visibility 1s, opacity 1s;
+}
+.side-list .items.true{
+    visibility: visible;
+    opacity: 1;
+    width: 80%;
+}
