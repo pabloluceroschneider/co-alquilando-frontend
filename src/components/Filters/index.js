@@ -13,7 +13,7 @@ const FilterPanel = ({filters, onClose}) => {
         <div className="panel" >
             <div className="header">
                 <span><FilterOutlined /> Filtros</span>
-                <CloseOutlined onClick={onClose} /> 
+                { window.screen.width < 600 ? <CloseOutlined onClick={onClose} /> : null}
             </div>
             <div className="filter-content">
                 {params?.map( p => {
