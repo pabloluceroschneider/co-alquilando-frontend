@@ -4,6 +4,10 @@
     place-items: center;
 }
 
+.wrapper-filter .params{
+    padding-bottom: 20px;
+}
+
 .wrapper-filter .panel{
     width: 100%;
     background-color: var(--grey);

@@ -26,5 +26,8 @@
 	"pets": "Acepta mascotas",
 	"security": "Seguridad",
 	"true": "Sí",
-	"false": "No"
+	"false": "No",
+
+	"price": "Precio",
+	"on": "Sí"
 }

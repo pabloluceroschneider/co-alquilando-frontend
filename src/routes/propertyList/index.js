@@ -11,6 +11,7 @@ const Property = () => {
 	const [ page, setPage ] = useState(1);
 	const [ size ] = useState(10);
 	const [ totalItems, setTotalItems ] = useState(0);
+
 	useEffect(
 		() => {
 			let asyncGet = async () => {

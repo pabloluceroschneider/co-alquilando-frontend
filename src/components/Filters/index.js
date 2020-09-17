@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Button } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { Button, Tag } from 'antd';
 import { FilterOutlined, CloseOutlined } from "@ant-design/icons";
+import getParams from '../../util/getParams';
 
 const FilterPanel = ({filters, onClose}) => {
 
@@ -29,18 +31,27 @@ const FilterPanel = ({filters, onClose}) => {
 
 const Filters = ({filters}) => {
     const [showPanel, setshowPanel] = useState( window.screen.width > 600 ? true : false);
+    const { t } = useTranslation();
 
     const togglePanel = () => setshowPanel(!showPanel)
 
+    const [ params ] = getParams()
+
     return (
         <div className="wrapper-filter">
-            {
-                !showPanel ?
-
+            {!showPanel &&
                 <Button onClick={togglePanel} icon={<FilterOutlined /> } />
+            }
 
-                : <FilterPanel filters={filters} onClose={togglePanel} />
-
+            {showPanel &&
+                <div>
+                    <div className="params">
+                        {params?.map( p => {
+                            return <Tag closable color="processing" key={p[0]}>{`${t(p[0])} : ${t(p[1])}`}</Tag>
+                        })}
+                    </div>
+                    <FilterPanel filters={filters} onClose={togglePanel} />
+                </div>
             }
             
         </div>
