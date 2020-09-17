@@ -1,19 +1,34 @@
 import React, { useState } from 'react';
-import { FilterOutlined } from "@ant-design/icons";
+import { Button } from 'antd';
+import { FilterOutlined, CloseOutlined } from "@ant-design/icons";
 
 const FilterPanel = ({filters, onClose}) => {
 
     return (
         <div className="panel" >
-            <div onClick={onClose}>
-                Panel
+            <div className="header">
+                <span><FilterOutlined /> Filtros</span>
+                <CloseOutlined onClick={onClose} /> 
+            </div>
+            <div className="filter-content">
+                <form>
+                    {filters?.map( f => {
+                        return (
+                            <div key={f.name} className="filter-item">
+                                <span htmlFor={f.name}>{f.span}</span>
+                                <input type={f.type} name={f.name}/>
+                            </div>
+                        )
+                    })}
+                    <button type="submit">Filtrar</button>
+                </form>
             </div>
         </div>
     )
 }
 
 const Filters = ({filters}) => {
-    const [showPanel, setshowPanel] = useState(false);
+    const [showPanel, setshowPanel] = useState( window.screen.width > 600 ? true : false);
 
     const togglePanel = () => setshowPanel(!showPanel)
 
@@ -22,9 +37,7 @@ const Filters = ({filters}) => {
             {
                 !showPanel ?
 
-                <button type="button" onClick={togglePanel}>
-                    <FilterOutlined /> Filters
-                </button>
+                <Button onClick={togglePanel} icon={<FilterOutlined /> } />
 
                 : <FilterPanel filters={filters} onClose={togglePanel} />
 

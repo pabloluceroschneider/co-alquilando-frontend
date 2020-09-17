@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { notification, Pagination } from 'antd';
 import ApiRequest from '../../util/ApiRequest';
 import ContentWrapper from '../../components/ContentWrapper';
 import PropertyCard from '../../components/PropertyCard';
 import Filters from '../../components/Filters';
-import { notification, Pagination } from 'antd';
-import '../../styles/PropertyList.css';
+import { propertyFilters } from '../../forms/FILTERS';
 
 const Property = () => {
 	const [ datos, setDatos ] = useState(null);
@@ -39,7 +39,7 @@ const Property = () => {
 			<div className="properties-wrapper">
 				
         <div className="filters">
-          <Filters />
+          <Filters filters={propertyFilters}/>
         </div>
 
         <div className="list">
