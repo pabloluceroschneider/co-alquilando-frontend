@@ -4,10 +4,6 @@
     place-items: center;
 }
 
-.wrapper-filter .params{
-    padding-bottom: 20px;
-}
-
 .wrapper-filter .panel{
     width: 100%;
     background-color: var(--grey);
@@ -22,7 +18,7 @@
     align-items: center;
     border-bottom: 1px solid #ddd;
     padding-bottom: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .wrapper-filter .panel .header span{

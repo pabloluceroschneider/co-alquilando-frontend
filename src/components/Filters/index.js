@@ -5,6 +5,9 @@ import { FilterOutlined, CloseOutlined } from "@ant-design/icons";
 import getParams from '../../util/getParams';
 
 const FilterPanel = ({filters, onClose}) => {
+    const { t } = useTranslation();
+
+    const [ params ] = getParams()
 
     return (
         <div className="panel" >
@@ -13,6 +16,9 @@ const FilterPanel = ({filters, onClose}) => {
                 <CloseOutlined onClick={onClose} /> 
             </div>
             <div className="filter-content">
+                {params?.map( p => {
+                    return <Tag closable color="processing" key={p[0]}>{`${t(p[0])}`}</Tag>
+                })}
                 <form>
                     {filters?.map( f => {
                         return (
@@ -31,11 +37,8 @@ const FilterPanel = ({filters, onClose}) => {
 
 const Filters = ({filters}) => {
     const [showPanel, setshowPanel] = useState( window.screen.width > 600 ? true : false);
-    const { t } = useTranslation();
 
     const togglePanel = () => setshowPanel(!showPanel)
-
-    const [ params ] = getParams()
 
     return (
         <div className="wrapper-filter">
@@ -45,11 +48,6 @@ const Filters = ({filters}) => {
 
             {showPanel &&
                 <div>
-                    <div className="params">
-                        {params?.map( p => {
-                            return <Tag closable color="processing" key={p[0]}>{`${t(p[0])} : ${t(p[1])}`}</Tag>
-                        })}
-                    </div>
                     <FilterPanel filters={filters} onClose={togglePanel} />
                 </div>
             }
