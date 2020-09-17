@@ -5,18 +5,20 @@ import ContentWrapper from '../../components/ContentWrapper';
 import PropertyCard from '../../components/PropertyCard';
 import Filters from '../../components/Filters';
 import { propertyFilters } from '../../forms/FILTERS';
+import { getParamsEntries } from '../../util/getParams'
 
 const Property = () => {
 	const [ datos, setDatos ] = useState(null);
 	const [ page, setPage ] = useState(1);
 	const [ size ] = useState(10);
 	const [ totalItems, setTotalItems ] = useState(0);
+	const [ params ] = useState( getParamsEntries() )
 
 	useEffect(
 		() => {
 			let asyncGet = async () => {
 				try {
-					let { data } = await ApiRequest.get(`/property/properties?page=${page - 1}&size=${size}`);
+					let { data } = await ApiRequest.get(`/property/properties`, { page: page -1, size, ...params });
 					setDatos(data.content);
 					setTotalItems(data.totalElements);
 				} catch (e) {
@@ -28,7 +30,7 @@ const Property = () => {
 			};
 			asyncGet();
 		},
-		[ page, size ]
+		[ page, size, params ]
 	);
 
 	const onChange = (page) => {

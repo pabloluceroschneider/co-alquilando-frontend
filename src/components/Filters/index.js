@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Tag } from 'antd';
 import { FilterOutlined, CloseOutlined } from "@ant-design/icons";
-import getParams from '../../util/getParams';
+import { getParams } from '../../util/getParams';
 
 const FilterPanel = ({filters, onClose}) => {
     const { t } = useTranslation();
