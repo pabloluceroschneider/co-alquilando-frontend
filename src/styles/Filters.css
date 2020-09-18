@@ -1,14 +1,14 @@
 
 .wrapper-filter{
     display: grid;
-    place-items: center;
+    justify-content: right;
 }
 
 .wrapper-filter .panel{
     width: 90vw;
     background-color: var(--grey);
     border: 1px solid #f5f5f5;
-    padding: 20px;
+    padding: 10px 20px;
 }
 
 .wrapper-filter .panel .header{
@@ -16,13 +16,14 @@
     grid-template-columns: auto auto;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
 }
 
 .wrapper-filter .panel .header span{
     font-size: 1.1em;
+}
+
+.wrapper-filter .panel .filter-content .tags{
+    padding-top: 10px;
 }
 
 .wrapper-filter .panel .filter-content .filter-item{
@@ -32,8 +33,17 @@
     padding-top: 10px;
 }
 
+.wrapper-filter .panel .filter-content{
+    height: auto;
+}
+
+.wrapper-filter .panel .filter-content.collapse-false{
+    height: 0px;
+    overflow: hidden;
+}
+
 .wrapper-filter .panel .filter-content .filter-item input{
-    border: 1px solid black;
+    border: 1px solid #ddd;
 }
 
 .wrapper-filter .panel .filter-content button{
@@ -44,6 +54,11 @@
 
 /* Desktop View */
 @media only screen and (min-width: 600px){
+    .wrapper-filter{
+        display: grid;
+        place-items: center;
+    }
+
     .wrapper-filter .panel{
         width: 100%;
     }

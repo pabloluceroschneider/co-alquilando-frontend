@@ -14,5 +14,5 @@ export const getParamsEntries = () => {
     .split("&")
     .map( p => p.split("="))
     .filter( p => p[1])
-    return Object.fromEntries(params)
+    return Object.fromEntries(params);
 }
