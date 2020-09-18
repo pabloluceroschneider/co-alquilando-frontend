@@ -21,6 +21,13 @@
 @import './PropertyDetail.css';
 @import './ModalAsyncList.css';
 @import './ContentWrapper.css';
+@import './Groups.css';
+@import './SideList.css';
+@import './H-Scroll-List.css';
+@import './GroupList.css';
+@import './GroupDetail.css';
+@import './Chat.css';
+@import './WaitingSelection.css';
 @import './Notifications.css';
 @import './Filters.css';
 
@@ -49,6 +56,38 @@ code {
 .userHome img{
   width: 100vw;
 }
+
+.clickeable {
+  position: relative;
+  border: none;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.clickeable:after {
+  position: absolute;
+  content: "";
+  background: var(--tertiary-blue);
+  display: block;
+  border-radius: 15px;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -10px!important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.clickeable:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 0.3;
+  transition: 0s
+}
+
 @media only screen and (min-width: 600px){
   .userHome{
     text-align: center;
