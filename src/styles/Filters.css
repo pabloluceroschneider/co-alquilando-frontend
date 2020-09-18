@@ -28,6 +28,7 @@
 .wrapper-filter .panel .filter-content .filter-item{
     display: grid;
     grid-template-columns: 60% 40%;
+    align-items: center;
     padding-top: 10px;
 }
 

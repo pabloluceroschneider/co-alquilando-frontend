@@ -6,7 +6,6 @@ import { getParams } from '../../util/getParams';
 
 const FilterPanel = ({filters, onClose}) => {
     const { t } = useTranslation();
-
     const [ params ] = getParams()
 
     return (
@@ -47,9 +46,7 @@ const Filters = ({filters}) => {
             }
 
             {showPanel &&
-                <div>
-                    <FilterPanel filters={filters} onClose={togglePanel} />
-                </div>
+                <FilterPanel filters={filters} onClose={togglePanel} />
             }
             
         </div>
