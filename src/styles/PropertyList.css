@@ -23,6 +23,11 @@
     justify-content: center;
 }
 
+.properties-wrapper .contentPL .waiting-selection{
+    height: 60vh;
+    margin-bottom: 2%;
+}
+
 .properties-wrapper .pagination{
     display: block;
     text-align-last: center;

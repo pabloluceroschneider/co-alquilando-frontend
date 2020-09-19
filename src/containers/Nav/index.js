@@ -6,11 +6,9 @@ import Login from '../../components/Login';
 import Auth from '../../util/Auth';
 
 const Ring = () => {
-	const [count, setCount] = useState(0);
-	setTimeout(() => { setCount(1); }, 3000);
 	useEffect(() => { return () => { new AbortController().abort(); } })
 	return (
-		<Badge count={count}>
+		<Badge>
 			<BellOutlined />
 		</Badge>
 	);
