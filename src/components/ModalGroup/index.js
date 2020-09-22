@@ -96,7 +96,7 @@ const RadioGroup = ({ radio, setRadio }) => {
   
     await ApiRequest.post(`/user/${user.id}/invite`, bodyReqNewInvitation);
   
-    return;
+    return data.id;
   };
   
   const inviteToGroup = async (user, selected) => {
@@ -116,19 +116,29 @@ const RadioGroup = ({ radio, setRadio }) => {
     const [radio, setRadio] = useState(1);
     const [input, setInput] = useState("");
     const [selected, setSelected] = useState({});
+    let groupId = null;
   
     const handleConfirm = async (radio, input, user, state, selected) => {
         
         if (radio === 1) {
-            createNewGroup(input, user, state.user.id);
+            groupId = await createNewGroup(input, user, state.user.id);
+            console.log('groupID', groupId)
         } else {
             inviteToGroup(user, selected);
         }
         
+        let notificationAttributes = [
+          {
+            attributeType: 'groupId',
+            value: radio === 1 ? groupId : selected.id
+          }
+        ]
+
         let bodyReq = new Notification(
           state.user.id,
           user.id,
-          "group_send_invitation"
+          "group_send_invitation",
+          notificationAttributes
         );
     
         await ApiRequest.post("/notifications/send", bodyReq);
