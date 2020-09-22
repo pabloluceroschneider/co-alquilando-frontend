@@ -1,9 +1,6 @@
-import React, { useState, useEffect , useContext} from 'react'
+import React from 'react'
 import { useHistory, useParams } from "react-router-dom";
 import { ArrowRightOutlined } from '@ant-design/icons';
-import ApiRequest from "../../util/ApiRequest";
-import { SessionContext } from '../../store';
-
 
 const Group = ({name, link}) => {
     const { group } = useParams();

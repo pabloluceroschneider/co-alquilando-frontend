@@ -6,7 +6,7 @@ import { notification } from 'antd';
 
 const Chat = ({ render, groupId, channel }) => {
 	const [ datos, setDatos ] = useState(null);
-  const { state } = useContext(SessionContext);
+  	const { state } = useContext(SessionContext);
   
 	useEffect(() => {
 			let asyncGet = async () => {
@@ -23,6 +23,7 @@ const Chat = ({ render, groupId, channel }) => {
 			asyncGet();
 		},[ state, channel ]);
 
+	console.log("datos",datos)
 	return (
 		<div key={channel} className={`chat-container ${!!render}`}>
 

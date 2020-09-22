@@ -3,7 +3,7 @@
     padding: 10px;
     font-size: 1.5em;
     border-bottom: 1px solid var(--dark-grey);
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 .modal-async-list .title span.anticon{

@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Avatar } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { StarFilled } from '@ant-design/icons';
 import ApiRequest from "../../util/ApiRequest";
-import { SessionContext } from '../../store';
 
 const Item = ({ name, channel }) => {
 	let history = useHistory();
@@ -55,7 +54,6 @@ const Info = ({name}) => {
 
 
 const GroupDetail = ({render, group}) => {
-	const { state } = useContext(SessionContext);
 	const [detail, setDetail] = useState(null)
 
 	useEffect( () => {
