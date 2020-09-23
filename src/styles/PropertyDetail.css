@@ -72,6 +72,9 @@
 .propertyDetail .section.fullAddress div{
     margin-left: 10%;
 }
+.propertyDetail .section.payingLink div{
+    margin-left: 10%;
+}
 
 /* attributes */
 .propertyDetail .section.attributes .row{
@@ -127,6 +130,10 @@
     .propertyDetail .section.attributes{
         grid-column: 2;
         grid-row: 5 / span 2;
+    }
+    .propertyDetail .section.payingLink{
+        grid-column: 2;
+        grid-row: 7;
     }
    
     /* table price */

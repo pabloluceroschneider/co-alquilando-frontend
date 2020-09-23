@@ -237,18 +237,11 @@ const propertyFields = {
 				}
 			],
 			[
-				/*{
-					label: 'Link de pago ',
-					component: 'infoTooltip',
-					name: ['payingLink'],
-					description: 'Accedé a Mercado Pago y generá un link de pago por el monto requerido de Pre-Alquiler. Luego agrega ese link en esta publicaciá',
-					color: '--secondary-blue'
-				}*/
 				{
 					label: 'Link de pago ',
 					name: ['payingLink'],
 					component: 'Input'
-				},
+				}
 			]
 		],
 		

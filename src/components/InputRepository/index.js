@@ -68,7 +68,6 @@ const InputRepository = props => {
       return (
         <>
           <InfoTooltip description={element.description} color={element.color} label={element.label} />
-          <Input />
         </>
       );
     case "h2":

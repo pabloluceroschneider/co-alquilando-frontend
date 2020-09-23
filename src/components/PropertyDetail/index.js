@@ -61,10 +61,10 @@ const PriceSection = ({ services, taxes, expenses, rentPrice }) => {
                 <div>Impuestos</div>
                 <div>Expensas</div>
                 <div>Alquiler</div>
+                <div>${validPrice(rentPrice)}</div>
+                <div>${validPrice(expenses)}</div>
                 <div>${validPrice(services)}</div>
                 <div>${validPrice(taxes)}</div>
-                <div>${validPrice(expenses)}</div>
-                <div>${validPrice(rentPrice)}</div>
             </div>
         </div>
     )
@@ -119,6 +119,17 @@ const Attributes = ({ attributes }) => {
     )
 }
 
+const PayingLink = ({ payingLink }) => {
+    if (!payingLink) return <div className="section box">Link de Pago no disponible</div>
+    return (
+        <div className="section box payingLink">
+            <span>Link de Pago</span>
+            <div>{payingLink}</div>
+        </div>
+    )
+}
+
+
 const PropertyDetail = props => {
     return (
         <div className="propertyDetail">
@@ -127,6 +138,7 @@ const PropertyDetail = props => {
             <TitleSection title={props.title} description={props.description} />
             <PriceSection {...props.price} />
             <FullAddress {...props.address} />
+            <PayingLink payingLink={props.payingLink} />
             <MapSection {...props.address?.coordinates} />
             <Attributes attributes={props.attributes} />
         </div>
