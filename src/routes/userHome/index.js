@@ -1,7 +1,8 @@
 import React from 'react';
 import ImgPortada from '../../assets/images/LOGO.jpg';
 import ContentWrapper from '../../components/ContentWrapper';
-const userHome = () => {
+
+const UserHome = () => {
 	return (
 		<ContentWrapper topNav optionsNav footer>
 			<div className="userHome">
@@ -11,4 +12,4 @@ const userHome = () => {
 	);
 };
 
-export default userHome;
+export default UserHome;

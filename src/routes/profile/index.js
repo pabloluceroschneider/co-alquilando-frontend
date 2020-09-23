@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import ApiRequest from "../../util/ApiRequest";
 import calculateAge from "../../util/CalculateAge";
 import ContentWrapper from "../../components/ContentWrapper";
-import { Button } from "antd";
+import { Button, Modal, notification } from "antd";
+import { UsergroupAddOutlined } from "@ant-design/icons";
+import Notification from "../../classes/Notification";
+import { SessionContext } from "../../store";
 
 const image =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
@@ -17,16 +20,48 @@ let genders = {
 const Profile = (props) => {
   let { nickname } = useParams();
   const [datos, setDatos] = useState(null);
+  const { state } = useContext(SessionContext);
+
+  const { confirm } = Modal;
+
+  const handleConfirm = async () => {
+    let bodyReq = new Notification(state.user.id, datos.id, "group_send_invitation");
+    await ApiRequest.post("/notifications/send", bodyReq);
+    notification.success({
+      message: `¡Tu solicitud fue enviada con éxito!`,
+      placement: "bottomLeft",
+    });
+  };
+
+  const handleConnect = () => {
+    confirm({
+	  title: "¿Quieres enviar la solicitud de grupo?",
+	  okText: "Confirmar",
+	  className: "notificationModal",
+      icon: <UsergroupAddOutlined />,
+      content: `${datos.userName} recibirá tu invitación`,
+      onOk() {
+        console.log("OK");
+        handleConfirm();
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
 
   useEffect(() => {
     if (!datos) {
       const getUser = async () => {
         const { data } = await ApiRequest.get(`/user/${nickname}`);
         let attr = [];
-        data.attributes.forEach((t) => {
-          attr = { ...attr, [t.attributeType]: t.value };
-        });
-        setDatos({ ...data, attributes: attr });
+        if (data.attributes) { 
+            data.attributes.forEach((t) => {
+            attr = { ...attr, [t.attributeType]: t.value };
+          });
+        }
+        console.log("attr =>", attr);
+        setDatos({ attributes: attr });
       };
       getUser();
     }
@@ -72,7 +107,7 @@ const Profile = (props) => {
             </div>
           </div>
           <div className="profileButton">
-            <Button id="buttonConectar">Conectar</Button>
+            <Button id="buttonConectar" onClick={() => handleConnect()}>Conectar</Button>
           </div>
         </div>
       ) : null}

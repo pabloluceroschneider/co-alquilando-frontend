@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import { SessionContext, reducer, initialState } from '../store'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import useServiceWorker from '../util/useServiceWorker';
 import Home from './home';
 import SignIn from './signIn';
 import Profile from './profile/index';
@@ -12,10 +13,13 @@ import UpdatePreferenciesForm from './profile/updatePreferenciesProfile';
 import PropertyList from "./propertyList";
 import MyProperties from "./my-properties";
 import Roommates from "./roommates";
+import Notifications from "./notifications";
 import FormPropertyUpdate from './property/updateProperty';
 import UserHome from '../routes/userHome';
+import Groups from './groups';
 
 const Routes = () => {
+	useServiceWorker();
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	return (
@@ -34,6 +38,10 @@ const Routes = () => {
 						<Route path="/properties" exact component={PropertyList} />
 						<Route path="/my-properties" exact component={MyProperties} />
 						<Route path="/roommates" exact component={Roommates} />
+						<Route path="/groups/:group/chat/:chat" component={Groups} />
+						<Route path="/groups/:group" component={Groups} />
+						<Route path="/groups" exact component={Groups} />
+						<Route path="/notifications" exact component={Notifications} />
 						<Redirect from="*" to="/"/>
 					</Switch>
 				) : (

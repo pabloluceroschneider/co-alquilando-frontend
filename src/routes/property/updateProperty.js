@@ -19,6 +19,8 @@ const FormPropertyUpdate = (props) => {
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/property/${idProperty}`).then((res) => {
+        console.log("haciendo el get");
+
         setOwnerId(res.data.ownerId);
         setStatus(res.data.status);
         setPhotosUpdate(res.data.photos);
@@ -46,7 +48,8 @@ const FormPropertyUpdate = (props) => {
   useEffect(() => {
     if (fields) {
       var atributos = Object.entries(fields.attributes);
-      const attributesFormate = atributos.forEach((a) => {
+      const attributesFormate = atributos.forEach((a) =>
+       {
         if (a) {
           let json = {
             attributeType: a[0],
@@ -127,7 +130,7 @@ const FormPropertyUpdate = (props) => {
     }
 
   }, [idProperty, history, fields]);
-
+  
   // Delete photos
   useEffect(() => {
     if (fields && fields.photos && fields.photos.file) {
