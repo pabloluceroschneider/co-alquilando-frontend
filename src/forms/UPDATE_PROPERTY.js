@@ -238,7 +238,7 @@ const propertyFields = {
 			],
 			[
 				{
-					label: 'Link de pago ',
+					label: 'Link de pago',
 					name: ['payingLink'],
 					component: 'Input'
 				}
