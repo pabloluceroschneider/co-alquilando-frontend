@@ -1,0 +1,22 @@
+
+.votation-wrapper{
+    width: 90%;
+    height: 100%;
+}
+
+.votation-wrapper .ongoing{
+    height: 40%;
+    border: 1px solid black;
+
+    display: grid;
+
+}
+
+.votation-wrapper .ongoing .votation, .votation-wrapper .ongoing .results, .votation-wrapper .ongoing .state{
+    margin: 20px;
+}
+
+.votation-wrapper .history{
+    height: 60%;
+    border: 1px solid black;
+}

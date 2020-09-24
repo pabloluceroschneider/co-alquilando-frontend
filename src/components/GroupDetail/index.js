@@ -29,9 +29,11 @@ const Item = ({ name, channel }) => {
 	);
 };
 
-const Votation = () => {
+const Votation = ({group}) => {
+	let history = useHistory();
+
 	const handleClick = () => {
-		alert("Funcionalidad En Contrucción!")
+		history.push(`/groups/${group}/votations`);
 	};
 	return (
 		<div className="item" onClick={handleClick}>
@@ -53,22 +55,14 @@ const Info = ({name}) => {
 
 
 
-const GroupDetail = ({render, group}) => {
-	const [detail, setDetail] = useState(null)
+const GroupDetail = ({detail, render, group}) => {
 
-	useEffect( () => {
-		let getGroupInformation = async () => {
-			let { data } = await ApiRequest.get(`/group/${group}/detail`)
-			setDetail(data);
-		};
-		getGroupInformation();
-	}, [group])
 
 	return (
 		<div className={`group-detail ${!!render}`}>
             <div className="container">
 				<Info name={detail?.name} />
-				<Votation />
+				<Votation group={detail?.id} />
 				{detail?.channels?.map( ch => {
 					return <Item key={ch} name={detail?.id} channel={ch} />
 				})}

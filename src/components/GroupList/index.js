@@ -20,7 +20,7 @@ const Group = ({name, link}) => {
 }
 
 
-const GroupList = ({groups, render}) => {
+const GroupList = ({ groups, render}) => {
 
     return (
         <div className={`group-list ${!!render}`}>

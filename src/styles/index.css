@@ -29,6 +29,7 @@
 @import './Chat.css';
 @import './WaitingSelection.css';
 @import './Notifications.css';
+@import './Votation.css';
 
 body {
   --principal-blue: #3a4e7a;
