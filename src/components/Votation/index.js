@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import { Rate } from 'antd';
-import { HeartOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { CheckSquareOutlined, CloseSquareOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { SessionContext } from '../../store';
 import ApiRequest from '../../util/ApiRequest';
 import Property from '../../classes/Property';
 
@@ -42,6 +43,7 @@ const useVotations = () => {
 
 const OnGoing = ({item, detail}) => {
     const [ property, setProperty ] = useState(null);
+    const { state } = useContext(SessionContext);
     
 
     useEffect(() => {
@@ -55,13 +57,23 @@ const OnGoing = ({item, detail}) => {
         asyncGetUser();
     },[item]);
 
+    const handleVote = async vote => {
+        let bodyReq = {
+            userId: state.user.id,
+            votationId: item?.id,
+            vote
+        }
+        let { data } = await ApiRequest.put(`/group/votation/vote/${detail?.id}`, bodyReq);
+    }
+
     return (
         <div className="ongoing">
 
             <div className="votation">
                 <div className="title">{property?.title}</div>
                 <div className="buttons">
-
+                    <CheckSquareOutlined onClick={() => handleVote(true)}/>
+                    <CloseSquareOutlined onClick={() => handleVote(false)} />
                 </div>
             </div>
 
