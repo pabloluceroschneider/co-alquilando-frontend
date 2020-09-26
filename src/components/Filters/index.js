@@ -22,7 +22,7 @@ const FilterPanel = ({filters, onClose}) => {
                 }
             </div>
             <div className={`filter-content collapse-${collapse}`}>
-                <div class="tags">
+                <div className="tags">
                     {params?.map( p => {
                         return <Tag closable color="processing" key={p[0]}>{`${t(p[0])}`}</Tag>
                     })}
@@ -32,7 +32,7 @@ const FilterPanel = ({filters, onClose}) => {
                         return (
                             <div key={f.name} className="filter-item">
                                 <span htmlFor={f.name}>{f.span}</span>
-                                <input type={f.type} name={f.name} id={f.name} list={`datalist-${f.name}`}/>
+                                <input type={f.type} name={f.name} id={f.name} list={`datalist-${f.name}`} min={f.min} />
                                 {f.type === "datalist" ?
                                     <datalist id={`datalist-${f.name}`}>
                                         {f.options.map( op => {

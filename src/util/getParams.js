@@ -14,5 +14,11 @@ export const getParamsEntries = () => {
     .split("&")
     .map( p => p.split("="))
     .filter( p => p[1])
+    .map( f => {
+        if (f[1]==="on"){
+            f[1] = true
+        }
+        return f
+    })
     return Object.fromEntries(params);
 }

@@ -10,12 +10,14 @@ export const propertyFilters = [
     {
         span: "Precio Máximo $",
         name: "price",
-        type: "number"
+        type: "number",
+        min: 0
     },
     {
         span: "Habitaciones",
         name: "rooms",
-        type: "number"
+        type: "number",
+        min: 0
     },
     {
         span: "Acepta Mascotas",
