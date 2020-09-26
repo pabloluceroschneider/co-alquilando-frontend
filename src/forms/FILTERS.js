@@ -1,5 +1,12 @@
+import boulevards from '../util/boulevards';
 
 export const propertyFilters = [
+    {
+        span: "Barrio",
+        name: "boulevard",
+        type: "datalist",
+        options : boulevards
+    },
     {
         span: "Precio Máximo $",
         name: "price",

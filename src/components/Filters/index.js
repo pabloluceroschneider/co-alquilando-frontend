@@ -32,7 +32,14 @@ const FilterPanel = ({filters, onClose}) => {
                         return (
                             <div key={f.name} className="filter-item">
                                 <span htmlFor={f.name}>{f.span}</span>
-                                <input type={f.type} name={f.name}/>
+                                <input type={f.type} name={f.name} id={f.name} list={`datalist-${f.name}`}/>
+                                {f.type === "datalist" ?
+                                    <datalist id={`datalist-${f.name}`}>
+                                        {f.options.map( op => {
+                                        return <option key={op.value} value={op.value}>{op.name}</option>
+                                        })}
+                                    </datalist> : null
+                                }
                             </div>
                         )
                     })}
