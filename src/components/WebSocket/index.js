@@ -43,7 +43,7 @@ class WebSocket extends React.Component {
   }
 
   
-  async componentWillMount() {
+  async componentDidMount() {
     let mes = await ApiRequest.get(`/chat/history/${this.props.channel}`);
     this.setState({ messages: mes.data });
   }
