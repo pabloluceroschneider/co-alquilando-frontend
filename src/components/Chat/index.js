@@ -7,7 +7,6 @@ import { notification } from 'antd';
 const Chat = ({ render, groupId, channel }) => {
 	const [ datos, setDatos ] = useState(null);
   const { state } = useContext(SessionContext);
-  
 	useEffect(() => {
 			let asyncGet = async () => {
 				try {
@@ -30,7 +29,7 @@ const Chat = ({ render, groupId, channel }) => {
         name={state.user.userNickname} 
         id={state.user.id} 
         groupId={groupId} 
-        channel={channel} 
+		channel={channel} 
         />
 
 		</div>
