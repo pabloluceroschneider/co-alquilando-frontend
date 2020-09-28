@@ -9,15 +9,6 @@ class WebSocket extends React.Component {
     this.state = {
       clientConnected: false,
       messages:[]
-/*
-      [{
-        author: "admin",
-        authorId: "5f6bb89ff3cc60330710c0c0",
-        channel: "topic",
-        groupId: "5f6bc01de7675e568ac7de96",
-        message: "Prueba",
-        timestamp: "1600898806723"
-      }],*/
     };
   }
 
@@ -42,7 +33,6 @@ class WebSocket extends React.Component {
     }
   }
 
-  
   async componentDidMount() {
     let mes = await ApiRequest.get(`/chat/history/${this.props.channel}`);
     this.setState({ messages: mes.data });
@@ -54,7 +44,7 @@ class WebSocket extends React.Component {
       <div>
         
         <TalkBox
-          topic={this.props.channel}
+          topic={this.props.channelName}
           currentUserId={this.props.id}
           currentUser={this.props.name}
           messages={this.state.messages}
