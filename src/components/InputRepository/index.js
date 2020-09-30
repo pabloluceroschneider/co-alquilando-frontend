@@ -2,7 +2,6 @@ import React from "react";
 import { Form, Input, Checkbox, InputNumber } from "antd";
 import Select from "./Select";
 import Upload from "./Upload";
-import InfoTooltip from "./../InfoTooltip";
 import DatePicker from "./DatePicker";
 import CheckboxGroup from "./CheckboxGroup";
 import SliderForm from "./Slider";
@@ -64,12 +63,6 @@ const InputRepository = props => {
 
     case "label":
       return <label className="label" key={element.label}>{element.label}</label>;
-    case "infoTooltip":
-      return (
-        <>
-          <InfoTooltip description={element.description} color={element.color} label={element.label} />
-        </>
-      );
     case "h2":
       return <h2 className="h2" key={element.label}>{element.label}</h2>;
     case "link":
