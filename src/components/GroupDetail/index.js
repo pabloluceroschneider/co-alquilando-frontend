@@ -36,7 +36,7 @@ const Votation = ({group}) => {
 		history.push(`/groups/${group}/votations`);
 	};
 	return (
-		<div className="item" onClick={handleClick}>
+		<div className="item clickeable" onClick={handleClick}>
 			<StarFilled />
 			<div className="name-msg">
 				<div className="">Votaciones</div>

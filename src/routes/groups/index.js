@@ -22,6 +22,7 @@ const Groups = () => {
     const [detail, setDetail] = useState(null)
 
 	useEffect( () => {
+        if (!group) return
 		let getGroupInformation = async () => {
 			let { data } = await ApiRequest.get(`/group/${group}/detail`)
 			setDetail(data);
@@ -54,10 +55,13 @@ const Groups = () => {
                     <GroupDetail detail={detail} render={ group && !chat } group={group} /> 
                     : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
                 }
-                { 
-                    group && chat ?  
-                    <Chat render={ group && chat } groupId={group} channel={chat}/> 
-                    : <Votation detail={detail} />
+                {
+                    group ? (
+                        chat ? 
+                        <Chat render={ group && chat } groupId={group} channel={chat}/> 
+                        : <Votation detail={detail} />
+                    ) 
+                    : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
                 }
             </div>
         </ContentWrapper>

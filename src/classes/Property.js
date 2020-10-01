@@ -27,7 +27,7 @@ class Property{
     }
 
     static mapURLphotos(idProperty, photos){
-        if (!photos) return;
+        if (!photos) return ["https://omegamma.com.au/wp-content/uploads/2017/04/default-image-720x530.jpg"]
         let urlArray = [];
         if(photos){
             let url = "http://localhost:8080"
