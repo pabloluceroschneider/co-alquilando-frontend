@@ -76,6 +76,8 @@ const OnGoing = ({ item, detail }) => {
         "canceled": "Cancelada"
     }
     console.log("prop", property)
+    
+     if(property){
     return (
         <div className="ongoing">
 
@@ -110,10 +112,35 @@ const OnGoing = ({ item, detail }) => {
         </div>
     )
 }
+    else{
+    return(
+        <div>
+            No una votacion en curso
+        </div>
+    )
+} 
+}
 const History = ({ items }) => {
+    
+    let typologies = {
+        "ongoing": "En curso",
+        "passed": "Aprobada",
+        "failed": "Rechazada",
+        "canceled": "Cancelada"
+    }
+    console.log("items", items)
     return (
-       <div className="history">
-           Historial
+        <div className="history">
+        {items?.map(item => {
+
+
+            return (
+        
+                <div >
+                <a href={`/property/${item?.propertyId}`} className="titleVotation">Ver propiedad</a>
+                <div className="resultVotation">{typologies[item?.result]}</div>
+               </div>)
+        })}
         </div>
 
     )
