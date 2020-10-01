@@ -42,17 +42,17 @@ const NotificationCard = (props) => {
     group_send_invitation: [
       <span
         onClick={() => {
-          response("group_decline_invitation");
-        }}
-      >
-        <CloseCircleTwoTone twoToneColor="#FB8888" />
-      </span>,
-      <span
-        onClick={() => {
           response("group_accept_invitation");
         }}
       >
-        <CheckCircleTwoTone twoToneColor="#52c41a" />
+        <CheckCircleTwoTone className="responseButton" twoToneColor="#52c41a" />
+      </span>,
+      <span
+        onClick={() => {
+          response("group_decline_invitation");
+        }}
+      >
+        <CloseCircleTwoTone className="responseButton" twoToneColor="#FB8888" />
       </span>,
     ],
   };
