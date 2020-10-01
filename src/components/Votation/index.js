@@ -139,11 +139,11 @@ const History = ({ items }) => {
     )
 }
 
-const Votation = ({ detail }) => {
+const Votation = ({ detail, render }) => {
     const [votations] = useVotations(detail);
 
     return (
-        <div key={detail?.id} className="votation-wrapper">
+        <div key={detail?.id} className={`votation-wrapper ${!!render}`}>
             <OnGoing item={votations?.ongoing} detail={detail} />
             <History items={votations?.history} />
         </div>

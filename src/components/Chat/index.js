@@ -23,7 +23,6 @@ const Chat = ({ render, groupId, channel }) => {
 			asyncGet();
 		},[ state, channel ]);
 
-	console.log("datos",datos)
 	return (
 		<div key={channel} className={`chat-container ${!!render}`}>
 

@@ -12,6 +12,7 @@ import { SendOutlined, TeamOutlined } from '@ant-design/icons';
 
 const Groups = () => {
     let { group, chat } = useParams();
+    let votation = window.location.pathname.split("/").includes("votations")
     let breadscrumb = [{
         Grupos : "/groups"
     }]
@@ -49,17 +50,17 @@ const Groups = () => {
     return (
         <ContentWrapper topNav breadscrumb={breadscrumb} >
             <div className="groups-container">
-                <GroupList groups={data} render={ !group && !chat} />
+                <GroupList groups={data} render={ !group && !chat && !votation} />
                 {   
                     group || chat ?  
-                    <GroupDetail detail={detail} render={ group && !chat } group={group} /> 
+                    <GroupDetail detail={detail} render={ group && !chat && !votation } group={group} /> 
                     : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
                 }
                 {
                     group ? (
                         chat ? 
-                        <Chat render={ group && chat } groupId={group} channel={chat}/> 
-                        : <Votation detail={detail} />
+                        <Chat render={ group && chat && !votation } groupId={group} channel={chat}/> 
+                        : <Votation render={ group && !chat && votation } detail={detail} />
                     ) 
                     : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
                 }

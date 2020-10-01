@@ -1,4 +1,8 @@
 
+.votation-wrapper.false{
+    display: none; 
+}
+
 .votation-wrapper{
     display: flex;
     flex-direction: column;
@@ -21,4 +25,11 @@
     height: 150px;
     overflow-y: scroll;
     border: 1px solid lightgrey;
+}
+
+
+@media only screen and (min-width: 600px){
+    .votation-wrapper.false{
+        display: grid; 
+    }
 }
