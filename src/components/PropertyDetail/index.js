@@ -70,13 +70,14 @@ const PriceSection = ({services, taxes, expenses, rentPrice }) => {
     )
 }
 
-const FullAddress = ({province, neighborhood, street, 
+const FullAddress = ({province, neighborhood, street, tower, 
     number, floor, apartment, description }) => {
         return (
             <div className="section box fullAddress">
                 <span>Dirección</span>
                 <div>{province}, Bº {neighborhood}</div>
-                <div>{street}, {number} - {floor}º {apartment}</div>
+                <div>{street}, {number} </div>
+                <div>{tower ? `Torre: ${tower}`: null} {floor}º {apartment}</div>
                 <div>{description}</div>
             </div>
         )
