@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext  } from 'react';
 import { Avatar } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useHistory} from 'react-router-dom';
 import { StarFilled } from '@ant-design/icons';
 import ApiRequest from "../../util/ApiRequest";
+import { SessionContext } from '../../store';
 
 const Item = ({ name, channel }) => {
 	let history = useHistory();
@@ -56,16 +57,40 @@ const Info = ({name}) => {
 
 
 
+
+
 const GroupDetail = ({detail, render, group}) => {
 
-console.log("detalle",detail)
+console.log("detalle",detail, "Group", group)
+const {state} = useContext(SessionContext);  
 
 
+const adminSearh = (detalle) =>
+{	
+	debugger
+	detalle != null && detalle.channels.forEach( a => {
+		debugger
+		let adminIDarray = a.channelId.split("-")
+		console.log('adminIDarray :>> ', adminIDarray);
+
+		console.log('state.user.id :>> ', state.user.id);
+		if(adminIDarray[2] === state.user.id ){
+			console.log("adminARRAY", adminIDarray)
+			return true
+		}
+	
+	}
+	);
+	return false
+}
+
+let isAdmin = adminSearh(detail)
+console.log("ADMIN", isAdmin)
 	return (
 		<div className={`group-detail ${!!render}`}>
             <div className="container">
 				<Info name={detail?.name} />
-				<Votation group={detail?.id} />
+				{isAdmin? "Soy el admin":<Votation group={detail?.id} />}
 				{detail?.channels?.map( ch => {
 					return <Item key={ch} name={detail?.id} channel={ch} />
 				})}
