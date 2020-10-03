@@ -3,7 +3,7 @@ import boulevards from '../util/boulevards';
 export const propertyFilters = [
     {
         span: "Barrio",
-        name: "boulevard",
+        name: "neighborhood",
         type: "datalist",
         options : boulevards
     },
