@@ -34,7 +34,6 @@ const Nav = () => {
 				data.attributes.forEach((t) => {
 					attr = { ...attr, [t.attributeType]: t.value };
 				});
-				console.log(data)
 				setDatos({ ...data, attributes: attr });
 				setPhotosUpdate(data.photos);
 			};
