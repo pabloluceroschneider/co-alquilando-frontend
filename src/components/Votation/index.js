@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from "react-router-dom";
-import { Rate } from 'antd';
+import React, { useState, useEffect, useContext} from 'react';
+import { useParams , useHistory} from "react-router-dom";
+import { Rate, notification } from 'antd';
 import { CloseCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import { SessionContext } from '../../store';
 import ApiRequest from '../../util/ApiRequest';
@@ -12,7 +12,7 @@ const useVotations = (detail) => {
     const [votations, setVotations] = useState(null);
     let { group } = useParams();
 
-
+	
 
     useEffect(() => {
         const getVotations = async () => {
@@ -46,7 +46,7 @@ const useVotations = (detail) => {
 const OnGoing = ({ item, detail }) => {
     const [property, setProperty] = useState(null);
     const { state } = useContext(SessionContext);
-
+    let history = useHistory();
 
     useEffect(() => {
         if (!item) {
@@ -67,7 +67,23 @@ const OnGoing = ({ item, detail }) => {
             votationId: item?.id,
             vote
         }
-        let { data } = await ApiRequest.put(`/group/votation/vote/${detail?.id}`, bodyReq);
+        await ApiRequest.put(`/group/votation/vote/${detail?.id}`, bodyReq).then(
+            (res)=> {
+                console.log("res",res)
+                if(res.status==200){
+                    notification.success({
+                        message: "Votación registrada",
+                        placement: "bottomLeft",
+                      });
+                } else {
+                    notification.success({
+                        message: "Hubo un error al registrar su votación. Por favor, intente nuevamente.",
+                        placement: "bottomLeft",
+                      });
+                }
+               history.push(`/groups/${item.groupId}`);
+            }  
+        );
     }
 
     let typologies = {

@@ -7,8 +7,9 @@ import ApiRequest from "../../util/ApiRequest";
 const Item = ({ name, channel }) => {
 	let history = useHistory();
 
+
 	const handleClick = () => {
-		history.push(`/groups/${name}/chat/${channel}`);
+		history.push(`/groups/${name}/chat/${channel.channelId}`);
 	};
 
 	function date() {
@@ -21,7 +22,7 @@ const Item = ({ name, channel }) => {
 		<div className="item clickeable" onClick={handleClick}>
 			<Avatar />
 			<div className="name-msg">
-				<div className="name">{channel}</div>
+				<div className="name">{channel.name}</div>
 				<div className="msg">last message</div>
 			</div>
 			<div className="time">{date()}</div>
@@ -56,6 +57,8 @@ const Info = ({name}) => {
 
 
 const GroupDetail = ({detail, render, group}) => {
+
+console.log("detalle",detail)
 
 
 	return (
