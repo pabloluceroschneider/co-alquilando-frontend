@@ -1,4 +1,5 @@
 import provinces from '../util/provinces.js'
+import neighborhoods from '../util/neighborhoods.js'
 
 const propertyFields = {
 	name: 'property',
@@ -83,7 +84,8 @@ const propertyFields = {
 				{
 					label: 'Barrio',
 					name: [ 'address', 'neighborhood' ],
-					component: 'Input',
+					component: 'Select',
+					options: neighborhoods,
 					required: true
 				}
 			],
