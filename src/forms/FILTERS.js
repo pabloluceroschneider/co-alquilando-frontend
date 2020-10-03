@@ -45,6 +45,11 @@ export const propertyFilters = [
         type: "checkbox"
     },
     {
+        span: "Balcon",
+        name: "balcony",
+        type: "checkbox"
+    },
+    {
         span: "Ascensor",
         name: "elevator",
         type: "checkbox"
