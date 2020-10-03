@@ -111,7 +111,7 @@ const propertyFields = {
 					label: 'Geolocalizacion',
 					name: 'coordinates',
 					component: 'Map',
-					required: true
+					
 				}
 			],
 			[
@@ -228,6 +228,24 @@ const propertyFields = {
 					name: [ 'attributes', 'pets' ],
 					valuePropName: 'checked',
 					component: 'Checkbox'
+				}
+			],
+			[
+				{
+					label: 'Estado Propiedad',
+					component: 'h2'
+				}
+			],
+			[
+				{
+					label: 'Estado',
+					name: 'status' ,
+					component: 'Select',
+					options: [
+						{ name: 'Disponible', value: 'available' },
+						{ name: 'Pre-Rentado', value: 'pre_rented' },
+						{ name: 'Alquilado', value: 'rented' }
+					],
 				}
 			]
 		]
