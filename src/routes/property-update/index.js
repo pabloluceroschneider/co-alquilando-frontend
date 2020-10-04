@@ -10,8 +10,8 @@ import propertyFields from "../../forms/UPDATE_PROPERTY";
 // custom hook
 const usePutProperty = (fields, hiddenFields) => {
 	const { idProperty } = useParams();
-    const [ resultPut, setResultPut] = useState(0);
-    const [ error, setError] = useState(null);
+    const [ resultPut, setResultPut] = useState({ basic:null, multipart:null, deleteMultipart: null});
+    const [ error, setError] = useState({ basic:null, multipart:null, deleteMultipart: null});
 
     // PUT BASIC DATA
     useEffect(() => {
@@ -22,10 +22,10 @@ const usePutProperty = (fields, hiddenFields) => {
         let asyncPut = async () => {
             try {
                 await ApiRequest.put(`/property/${idProperty}`, bodyRequest);
-                setResultPut(resultPut => resultPut + 1);
-            } catch (error) {
-                setError(error);
-                setResultPut(false);
+                setResultPut(resultPut => { return {...resultPut, basic: true}});
+            } catch (err) {
+                setError(error => { return {...error, basic: err}});
+
             }
         }
         asyncPut();
@@ -37,7 +37,7 @@ const usePutProperty = (fields, hiddenFields) => {
 
         var plist = fields.photos.file?.fileList;
         if (!plist) {
-            setResultPut(resultPut => resultPut + 1);
+            setResultPut( resultPut => { return {...resultPut, multipart: true}});
             return
         }
 
@@ -51,10 +51,9 @@ const usePutProperty = (fields, hiddenFields) => {
         let asyncPutPhoto = async () => {
             try {
                 await ApiRequest.multipartPut(`/property/${idProperty}/photos`, formData)
-                setResultPut(resultPut => resultPut + 1);
-            } catch (error) {
-                setError(error);
-                setResultPut(false);
+                setResultPut(resultPut => {return {...resultPut, multipart: true}});
+            } catch (err) {
+                setError(error => { return {...error, multipart: err}});
             }
         }
         asyncPutPhoto();
@@ -67,7 +66,7 @@ const usePutProperty = (fields, hiddenFields) => {
 
         var listPhoto = fields.photos.file?.fileList;
         if (!listPhoto) {
-            setResultPut(resultPut => resultPut + 1);
+            setResultPut( resultPut => { return {...resultPut, deleteMultipart: true}});
             return
         }
         var auxListPhoto = [];
@@ -82,9 +81,9 @@ const usePutProperty = (fields, hiddenFields) => {
                 let asyncPutPhoto = async () => {
                     try {
                         await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`)
-                    } catch (error) {
-                        setResultPut(resultPut => resultPut - 1);
-                        setError(error);
+                        setResultPut(resultPut => { return {...resultPut, deleteMultipart: true}});
+                    } catch (err) {
+                        setError(error => { return {...error, deleteMultipart: err}});
                     }
                 }
                 asyncPutPhoto();
@@ -121,13 +120,14 @@ const UpdateProperty = () => {
     },[idProperty])
 
     useEffect(()=> {
-        if (error){
+        if (error.basic || error.multipart || error.deleteMultipart){
             notification.error({
                 message: `Error: No se pudo actualizar sus datos`,
+                description: `${error.basic} ${error.multipart} ${error.deleteMultipart}`,
                 placement: "bottomLeft",
             });
-        }else if( resultPut >= 2 ){
-            // Both put success
+        }else if( resultPut.basic && resultPut.multipart && resultPut.deleteMultipart){
+            // All put success
             notification.success({
                 message: `Datos Actualizados`,
                 placement: "bottomLeft",
