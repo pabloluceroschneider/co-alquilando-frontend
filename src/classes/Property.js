@@ -49,6 +49,15 @@ class Property{
         }
         return formatedProperty
     }
+
+    mapJsonToRequest(){
+        let formatedProperty = {
+            ...this.property,
+            attributes: Property.mapJsonToArray(this.property.attributes),
+            address: {...this.property.address, coordinates: this.property.coordinates}
+        }
+        return formatedProperty
+    }
 }
 
 export default Property;
