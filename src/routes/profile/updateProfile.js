@@ -115,7 +115,7 @@ const userData = {
           name: "userDescription",
           component: "Input.TextArea",
         },
-       
+
       ],
       [
         {
@@ -182,7 +182,7 @@ const UpdateForm = (props) => {
       delete bodyReq.photos;
 
       console.log("BODY", bodyReq);
-      
+
       let asyncPutUser = new Promise(async (res, rej) => {
         await ApiRequest.put(`/user/${idUser}`, bodyReq).then((res) => {
           if (res.status === 200) {

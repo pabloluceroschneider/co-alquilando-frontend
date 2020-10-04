@@ -22,7 +22,7 @@ const CustomSelect = (props) => {
                 return (
                     <Option key={op[props.search]} value={op[props.search]}>
                         {op[props.search]}
-					</Option>
+                    </Option>
                 );
             })}
         </Select>
