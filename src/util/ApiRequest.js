@@ -13,6 +13,16 @@ export default class ApiRequest {
             }
         })
     }
+    static getQuery = async (endpoint, params) => {
+        return new Promise( async (res, rej) => {
+            try{
+                let data = await axios.get(endpoint, { params })
+                res(data)
+            }catch(err){
+                rej(err)
+            }
+        })
+    }
     static post = async (endpoint, body) => {
         return new Promise( async (res, rej) => {
             try{
