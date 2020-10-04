@@ -51,8 +51,8 @@ const InputRepository = props => {
             mapElement={<div style={{ height: `100%` }} />}
             zoomLevel={10}
             onChange={onChange}
-            latitude={props.form.getFieldValue([element.name])["latitude"]}
-            length={props.form.getFieldValue([element.name])["length"]}
+            latitude={props.form.getFieldValue([element.name]) ? props.form.getFieldValue([element.name])["latitude"] : null }
+            length={props.form.getFieldValue([element.name]) ? props.form.getFieldValue([element.name])["length"] : null}
         />
         </div>
       default: 

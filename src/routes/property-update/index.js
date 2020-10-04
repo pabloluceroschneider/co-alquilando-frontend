@@ -1,39 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Form } from "antd";
 import ApiRequest from "../../util/ApiRequest";
+import Property from "../../classes/Property";
 import ContentWrapper from "../../components/ContentWrapper";
 import CustomizedForm from "../../components/CustomizedForm";
+import propertyFields from "../../forms/UPDATE_PROPERTY";
 
-const propertyFields = {
-	name: "user",
-	layout: "vertical",
-	btnSubmit: "Actualizar Datos",
-	fields: {
-	  primaries: [
-		[
-		  {
-			label: "Titulo",
-			name: "title",
-			component: "Input",
-		  }
-		],
-		[
-		  {
-			label: "Geolocalizacion",
-			name: "coordinates",
-			component: "Map",
-		  },
-		]
-	]}
-}
 
-export const UpdateProperty = () => {
+const UpdateProperty = () => {
 	const [form] = Form.useForm();
-	const [fields, setFields] = useState(null);
-
-	form.setFieldsValue({ title: "Valor"})
-	form.setFieldsValue({ coordinates: {latitude:"-31.3588105",length:"-64.1820288"}})
-	console.log(form.getFieldsValue(["coordinates"]))
+    const [fields, setFields] = useState(null);
+    const [data, setData] = useState(null);
+	const { idProperty } = useParams();
+    form.setFieldsValue(data)
+    
+    useEffect(() => {
+        let getProperty = async () => {
+            let { data } = await ApiRequest.get(`/property/${idProperty}`)
+            let property = new Property(data).mapResponseToJson();
+            setData(property)
+        }
+        getProperty();
+    },[])
 
 	return (
 		<ContentWrapper topNav title="Actualizar Perfil">

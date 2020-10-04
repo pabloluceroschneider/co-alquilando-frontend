@@ -44,7 +44,8 @@ class Property{
         let formatedProperty = {
             ...this.property,
             attributes: Property.mapArrayToJson( this.property.attributes ),
-            photos: Property.mapURLphotos(this.property.id, this.property.photos)
+            photos: Property.mapURLphotos(this.property.id, this.property.photos),
+            coordinates: this.property.address.coordinates
         }
         return formatedProperty
     }
