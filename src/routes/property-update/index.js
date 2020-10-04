@@ -7,11 +7,13 @@ import ContentWrapper from "../../components/ContentWrapper";
 import CustomizedForm from "../../components/CustomizedForm";
 import propertyFields from "../../forms/UPDATE_PROPERTY";
 
+// custom hook
 const usePutProperty = (fields, hiddenFields) => {
 	const { idProperty } = useParams();
     const [ resultPut, setResultPut] = useState(0);
     const [ error, setError] = useState(null);
 
+    // PUT BASIC DATA
     useEffect(() => {
         if (!fields) return;
         let bodyRequest = new Property(fields).mapJsonToRequest();
@@ -29,6 +31,7 @@ const usePutProperty = (fields, hiddenFields) => {
         asyncPut();
     },[fields]);
 
+    // PUT MULTIPART
     useEffect(() => {
         if (!fields?.photos) return;
 
@@ -57,6 +60,39 @@ const usePutProperty = (fields, hiddenFields) => {
         asyncPutPhoto();
     },[fields?.photos])
 
+    // DELETE MULTIPART
+    useEffect(() => {
+        if (!fields?.photos) return;
+        if (!hiddenFields?.photos) return;
+
+        var listPhoto = fields.photos.file?.fileList;
+        if (!listPhoto) {
+            setResultPut(resultPut => resultPut + 1);
+            return
+        }
+        var auxListPhoto = [];
+        listPhoto.forEach((photo) => {
+            if(!photo.originFileObj) {
+                auxListPhoto.push(photo);       
+            }
+        });
+        auxListPhoto.forEach((photoAux) => {
+            hiddenFields.photos.forEach((photo) => {
+              if (photoAux.name === photo) {
+                let asyncPutPhoto = async () => {
+                    try {
+                        await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`)
+                    } catch (error) {
+                        setResultPut(resultPut => resultPut - 1);
+                        setError(error);
+                    }
+                }
+                asyncPutPhoto();
+              }
+            })
+        })
+    },[fields?.photos, hiddenFields?.photos])
+
     return [resultPut, error]
 }
 
@@ -65,8 +101,8 @@ const UpdateProperty = () => {
     const [data, setData] = useState(null);
     const [fields, setFields] = useState(null);
     const [hiddenFields, setHiddenFields] = useState(null);
-    const [resultPut, error ] = usePutProperty(fields, hiddenFields);
-    const {idProperty } = useParams();
+    const [resultPut, error] = usePutProperty(fields, hiddenFields);
+    const {idProperty} = useParams();
     const history = useHistory();
     form.setFieldsValue(data)
     
@@ -91,7 +127,7 @@ const UpdateProperty = () => {
                 placement: "bottomLeft",
             });
         }else if( resultPut >= 2 ){
-            // Both put succesfully
+            // Both put success
             notification.success({
                 message: `Datos Actualizados`,
                 placement: "bottomLeft",
