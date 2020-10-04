@@ -1,0 +1,62 @@
+
+.group-detail.false{
+    display: none; 
+}
+.group-detail{
+    display: grid; 
+    grid-template-columns: auto;
+    align-items: baseline;
+    justify-items: center;
+    width: 90%;
+    height: 100%;
+}
+.group-detail .container{
+    width: 100%;
+}
+.group-detail .info{
+    display: grid; 
+    place-items: center;
+    width: 100%;
+    border: 1px solid #dbdbdb;
+    padding: 5%;
+    box-shadow: 0px 0px 2px var(--dark-grey);
+}
+
+.group-detail .item{
+    display: grid; 
+    grid-template-columns: 15% 75% 10%;
+    place-items: center;
+    min-height: 10vh;
+    width: 100%;
+    border-bottom: 1px solid var(--dark-grey);
+    padding: 2%;
+
+}
+
+.group-detail .item .name-msg{
+    display: grid;
+    width: 100%;
+    align-items: center;
+    justify-items: left;
+}
+
+.group-detail .item .name-msg .name{
+    font-size: 1.1em ;
+
+}
+.group-detail .item .name-msg .msg{
+    font-size: 0.9em ;
+}
+
+.group-detail .item .hour{
+    align-items: baseline;
+}
+
+@media only screen and (min-width: 600px){
+    .group-detail.false{
+        display: grid; 
+    }
+}
+
+
+
