@@ -5,7 +5,7 @@ import App from './routes';
 import config from './config.json'
 import Amplify from 'aws-amplify';
 import * as serviceWorker from './serviceWorker';
-import './styles/index.css';
+import './styles/index.scss';
 import 'antd/dist/antd.css';
 
 Amplify.configure({
