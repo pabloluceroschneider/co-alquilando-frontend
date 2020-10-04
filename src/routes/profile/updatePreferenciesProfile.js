@@ -33,7 +33,9 @@ const userPreferenciesRoomie = {
         {
           label: "Ocupación",
           name: ["roommatePreferences", "occupation"],
-          component: "Input",
+          component: "SelectDB",
+          endpoint: '/occupation/all',
+          search: 'occupation'
         },
       ],
       [
