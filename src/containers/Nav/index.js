@@ -26,22 +26,6 @@ const Nav = () => {
 	const image =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
 
-	useEffect(() => {
-		if (!datos) {
-			const getUser = async () => {
-				const { data } = await ApiRequest.get(`/user/${state.user.userNickname}`);
-				let attr = [];
-				data.attributes.forEach((t) => {
-					attr = { ...attr, [t.attributeType]: t.value };
-				});
-				setDatos({ ...data, attributes: attr });
-				setPhotosUpdate(data.photos);
-			};
-			getUser();
-		}
-	}, [state, datos]);
-
-
 	const profileSignedIn = (
 		<Menu>
 			<Menu.Item key="0">
