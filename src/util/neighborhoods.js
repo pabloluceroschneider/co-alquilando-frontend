@@ -1,16 +1,14 @@
-import useState from 'react';
-import ApiRequest from '../util/ApiRequest';
+import React, { useContext, useState, useEffect } from 'react';
+import { Select } from 'antd'
+import { notification } from 'antd';
+import ApiRequest from './ApiRequest';
+const { Option } = Select;
 
-let n = null;
-//const [neighborhoods, setNeighborhoods] = useState(null);
 
-let asyncNeighborhoods = async () => {
+let neighborhood = async() => {
     let { data } = await ApiRequest.get(`location/all`);
-    //setNeighborhoods(data)
-    n=data;
+    console.log(data);
+    return [];
 }
-asyncNeighborhoods();
 
-export default n;
-
-
+export default neighborhood;

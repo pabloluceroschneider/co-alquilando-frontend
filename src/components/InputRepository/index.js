@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Input, Checkbox, InputNumber } from "antd";
 import Select from "./Select";
+import SelectDB from "./SelectDB";
 import Upload from "./Upload";
 import DatePicker from "./DatePicker";
 import CheckboxGroup from "./CheckboxGroup";
@@ -38,6 +39,8 @@ const InputRepository = props => {
         return DatePicker(props);
       case "Select":
         return Select(element);
+      case "SelectDB":
+        return SelectDB(element);
       case "Upload":
         return <Upload onChange={onChange} {...props} key={element.label} />;
       case "slider":
