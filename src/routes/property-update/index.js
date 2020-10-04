@@ -11,7 +11,7 @@ import propertyFields from "../../forms/UPDATE_PROPERTY";
 const usePutProperty = (fields, hiddenFields) => {
 	const { idProperty } = useParams();
     const [ resultPut, setResultPut] = useState({ basic:null, multipart:null, deleteMultipart: null});
-    const [ error, setError] = useState({ basic:null, multipart:null, deleteMultipart: null});
+    const [ error, setError] = useState({ from: null, message:null });
 
     // PUT BASIC DATA
     useEffect(() => {
@@ -24,7 +24,7 @@ const usePutProperty = (fields, hiddenFields) => {
                 await ApiRequest.put(`/property/${idProperty}`, bodyRequest);
                 setResultPut(resultPut => { return {...resultPut, basic: true}});
             } catch (err) {
-                setError(error => { return {...error, basic: err}});
+                setError({ from: "Actualizar Datos", message:err });
 
             }
         }
@@ -53,7 +53,7 @@ const usePutProperty = (fields, hiddenFields) => {
                 await ApiRequest.multipartPut(`/property/${idProperty}/photos`, formData)
                 setResultPut(resultPut => {return {...resultPut, multipart: true}});
             } catch (err) {
-                setError(error => { return {...error, multipart: err}});
+                setError({ from: "Actualizar Fotos", message:err });
             }
         }
         asyncPutPhoto();
@@ -83,7 +83,7 @@ const usePutProperty = (fields, hiddenFields) => {
                         await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`)
                         setResultPut(resultPut => { return {...resultPut, deleteMultipart: true}});
                     } catch (err) {
-                        setError(error => { return {...error, deleteMultipart: err}});
+                        setError({ from: "Eliminar Fotos", message:err });
                     }
                 }
                 asyncPutPhoto();
@@ -120,10 +120,10 @@ const UpdateProperty = () => {
     },[idProperty])
 
     useEffect(()=> {
-        if (error.basic || error.multipart || error.deleteMultipart){
+        if (error.message){
             notification.error({
                 message: `Error: No se pudo actualizar sus datos`,
-                description: `${error.basic} ${error.multipart} ${error.deleteMultipart}`,
+                description: `${error.from}`,
                 placement: "bottomLeft",
             });
         }else if( resultPut.basic && resultPut.multipart && resultPut.deleteMultipart){

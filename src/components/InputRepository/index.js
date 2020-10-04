@@ -42,7 +42,8 @@ const InputRepository = props => {
         return <Upload onChange={onChange} {...props} key={element.label} />;
       case "slider":
         return <SliderForm onChange={onChange} {...props} key={element.label} />
-        case "Map":
+      case "Map":
+          console.log("MAP Form", props.form.getFieldValue([element.name]))
           return <div id="formMap" style={{ height: `300px`, width: `100%` }}>
           <ClickeableMap 
             googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDzoLTHAJKj5xymA3iBqJxxQl-MYG9R_ag"
