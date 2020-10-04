@@ -52,6 +52,17 @@
     align-items: baseline;
 }
 
+.group-detail .admin-buttons{
+    display: flex;
+    min-height: 7vh;
+    width: 100%;
+    border-bottom: 1px solid var(--dark-grey);
+    padding: 2%;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
 @media only screen and (min-width: 600px){
     .group-detail.false{
         display: grid; 

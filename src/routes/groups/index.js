@@ -28,7 +28,6 @@ const Groups = () => {
             let { data } = await ApiRequest.get(`/group/${group}/detail`)
             
             setDetail(data);
-            debugger
 		};
 		getGroupInformation();
 	}, [group])
