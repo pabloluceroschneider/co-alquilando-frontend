@@ -25,7 +25,7 @@ export const propertyFilters = [
         type: "checkbox"
     },
     {
-        span: "Gimnacio",
+        span: "Gimnasio",
         name: "gym",
         type: "checkbox"
     },
