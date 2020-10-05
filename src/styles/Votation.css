@@ -11,6 +11,7 @@
 }
 
 .votation-wrapper .ongoing{
+    box-shadow: 2px 2px 5px var(--dark-grey);
     border: 1px solid lightgrey;
     display: grid;
 

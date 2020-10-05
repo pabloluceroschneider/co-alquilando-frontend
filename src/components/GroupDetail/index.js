@@ -111,7 +111,7 @@ const GroupDetail = ({ detail, render, group }) => {
         <Info name={detail?.name} />
         {isAdmin ? <AdminMenu channels={detail?.channels} /> : <Votation group={detail?.id} />}
         {detail?.channels?.map((ch) => {
-          return <Item key={ch} name={detail?.id} channel={ch} />;
+          return <Item key={ch.name} name={detail?.id} channel={ch} />;
         })}
       </div>
     </div>

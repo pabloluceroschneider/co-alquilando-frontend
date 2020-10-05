@@ -12,20 +12,29 @@ const useVotations = (detail) => {
     const [votations, setVotations] = useState(null);
     let { group } = useParams();
 
-	
-
     useEffect(() => {
         const getVotations = async () => {
             const { data } = await ApiRequest.get(`/group/votation/all/${group}`);
+            console.log("actualizacion:", data)
             setData(data);
         };
         getVotations();
     }, [group])
 
     useEffect(() => {
+        if (!votations?.update) return;
+        const getVotations = async () => {
+            const { data } = await ApiRequest.get(`/group/votation/all/${group}`);
+            setData(data);
+            setVotations({...votations, update: false});
+        };
+        getVotations();
+    },[group, votations])
+
+    useEffect(() => {
         if (!data) return;
 
-        let ongoing = {}
+        let ongoing = null;
         let history = []
         data.map(item => {
             if (item.result === "ongoing") {
@@ -40,51 +49,46 @@ const useVotations = (detail) => {
 
     }, [data])
 
-    return [votations];
+    return [votations, setVotations];
 }
 
-const OnGoing = ({ item, detail }) => {
+const OnGoing = ({ votations, detail, setVotations }) => {
     const [property, setProperty] = useState(null);
     const { state } = useContext(SessionContext);
-    let history = useHistory();
 
     useEffect(() => {
-        if (!item) {
+        if (!votations?.ongoing) {
             setProperty(null);
             return;
         }
         let asyncGetUser = async () => {
-            let { data } = await ApiRequest.get(`/property/${item?.propertyId}`);
+            let { data } = await ApiRequest.get(`/property/${votations?.ongoing.propertyId}`);
             let formatedProperty = await new Property(data).mapResponseToJson();
             setProperty(formatedProperty);
         };
         asyncGetUser();
-    }, [item, detail]);
+    }, [votations, detail]);
 
     const handleVote = async vote => {
         let bodyReq = {
             userId: state.user.id,
-            votationId: item?.id,
+            votationId: votations?.ongoing.id,
             vote
         }
-        await ApiRequest.put(`/group/votation/vote/${detail?.id}`, bodyReq).then(
-            (res)=> {
-                console.log("res",res)
-                if(res.status==200){
-                    notification.success({
-                        message: "Votación registrada",
-                        placement: "bottomLeft",
-                      });
-                } else {
-                    notification.success({
-                        message: "Hubo un error al registrar su votación. Por favor, intente nuevamente.",
-                        placement: "bottomLeft",
-                      });
-                }
-               history.push(`/groups/${item.groupId}`);
-            }  
-        );
-    }
+        let { data, status } = await ApiRequest.put(`/group/votation/vote/${detail?.id}`, bodyReq)
+        setVotations({...votations, ongoing: data, update: true});
+        if(status===200){
+            notification.success({
+                message: "Votación registrada",
+                placement: "bottomLeft",
+                });
+        } else {
+            notification.success({
+                message: "Hubo un error al registrar su votación. Por favor, intente nuevamente.",
+                placement: "bottomLeft",
+                });
+        }
+    }  
 
     let typologies = {
         "ongoing": "En curso",
@@ -93,35 +97,33 @@ const OnGoing = ({ item, detail }) => {
         "canceled": "Cancelada"
     }
     
-    if(item && property){
+    if(votations?.ongoing && property){
         return (
-            <div className="ongoing" key={item?.id}>
-                <div className={`votation ${item.id}`} >
-                    <div className="votationHeader">
-                        <img
-                            alt="imagen de perfil"
-                            src={property?.photos[0]}
-                            className="imageVotation"
-                        />
-                        <div key={item.id} className="contentVotationTitle">
-                            <a href={`/property/${item?.propertyId}`} className="titleVotation">{property?.title}</a>
-                            <div className="priceVotation">Precio: ${property?.price.rentPrice}</div>
-                            <div className="buttonsVotation">
-                                <CheckCircleOutlined className="buttonsVotationOk" onClick={() => handleVote(true)} />
-                                <CloseCircleOutlined className="buttonsVotationNo" onClick={() => handleVote(false)} />
-                            </div>
+            <div className="ongoing" key={Math.random()}>
+                <div className="votationHeader">
+                    <img
+                        alt="imagen de perfil"
+                        src={property?.photos[0]}
+                        className="imageVotation"
+                    />
+                    <div key={votations.id} className="contentVotationTitle">
+                        <a href={`/property/${votations?.ongoing.propertyId}`} className="titleVotation">{property?.title}</a>
+                        <div className="priceVotation">Precio: ${property?.price.rentPrice}</div>
+                        <div className="buttonsVotation">
+                            <CheckCircleOutlined className="buttonsVotationOk" onClick={() => handleVote(true)} />
+                            <CloseCircleOutlined className="buttonsVotationNo" onClick={() => handleVote(false)} />
                         </div>
                     </div>
+                </div>
 
 
-                    <div className="rowVotation">
-                        <div className="subtitleVotation">Resultado actual</div>
-                        <Rate className="actualVotation" character={<CheckCircleOutlined />} disabled count={detail?.membersId.length} value={item?.votospositivos} />
-                    </div>
+                <div className="rowVotation">
+                    <div className="subtitleVotation">Resultado actual</div>
+                    <Rate className="actualVotation" character={<CheckCircleOutlined />} disabled count={detail?.membersId.length} value={votations?.ongoing.votospositivos} />
+                </div>
 
-                    <div className="rowVotation">
-                        <div className="resultVotation">{typologies[item?.result]}</div>
-                    </div>
+                <div className="rowVotation">
+                    <div className="resultVotation">{typologies[votations?.ongoing.result]}</div>
                 </div>
             </div>
         )
@@ -156,11 +158,11 @@ const History = ({ items }) => {
 }
 
 const Votation = ({ detail, render }) => {
-    const [votations] = useVotations(detail);
+    const [votations, setVotations] = useVotations(detail);
 
     return (
         <div key={detail?.id} className={`votation-wrapper ${!!render}`}>
-            <OnGoing item={votations?.ongoing} detail={detail} />
+            <OnGoing votations={votations} item={votations?.ongoing} detail={detail} setVotations={setVotations} />
             <History items={votations?.history} />
         </div>
     )
