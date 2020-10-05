@@ -11,6 +11,7 @@
 }
 
 .votation-wrapper .ongoing{
+    padding: 2% 2% 0 2%;
     box-shadow: 2px 2px 5px var(--dark-grey);
     border: 1px solid lightgrey;
     display: grid;
@@ -22,8 +23,10 @@
 }
 
 .votation-wrapper .history{
+    padding: 2% 5%;
     margin-top: 10px;
-    height: 150px;
+    height: auto;
+    max-height: 45vh;
     overflow-y: scroll;
     border: 1px solid lightgrey;
 }

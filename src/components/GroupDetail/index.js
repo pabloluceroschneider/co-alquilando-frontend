@@ -110,9 +110,11 @@ const GroupDetail = ({ detail, render, group }) => {
       <div className="container">
         <Info name={detail?.name} />
         {isAdmin ? <AdminMenu channels={detail?.channels} /> : <Votation group={detail?.id} />}
-        {detail?.channels?.map((ch) => {
-          return <Item key={ch.name} name={detail?.id} channel={ch} />;
-        })}
+        <div className="chats">
+          {detail?.channels?.map((ch) => {
+            return <Item key={ch.name} name={detail?.id} channel={ch} />;
+          })}
+        </div>
       </div>
     </div>
   );

@@ -13,6 +13,7 @@
 .group-detail .container{
     width: 100%;
 }
+
 .group-detail .info{
     display: grid; 
     place-items: center;
@@ -50,6 +51,11 @@
 
 .group-detail .item .hour{
     align-items: baseline;
+}
+
+.group-detail .container .chats{
+    max-height: 62vh;
+    overflow-y: scroll;
 }
 
 .group-detail .admin-buttons{
