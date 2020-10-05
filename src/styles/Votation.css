@@ -31,6 +31,14 @@
     border: 1px solid lightgrey;
 }
 
+.votation-wrapper .history .row{
+    display: grid;
+    grid-template-columns: auto auto;
+    place-items: center;
+    border-bottom: 1px solid lightgrey;
+    padding: 2% 1% 0% 1%;
+    margin: 0px 20px;
+}
 
 @media only screen and (min-width: 600px){
     .votation-wrapper.false{

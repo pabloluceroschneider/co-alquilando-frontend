@@ -128,11 +128,7 @@ const OnGoing = ({ votations, detail, setVotations }) => {
             </div>
         )
     }
-    return (
-        <div>
-            No una votacion en curso
-        </div>
-    )
+    return (<div></div>)
 }
 const History = ({ items }) => {
     
@@ -146,7 +142,7 @@ const History = ({ items }) => {
         <div className="history">
         {items?.map(item => {
             return (
-                <div key={item.id}>
+                <div className="row" key={item.id}>
                     <a href={`/property/${item?.propertyId}`} className="titleVotation">Ver propiedad</a>
                     <div className="resultVotation">{typologies[item?.result]}</div>
                 </div>
@@ -163,7 +159,7 @@ const Votation = ({ detail, render }) => {
     return (
         <div key={detail?.id} className={`votation-wrapper ${!!render}`}>
             <OnGoing votations={votations} item={votations?.ongoing} detail={detail} setVotations={setVotations} />
-            <History items={votations?.history} />
+            {votations?.history.length ? <History items={votations?.history}/> : null}
         </div>
     )
 }
