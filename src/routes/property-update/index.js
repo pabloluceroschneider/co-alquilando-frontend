@@ -29,7 +29,7 @@ const usePutProperty = (fields, hiddenFields) => {
             }
         }
         asyncPut();
-    },[fields]);
+    },[fields, idProperty, hiddenFields]);
 
     // PUT MULTIPART
     useEffect(() => {
@@ -57,7 +57,7 @@ const usePutProperty = (fields, hiddenFields) => {
             }
         }
         asyncPutPhoto();
-    },[fields?.photos])
+    },[fields, hiddenFields, idProperty])
 
     // DELETE MULTIPART
     useEffect(() => {
@@ -90,7 +90,7 @@ const usePutProperty = (fields, hiddenFields) => {
               }
             })
         })
-    },[fields?.photos, hiddenFields?.photos])
+    },[fields, hiddenFields, idProperty])
 
     return [resultPut, error]
 }
@@ -134,7 +134,7 @@ const UpdateProperty = () => {
             });
             history.push(`/property/${idProperty}`);
         }
-    },[resultPut, error, history])
+    },[resultPut, error, history, idProperty])
 
 	return (
 		<ContentWrapper topNav title="Actualizar Propiedad">

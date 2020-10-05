@@ -9,7 +9,7 @@ const Item = ({ name, channel }) => {
 	let history = useHistory();
 
 	const handleClick = () => {
-		history.push(`/groups/${name}/chat/${channel}`);
+		history.push(`/groups/${name}/chat/${channel.channelId}/${channel.name}`);
 	};
 
 	function date() {
@@ -22,7 +22,7 @@ const Item = ({ name, channel }) => {
 		<div className="item clickeable" onClick={handleClick}>
 			<Avatar />
 			<div className="name-msg">
-				<div className="name">{channel}</div>
+				<div className="name">{channel.name}</div>
 				<div className="msg">last message</div>
 			</div>
 			<div className="time">{date()}</div>
@@ -66,13 +66,13 @@ const GroupDetail = ({render, group}) => {
 		getGroupInformation();
 	}, [group])
 
-	return (
+	return (	
 		<div className={`group-detail ${!!render}`}>
             <div className="container">
 				<Info name={detail?.name} />
 				<Votation />
 				{detail?.channels?.map( ch => {
-					return <Item key={ch} name={detail?.id} channel={ch} />
+					return <Item key={ch.channelId} name={detail?.id} channel={ch} />
 				})}
 			</div>
 		</div>

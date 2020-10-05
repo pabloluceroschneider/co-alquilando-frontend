@@ -4,15 +4,11 @@ import { Menu, Avatar, Badge, Dropdown } from 'antd';
 import { LogoutOutlined, BellOutlined, TeamOutlined } from '@ant-design/icons';
 import Login from '../../components/Login';
 import Auth from '../../util/Auth';
-import ApiRequest from "../../util/ApiRequest";
-
 
 const Ring = () => {
-	const [count, setCount] = useState(0);
-	setTimeout(() => { setCount(1); }, 3000);
 	useEffect(() => { return () => { new AbortController().abort(); } })
 	return (
-		<Badge count={count}>
+		<Badge>
 			<BellOutlined />
 		</Badge>
 	);
@@ -20,11 +16,10 @@ const Ring = () => {
 
 const Nav = () => {
 	const { state, dispatch } = useContext(SessionContext);
-	const [datos, setDatos] = useState(null);
-	const [photosUpdate, setPhotosUpdate] = useState(null);
 
-	const image =
-  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
+	const image = state.user.photos ? 
+	`http://localhost:8080/user/${state.user.id}/photos/${state.user.photos}` :
+  	"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
 
 	const profileSignedIn = (
 		<Menu>
@@ -60,10 +55,7 @@ const Nav = () => {
 					<li style={{ float: 'right' }}>
 						<Dropdown overlay={profileSignedIn} placement="bottomRight" trigger="click">
 							<a rel="noopener noreferrer" className="ant-dropdown-link" href="/">
-								<Avatar
-									size={30}
-									src={(state.user.id && photosUpdate) ? `http://localhost:8080/user/${state.user.id}/photos/${photosUpdate}` : image}
-								/>
+								<Avatar size={30} src={image} />
 							</a>
 						</Dropdown>
 					</li>

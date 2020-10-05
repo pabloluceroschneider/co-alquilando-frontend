@@ -16,7 +16,8 @@ const Match = () => {
 					let { data } = await ApiRequest.get(`/user/match/${state.user.id}`);
 					setMatched(data);
 				} catch (error) {
-					let { data } = await ApiRequest.get(`/user/users`);
+					let params = { userId : state.user.id }
+					let { data } = await ApiRequest.getQuery(`/user/users`, params);
 					setUsers(data);
 				}
 			};

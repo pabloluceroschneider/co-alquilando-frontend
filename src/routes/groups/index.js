@@ -10,7 +10,7 @@ import WaitingSelection from '../../components/WaitingSelection';
 import { SendOutlined, TeamOutlined } from '@ant-design/icons';
 
 const Groups = () => {
-    let { group, chat } = useParams();
+    let { group, chat, name } = useParams();
     let breadscrumb = [{
         Grupos : "/groups"
     }]
@@ -45,7 +45,7 @@ const Groups = () => {
                 }
                 { 
                     group && chat ?  
-                    <Chat render={ group && chat } groupId={group} channel={chat}/> 
+                    <Chat render={ group && chat } channelName={name} groupId={group} channel={chat}/> 
                     : <WaitingSelection message="Seleccione Chat"  render={ group && chat } icon={<SendOutlined />} /> 
                 }
             </div>
