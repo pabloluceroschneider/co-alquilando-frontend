@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext} from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams , useHistory} from "react-router-dom";
 import { Rate, notification } from 'antd';
 import { CloseCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
@@ -122,32 +123,33 @@ const OnGoing = ({ votations, detail, setVotations }) => {
                     <Rate className="actualVotation" character={<CheckCircleOutlined />} disabled count={detail?.membersId.length} value={votations?.ongoing.votospositivos} />
                 </div>
 
-                <div className="rowVotation">
+                <div className="">
                     <div className="resultVotation">{typologies[votations?.ongoing.result]}</div>
                 </div>
             </div>
         )
     }
-    return (<div></div>)
+    return (<></>)
 }
 const History = ({ items }) => {
-    
-    let typologies = {
-        "ongoing": "En curso",
-        "passed": "Aprobada",
-        "failed": "Rechazada",
-        "canceled": "Cancelada"
+    const { t } = useTranslation();
+    let configColor = {
+        "ongoing": "#F7DC6F",
+        "passed": "#17A589",
+        "failed": "#E74C3C",
+        "canceled": "#E74C3C"
     }
     return (
         <div className="history">
-        {items?.map(item => {
-            return (
-                <div className="row" key={item.id}>
-                    <a href={`/property/${item?.propertyId}`} className="titleVotation">Ver propiedad</a>
-                    <div className="resultVotation">{typologies[item?.result]}</div>
-                </div>
-               )
-        })}
+            <span>Historial</span>
+            {items?.map(item => {
+                return (
+                    <div className="row" key={item.id}>
+                        <a href={`/property/${item?.propertyId}`} >Ver propiedad</a>
+                        <div style={{color:configColor[item?.result]}} className="resultVotation">{ t( item?.result ) }</div>
+                    </div>
+                )
+            })}
         </div>
 
     )

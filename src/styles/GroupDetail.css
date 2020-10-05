@@ -31,7 +31,10 @@
     width: 100%;
     border-bottom: 1px solid var(--dark-grey);
     padding: 2%;
-
+}
+.group-detail .item:hover{
+    color: #3f3f3f;
+    box-shadow: 1px 3px 8px var(--dark-grey), 1px -3px 8px var(--dark-grey) ;
 }
 
 .group-detail .item .name-msg{
@@ -43,7 +46,6 @@
 
 .group-detail .item .name-msg .name{
     font-size: 1.1em ;
-
 }
 .group-detail .item .name-msg .msg{
     font-size: 0.9em ;
@@ -54,6 +56,7 @@
 }
 
 .group-detail .container .chats{
+    padding: 5px 0px 5px 0px;
     max-height: 62vh;
     overflow-y: scroll;
 }

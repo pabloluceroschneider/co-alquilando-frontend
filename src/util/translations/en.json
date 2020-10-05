@@ -26,5 +26,10 @@
 	"pets": "Acepta mascotas",
 	"security": "Seguridad",
 	"true": "Sí",
-	"false": "No"
+	"false": "No",
+
+	"ongoing": "En curso",
+	"passed": "Aprobada",
+	"failed": "Rechazada",
+	"canceled": "Cancelada"
 }

@@ -40,7 +40,7 @@ const Votation = ({ group }) => {
     <div className="item clickeable" onClick={handleClick}>
       <StarFilled />
       <div className="name-msg">
-        <div className="">Votaciones</div>
+        <div>Votaciones</div>
       </div>
     </div>
   );
