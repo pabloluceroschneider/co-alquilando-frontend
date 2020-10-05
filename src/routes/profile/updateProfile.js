@@ -17,13 +17,6 @@ const userData = {
     primaries: [
       [
         {
-          label: "Nombre de usuario",
-          name: "userNickname",
-          component: "Input",
-        },
-      ],
-      [
-        {
           label: "Nombre",
           name: "userName",
           component: "Input",
