@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Card, notification, Avatar } from "antd";
 import ApiRequest from "../../util/ApiRequest";
 import Notification from "../../classes/Notification";
 import { CloseCircleTwoTone, CheckCircleTwoTone } from "@ant-design/icons";
+import { SessionContext } from "../../store";
 
 const { Meta } = Card;
 
@@ -29,7 +30,21 @@ const Name = ({ name, userNickname }) => {
 };
 
 const NotificationCard = (props) => {
+  console.log("Props -->", props);
+  const { state } = useContext(SessionContext);
   const response = async (type) => {
+    let groupID = await props.notificationAttributes.find((a) => a.attributeType === 'groupId');
+    console.log('groupID', groupID)
+
+    if (type !== "group_send_invitation") {
+      let bodyReqResp = {
+        decision: type === "group_accept_invitation" ? true : false,
+        groupId: groupID.value
+      };
+
+      await ApiRequest.put(`/user/${state.user.id}/invite`, bodyReqResp);
+    }
+
     let bodyReq = new Notification(props.to, props.from, type);
     await ApiRequest.post("/notifications/send", bodyReq);
     notification.success({
@@ -42,17 +57,17 @@ const NotificationCard = (props) => {
     group_send_invitation: [
       <span
         onClick={() => {
-          response("group_decline_invitation");
-        }}
-      >
-        <CloseCircleTwoTone twoToneColor="#FB8888" />
-      </span>,
-      <span
-        onClick={() => {
           response("group_accept_invitation");
         }}
       >
-        <CheckCircleTwoTone twoToneColor="#52c41a" />
+        <CheckCircleTwoTone className="responseButton" twoToneColor="#52c41a" />
+      </span>,
+      <span
+        onClick={() => {
+          response("group_decline_invitation");
+        }}
+      >
+        <CloseCircleTwoTone className="responseButton" twoToneColor="#FB8888" />
       </span>,
     ],
   };

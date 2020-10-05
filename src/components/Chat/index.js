@@ -4,7 +4,7 @@ import WebSocket from '../WebSocket';
 import ApiRequest from '../../util/ApiRequest';
 import { notification } from 'antd';
 
-const Chat = ({ render, groupId, channel }) => {
+const Chat = ({ render, groupId, channel, channelName }) => {
 	const [ datos, setDatos ] = useState(null);
   	const { state } = useContext(SessionContext);
   
@@ -30,7 +30,8 @@ const Chat = ({ render, groupId, channel }) => {
         name={state.user.userNickname} 
         id={state.user.id} 
         groupId={groupId} 
-        channel={channel} 
+		channel={channel} 
+		channelName={channelName}
         />
 
 		</div>

@@ -6,6 +6,8 @@ import CustomizedForm from "../../components/CustomizedForm";
 import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 import moment from "moment";
+import provinces from '../../util/provinces'
+
 
 const userData = {
   name: "user",
@@ -94,29 +96,34 @@ const userData = {
           component: "Input",
         },
         {
-          label: "Ciudad",
+          label: "Provincia",
           name: ["attributes", "city"],
-          component: "Input",
+          component: "Select",
+          options: provinces
         },
       ],
       [
+        {
+          label: "Ocupación",
+          name: ["attributes", "occupation"],
+          component: "SelectDB",
+          endpoint: '/occupation/all',
+          search: 'occupation'
+        },
         {
           label: "Descripción Personal",
           name: "userDescription",
           component: "Input.TextArea",
         },
+
+      ],
+      [
         {
           label: "Cargar Imagen",
           name: "photos",
           component: "Upload",
         },
       ],
-      [
-        {
-          label: "Preferencias",
-          component: "link",
-        },
-      ]
     ],
   },
 };
@@ -169,7 +176,7 @@ const UpdateForm = (props) => {
       delete bodyReq.photos;
 
       console.log("BODY", bodyReq);
-      
+
       let asyncPutUser = new Promise(async (res, rej) => {
         await ApiRequest.put(`/user/${idUser}`, bodyReq).then((res) => {
           if (res.status === 200) {
@@ -321,8 +328,6 @@ const UpdateForm = (props) => {
       })
     }
   }, [idUser, history, fields, photosUpdate]);
-
-
 
   return (
     <ContentWrapper topNav title="Actualizar Perfil">

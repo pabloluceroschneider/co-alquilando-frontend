@@ -1,5 +1,4 @@
 /* Mobile */
-@media only screen and (max-width: 599px){
 .contentPC{
     display: flex;
     column-gap: 5px;
@@ -9,19 +8,15 @@
     text-align: center;
     align-items: center;
     }
-    .dividerPC{
-        margin: 2px 0 2px 0;
-    }
 
     .cabeceraPC{
-
         text-align: center;
     }
 
    .itemsPC{
         display: flex;
         flex-direction: column;
-        text-align: left;
+        align-self: center;
     }
 
     .typologyPC{
@@ -41,18 +36,42 @@
         margin-right: 17px;
     }
    
-    .titlePC {
+    .pricePC {
         padding:0 0 0 0;
         color: rgb(9, 93, 9);
         margin: 0 0 0 0;
-        font-size: 25px;
+        font-size: 15px;
         font-weight: bold;
     }
     .icon{
         padding-right: 1%;
 
     }
-}
+
+    .titlePC{
+        padding:0 0 0 0;
+        color:var(--principal-blue );
+        margin: 0 0 0 0;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .tagPC{
+        margin: 5px 15px!important;
+    }
+
+    .dividerPC{
+        margin: 14px 0!important;
+    }
+
+    .button-place{
+        display: grid;
+        grid-template-columns: auto auto auto;
+        place-content: center;
+    }
+    .button-place button{
+        margin-left: 8px;
+    }
 
 /* Desktop */
 @media only screen and (min-width: 600px){
@@ -63,20 +82,15 @@
     flex-direction: row;
     text-align: center;
     }
-    
-    .dividerPC{
-        margin: 2px 0 2px 0;
-    }
 
     .cabeceraPC{
-
         text-align: center;
     }
 
    .itemsPC{
         display: flex;
         flex-direction: column;
-        text-align: left;
+        align-self: center;
     }
 
     .typologyPC{
@@ -96,23 +110,9 @@
         height: 10px;
         margin-right: 17px;
     }
-   
-    .titlePC {
-        padding:0 0 0 0;
-        color: rgb(9, 93, 9);
-        margin: 0 0 0 0;
-        font-size: 30px;
-        font-weight: bold;
-    }
+
     .icon{
         padding-right: 3%;
-    }
-    .button-place{
-        display: grid;
-        grid-template-columns: auto auto auto;
-    }
-    .button-place button{
-        margin-left: 8px;
     }
 }
 

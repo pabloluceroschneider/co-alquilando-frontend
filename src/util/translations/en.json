@@ -31,5 +31,9 @@
 	"ongoing": "En curso",
 	"passed": "Aprobada",
 	"failed": "Rechazada",
-	"canceled": "Cancelada"
+	"canceled": "Cancelada",
+
+	"price": "Precio",
+	"on": "Sí",
+	"boulevard": "Barrio"
 }

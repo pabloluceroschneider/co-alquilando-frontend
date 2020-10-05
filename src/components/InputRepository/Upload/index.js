@@ -31,8 +31,8 @@ const CustomUpload = (props) => {
           props.value.forEach(async (photo, index) => {
             let photoJson = {
               uid: index,
-              name: photo,
-              url: `http://localhost:8080/property/${idProperty}/photos/${photo}`,
+              name: `Alt Image ${index}`,
+              url: photo,
             };
             setFileList((fileList) => [...fileList, photoJson]);
           });
