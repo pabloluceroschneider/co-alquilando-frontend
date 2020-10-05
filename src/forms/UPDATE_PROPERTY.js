@@ -90,6 +90,11 @@ const propertyFields = {
 			],
 			[
 				{
+					label: 'Torre',
+					name: [ 'address', 'tower' ],
+					component: 'Input'
+				},
+				{
 					label: 'Piso',
 					name: [ 'address', 'floor' ],
 					component: 'InputNumber'

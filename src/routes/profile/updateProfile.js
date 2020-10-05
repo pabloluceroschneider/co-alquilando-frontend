@@ -124,12 +124,6 @@ const userData = {
           component: "Upload",
         },
       ],
-      [
-        {
-          label: "Preferencias",
-          component: "link",
-        },
-      ]
     ],
   },
 };
@@ -334,8 +328,6 @@ const UpdateForm = (props) => {
       })
     }
   }, [idUser, history, fields, photosUpdate]);
-
-
 
   return (
     <ContentWrapper topNav title="Actualizar Perfil">
