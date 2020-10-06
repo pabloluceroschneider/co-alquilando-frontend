@@ -17,13 +17,6 @@ const userData = {
     primaries: [
       [
         {
-          label: "Nombre de usuario",
-          name: "userNickname",
-          component: "Input",
-        },
-      ],
-      [
-        {
           label: "Nombre",
           name: "userName",
           component: "Input",
@@ -65,6 +58,7 @@ const userData = {
           label: "Fecha de Nacimiento",
           name: "userBirthDate",
           component: "DatePicker",
+          required:true,
         },
         {
           label: "Número de Celular",
