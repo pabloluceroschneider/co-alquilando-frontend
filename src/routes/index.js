@@ -14,7 +14,7 @@ import PropertyList from "./propertyList";
 import MyProperties from "./my-properties";
 import Roommates from "./roommates";
 import Notifications from "./notifications";
-import FormPropertyUpdate from './property/updateProperty';
+import FormPropertyUpdate from './property-update';
 import UserHome from '../routes/userHome';
 import Groups from './groups';
 
@@ -38,7 +38,7 @@ const Routes = () => {
 						<Route path="/properties" exact component={PropertyList} />
 						<Route path="/my-properties" exact component={MyProperties} />
 						<Route path="/roommates" exact component={Roommates} />
-						<Route path="/groups/:group/chat/:chat" component={Groups} />
+						<Route path="/groups/:group/chat/:chat/:name" component={Groups} />
 						<Route path="/groups/:group" component={Groups} />
 						<Route path="/groups" exact component={Groups} />
 						<Route path="/notifications" exact component={Notifications} />

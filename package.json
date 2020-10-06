@@ -32,8 +32,8 @@
     "react-stomp": "^5.0.0",
     "react-talk": "^1.0.0",
     "redux": "^4.0.5",
-    "username-generator": "^1.1.0",
     "register-service-worker": "^1.7.1",
+    "username-generator": "^1.1.0",
     "uuidv4": "^6.1.1"
   },
   "scripts": {

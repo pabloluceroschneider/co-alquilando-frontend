@@ -12,10 +12,10 @@ const image =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
 
 let genders = {
-    "MALE": "Masculino",
-    "FEMALE": "Femenino",
-    "OTHER": "Otro"
-}
+  MALE: "Masculino",
+  FEMALE: "Femenino",
+  OTHER: "Otro",
+};
 
 const Profile = (props) => {
   let { nickname } = useParams();
@@ -25,7 +25,11 @@ const Profile = (props) => {
   const { confirm } = Modal;
 
   const handleConfirm = async () => {
-    let bodyReq = new Notification(state.user.id, datos.id, "group_send_invitation");
+    let bodyReq = new Notification(
+      state.user.id,
+      datos.id,
+      "group_send_invitation"
+    );
     await ApiRequest.post("/notifications/send", bodyReq);
     notification.success({
       message: `¡Tu solicitud fue enviada con éxito!`,
@@ -35,9 +39,9 @@ const Profile = (props) => {
 
   const handleConnect = () => {
     confirm({
-	  title: "¿Quieres enviar la solicitud de grupo?",
-	  okText: "Confirmar",
-	  className: "notificationModal",
+      title: "¿Quieres enviar la solicitud de grupo?",
+      okText: "Confirmar",
+      className: "notificationModal",
       icon: <UsergroupAddOutlined />,
       content: `${datos.userName} recibirá tu invitación`,
       onOk() {
@@ -55,16 +59,18 @@ const Profile = (props) => {
       const getUser = async () => {
         const { data } = await ApiRequest.get(`/user/${nickname}`);
         let attr = [];
-        if (data.attributes) { 
-            data.attributes.forEach((t) => {
+        if (data.attributes) {
+          data.attributes.forEach((t) => {
             attr = { ...attr, [t.attributeType]: t.value };
           });
         }
         console.log("attr =>", attr);
-        setDatos({ attributes: attr });
+        setDatos({ ...data, attributes: attr });
+        
       };
       getUser();
     }
+    console.log(datos)
   }, [nickname, datos]);
 
   return (
@@ -75,7 +81,8 @@ const Profile = (props) => {
             <div className="imageContent">
               <img
                 alt="imagen de perfil"
-                src={image}
+                src={datos?.photo ? `http://localhost:8080/user/${datos.id}/photos/${datos.photo[0]}`
+                : image}
                 className="profileImage"
               />
             </div>
@@ -88,26 +95,26 @@ const Profile = (props) => {
               <h4>
                 {datos.attributes.nationality} - {datos.attributes.city}
               </h4>
+            
+            <div>
+              <p>
+                <b>Nickname:</b> {nickname}
+              </p>
             </div>
-          </div>
-          <div className="datosContent">
-            <div className="profileGroup3">
-              <div>
-                <p>Nickname: {nickname}</p>
-              </div>
-              <div>
-                <p>
-                  Sexo:{" "}
-                  {genders[datos.attributes.sex]}
-                </p>
-              </div>
-              <div>
-                <p>Edad: {calculateAge(datos.userBirthDate)}</p>
-              </div>
+            <div>
+              <p>
+                <b>Sexo:</b> {genders[datos.attributes.sex]}
+              </p>
+            </div>
+            <div>
+              <p>
+                <b>Edad:</b> {calculateAge(datos.userBirthDate)}
+              </p>
+            </div>
             </div>
           </div>
           <div className="profileButton">
-            <Button id="buttonConectar" onClick={() => handleConnect()}>Conectar</Button>
+            <Button onClick={() => handleConnect()}>Conectar</Button>
           </div>
         </div>
       ) : null}

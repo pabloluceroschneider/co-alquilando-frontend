@@ -1,35 +1,37 @@
 import React, { useEffect, useState, useContext } from "react";
-import { SessionContext } from '../../store';
+import { SessionContext } from "../../store";
 import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 import calculateAge from "../../util/CalculateAge";
-
+import { Button } from "antd";
+import { useRouteMatch } from "react-router";
 
 const image =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
 
 let genders = {
-    "MALE": "Masculino",
-    "FEMALE": "Femenino",
-    "OTHER": "Otro"
-}
+  MALE: "Masculino",
+  FEMALE: "Femenino",
+  OTHER: "Otro",
+};
 
 const MyProfile = (props) => {
-  const {state} = useContext(SessionContext);
+  const { state } = useContext(SessionContext);
   const [datos, setDatos] = useState(null);
   const [photosUpdate, setPhotosUpdate] = useState(null);
+  const { path } = useRouteMatch();
 
-
-
-  useEffect(() => {        
+  useEffect(() => {
     if (!datos) {
       const getUser = async () => {
-        const { data } = await ApiRequest.get(`/user/${state.user.userNickname}`);
+        const { data } = await ApiRequest.get(
+          `/user/${state.user.userNickname}`
+        );
         let attr = [];
         data.attributes.forEach((t) => {
           attr = { ...attr, [t.attributeType]: t.value };
         });
-        console.log(data)
+        console.log(data);
         setDatos({ ...data, attributes: attr });
         setPhotosUpdate(data.photos);
       };
@@ -37,8 +39,7 @@ const MyProfile = (props) => {
     }
   }, [state, datos]);
 
-  console.log("ID",state.user.id, "PHOTO", photosUpdate);
-  
+  console.log("ID", state.user.id, "PHOTO", photosUpdate);
 
   return (
     <ContentWrapper topNav>
@@ -48,40 +49,47 @@ const MyProfile = (props) => {
             <div className="imageContent">
               <img
                 alt="imagen de perfil"
-                src={(state.user.id && photosUpdate) ? `http://localhost:8080/user/${state.user.id}/photos/${photosUpdate}` : image }
+                src={
+                  state.user.id && photosUpdate
+                    ? `http://localhost:8080/user/${state.user.id}/photos/${photosUpdate}`
+                    : image
+                }
                 className="profileImage"
               />
             </div>
             <div className="profileMainData">
-              <h2>
+              <h1>
                 <strong>
                   {datos.userName} {datos.userSurname}
                 </strong>
-              </h2>
-              <h4>
+              </h1>
+              <h3>
                 {datos.attributes.nationality} - {datos.attributes.city}
-              </h4>
-            </div>
-          </div>
-          <div className="datosContent">
-            <div className="profileGroup3">
-              <div>
-                <p>Nickname: {state.user.userNickname}</p>
-              </div>
+              </h3>
               <div>
                 <p>
-                  Sexo:{" "}
-                  {genders[datos.attributes.sex]}
+                  <b>Nickname:</b> {state.user.userNickname}
                 </p>
               </div>
               <div>
-                <p>Edad: {calculateAge(datos.userBirthDate)}</p>
+                <p>
+                  <b>Sexo:</b> {genders[datos.attributes.sex]}
+                </p>
+              </div>
+              <div>
+                <p>
+                  <b>Edad:</b> {calculateAge(datos.userBirthDate)}
+                </p>
               </div>
             </div>
           </div>
           <div className="profileButton">
-            <button className="buttonEdit"><a href="/my-profile/update">Editar Datos</a></button>
-            <button className="buttonEdit"><a href="/my-profile/updatePreferencies">Editar Preferencias</a></button>
+            <Button className="buttonEdit">
+              <a href="/my-profile/update">Editar Datos</a>
+            </Button>
+            <Button className="buttonEdit">
+              <a href="/my-profile/updatePreferencies">Editar Preferencias</a>
+            </Button>
           </div>
         </div>
       ) : null}
@@ -106,7 +114,7 @@ const MyProfile = (props) => {
 
       {datos && datos.userDescription ? (
         <div className="profileContent">
-          <h3>Más sobre {datos.userName}</h3>
+          <h3>Más sobre {path === "/my-profile" ? "mi" : datos.userName}</h3>
           {datos.userDescription}
         </div>
       ) : null}
