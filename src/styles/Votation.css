@@ -11,7 +11,7 @@
 }
 
 .votation-wrapper .ongoing{
-    padding: 2% 2% 0 2%;
+    padding: 2%;
     margin-bottom: 4%;
     box-shadow: 2px 2px 5px var(--dark-grey);
     border: 1px solid lightgrey;
@@ -19,15 +19,15 @@
 
 }
 
-.votation-wrapper .ongoing .votation, .votation-wrapper .ongoing .results, .votation-wrapper .ongoing .state{
+.votation-wrapper .ongoing .votation {
     margin: 20px;
 }
 
 .votation-wrapper .history{
     height: auto;
     max-height: 45vh;
-    overflow-y: scroll;
     text-align: center;
+    overflow-y: scroll;
 }
 .votation-wrapper .history span{
     font-size: large;

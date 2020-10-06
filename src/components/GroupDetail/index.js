@@ -19,11 +19,11 @@ const Item = ({ name, channel }) => {
     return h + ":" + m;
   }
   return (
-    <div className="item clickeable" onClick={handleClick}>
+    <div className="item clickeable seleccionable" onClick={handleClick}>
       <Avatar />
       <div className="name-msg">
         <div className="name">{channel.name}</div>
-        <div className="msg">last message</div>
+        <div className="msg">{}</div>
       </div>
       <div className="time">{date()}</div>
     </div>
@@ -48,13 +48,11 @@ const Votation = ({ group }) => {
 
 const AdminMenu = ({channels}) => {
 	const onclick = async resp => {
-		console.log('channels', channels)
 		let channel_data_array = channels[0]?.channelId.split('-');
 		let bodyReq = {
 			groupId: channel_data_array[0],
 			decision: resp === 'accept_group' ? true : false
 		}
-		console.log('bodyReq', bodyReq)
 		await ApiRequest.put(`/property/${channel_data_array[2]}/decideGroup`, bodyReq).then(res => {
 			if (res.state == 200){
 				notification.success({
@@ -88,7 +86,6 @@ const Info = ({ name }) => {
 };
 
 const GroupDetail = ({ detail, render, group }) => {
-  console.log("detalle", detail, "Group", group);
   const { state } = useContext(SessionContext);
 
   const adminSearh = (detalle) => {
@@ -104,7 +101,6 @@ const GroupDetail = ({ detail, render, group }) => {
   };
 
   let isAdmin = adminSearh(detail);
-  console.log("ADMIN", isAdmin);
   return (
     <div className={`group-detail ${!!render}`}>
       <div className="container">

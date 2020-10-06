@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext} from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams , useHistory} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Rate, notification } from 'antd';
 import { CloseCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import { SessionContext } from '../../store';
 import ApiRequest from '../../util/ApiRequest';
 import Property from '../../classes/Property';
-import '../../styles/VotationState.css';
 
 const useVotations = (detail) => {
     const [data, setData] = useState(null);
@@ -16,7 +15,6 @@ const useVotations = (detail) => {
     useEffect(() => {
         const getVotations = async () => {
             const { data } = await ApiRequest.get(`/group/votation/all/${group}`);
-            console.log("actualizacion:", data)
             setData(data);
         };
         getVotations();
@@ -54,8 +52,9 @@ const useVotations = (detail) => {
 }
 
 const OnGoing = ({ votations, detail, setVotations }) => {
-    const [property, setProperty] = useState(null);
+    const { t } = useTranslation();
     const { state } = useContext(SessionContext);
+    const [property, setProperty] = useState(null);
 
     useEffect(() => {
         if (!votations?.ongoing) {
@@ -90,13 +89,6 @@ const OnGoing = ({ votations, detail, setVotations }) => {
                 });
         }
     }  
-
-    let typologies = {
-        "ongoing": "En curso",
-        "passed": "Aprobada",
-        "failed": "Rechazada",
-        "canceled": "Cancelada"
-    }
     
     if(votations?.ongoing && property){
         return (
@@ -118,13 +110,13 @@ const OnGoing = ({ votations, detail, setVotations }) => {
                 </div>
 
 
-                <div className="rowVotation">
+                <div className="results">
                     <div className="subtitleVotation">Resultado actual</div>
                     <Rate className="actualVotation" character={<CheckCircleOutlined />} disabled count={detail?.membersId.length} value={votations?.ongoing.votospositivos} />
                 </div>
 
-                <div className="">
-                    <div className="resultVotation">{typologies[votations?.ongoing.result]}</div>
+                <div className="state">
+                    <div className="resultVotation">{ t(votations?.ongoing.result) }</div>
                 </div>
             </div>
         )
@@ -136,8 +128,8 @@ const History = ({ items }) => {
     let configColor = {
         "ongoing": "#F7DC6F",
         "passed": "#17A589",
-        "failed": "#E74C3C",
-        "canceled": "#E74C3C"
+        "failed": "#F1948A",
+        "canceled": "#bbb"
     }
     return (
         <div className="history">

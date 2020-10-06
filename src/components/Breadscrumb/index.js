@@ -9,13 +9,14 @@ const CustomBreadcrumb = ({paths}) => {
 				<HomeOutlined />
 			</Breadcrumb.Item>
 			{paths?.map( (c,i) => {
+				let values = Object.values(c)[0]
+				if (!values) return
 				return (
-					<Breadcrumb.Item key={i} href={Object.values(c)}>
+					<Breadcrumb.Item key={i} href={values}>
 						{Object.keys(c)}
 					</Breadcrumb.Item>
 				)
-			})
-			}
+			})}
 		</Breadcrumb>
 	);
 };

@@ -21,7 +21,7 @@ const Chat = ({ render, groupId, channel, channelName }) => {
 				}
 			};
 			asyncGet();
-		},[ state, channel ]);
+		},[ state ]);
 
 	return (
 		<div key={channel} className={`chat-container ${!!render}`}>

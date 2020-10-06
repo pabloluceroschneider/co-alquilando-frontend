@@ -22,6 +22,10 @@
     margin: 0% 2% 0% 2%;
     padding: 2%;
     border-bottom: 1px solid var(--dark-grey);
+    &:hover{
+        color: var(--secondary-blue);
+        background-color: #f6faff;
+    }
 }
 .group-list .detail .header{
     display: grid;

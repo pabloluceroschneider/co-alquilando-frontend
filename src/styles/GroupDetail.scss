@@ -1,0 +1,82 @@
+
+.group-detail{
+    display: grid; 
+    grid-template-columns: auto;
+    align-items: baseline;
+    justify-items: center;
+    width: 90%;
+    height: 100%;
+
+    .false{
+        display: none; 
+    }
+
+    .container{
+        width: 100%;
+    }
+
+    .info{
+        display: grid; 
+        place-items: center;
+        width: 100%;
+        border: 1px solid #dbdbdb;
+        padding: 5%;
+        box-shadow: 0px 0px 2px var(--dark-grey);
+    }
+
+    .item{
+        display: grid; 
+        grid-template-columns: 15% 75% 10%;
+        place-items: center;
+        min-height: 10vh;
+        width: 100%;
+        border-bottom: 1px solid var(--dark-grey);
+        padding: 2%;
+        &:hover{
+            color: var(--secondary-blue);
+            background-color: #f6faff;
+        }
+        .name-msg{
+            display: grid;
+            width: 100%;
+            align-items: center;
+            justify-items: left;
+            .name{
+                font-size: 1.1em ;
+            }
+            .msg{
+                font-size: 0.9em ;
+            }
+        }
+        .hour{
+            align-items: baseline;
+        }
+    }
+    .container {
+        .chats{
+            max-height: 62vh;
+            overflow-y: scroll;
+        }
+    }
+    .admin-buttons{
+        display: flex;
+        min-height: 7vh;
+        width: 100%;
+        border-bottom: 1px solid var(--dark-grey);
+        padding: 2%;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: row;
+    }
+}
+
+@media only screen and (min-width: 600px){
+    .group-detail{
+        .false{
+            display: grid; 
+        }
+    }
+}
+
+
+
