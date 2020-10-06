@@ -22,7 +22,7 @@ const Notifications = (props) => {
     <ContentWrapper topNav title="Notificaciones">
       <div className="notifications">
         {notifications?.map((n) => {
-          return <NotificationCard key={n.id} {...n} />;
+          return <NotificationCard key={n.id} {...n} setNotifications={setNotifications} notifications={notifications}/>;
         })}
       </div>
     </ContentWrapper>
