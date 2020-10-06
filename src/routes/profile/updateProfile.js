@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { SessionContext } from '../../store'
+import { SessionContext, SIGN_IN } from '../../store'
 import { useHistory } from "react-router-dom";
 import { Form, notification } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
@@ -132,7 +132,7 @@ const UpdateForm = (props) => {
   const [fields, setFields] = useState(null);
   const [idUser, setIdUser] = useState(null);
   const history = useHistory();
-  const { state } = useContext(SessionContext);
+  const { state, dispatch } = useContext(SessionContext);
   const [photosUpdate, setPhotosUpdate] = useState(null);
   useEffect(() => {
     let asyncGetUser = async () => {
@@ -184,6 +184,7 @@ const UpdateForm = (props) => {
               message: `Datos Actualizados`,
               placement: "bottomLeft",
             });
+            dispatch( SIGN_IN(res.data) )
           } else {
             notification.error({
               message: `Error: No se pudo actualizar sus datos`,
