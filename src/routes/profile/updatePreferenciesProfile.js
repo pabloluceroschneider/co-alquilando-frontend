@@ -44,14 +44,15 @@ const userPreferenciesRoomie = {
         {
           label: "Nacionalidad",
           name: ["roommatePreferences", "nationality"],
-          component: "Input",
+          component: "SelectDB",
+          endpoint: '/nationality/all',
+          search: 'nationality'
         },
         {
 					label: 'Provincia',
 					name: [ 'address', 'province' ],
 					component: 'Select',
 					options: provinces,
-					required: true
 				}
       ],
       [

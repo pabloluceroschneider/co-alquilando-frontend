@@ -87,7 +87,9 @@ const userData = {
         {
           label: "Nacionalidad",
           name: ["attributes", "nationality"],
-          component: "Input",
+          component: "SelectDB",
+          endpoint: "/nationality/all",
+          search: 'nationality',
         },
         {
           label: "Provincia",
@@ -149,9 +151,6 @@ const UpdateForm = (props) => {
         form.setFieldsValue(formated);
         setIdUser(formated.id);
         setPhotosUpdate(res.data.photos);
-
-
-
       });
     };
     asyncGetUser();
@@ -185,7 +184,6 @@ const UpdateForm = (props) => {
             });
           }
         })
-
 
         if (fields && fields.photos && fields.photos.file) {
           var plist = fields.photos.file.fileList;
@@ -232,55 +230,12 @@ const UpdateForm = (props) => {
     }
   }, [fields, idUser, history]);
 
-
-  /*useEffect(() => {
-    if (fields && fields.photos && fields.photos.file) {
-      var plist = fields.photos.file.fileList;
-
-      const formData = new FormData();
-      formData.append('type', 'file')
-      let hasFile = false;
-      for (const ph in plist) {
-        hasFile = true;
-        if (plist[ph].originFileObj) {
-          let phLast = plist[ph].originFileObj
-          formData.append("photos", phLast)
-        }
-      }
-
-      let header = {
-        'Content-Type': 'multipart/form-data'
-      }
-
-      if (hasFile) {
-          let asyncPutUser = new Promise(async (res, rej) => {
-          await ApiRequest.multipartPut(`/user/${idUser}/photos`, formData, header).then((res) => {
-            console.log(res);
-            if (res.status === 200) {
-              notification.success({
-                message: `Datos Actualizados`,
-                placement: "bottomLeft",
-              });
-            } else {
-              notification.error({
-                message: `Error: No se pudo actualizar sus datos`,
-                placement: "bottomLeft",
-              });
-            }
-          });
-          res()
-        })
-        asyncPutUser.then(() => {
-          history.push(`/my-profile`);
-        });
-      }
-    }
-  }, [idUser, fields, history]);*/
-
-
   // Delete photos
   useEffect(() => {
-    if (fields && fields.photos && fields.photos.file) {
+    console.log("EN EL DELETE");
+    console.log("fields", fields);
+    debugger
+    if (fields && fields.photo && fields.photos.file && photosUpdate) {
       var listPhoto = fields.photos.file.fileList;
       console.log("photosUpdate -->", photosUpdate);
       console.log("listPhoto -->", listPhoto);
