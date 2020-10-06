@@ -58,6 +58,7 @@ const userData = {
           label: "Fecha de Nacimiento",
           name: "userBirthDate",
           component: "DatePicker",
+          required:true,
         },
         {
           label: "Número de Celular",
