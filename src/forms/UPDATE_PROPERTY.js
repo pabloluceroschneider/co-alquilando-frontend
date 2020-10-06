@@ -243,11 +243,26 @@ const propertyFields = {
 			],
 			[
 				{
+					label: "Información de pago",
+					component: "h2",
+				},
+			],
+			[
+
+				{
 					label: 'Link de pago',
 					name: ['payingLink'],
 					component: 'Input'
-				}
-			]
+				},
+				{
+					content: [
+						'1. Accedé a Mercado Pago desde tu cuenta personal ',
+						'2. Generá un link de pago por el monto del Pre-Alquiler que deban abonar los inquilinos para reservar esta propiedad.',
+						'3. Recibí el dinero en tu cuenta.'],
+					name: ['info'],
+					component: 'multiple-line'
+				},
+			],
 		],
 	},
 };

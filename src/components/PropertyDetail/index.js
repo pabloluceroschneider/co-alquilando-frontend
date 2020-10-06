@@ -33,7 +33,7 @@ const Header = ({ status, typology }) => {
 const PhotoSection = ({ photos, alt }) => {
     return (
         <div className="section carrousel">
-            <Carousel>
+            <Carousel autoplay>
                 {photos.map(url => {
                     return <img key={alt} src={url} alt={alt} />
                 })}

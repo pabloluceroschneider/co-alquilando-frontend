@@ -52,6 +52,16 @@
     font-weight: bold;
 }
 
+.multiple-line {
+    padding: 7px;
+    text-align: left;
+}
+
+.multiple-line p {
+    margin: 0;
+    font-style: italic;
+}
+
 /* pantalla de escritorio */
 @media only screen and (min-width: 600px){
     .customizedForm{

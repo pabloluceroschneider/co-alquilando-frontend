@@ -27,7 +27,14 @@
 
 /* carrousel */
 .propertyDetail .section.carrousel img{
-    max-height: 400px;
+    max-height: 500px;
+    height: auto;
+    max-width: 500px;
+    width: auto;
+}
+
+.ant-carousel .slick-slide {
+    background-color: white;
 }
 
 /* map */

@@ -9,27 +9,27 @@ import propertyFields from "../../forms/UPDATE_PROPERTY";
 
 // custom hook
 const usePutProperty = (fields, hiddenFields) => {
-	const { idProperty } = useParams();
-    const [ resultPut, setResultPut] = useState({ basic:null, multipart:null, deleteMultipart: null});
-    const [ error, setError] = useState({ from: null, message:null });
+    const { idProperty } = useParams();
+    const [resultPut, setResultPut] = useState({ basic: null, multipart: null, deleteMultipart: null });
+    const [error, setError] = useState({ from: null, message: null });
 
     // PUT BASIC DATA
     useEffect(() => {
         if (!fields) return;
         let bodyRequest = new Property(fields).mapJsonToRequest();
-        bodyRequest = {...bodyRequest,...hiddenFields};
+        bodyRequest = { ...bodyRequest, ...hiddenFields };
 
         let asyncPut = async () => {
             try {
                 await ApiRequest.put(`/property/${idProperty}`, bodyRequest);
-                setResultPut(resultPut => { return {...resultPut, basic: true}});
+                setResultPut(resultPut => { return { ...resultPut, basic: true } });
             } catch (err) {
-                setError({ from: "Actualizar Datos", message:err });
+                setError({ from: "Actualizar Datos", message: err });
 
             }
         }
         asyncPut();
-    },[fields, idProperty, hiddenFields]);
+    }, [fields, idProperty, hiddenFields]);
 
     // PUT MULTIPART
     useEffect(() => {
@@ -37,27 +37,27 @@ const usePutProperty = (fields, hiddenFields) => {
 
         var plist = fields.photos.file?.fileList;
         if (!plist) {
-            setResultPut( resultPut => { return {...resultPut, multipart: true}});
+            setResultPut(resultPut => { return { ...resultPut, multipart: true } });
             return
         }
 
         const formData = new FormData();
         formData.append('type', 'file')
         for (const ph in plist) {
-          let phLast = plist[ph].originFileObj
-          formData.append("photos", phLast)
+            let phLast = plist[ph].originFileObj
+            formData.append("photos", phLast)
         }
 
         let asyncPutPhoto = async () => {
             try {
                 await ApiRequest.multipartPut(`/property/${idProperty}/photos`, formData)
-                setResultPut(resultPut => {return {...resultPut, multipart: true}});
+                setResultPut(resultPut => { return { ...resultPut, multipart: true } });
             } catch (err) {
-                setError({ from: "Actualizar Fotos", message:err });
+                setError({ from: "Actualizar Fotos", message: err });
             }
         }
         asyncPutPhoto();
-    },[fields, hiddenFields, idProperty])
+    }, [fields, hiddenFields, idProperty])
 
     // DELETE MULTIPART
     useEffect(() => {
@@ -66,45 +66,50 @@ const usePutProperty = (fields, hiddenFields) => {
 
         var listPhoto = fields.photos.file?.fileList;
         if (!listPhoto) {
-            setResultPut( resultPut => { return {...resultPut, deleteMultipart: true}});
+            setResultPut(resultPut => { return { ...resultPut, deleteMultipart: true } });
             return
         }
         var auxListPhoto = [];
         listPhoto.forEach((photo) => {
-            if(!photo.originFileObj) {
-                auxListPhoto.push(photo);       
+            if (!photo.originFileObj) {
+                auxListPhoto.push(photo);
             }
         });
+        console.log("auxListPhoto  --> ", auxListPhoto);
+        console.log("hiddenFields  --> ", hiddenFields);
         auxListPhoto.forEach((photoAux) => {
             hiddenFields.photos.forEach((photo) => {
-              if (photoAux.name === photo) {
-                let asyncPutPhoto = async () => {
-                    try {
-                        await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`)
-                        setResultPut(resultPut => { return {...resultPut, deleteMultipart: true}});
-                    } catch (err) {
-                        setError({ from: "Eliminar Fotos", message:err });
+                console.log("photoAux.name  --> ", photoAux.name);
+                console.log("photo  --> ", photo);
+                if (photoAux.url === photo) {
+                    let asyncPutPhoto = async () => {
+                        try {
+                            console.log("EN EL DELETE");
+                            await ApiRequest.delete(`${photo}`)
+                            setResultPut(resultPut => { return { ...resultPut, deleteMultipart: true } });
+                        } catch (err) {
+                            setError({ from: "Eliminar Fotos", message: err });
+                        }
                     }
+                    asyncPutPhoto();
                 }
-                asyncPutPhoto();
-              }
             })
         })
-    },[fields, hiddenFields, idProperty])
+    }, [fields, hiddenFields, idProperty])
 
     return [resultPut, error]
 }
 
 const UpdateProperty = () => {
-	const [form] = Form.useForm();
+    const [form] = Form.useForm();
     const [data, setData] = useState(null);
     const [fields, setFields] = useState(null);
     const [hiddenFields, setHiddenFields] = useState(null);
     const [resultPut, error] = usePutProperty(fields, hiddenFields);
-    const {idProperty} = useParams();
+    const { idProperty } = useParams();
     const history = useHistory();
     form.setFieldsValue(data)
-    
+
     useEffect(() => {
         let getProperty = async () => {
             let { data } = await ApiRequest.get(`/property/${idProperty}`)
@@ -117,16 +122,16 @@ const UpdateProperty = () => {
             })
         }
         getProperty();
-    },[idProperty])
+    }, [idProperty])
 
-    useEffect(()=> {
-        if (error.message){
+    useEffect(() => {
+        if (error.message) {
             notification.error({
                 message: `Error: No se pudo actualizar sus datos`,
                 description: `${error.from}`,
                 placement: "bottomLeft",
             });
-        }else if( resultPut.basic && resultPut.multipart && resultPut.deleteMultipart){
+        } else if (resultPut.basic && resultPut.multipart && resultPut.deleteMultipart) {
             // All put success
             notification.success({
                 message: `Datos Actualizados`,
@@ -134,13 +139,13 @@ const UpdateProperty = () => {
             });
             history.push(`/property/${idProperty}`);
         }
-    },[resultPut, error, history, idProperty])
+    }, [resultPut, error, history, idProperty])
 
-	return (
-		<ContentWrapper topNav title="Actualizar Propiedad">
-			<CustomizedForm form={form} data={propertyFields} onfinish={setFields} />
-		</ContentWrapper>
-	)
+    return (
+        <ContentWrapper topNav title="Actualizar Propiedad">
+            <CustomizedForm form={form} data={propertyFields} onfinish={setFields} />
+        </ContentWrapper>
+    )
 }
 
 export default UpdateProperty

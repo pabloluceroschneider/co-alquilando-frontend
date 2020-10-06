@@ -130,11 +130,11 @@ const FormPropertyUpdate = (props) => {
     }
 
   }, [idProperty, history, fields]);
-<<<<<<< HEAD
   
   // Delete photos
   useEffect(() => {
     if (fields && fields.photos && fields.photos.file) {
+      console.log("EN EL DELETE");
       var listPhoto = fields.photos.file.fileList;
       console.log("photosUpdate -->", photosUpdate);
       console.log("listPhoto -->", listPhoto);
@@ -155,6 +155,7 @@ const FormPropertyUpdate = (props) => {
           if (photoAux.name === photo) {
             let asyncPutPhoto = async () => {
               console.log("Photo a eliminar: ", photo)
+              console.log("EN EL DELETE");
               await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`).then((res) => {
                 console.log(res);
                 if (res.status === 200) {
@@ -168,45 +169,6 @@ const FormPropertyUpdate = (props) => {
                     placement: "bottomLeft",
                   });
                 }
-=======
- 
- // Delete photos
- useEffect(() => {
-   console.log("EN EL DELETE");
-   console.log("fields", fields);
-  if (fields && fields.photos) {
-    var listPhoto = fields.photos.file.fileList;
-    console.log("photosUpdate -->", photosUpdate);
-    console.log("listPhoto -->", listPhoto);
-
-    var auxListPhoto = [];
-    listPhoto.forEach((photo, index) => {
-      if(!photo.originFileObj) {
-        auxListPhoto.push(photo);
-      }
-    });
-    console.log("auxListPhoto -->", auxListPhoto);
-
-    auxListPhoto.forEach((photoAux, indexAux) => {
-    photosUpdate.forEach((photo, index) => {
-      console.log("photoAux -->", photoAux.name);
-      console.log("photo -->", photo);
-
-      if (photoAux.name === photo) {
-        let asyncPutPhoto = async () => {
-          console.log("Photo a eliminar: " , photo)
-          await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`).then((res) => {
-            console.log(res);
-            if (res.status === 200) {
-              notification.success({
-                message: "Datos Actualizados",
-                placement: "bottomLeft",
-              });
-            } else {
-              notification.error({
-                message: "Error: No se pudo actualizar sus datos",
-                placement: "bottomLeft",
->>>>>>> b9bd3b2b3b50f5b40603bfc97ccdac3425518559
               });
             };
             asyncPutPhoto();

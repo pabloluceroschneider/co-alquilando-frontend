@@ -69,6 +69,18 @@ const InputRepository = props => {
 
     case "label":
       return <label className="label" key={element.label}>{element.label}</label>;
+    case "span":
+      return <span className="span" key={element.label}>{element.label}</span>;
+    case "multiple-line":
+      return (
+        <div className='multiple-line'>
+          {
+            element.content.map(label => {
+              return <p className="span" key={label}>{label}</p>;
+            })
+          }
+        </div>
+      )
     case "h2":
       return <h2 className="h2" key={element.label}>{element.label}</h2>;
     case "link":
