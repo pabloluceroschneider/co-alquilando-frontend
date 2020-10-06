@@ -5,6 +5,8 @@ import CustomizedForm from "../../components/CustomizedForm";
 import { Form, notification } from "antd";
 import { useHistory } from "react-router-dom";
 import ApiRequest from "../../util/ApiRequest";
+import provinces from '../../util/provinces.js'
+
 
 const userPreferenciesRoomie = {
   name: "user",
@@ -45,10 +47,12 @@ const userPreferenciesRoomie = {
           component: "Input",
         },
         {
-          label: "Ciudad",
-          name: ["roommatePreferences", "city"],
-          component: "Input",
-        },
+					label: 'Provincia',
+					name: [ 'address', 'province' ],
+					component: 'Select',
+					options: provinces,
+					required: true
+				}
       ],
       [
         {

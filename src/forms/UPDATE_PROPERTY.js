@@ -83,8 +83,9 @@ const propertyFields = {
 				{
 					label: 'Barrio',
 					name: [ 'address', 'neighborhood' ],
-					component: 'Select',
-					options: provinces,
+					component: 'SelectDB',
+					endpoint: '/location/all',
+					search: 'neighborhood',
 					required: true
 				}
 			],
@@ -107,9 +108,8 @@ const propertyFields = {
 				{
 					label: 'Provincia',
 					name: [ 'address', 'province' ],
-					component: 'SelectDB',
-					endpoint: '/location/all',
-					search: 'province',
+					component: 'Select',
+					options: provinces,
 					required: true
 				}
 			],

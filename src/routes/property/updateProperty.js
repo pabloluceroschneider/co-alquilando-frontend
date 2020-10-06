@@ -125,6 +125,8 @@ const FormPropertyUpdate = (props) => {
  
  // Delete photos
  useEffect(() => {
+   console.log("EN EL DELETE");
+   console.log("fields", fields);
   if (fields && fields.photos) {
     var listPhoto = fields.photos.file.fileList;
     console.log("photosUpdate -->", photosUpdate);
