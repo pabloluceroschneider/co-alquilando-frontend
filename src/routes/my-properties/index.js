@@ -34,7 +34,7 @@ const Property = () => {
 
   return (
     <ContentWrapper topNav title="Mis Propiedades">
-      <div className="contentPL">
+      <div className="contentMyProperties">
         {datos
           ? datos.map((p) => {
               return <PropertyCard key={p.id} {...p} />;
