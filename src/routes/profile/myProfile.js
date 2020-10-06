@@ -49,8 +49,8 @@ const MyProfile = (props) => {
             <div className="imageContent">
               <img
                 alt="imagen de perfil"
-                src={
-                  state.user.id && photosUpdate
+                src={ 
+                  (state.user.id && photosUpdate?.length) 
                     ? `http://localhost:8080/user/${state.user.id}/photos/${photosUpdate}`
                     : image
                 }
