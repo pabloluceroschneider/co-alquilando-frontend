@@ -31,12 +31,57 @@ const usePutProperty = (fields, hiddenFields) => {
         asyncPut();
     }, [fields, idProperty, hiddenFields]);
 
+    // DELETE MULTIPART
+    useEffect(() => {
+        if (!fields?.photos) return;
+        if (!hiddenFields?.photos) return;
+
+        var listPhoto = fields.photos.file?.fileList;
+        console.log('listPhoto', listPhoto)
+        if (!listPhoto) {
+            setResultPut(resultPut => { return { ...resultPut, deleteMultipart: true } });
+            return
+        }
+        var auxListPhoto = [];
+        listPhoto.forEach((photo) => {
+            if (!photo.originFileObj) {
+                auxListPhoto.push(photo);
+            }
+        });
+        console.log("auxListPhoto  --> ", auxListPhoto);
+        console.log("hiddenFields  --> ", hiddenFields);
+
+        hiddenFields.photos.forEach((photo) => {
+            let res = auxListPhoto.find(photoAux => photoAux.name === photo)
+                if (!res) {
+                    let asyncPutPhoto = async () => {
+                        try {
+                            console.log("EN EL DELETE");
+                            await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`)
+                            setResultPut(resultPut => { return { ...resultPut, deleteMultipart: true } });
+                        } catch (err) {
+                            setError({ from: "Eliminar Fotos", message: err });
+                        }
+                    }
+                    asyncPutPhoto();
+                }
+            })
+        }, [fields, hiddenFields, idProperty])
+
     // PUT MULTIPART
     useEffect(() => {
         if (!fields?.photos) return;
 
+        let photoAgregar = []
         var plist = fields.photos.file?.fileList;
-        if (!plist) {
+        plist.forEach((photo) => {
+            if (photo.originFileObj) {
+                photoAgregar.push(photo);
+            }
+        });
+
+        console.log('plist', plist)
+        if (!photoAgregar.length) {
             setResultPut(resultPut => { return { ...resultPut, multipart: true } });
             return
         }
@@ -59,43 +104,7 @@ const usePutProperty = (fields, hiddenFields) => {
         asyncPutPhoto();
     }, [fields, hiddenFields, idProperty])
 
-    // DELETE MULTIPART
-    useEffect(() => {
-        if (!fields?.photos) return;
-        if (!hiddenFields?.photos) return;
 
-        var listPhoto = fields.photos.file?.fileList;
-        if (!listPhoto) {
-            setResultPut(resultPut => { return { ...resultPut, deleteMultipart: true } });
-            return
-        }
-        var auxListPhoto = [];
-        listPhoto.forEach((photo) => {
-            if (!photo.originFileObj) {
-                auxListPhoto.push(photo);
-            }
-        });
-        console.log("auxListPhoto  --> ", auxListPhoto);
-        console.log("hiddenFields  --> ", hiddenFields);
-        auxListPhoto.forEach((photoAux) => {
-            hiddenFields.photos.forEach((photo) => {
-                console.log("photoAux.name  --> ", photoAux.name);
-                console.log("photo  --> ", photo);
-                if (photoAux.url === photo) {
-                    let asyncPutPhoto = async () => {
-                        try {
-                            console.log("EN EL DELETE");
-                            await ApiRequest.delete(`${photo}`)
-                            setResultPut(resultPut => { return { ...resultPut, deleteMultipart: true } });
-                        } catch (err) {
-                            setError({ from: "Eliminar Fotos", message: err });
-                        }
-                    }
-                    asyncPutPhoto();
-                }
-            })
-        })
-    }, [fields, hiddenFields, idProperty])
 
     return [resultPut, error]
 }
@@ -113,7 +122,7 @@ const UpdateProperty = () => {
     useEffect(() => {
         let getProperty = async () => {
             let { data } = await ApiRequest.get(`/property/${idProperty}`)
-            let property = new Property(data).mapResponseToJson();
+            let property = new Property(data).mapResponseToFormJson();
             setData(property)
             setHiddenFields({
                 ownerId: property.ownerId,

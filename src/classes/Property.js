@@ -50,6 +50,15 @@ class Property{
         return formatedProperty
     }
 
+    mapResponseToFormJson(){
+        let formatedProperty = {
+            ...this.property,
+            attributes: Property.mapArrayToJson( this.property.attributes ),
+            coordinates: this.property.address.coordinates
+        }
+        return formatedProperty
+    }
+
     mapJsonToRequest(){
         let formatedProperty = {
             ...this.property,

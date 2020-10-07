@@ -32,7 +32,7 @@ const CustomUpload = (props) => {
             let photoJson = {
               uid: index,
               name: photo,
-              url: photo,
+              url: `http://localhost:8080/property/${idProperty}/photos/${photo}`,
             };
             setFileList((fileList) => [...fileList, photoJson]);
           });
