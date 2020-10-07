@@ -13,28 +13,28 @@ const statusColor = {
     rented: "error",
 }
 
-const Header = ({status, typology}) => {
+const Header = ({ status, typology }) => {
     const { t } = useTranslation();
 
     return (
-        <div className="section header"> 
-            <Tag>{ t(typology) }</Tag>
-            <Tag color={statusColor[status]}>{ t(status) }</Tag>
-            <ModalAsyncList 
-                label={<Tag icon={<SendOutlined />} color="#5e83ba">Compartir en Grupo</Tag>} 
+        <div className="section header">
+            <Tag>{t(typology)}</Tag>
+            <Tag color={statusColor[status]}>{t(status)}</Tag>
+            <ModalAsyncList
+                label={<Tag icon={<SendOutlined />} color="#5e83ba">Compartir en Grupo</Tag>}
                 title={<div><TeamOutlined />Seleccione Grupo</div>}
                 endpoint={`/user/users`}
                 itemTitle="userName"
-                />
+            />
         </div>
     )
 }
 
-const PhotoSection = ({photos, alt}) => {
+const PhotoSection = ({ photos, alt }) => {
     return (
         <div className="section carrousel">
-            <Carousel>
-                {photos.map( url => {
+            <Carousel autoplay>
+                {photos.map(url => {
                     return <img key={alt} src={url} alt={alt} />
                 })}
             </Carousel>
@@ -42,9 +42,9 @@ const PhotoSection = ({photos, alt}) => {
     )
 }
 
-const TitleSection = ({title, description}) => {
+const TitleSection = ({ title, description }) => {
     return (
-        <div className="section box description"> 
+        <div className="section box description">
             <h3>{title}</h3>
             <div>{description} </div>
         </div>
@@ -52,7 +52,7 @@ const TitleSection = ({title, description}) => {
 }
 
 const validPrice = price => price ? price : "-"
-const PriceSection = ({services, taxes, expenses, rentPrice }) => {
+const PriceSection = ({ services, taxes, expenses, rentPrice }) => {
     return (
         <div className="section box price">
             <span>Precios</span>
@@ -61,10 +61,10 @@ const PriceSection = ({services, taxes, expenses, rentPrice }) => {
                 <div>Impuestos</div>
                 <div>Expensas</div>
                 <div>Alquiler</div>
+                <div>${validPrice(rentPrice)}</div>
+                <div>${validPrice(expenses)}</div>
                 <div>${validPrice(services)}</div>
                 <div>${validPrice(taxes)}</div>
-                <div>${validPrice(expenses)}</div>
-                <div>${validPrice(rentPrice)}</div>
             </div>
         </div>
     )
@@ -84,12 +84,12 @@ const FullAddress = ({province, neighborhood, street, tower,
 }
 
 const MapSection = props => {
-    if( !props.latitude || !props.length ) return <div className="section box">Geolocalización no disponible</div>
-    
+    if (!props.latitude || !props.length) return <div className="section box">Geolocalización no disponible</div>
+
     return (
         <div className="section map">
             <span>Ver Ubicación</span>
-            <ClickeableMap 
+            <ClickeableMap
                 googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDzoLTHAJKj5xymA3iBqJxxQl-MYG9R_ag"
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `auto`, width: `auto` }} />}
@@ -102,17 +102,17 @@ const MapSection = props => {
     )
 }
 
-const Attributes = ({attributes}) => {
+const Attributes = ({ attributes }) => {
     const { t } = useTranslation();
     let attrArray = Property.mapJsonToArray(attributes);
     return (
         <div className="section box attributes">
             <span>Comodidades</span>
-            {attrArray?.map( (attr, index) => {
+            {attrArray?.map((attr, index) => {
                 return (
                     <div key={index} className="row">
-                        <div>{ t(attr.attributeType) }</div>
-                        <div>{ t(attr.value) }</div>
+                        <div>{t(attr.attributeType)}</div>
+                        <div>{t(attr.value)}</div>
                     </div>
                 )
             })}
@@ -120,14 +120,26 @@ const Attributes = ({attributes}) => {
     )
 }
 
+const PayingLink = ({ payingLink }) => {
+    if (!payingLink) return <div className="section box">Link de Pago no disponible</div>
+    return (
+        <div className="section box payingLink">
+            <span>Link de Pago</span>
+            <div>{payingLink}</div>
+        </div>
+    )
+}
+
+
 const PropertyDetail = props => {
     return (
         <div className="propertyDetail">
-            <Header status={props.status} typology={props.attributes?.typology}/>
+            <Header status={props.status} typology={props.attributes?.typology} />
             <PhotoSection photos={props.photos} alt={props.description} />
             <TitleSection title={props.title} description={props.description} />
             <PriceSection {...props.price} />
             <FullAddress {...props.address} />
+            <PayingLink payingLink={props.payingLink} />
             <MapSection {...props.address?.coordinates} />
             <Attributes attributes={props.attributes} />
         </div>
