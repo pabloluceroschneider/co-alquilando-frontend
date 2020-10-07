@@ -243,6 +243,33 @@ const propertyFields = {
 			],
 			[
 				{
+					label: 'Estado Propiedad',
+					component: 'h2'
+				}
+			],
+			[
+				{
+					label: 'Estado',
+					name: 'status',
+					component: 'Select',
+					options: [
+						{ name: 'Disponible', value: 'available' },
+						{ name: 'Pre-Rentado', value: 'pre_rented' },
+						{ name: 'Alquilado', value: 'rented' },
+						{ name: 'No disponible', value: 'disabled' },
+					],
+				},
+				{
+					content: [
+						' ',
+						'En esta sección podras reflejar el estado de tu propiedad.',
+						' ',],
+					name: ['info'],
+					component: 'multiple-line'
+				},
+			],
+			[
+				{
 					label: "Información de pago",
 					component: "h2",
 				},
@@ -256,7 +283,7 @@ const propertyFields = {
 				},
 				{
 					content: [
-						'1. Accedé a Mercado Pago desde tu cuenta personal ',
+						'1. Accedé a Mercado Pago desde tu cuenta personal. ',
 						'2. Generá un link de pago por el monto del Pre-Alquiler que deban abonar los inquilinos para reservar esta propiedad.',
 						'3. Recibí el dinero en tu cuenta.'],
 					name: ['info'],

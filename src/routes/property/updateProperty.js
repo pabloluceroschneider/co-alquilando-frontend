@@ -39,6 +39,7 @@ const FormPropertyUpdate = (props) => {
             attributes: { ...res.data.attributes, ...t },
           };
         });
+        console.log(res.data)
         form.setFieldsValue(res.data);
       });
     };
@@ -47,8 +48,10 @@ const FormPropertyUpdate = (props) => {
 
   useEffect(() => {
     if (fields) {
+      console.log("fields",fields)
       var atributos = Object.entries(fields.attributes);
-      const attributesFormate = atributos.forEach((a) =>
+      console.log("atributos",atributos)
+      const attributesFormate = atributos.map((a) =>
        {
         if (a) {
           let json = {
@@ -59,13 +62,14 @@ const FormPropertyUpdate = (props) => {
           return json;
         }
       });
+      console.log("AttributesFormate",attributesFormate)
 
       console.log("FIELDS", fields)
       let formatedBody = {
         ...fields,
         attributes: attributesFormate,
         ownerId: ownerId,
-        status: status,
+      
       };
 
       console.log("BODY", formatedBody);

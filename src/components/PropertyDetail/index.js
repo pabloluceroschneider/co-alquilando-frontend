@@ -149,8 +149,8 @@ const PayingLink = ({ payingLink }) => {
     if (!payingLink) return <div className="section box">Link de Pago no disponible</div>
     return (
         <div className="section box payingLink">
-            <span>Link de Pago</span>
-            <div>{payingLink}</div>
+            <p>Link de Pago </p>
+            <div><a href={`//${payingLink}`} target="blank">{payingLink}</a></div>
         </div>
     )
 }
