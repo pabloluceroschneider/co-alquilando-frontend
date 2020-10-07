@@ -74,11 +74,13 @@ const usePutProperty = (fields, hiddenFields) => {
 
         let photoAgregar = []
         var plist = fields.photos.file?.fileList;
-        plist.forEach((photo) => {
-            if (photo.originFileObj) {
-                photoAgregar.push(photo);
-            }
-        });
+        if (plist) {
+            plist.forEach((photo) => {
+                if (photo.originFileObj) {
+                    photoAgregar.push(photo);
+                }
+            });
+        }
 
         console.log('plist', plist)
         if (!photoAgregar.length) {

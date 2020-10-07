@@ -55,6 +55,7 @@
 .multiple-line {
     padding: 7px;
     text-align: left;
+    align-self: center;
 }
 
 .multiple-line p {
