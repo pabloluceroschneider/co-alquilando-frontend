@@ -88,10 +88,11 @@ const usePutProperty = (fields, hiddenFields) => {
 
         const formData = new FormData();
         formData.append('type', 'file')
-        for (const ph in plist) {
-            let phLast = plist[ph].originFileObj
+        for (const ph in photoAgregar) {
+            let phLast = photoAgregar[ph].originFileObj
             formData.append("photos", phLast)
         }
+        console.log('formData', formData)
 
         let asyncPutPhoto = async () => {
             try {
