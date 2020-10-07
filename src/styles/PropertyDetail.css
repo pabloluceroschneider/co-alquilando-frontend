@@ -27,7 +27,14 @@
 
 /* carrousel */
 .propertyDetail .section.carrousel img{
-    max-height: 400px;
+    max-height: 500px;
+    height: auto;
+    max-width: 500px;
+    width: auto;
+}
+
+.ant-carousel .slick-slide {
+    background-color: white;
 }
 
 /* map */
@@ -70,6 +77,9 @@
     text-align: left;
 }
 .propertyDetail .section.fullAddress div{
+    margin-left: 10%;
+}
+.propertyDetail .section.payingLink div{
     margin-left: 10%;
 }
 
@@ -127,6 +137,10 @@
     .propertyDetail .section.attributes{
         grid-column: 2;
         grid-row: 5 / span 2;
+    }
+    .propertyDetail .section.payingLink{
+        grid-column: 2;
+        grid-row: 7;
     }
    
     /* table price */

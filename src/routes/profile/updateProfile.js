@@ -6,6 +6,8 @@ import CustomizedForm from "../../components/CustomizedForm";
 import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 import moment from "moment";
+import provinces from '../../util/provinces'
+
 
 const userData = {
   name: "user",
@@ -13,13 +15,6 @@ const userData = {
   btnSubmit: "Actualizar Datos",
   fields: {
     primaries: [
-      [
-        {
-          label: "Nombre de usuario",
-          name: "userNickname",
-          component: "Input",
-        },
-      ],
       [
         {
           label: "Nombre",
@@ -63,6 +58,7 @@ const userData = {
           label: "Fecha de Nacimiento",
           name: "userBirthDate",
           component: "DatePicker",
+          required:true,
         },
         {
           label: "Número de Celular",
@@ -91,32 +87,39 @@ const userData = {
         {
           label: "Nacionalidad",
           name: ["attributes", "nationality"],
-          component: "Input",
+          component: "SelectDB",
+          endpoint: "/nationality/all",
+          search: 'nationality',
         },
         {
-          label: "Ciudad",
+          label: "Provincia",
           name: ["attributes", "city"],
-          component: "Input",
+          component: "Select",
+          options: provinces
         },
       ],
       [
+        {
+          label: "Ocupación",
+          name: ["attributes", "occupation"],
+          component: "SelectDB",
+          endpoint: '/occupation/all',
+          search: 'occupation'
+        },
         {
           label: "Descripción Personal",
           name: "userDescription",
           component: "Input.TextArea",
         },
+
+      ],
+      [
         {
           label: "Cargar Imagen",
           name: "photos",
           component: "Upload",
         },
       ],
-      [
-        {
-          label: "Preferencias",
-          component: "link",
-        },
-      ]
     ],
   },
 };
@@ -148,9 +151,6 @@ const UpdateForm = (props) => {
         form.setFieldsValue(formated);
         setIdUser(formated.id);
         setPhotosUpdate(res.data.photos);
-
-
-
       });
     };
     asyncGetUser();
@@ -169,7 +169,7 @@ const UpdateForm = (props) => {
       delete bodyReq.photos;
 
       console.log("BODY", bodyReq);
-      
+
       let asyncPutUser = new Promise(async (res, rej) => {
         await ApiRequest.put(`/user/${idUser}`, bodyReq).then((res) => {
           if (res.status === 200) {
@@ -184,7 +184,6 @@ const UpdateForm = (props) => {
             });
           }
         })
-
 
         if (fields && fields.photos && fields.photos.file) {
           var plist = fields.photos.file.fileList;
@@ -231,55 +230,12 @@ const UpdateForm = (props) => {
     }
   }, [fields, idUser, history]);
 
-
-  /*useEffect(() => {
-    if (fields && fields.photos && fields.photos.file) {
-      var plist = fields.photos.file.fileList;
-
-      const formData = new FormData();
-      formData.append('type', 'file')
-      let hasFile = false;
-      for (const ph in plist) {
-        hasFile = true;
-        if (plist[ph].originFileObj) {
-          let phLast = plist[ph].originFileObj
-          formData.append("photos", phLast)
-        }
-      }
-
-      let header = {
-        'Content-Type': 'multipart/form-data'
-      }
-
-      if (hasFile) {
-          let asyncPutUser = new Promise(async (res, rej) => {
-          await ApiRequest.multipartPut(`/user/${idUser}/photos`, formData, header).then((res) => {
-            console.log(res);
-            if (res.status === 200) {
-              notification.success({
-                message: `Datos Actualizados`,
-                placement: "bottomLeft",
-              });
-            } else {
-              notification.error({
-                message: `Error: No se pudo actualizar sus datos`,
-                placement: "bottomLeft",
-              });
-            }
-          });
-          res()
-        })
-        asyncPutUser.then(() => {
-          history.push(`/my-profile`);
-        });
-      }
-    }
-  }, [idUser, fields, history]);*/
-
-
   // Delete photos
   useEffect(() => {
-    if (fields && fields.photos && fields.photos.file) {
+    console.log("EN EL DELETE");
+    console.log("fields", fields);
+    debugger
+    if (fields && fields.photo && fields.photos.file && photosUpdate) {
       var listPhoto = fields.photos.file.fileList;
       console.log("photosUpdate -->", photosUpdate);
       console.log("listPhoto -->", listPhoto);
@@ -321,8 +277,6 @@ const UpdateForm = (props) => {
       })
     }
   }, [idUser, history, fields, photosUpdate]);
-
-
 
   return (
     <ContentWrapper topNav title="Actualizar Perfil">

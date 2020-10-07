@@ -44,7 +44,26 @@ class Property{
         let formatedProperty = {
             ...this.property,
             attributes: Property.mapArrayToJson( this.property.attributes ),
-            photos: Property.mapURLphotos(this.property.id, this.property.photos)
+            photos: Property.mapURLphotos(this.property.id, this.property.photos),
+            coordinates: this.property.address.coordinates
+        }
+        return formatedProperty
+    }
+
+    mapResponseToFormJson(){
+        let formatedProperty = {
+            ...this.property,
+            attributes: Property.mapArrayToJson( this.property.attributes ),
+            coordinates: this.property.address.coordinates
+        }
+        return formatedProperty
+    }
+
+    mapJsonToRequest(){
+        let formatedProperty = {
+            ...this.property,
+            attributes: Property.mapJsonToArray(this.property.attributes),
+            address: {...this.property.address, coordinates: this.property.coordinates}
         }
         return formatedProperty
     }

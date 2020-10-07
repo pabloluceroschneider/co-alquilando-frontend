@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Input, Checkbox, InputNumber } from "antd";
 import Select from "./Select";
+import SelectDB from "./SelectDB";
 import Upload from "./Upload";
 import DatePicker from "./DatePicker";
 import CheckboxGroup from "./CheckboxGroup";
@@ -8,13 +9,13 @@ import SliderForm from "./Slider";
 import ClickeableMap from "../../components/ClickeableMap"
 
 const InputRepository = props => {
-  const {element, form} = props;
+  const { element, form } = props;
 
   const onChange = value => {
-		form.setFieldsValue({
-			[element.name] : value
+    form.setFieldsValue({
+      [element.name]: value
     })
-	}
+  }
 
   const pickInput = () => {
     switch (element.component) {
@@ -38,31 +39,48 @@ const InputRepository = props => {
         return DatePicker(props);
       case "Select":
         return Select(element);
+      case "SelectDB":
+        return SelectDB(element);
       case "Upload":
         return <Upload onChange={onChange} {...props} key={element.label} />;
       case "slider":
         return <SliderForm onChange={onChange} {...props} key={element.label} />
-        case "Map":
-          return <div id="formMap" style={{ height: `300px`, width: `100%` }}>
-          <ClickeableMap 
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDzoLTHAJKj5xymA3iBqJxxQl-MYG9R_ag"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `300px`, width: `300px` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-          zoomLevel={10}
-          onChange={onChange}
-        />
+      case "Map":
+        console.log("MAP Form", props.form.getFieldValue([element.name]))
+        return <div id="formMap" style={{ height: `300px`, width: `100%` }}>
+          <ClickeableMap
+            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDzoLTHAJKj5xymA3iBqJxxQl-MYG9R_ag"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `300px`, width: `300px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            zoomLevel={10}
+            onChange={onChange}
+            latitude={props.form.getFieldValue([element.name]) ? props.form.getFieldValue([element.name])["latitude"] : null}
+            length={props.form.getFieldValue([element.name]) ? props.form.getFieldValue([element.name])["length"] : null}
+          />
         </div>
-      default: 
+      default:
         return <Input />;
 
     }
   };
 
   switch (element.component) {
-  
+
     case "label":
       return <label className="label" key={element.label}>{element.label}</label>;
+    case "span":
+      return <span className="span" key={element.label}>{element.label}</span>;
+    case "multiple-line":
+      return (
+        <div className='multiple-line'>
+          {
+            element.content.map(label => {
+              return <p className="span" key={label}>{label}</p>;
+            })
+          }
+        </div>
+      )
     case "h2":
       return <h2 className="h2" key={element.label}>{element.label}</h2>;
     case "link":
@@ -84,18 +102,18 @@ const InputRepository = props => {
           rules={
             element.validate
               ? [
-                  {
-                    required: element.required,
-                    message: `Porfavor, ingrese ${element.label}`,
-                  },
-                  element.validate,
-                ]
+                {
+                  required: element.required,
+                  message: `Porfavor, ingrese ${element.label}`,
+                },
+                element.validate,
+              ]
               : [
-                  {
-                    required: element.required,
-                    message: `Porfavor, ingrese ${element.label}`,
-                  },
-                ]
+                {
+                  required: element.required,
+                  message: `Porfavor, ingrese ${element.label}`,
+                },
+              ]
           }
         >
           {pickInput()}

@@ -14,7 +14,7 @@ import PropertyList from "./propertyList";
 import MyProperties from "./my-properties";
 import Roommates from "./roommates";
 import Notifications from "./notifications";
-import FormPropertyUpdate from './property/updateProperty';
+import FormPropertyUpdate from './property-update';
 import UserHome from '../routes/userHome';
 import Groups from './groups';
 

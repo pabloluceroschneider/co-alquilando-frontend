@@ -87,6 +87,11 @@ const propertyFields = {
 			],
 			[
 				{
+					label: 'Torre',
+					name: [ 'address', 'tower' ],
+					component: 'Input'
+				},
+				{
 					label: 'Piso',
 					name: [ 'address', 'floor' ],
 					component: 'InputNumber'
@@ -140,11 +145,25 @@ const propertyFields = {
 					name: [ 'price', 'taxes' ],
 					component: 'Input.Currency'
 				}
+			],
+			[
+				{
+					label: 'Informacion de pago',
+					component: 'h2'
+				}
+			],
+			[
+				{
+					label: 'Link de pago ',
+					name: ['payingLink'],
+					component: 'Input'
+				}
 			]
 		],
 		secondaries: [
 			[
 				{
+
 					label: 'Comodidades',
 					component: 'h2'
 				}
