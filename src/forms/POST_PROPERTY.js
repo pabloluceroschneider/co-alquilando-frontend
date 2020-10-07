@@ -145,11 +145,25 @@ const propertyFields = {
 					name: [ 'price', 'taxes' ],
 					component: 'Input.Currency'
 				}
+			],
+			[
+				{
+					label: 'Informacion de pago',
+					component: 'h2'
+				}
+			],
+			[
+				{
+					label: 'Link de pago ',
+					name: ['payingLink'],
+					component: 'Input'
+				}
 			]
 		],
 		secondaries: [
 			[
 				{
+
 					label: 'Comodidades',
 					component: 'h2'
 				}

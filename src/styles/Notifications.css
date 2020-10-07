@@ -40,6 +40,18 @@
     text-align: center;
 }
 
+.notifications .NotificationClose svg{
+    opacity: 50%;
+}
+
+.notifications .NotificationClose:hover svg{
+    opacity: 100%;
+}
+
+.notifications .NotificationClose{
+    float: right;
+}
+
 /* Desktop View */
 @media only screen and (min-width: 600px){
     

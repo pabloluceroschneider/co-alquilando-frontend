@@ -8,10 +8,8 @@ import '../../styles/PropertyList.css';
 import { SessionContext } from '../../store';
 
 
-
 const Property = () => {
-  
-
+    const breadscrumb = [{'Mis Propiedades': '/my-properties'}]
     const [datos, setDatos] = useState(null)
     const {state} = useContext(SessionContext);
     useEffect(
@@ -33,13 +31,13 @@ const Property = () => {
     )
 
   return (
-    <ContentWrapper topNav title="Mis Propiedades">
-      <div className="contentPL">
-        {datos
+    <ContentWrapper topNav title="Mis Propiedades" breadscrumb={breadscrumb}>
+      <div className="contentMyProperties">
+        {datos?.length
           ? datos.map((p) => {
               return <PropertyCard key={p.id} {...p} />;
             })
-          : null}
+          : <div>No tienes ninguna propiedad publicada. Carga tu propiedad <a href="/property">aquí</a></div>}
       </div>
     </ContentWrapper>
   );
