@@ -38,7 +38,8 @@ const Routes = () => {
 						<Route path="/properties" exact component={PropertyList} />
 						<Route path="/my-properties" exact component={MyProperties} />
 						<Route path="/roommates" exact component={Roommates} />
-						<Route path="/groups/:group/chat/:chat/:name" component={Groups} />
+						<Route path="/groups/:group/votations" component={Groups} />
+						<Route path="/groups/:group/chat/:chat" component={Groups} />
 						<Route path="/groups/:group" component={Groups} />
 						<Route path="/groups" exact component={Groups} />
 						<Route path="/notifications" exact component={Notifications} />

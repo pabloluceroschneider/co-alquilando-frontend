@@ -67,46 +67,53 @@ const propertyFields = {
 			],
 			[
 				{
-					label: 'Calle',
-					name: [ 'address', 'street' ],
-					component: 'Input',
-					required: true
+					label: "Provincia",
+					name: ["address", "province"],
+					component: "Select",
+					options: [{ name: "Córdoba", value: "Córdoba" }],
+					required: true,
 				},
 				{
-					label: 'Número',
-					name: [ 'address', 'number' ],
-					component: 'InputNumber',
-					required: true
+					label: "Barrio",
+					name: ["address", "neighborhood"],
+					component: "SelectDB",
+					endpoint: "/location/all",
+					search: "neighborhood",
+					required: true,
 				},
-				{
-					label: 'Barrio',
-					name: [ 'address', 'neighborhood' ],
-					component: 'Input',
-					required: true
-				}
+
 			],
 			[
 				{
-					label: 'Torre',
-					name: [ 'address', 'tower' ],
-					component: 'Input'
+					label: "Calle",
+					name: ["address", "street"],
+					component: "Input",
+					required: true,
 				},
 				{
-					label: 'Piso',
-					name: [ 'address', 'floor' ],
-					component: 'InputNumber'
+					label: "Número",
+					name: ["address", "number"],
+					component: "InputNumber",
+					required: true,
+				},
+
+			],
+			[
+				{
+					label: "Torre",
+					name: ["address", "tower"],
+					component: "Input",
 				},
 				{
-					label: 'Departamento',
-					name: [ 'address', 'apartment' ],
-					component: 'Input'
+					label: "Piso",
+					name: ["address", "floor"],
+					component: "InputNumber",
 				},
 				{
-					label: 'Provincia',
-					name: [ 'address', 'province' ],
-					component: 'Input',
-					required: true
-				}
+					label: "Departamento",
+					name: ["address", "apartment"],
+					component: "Input",
+				},
 			],
 			[
 				{

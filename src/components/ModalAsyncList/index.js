@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from 'antd';
 import ApiRequest from '../../util/ApiRequest';
 
-const ModalAsyncList = ({endpoint, label, title, itemTitle}) => {
+const ModalAsyncList = ({endpoint, label, title, itemTitle, handleOk}) => {
     const [data, setData] = useState(null)
     const [visible, setVisible] = useState(false);
     const [selected, setSelected] = useState({});
@@ -10,8 +10,8 @@ const ModalAsyncList = ({endpoint, label, title, itemTitle}) => {
     useEffect( ()=>{
         if (!visible || data) return;
         let getAsync = async () => {
-            let { data } = await ApiRequest.get(`${endpoint}`);
-            setData( data );
+            let {data} = await ApiRequest.get(`${endpoint}`);
+            setData( data  );
         }
         getAsync();
     },[visible, data, endpoint])
@@ -28,13 +28,18 @@ const ModalAsyncList = ({endpoint, label, title, itemTitle}) => {
         setSelected(item)
     }
 
+    const handleConfirm = () => {
+        handleOk(selected);
+        handleVisible();
+    }
+
     return (
         <div className="modal-async-list-wrapp">
             <div onClick={handleVisible}> { label } </div>
             <Modal
                 visible={visible}
                 onCancel={handleVisible}
-                onOk={handleVisible}
+                onOk={handleConfirm}
                 className="modal-async-list"
             >
                 <div className="title">{ title }</div>

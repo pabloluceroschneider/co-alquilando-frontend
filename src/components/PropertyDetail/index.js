@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Carousel, Tag } from 'antd';
+import { Carousel, Tag, notification } from 'antd';
 import { SendOutlined, TeamOutlined } from '@ant-design/icons';
+import { SessionContext } from '../../store';
+import { useParams } from 'react-router';
+import ApiRequest from '../../util/ApiRequest'
 import Property from '../../classes/Property';
 import ClickeableMap from '../ClickeableMap';
 import ModalAsyncList from '../ModalAsyncList';
@@ -13,19 +16,41 @@ const statusColor = {
     rented: "error",
 }
 
-const Header = ({ status, typology }) => {
+const Header = ({status, typology}) => {
+    const { state } = useContext(SessionContext)
     const { t } = useTranslation();
+    const { idProperty } = useParams();
+
+    const handleOk = async selected => {
+        let bodyReq = {
+            userId: state.user.id,
+            propertyId: idProperty
+        }
+        try{
+            let { data } = await ApiRequest.post(`/group/votation/new/${selected.id}`, bodyReq)
+            notification.success({
+                message: `Se envió la notificacion al grupo ${data.name} y se registró tu voto.`,
+                placement: 'bottomLeft'
+            });
+        }catch(e){
+            notification.error({
+                message: `Error: ${e.message}`,
+                placement: 'bottomLeft'
+            });
+        }
+    }
 
     return (
-        <div className="section header">
-            <Tag>{t(typology)}</Tag>
-            <Tag color={statusColor[status]}>{t(status)}</Tag>
-            <ModalAsyncList
-                label={<Tag icon={<SendOutlined />} color="#5e83ba">Compartir en Grupo</Tag>}
+        <div className="section header"> 
+            <Tag>{ t(typology) }</Tag>
+            <Tag color={statusColor[status]}>{ t(status) }</Tag>
+            <ModalAsyncList 
+                label={<Tag icon={<SendOutlined />} color="#5e83ba">Iniciar Votación</Tag>} 
                 title={<div><TeamOutlined />Seleccione Grupo</div>}
-                endpoint={`/user/users`}
-                itemTitle="userName"
-            />
+                endpoint={`/group/user/${state.user.id}`}
+                itemTitle="name"
+                handleOk={handleOk}
+                />
         </div>
     )
 }
