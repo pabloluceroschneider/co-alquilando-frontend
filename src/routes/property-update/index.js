@@ -129,7 +129,6 @@ const UpdateProperty = () => {
             setData(property)
             setHiddenFields({
                 ownerId: property.ownerId,
-                status: property.status,
                 photos: property.photos,
             })
         }
