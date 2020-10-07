@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Avatar, Button, notification } from "antd";
+import React, { useState, useContext } from "react";
+import { Avatar, Button, notification, Modal } from "antd";
 import { useHistory } from "react-router-dom";
 import { StarFilled } from "@ant-design/icons";
 import ApiRequest from "../../util/ApiRequest";
@@ -47,14 +47,22 @@ const Votation = ({ group }) => {
 };
 
 const AdminMenu = ({channels}) => {
+  const [ showModal, setShowModal] = useState(false);
+  const [acceptGroup, setAcceptGroup] = useState(null)
   let history = useHistory();
+  const toggleShowModal = () => setShowModal(visible => !visible);
 
-	const onclick = async resp => {
+  const openModal = value => {
+    setAcceptGroup(value);
+    toggleShowModal();
+  }
+
+	const sendDecision = async resp => {
 		let channel_data_array = channels[0]?.channelId.split('-');
 		let bodyReq = {
 			groupId: channel_data_array[0],
-			decision: resp === 'accept_group' ? true : false
-		}
+			decision: acceptGroup
+    }
 		await ApiRequest.put(`/property/${channel_data_array[2]}/decideGroup`, bodyReq).then(res => {
 			if (res.status == 200){
 				notification.success({
@@ -74,8 +82,29 @@ const AdminMenu = ({channels}) => {
 
   return (
     <div className="admin-buttons">
-        <Button onClick={() => {onclick('accept_group')}}>Aceptar Grupo</Button>
-        <Button onClick={() => {onclick('decline_group')}}>Rechazar Grupo</Button>
+        <Button onClick={() => openModal(true)} type="primary">Aceptar Grupo</Button>
+        <Button onClick={() => openModal(false)} danger>Rechazar Grupo</Button>
+        <Modal 
+          visible={showModal}
+          onOk={() => sendDecision()}
+          onCancel={toggleShowModal}
+          title={ acceptGroup ? `Confirmar Grupo` : `Rechazar Grupo`}
+          okText={ acceptGroup ? `Confirmar` : `Rechazar`}
+          cancelText="Cancelar"
+          destroyOnClose
+          >
+            {acceptGroup? (
+              <div>
+                <p>Estas confirmando al grupo como inquilinos de tu Propiedad.</p>
+                <p>Al hacerlo, tu Propiedad pasará automaticamente al estado "Reservada".</p>
+                <p>Cuando confirmes alquiler por Contrato, no olvides actualizar su estado a "Alquilada"</p>
+              </div> )
+            :(
+              <div>
+                <p>Estas rechazando la solicitud de este grupo.</p>
+              </div>
+            )}
+          </Modal>
     </div>
   );
 };
