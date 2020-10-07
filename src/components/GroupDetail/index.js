@@ -47,6 +47,8 @@ const Votation = ({ group }) => {
 };
 
 const AdminMenu = ({channels}) => {
+  let history = useHistory();
+
 	const onclick = async resp => {
 		let channel_data_array = channels[0]?.channelId.split('-');
 		let bodyReq = {
@@ -54,7 +56,7 @@ const AdminMenu = ({channels}) => {
 			decision: resp === 'accept_group' ? true : false
 		}
 		await ApiRequest.put(`/property/${channel_data_array[2]}/decideGroup`, bodyReq).then(res => {
-			if (res.state == 200){
+			if (res.status == 200){
 				notification.success({
 					message: `¡Tu respuesta fue enviada con éxito!`,
 					placement: "bottomLeft",
@@ -64,7 +66,8 @@ const AdminMenu = ({channels}) => {
 					message: `Ocurrio un error al enviar la respuesta`,
 					placement: "bottomLeft",
 				  });
-			}
+      }
+      history.push("/groups");
 		});
 	}
 
