@@ -7,7 +7,7 @@
     width: 90%;
     height: 100%;
 
-    .false{
+    &.false{
         display: none; 
     }
 
@@ -72,7 +72,7 @@
 
 @media only screen and (min-width: 600px){
     .group-detail{
-        .false{
+        &.false{
             display: grid; 
         }
     }
