@@ -9,7 +9,7 @@ const Item = ({ name, channel }) => {
   let history = useHistory();
 
   const handleClick = () => {
-    history.push(`/groups/${name}/chat/${channel.channelId}`);
+    history.push(`/groups/${name}/chat/${channel.channelId}/${channel.name}`);
   };
 
   function date() {

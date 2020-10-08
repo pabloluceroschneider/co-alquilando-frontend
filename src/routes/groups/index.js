@@ -12,7 +12,7 @@ import { TeamOutlined } from '@ant-design/icons';
 
 const Groups = () => {
     const {state} = useContext(SessionContext);
-    const { group, chat } = useParams();
+    const { group, chat, name } = useParams();
     const votation = window.location.pathname.split("/").includes("votations")
     const breadscrumb = [
         { Grupos : "/groups" },
@@ -37,6 +37,7 @@ const Groups = () => {
         const getGroupInformation = async () => {
             const { data } = await ApiRequest.get(`/group/user/${state.user.id}`);
             setData(data);
+            console.log("Data asdasd ",data)
             };
         getGroupInformation();
     }, [state.user.id])
@@ -61,7 +62,7 @@ const Groups = () => {
                 {
                     group ? (
                         chat ? 
-                        <Chat render={ group && chat && !votation } groupId={group} channel={chat}/> 
+                        <Chat render={ group && chat && !votation } channelName={name} groupId={group} channel={chat}/> 
                         : <Votation render={ group && !chat && votation } detail={detail} />
                     ) 
                     : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
