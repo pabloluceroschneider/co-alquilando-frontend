@@ -122,6 +122,7 @@ const propertyFields = {
 					label: "Geolocalizacion",
 					name: "coordinates",
 					component: "Map",
+					form: "update",
 					required: true,
 				},
 			],
