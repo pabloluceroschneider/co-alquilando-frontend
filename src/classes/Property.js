@@ -27,7 +27,7 @@ class Property{
     }
 
     static mapURLphotos(idProperty, photos){
-        if (!photos) return;
+        if (!photos) return ["https://omegamma.com.au/wp-content/uploads/2017/04/default-image-720x530.jpg"]
         let urlArray = [];
         if(photos){
             let url = "http://localhost:8080"
@@ -44,7 +44,26 @@ class Property{
         let formatedProperty = {
             ...this.property,
             attributes: Property.mapArrayToJson( this.property.attributes ),
-            photos: Property.mapURLphotos(this.property.id, this.property.photos)
+            photos: Property.mapURLphotos(this.property.id, this.property.photos),
+            coordinates: this.property.address.coordinates
+        }
+        return formatedProperty
+    }
+
+    mapResponseToFormJson(){
+        let formatedProperty = {
+            ...this.property,
+            attributes: Property.mapArrayToJson( this.property.attributes ),
+            coordinates: this.property.address.coordinates
+        }
+        return formatedProperty
+    }
+
+    mapJsonToRequest(){
+        let formatedProperty = {
+            ...this.property,
+            attributes: Property.mapJsonToArray(this.property.attributes),
+            address: {...this.property.address, coordinates: this.property.coordinates}
         }
         return formatedProperty
     }

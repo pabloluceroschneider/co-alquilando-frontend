@@ -28,14 +28,17 @@ const CustomUpload = (props) => {
     let asyncGet = async () => {
       if (!fileList.length && props && props.value) {
         if (String(props.id) === "property_photos" && props.value) {
-          props.value.forEach(async (photo, index) => {
-            let photoJson = {
-              uid: index,
-              name: photo,
-              url: `http://localhost:8080/property/${idProperty}/photos/${photo}`,
-            };
-            setFileList((fileList) => [...fileList, photoJson]);
-          });
+          if (props.value) {
+            console.log("props.value", props.value);
+            props.value.forEach(async (photo, index) => {
+              let photoJson = {
+                uid: index,
+                name: photo,
+                url: `http://localhost:8080/property/${idProperty}/photos/${photo}`,
+              };
+              setFileList((fileList) => [...fileList, photoJson]);
+            });
+          }
         } else {
 
           console.log(props.value)

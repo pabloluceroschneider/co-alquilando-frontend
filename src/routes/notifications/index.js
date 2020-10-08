@@ -7,6 +7,7 @@ import NotificationCard from "../../components/NotificationCard";
 const Notifications = (props) => {
   const { state } = useContext(SessionContext);
   const [notifications, setNotifications] = useState();
+  const breadscrumb = [{Notificaciones: '/notifications'}]
 
   useEffect(() => {
     let asyncGet = async () => {
@@ -19,10 +20,10 @@ const Notifications = (props) => {
     asyncGet();
   }, [state.user.id]);
   return (
-    <ContentWrapper topNav title="Notificaciones">
+    <ContentWrapper topNav title="Notificaciones" breadscrumb={breadscrumb}>
       <div className="notifications">
         {notifications?.map((n) => {
-          return <NotificationCard key={n.id} {...n} />;
+          return <NotificationCard key={n.id} {...n} setNotifications={setNotifications} notifications={notifications}/>;
         })}
       </div>
     </ContentWrapper>

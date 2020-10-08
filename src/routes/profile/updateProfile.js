@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { SessionContext } from '../../store'
+import { SessionContext, SIGN_IN } from '../../store'
 import { useHistory } from "react-router-dom";
 import { Form, notification } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
@@ -15,13 +15,6 @@ const userData = {
   btnSubmit: "Actualizar Datos",
   fields: {
     primaries: [
-      [
-        {
-          label: "Nombre de usuario",
-          name: "userNickname",
-          component: "Input",
-        },
-      ],
       [
         {
           label: "Nombre",
@@ -65,6 +58,7 @@ const userData = {
           label: "Fecha de Nacimiento",
           name: "userBirthDate",
           component: "DatePicker",
+          required:true,
         },
         {
           label: "Número de Celular",
@@ -93,7 +87,9 @@ const userData = {
         {
           label: "Nacionalidad",
           name: ["attributes", "nationality"],
-          component: "Input",
+          component: "SelectDB",
+          endpoint: "/nationality/all",
+          search: 'nationality',
         },
         {
           label: "Provincia",
@@ -124,12 +120,6 @@ const userData = {
           component: "Upload",
         },
       ],
-      [
-        {
-          label: "Preferencias",
-          component: "link",
-        },
-      ]
     ],
   },
 };
@@ -138,7 +128,7 @@ const UpdateForm = (props) => {
   const [fields, setFields] = useState(null);
   const [idUser, setIdUser] = useState(null);
   const history = useHistory();
-  const { state } = useContext(SessionContext);
+  const { state, dispatch } = useContext(SessionContext);
   const [photosUpdate, setPhotosUpdate] = useState(null);
   useEffect(() => {
     let asyncGetUser = async () => {
@@ -161,9 +151,6 @@ const UpdateForm = (props) => {
         form.setFieldsValue(formated);
         setIdUser(formated.id);
         setPhotosUpdate(res.data.photos);
-
-
-
       });
     };
     asyncGetUser();
@@ -190,6 +177,7 @@ const UpdateForm = (props) => {
               message: `Datos Actualizados`,
               placement: "bottomLeft",
             });
+            dispatch( SIGN_IN(res.data) )
           } else {
             notification.error({
               message: `Error: No se pudo actualizar sus datos`,
@@ -197,7 +185,6 @@ const UpdateForm = (props) => {
             });
           }
         })
-
 
         if (fields && fields.photos && fields.photos.file) {
           var plist = fields.photos.file.fileList;
@@ -244,55 +231,12 @@ const UpdateForm = (props) => {
     }
   }, [fields, idUser, history]);
 
-
-  /*useEffect(() => {
-    if (fields && fields.photos && fields.photos.file) {
-      var plist = fields.photos.file.fileList;
-
-      const formData = new FormData();
-      formData.append('type', 'file')
-      let hasFile = false;
-      for (const ph in plist) {
-        hasFile = true;
-        if (plist[ph].originFileObj) {
-          let phLast = plist[ph].originFileObj
-          formData.append("photos", phLast)
-        }
-      }
-
-      let header = {
-        'Content-Type': 'multipart/form-data'
-      }
-
-      if (hasFile) {
-          let asyncPutUser = new Promise(async (res, rej) => {
-          await ApiRequest.multipartPut(`/user/${idUser}/photos`, formData, header).then((res) => {
-            console.log(res);
-            if (res.status === 200) {
-              notification.success({
-                message: `Datos Actualizados`,
-                placement: "bottomLeft",
-              });
-            } else {
-              notification.error({
-                message: `Error: No se pudo actualizar sus datos`,
-                placement: "bottomLeft",
-              });
-            }
-          });
-          res()
-        })
-        asyncPutUser.then(() => {
-          history.push(`/my-profile`);
-        });
-      }
-    }
-  }, [idUser, fields, history]);*/
-
-
   // Delete photos
   useEffect(() => {
-    if (fields && fields.photos && fields.photos.file) {
+    console.log("EN EL DELETE");
+    console.log("fields", fields);
+    debugger
+    if (fields && fields.photo && fields.photos.file && photosUpdate) {
       var listPhoto = fields.photos.file.fileList;
       console.log("photosUpdate -->", photosUpdate);
       console.log("listPhoto -->", listPhoto);
@@ -334,8 +278,6 @@ const UpdateForm = (props) => {
       })
     }
   }, [idUser, history, fields, photosUpdate]);
-
-
 
   return (
     <ContentWrapper topNav title="Actualizar Perfil">

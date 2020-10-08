@@ -6,19 +6,34 @@ import ContentWrapper from '../../components/ContentWrapper';
 import GroupList from '../../components/GroupList';
 import GroupDetail from '../../components/GroupDetail';
 import Chat from '../../components/Chat';
+import Votation from '../../components/Votation';
 import WaitingSelection from '../../components/WaitingSelection';
-import { SendOutlined, TeamOutlined } from '@ant-design/icons';
+import { TeamOutlined } from '@ant-design/icons';
 
 const Groups = () => {
-    let { group, chat, name } = useParams();
-    let breadscrumb = [{
-        Grupos : "/groups"
-    }]
-
     const {state} = useContext(SessionContext);
+    const { group, chat } = useParams();
+    const votation = window.location.pathname.split("/").includes("votations")
+    const breadscrumb = [
+        { Grupos : "/groups" },
+        { Detalle: group?`/groups/${group}`:null },
+        { Chat : chat?`/groups/${group}/chat/${chat}`:null },
+        { Votación: votation?`/groups/${group}/votations`:null },
+    ]
     const [data, setData] = useState(null); 
+    const [detail, setDetail] = useState(null)
+
+	useEffect( () => {
+        if (!group) return
+		let getGroupInformation = async () => {
+            let { data } = await ApiRequest.get(`/group/${group}/detail`)
+            setDetail(data);
+		};
+		getGroupInformation();
+	}, [group])
 
     useEffect( () => {
+        if (data) return;
         const getGroupInformation = async () => {
             const { data } = await ApiRequest.get(`/group/user/${state.user.id}`);
             setData(data);
@@ -37,16 +52,19 @@ const Groups = () => {
     return (
         <ContentWrapper topNav breadscrumb={breadscrumb} >
             <div className="groups-container">
-                <GroupList groups={data} render={ !group && !chat} />
+                <GroupList groups={data} render={ !group && !chat && !votation} />
                 {   
                     group || chat ?  
-                    <GroupDetail render={ group && !chat } group={group} /> 
+                    <GroupDetail detail={detail} render={ group && !chat && !votation } group={group} /> 
                     : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
                 }
-                { 
-                    group && chat ?  
-                    <Chat render={ group && chat } channelName={name} groupId={group} channel={chat}/> 
-                    : <WaitingSelection message="Seleccione Chat"  render={ group && chat } icon={<SendOutlined />} /> 
+                {
+                    group ? (
+                        chat ? 
+                        <Chat render={ group && chat && !votation } groupId={group} channel={chat}/> 
+                        : <Votation render={ group && !chat && votation } detail={detail} />
+                    ) 
+                    : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
                 }
             </div>
         </ContentWrapper>

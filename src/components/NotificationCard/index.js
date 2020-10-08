@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { Card, notification, Avatar } from "antd";
+import { Card, notification, Avatar, Modal } from "antd";
 import ApiRequest from "../../util/ApiRequest";
 import Notification from "../../classes/Notification";
-import { CloseCircleTwoTone, CheckCircleTwoTone } from "@ant-design/icons";
+import { CloseCircleTwoTone, CheckCircleTwoTone, CloseOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { SessionContext } from "../../store";
 
 const { Meta } = Card;
@@ -29,12 +29,37 @@ const Name = ({ name, userNickname }) => {
   );
 };
 
+const Close = ({id, setNotifications, notifications}) =>{
+  const { confirm } = Modal;
+
+  function showConfirm() {
+    confirm({
+      title: '¿Quieres eliminar esta notificación?',
+      icon: <ExclamationCircleOutlined />,
+      content: 'No se volverá a mostrar en el listado de notificaciones',
+      okType: 'danger',
+      okText: 'Si',
+      cancelText: 'No',
+      onOk() {
+        deleteNotification()
+      },
+      onCancel() {
+      },
+    });
+  }
+
+  const deleteNotification = async () => {
+    await ApiRequest.delete(`/notifications/${id}`);
+    setNotifications(notifications?.filter(n => n.id  !== id))
+  }
+
+  return(<CloseOutlined className="NotificationClose" onClick={showConfirm} />)
+}
+
 const NotificationCard = (props) => {
-  console.log("Props -->", props);
   const { state } = useContext(SessionContext);
   const response = async (type) => {
     let groupID = await props.notificationAttributes.find((a) => a.attributeType === 'groupId');
-    console.log('groupID', groupID)
 
     if (type !== "group_send_invitation") {
       let bodyReqResp = {
@@ -43,6 +68,9 @@ const NotificationCard = (props) => {
       };
 
       await ApiRequest.put(`/user/${state.user.id}/invite`, bodyReqResp);
+
+      await ApiRequest.delete(`/notifications/${props.id}`);
+      props.setNotifications(props.notification?.filter(n => n.id  !== props.id))
     }
 
     let bodyReq = new Notification(props.to, props.from, type);
@@ -57,17 +85,17 @@ const NotificationCard = (props) => {
     group_send_invitation: [
       <span
         onClick={() => {
-          response("group_decline_invitation");
-        }}
-      >
-        <CloseCircleTwoTone twoToneColor="#FB8888" />
-      </span>,
-      <span
-        onClick={() => {
           response("group_accept_invitation");
         }}
       >
-        <CheckCircleTwoTone twoToneColor="#52c41a" />
+        <CheckCircleTwoTone className="responseButton" twoToneColor="#52c41a" />
+      </span>,
+      <span
+        onClick={() => {
+          response("group_decline_invitation");
+        }}
+      >
+        <CloseCircleTwoTone className="responseButton" twoToneColor="#FB8888" />
       </span>,
     ],
   };
@@ -88,11 +116,12 @@ const NotificationCard = (props) => {
             {props.userFrom.userName[0].toUpperCase()}{" "}
           </Avatar>
         }
-        title={
+        title={<div>
           <Name
             name={props.userFrom.userName + " " + props.userFrom.userSurname}
             userNickname={props.userFrom.userNickname}
-          />
+          />{props.type !== 'group_send_invitation' && <Close notifications={props.notifications} setNotifications={props.setNotifications} id={props.id}/>}
+        </div>
         }
         description={<Description desc={props.type} />}
       />

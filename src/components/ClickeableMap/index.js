@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 
 const ClickeableMap = ({onChange, google, latitude, length, notClickeable}) => {
     const [position, setPosition] = useState({ lat: latitude, lng: length })  
+
+    useEffect(() => {
+        if (position.lat || position.length) return;
+        setPosition({ lat: latitude, lng: length })
+    },[latitude, length])
 
     const onMapClicked = (param, map, e) => {
         if (notClickeable) return;

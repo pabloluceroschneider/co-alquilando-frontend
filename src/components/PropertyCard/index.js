@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useRouteMatch } from 'react-router';
-import { Card, Divider, Button } from 'antd';
+import { Card, Divider, Button, Tag } from 'antd';
 import { EditOutlined, EyeOutlined } from '@ant-design/icons'
 import CarrouselPequeño from '../CarrouselPequeño';
 import ModalMapa from '../Modal';
 
 
 const PropertyCard = props => {
-    const { description, price, address, attributes, id, photos } = props;
+    const { title, price, address, attributes, id, photos } = props;
     const { rentPrice } = price;
     const {coordinates} = address;
     const history = useHistory();
@@ -71,22 +71,17 @@ const PropertyCard = props => {
             >
                 <div >
                     <div className="cabeceraPC">
-                        <label className="titlePC"> ${rentPrice}</label> <br></br>
-                        <label className="typologyPC"> {typologies[attr.typology]}</label>
+                        <label className="titlePC">{title}</label> <br></br>
+                        <label className="pricePC"> ${rentPrice} <Tag className="tagPC" title="Tipología" >{ typologies[attr.typology] }</Tag></label> <br></br>
+                        
                     </div>
 
                     <div className="itemsPC">
-                        {/* <label>{province}</label>
-                        <label>Ubicacion: {street} {number}</label> */}
-                        <label>Habitaciones: {attr.rooms}  </label>
-                        <label>Baños: {attr.bathrooms}</label>
-                        <label>Maximo Inquilinos: {attr.amountPeople}</label>
-                        <Divider className="dividerPC"></Divider>
-                        <label>{description}</label>
+                        <label>Hab: {attr.rooms} | Maximo Inquilinos: {attr.amountPeople} </label>
                         <Divider className="dividerPC"></Divider>
                     </div>
 
-                    <div className="filaPC">
+                    {attr && <div className="filaPC">
 
                         {attr.sum ? <label className="icon icon-bookmark" title="Salon de usos multiples">  </label> : null}
                         {attr.gym ? <label className="icon icon-barbell" title="Gym">  </label> : null}
@@ -102,13 +97,15 @@ const PropertyCard = props => {
                         {attr.pets ? <label className="icon icon-paw" title="Acepta Mascotas">  </label> : null}
 
 
+                        <Divider className="dividerPC"></Divider>
                     </div >
+                    }
 
                     <>
                     <div className="button-place">
                         <ModalMapa coordinates={coordinates}/>
                         {path === "/my-properties" &&
-                            <Button onClick={() => onEdit()}>
+                            <Button class="icon-map-pin-5" onClick={() => onEdit()}>
                                 <EditOutlined />
                             </Button>
                         }
@@ -117,11 +114,8 @@ const PropertyCard = props => {
                         </Button>
                     </div>
                     </>
-
                 </div>
-
             </Card>
-
         </div>
     );
 
