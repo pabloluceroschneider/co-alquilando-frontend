@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { SessionContext, SIGN_IN } from '../../store'
 import { Modal, Form, notification } from 'antd';
 import { useHistory } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import Auth from '../../util/Auth';
 import ApiRequest from '../../util/ApiRequest';
 import CustomizedForm from '../CustomizedForm';
@@ -52,6 +53,7 @@ const CustomizedModal = (props) => {
 	const [ form ] = Form.useForm();
 	const [ authErr, setAuthErr ] = useState(null);
 	const [ user, setUser ] = useState(null);
+	const { t } = useTranslation()
 
     const postSession = data => {
 		setAuthErr(null)
@@ -109,7 +111,7 @@ const CustomizedModal = (props) => {
 			destroyOnClose={true}
         >
 			<CustomizedForm form={form} data={loginFields} onfinish={postSession}/>
-			{ authErr && <span id="authErr">{authErr}</span> }
+			{ authErr && <span id="authErr">{ t(authErr) }</span> }
         </Modal>
 	);
 };
