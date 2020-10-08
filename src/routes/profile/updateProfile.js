@@ -235,7 +235,6 @@ const UpdateForm = (props) => {
   useEffect(() => {
     console.log("EN EL DELETE");
     console.log("fields", fields);
-    debugger
     if (fields && fields.photo && fields.photos.file && photosUpdate) {
       var listPhoto = fields.photos.file.fileList;
       console.log("photosUpdate -->", photosUpdate);

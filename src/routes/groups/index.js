@@ -64,7 +64,7 @@ const Groups = () => {
                         <Chat render={ group && chat && !votation } groupId={group} channel={chat}/> 
                         : <Votation render={ group && !chat && votation } detail={detail} />
                     ) 
-                    : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
+                    : null
                 }
             </div>
         </ContentWrapper>
