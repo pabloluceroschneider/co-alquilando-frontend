@@ -8,7 +8,7 @@ const ClickeableMap = ({onChange, google, latitude, length, notClickeable}) => {
     useEffect(() => {
         if (position.lat || position.length) return;
         setPosition({ lat: latitude, lng: length })
-    },[latitude, length])
+    },[position, latitude, length])
 
     const onMapClicked = (param, map, e) => {
         if (notClickeable) return;

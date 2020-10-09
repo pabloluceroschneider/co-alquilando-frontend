@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { SessionContext, SIGN_OUT } from '../../store'
 import { Menu, Avatar, Badge, Dropdown } from 'antd';
 import { LogoutOutlined, BellOutlined, TeamOutlined } from '@ant-design/icons';

@@ -1,4 +1,3 @@
-import provinces from "../util/provinces.js";
 
 const propertyFields = {
 	name: "property",

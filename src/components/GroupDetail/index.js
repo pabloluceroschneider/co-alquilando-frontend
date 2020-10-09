@@ -64,7 +64,7 @@ const AdminMenu = ({channels}) => {
 			decision: acceptGroup
     }
 		await ApiRequest.put(`/property/${channel_data_array[2]}/decideGroup`, bodyReq).then(res => {
-			if (res.status == 200){
+			if (res.status === 200){
 				notification.success({
 					message: `¡Tu respuesta fue enviada con éxito!`,
 					placement: "bottomLeft",

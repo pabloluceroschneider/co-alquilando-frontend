@@ -229,7 +229,7 @@ const UpdateForm = (props) => {
         history.push(`/my-profile`);
       });
     }
-  }, [fields, idUser, history]);
+  }, [fields, idUser, history, dispatch]);
 
   // Delete photos
   useEffect(() => {

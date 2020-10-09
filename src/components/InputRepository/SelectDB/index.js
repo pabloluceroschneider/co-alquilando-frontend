@@ -13,7 +13,7 @@ const CustomSelect = (props) => {
             setOptions(data);
         }
         getData();
-    }, []);
+    }, [props.endpoint]);
 
     return (
         <Select>
