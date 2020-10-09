@@ -31,15 +31,12 @@ const MyProfile = (props) => {
         data.attributes.forEach((t) => {
           attr = { ...attr, [t.attributeType]: t.value };
         });
-        console.log(data);
         setDatos({ ...data, attributes: attr });
         setPhotosUpdate(data.photos);
       };
       getUser();
     }
   }, [state, datos]);
-
-  console.log("ID", state.user.id, "PHOTO", photosUpdate);
 
   return (
     <ContentWrapper topNav>

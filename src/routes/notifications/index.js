@@ -15,7 +15,6 @@ const Notifications = (props) => {
         `/notifications/user/${state.user.id}`
       );
       setNotifications(data);
-      console.log("data:", data);
     };
     asyncGet();
   }, [state.user.id]);

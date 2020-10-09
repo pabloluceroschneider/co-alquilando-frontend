@@ -72,7 +72,7 @@ const Nav = () => {
 				</>) :
 				<>
 					<li style={{ float: 'right' }}>
-						<a href="#">
+						<a rel="noopener noreferrer" href="#">
 							<Login />
 						</a>
 					</li>

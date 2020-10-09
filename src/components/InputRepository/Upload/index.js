@@ -13,13 +13,11 @@ const CustomUpload = (props) => {
   let { idProperty } = useParams();
 
   const handlePhoto = (file) => {
-    console.log("DATOS:" + props.value);
     setFileList(file.fileList);
 
     if (file) {
       props.onChange({ file });
       if (file.status !== "uploading") {
-        console.log("File:", file);
       }
     }
   };
@@ -29,7 +27,6 @@ const CustomUpload = (props) => {
       if (!fileList.length && props && props.value) {
         if (String(props.id) === "property_photos" && props.value) {
           if (props.value) {
-            console.log("props.value", props.value);
             props.value.forEach(async (photo, index) => {
               let photoJson = {
                 uid: index,
@@ -41,7 +38,6 @@ const CustomUpload = (props) => {
           }
         } else {
 
-          console.log(props.value)
           if (String(props.id) === "user_photos" && props.value) {
             if (Array.isArray(props.value)) {
               props.value.forEach(async (photo, index) => {
@@ -64,7 +60,6 @@ const CustomUpload = (props) => {
 
   const onPreview = async (file) => {
     let src = file.url;
-    console.log("OnPreview")
     if (!src) {
       src = await new Promise((resolve) => {
         const reader = new FileReader();

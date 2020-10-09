@@ -37,7 +37,6 @@ const usePutProperty = (fields, hiddenFields) => {
         if (!hiddenFields?.photos) return;
 
         var listPhoto = fields.photos.file?.fileList;
-        console.log('listPhoto', listPhoto)
         if (!listPhoto) {
             setResultPut(resultPut => { return { ...resultPut, deleteMultipart: true } });
             return
@@ -48,15 +47,12 @@ const usePutProperty = (fields, hiddenFields) => {
                 auxListPhoto.push(photo);
             }
         });
-        console.log("auxListPhoto  --> ", auxListPhoto);
-        console.log("hiddenFields  --> ", hiddenFields);
 
         hiddenFields.photos.forEach((photo) => {
             let res = auxListPhoto.find(photoAux => photoAux.name === photo)
                 if (!res) {
                     let asyncPutPhoto = async () => {
                         try {
-                            console.log("EN EL DELETE");
                             await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`)
                             setResultPut(resultPut => { return { ...resultPut, deleteMultipart: true } });
                         } catch (err) {
@@ -82,7 +78,6 @@ const usePutProperty = (fields, hiddenFields) => {
             });
         }
 
-        console.log('plist', plist)
         if (!photoAgregar.length) {
             setResultPut(resultPut => { return { ...resultPut, multipart: true } });
             return
@@ -94,7 +89,6 @@ const usePutProperty = (fields, hiddenFields) => {
             let phLast = photoAgregar[ph].originFileObj
             formData.append("photos", phLast)
         }
-        console.log('formData', formData)
 
         let asyncPutPhoto = async () => {
             try {

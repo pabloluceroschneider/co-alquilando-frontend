@@ -19,13 +19,11 @@ const FormPropertyUpdate = (props) => {
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/property/${idProperty}`).then((res) => {
-        console.log("haciendo el get");
 
         setOwnerId(res.data.ownerId);
         setStatus(res.data.status);
         setPhotosUpdate(res.data.photos);
         setPayingLink(res.data.payingLink);
-        console.log(res.data);
         let array = [];
         if (res.data.attributes) {
           res.data.attributes.forEach((t) => {
@@ -39,7 +37,6 @@ const FormPropertyUpdate = (props) => {
             attributes: { ...res.data.attributes, ...t },
           };
         });
-        console.log(res.data)
         form.setFieldsValue(res.data);
       });
     };
@@ -48,9 +45,7 @@ const FormPropertyUpdate = (props) => {
 
   useEffect(() => {
     if (fields) {
-      console.log("fields",fields)
       var atributos = Object.entries(fields.attributes);
-      console.log("atributos",atributos)
       const attributesFormate = atributos.map((a) =>
        {
         if (a) {
@@ -62,9 +57,7 @@ const FormPropertyUpdate = (props) => {
           return json;
         }
       });
-      console.log("AttributesFormate",attributesFormate)
 
-      console.log("FIELDS", fields)
       let formatedBody = {
         ...fields,
         attributes: attributesFormate,
@@ -72,13 +65,10 @@ const FormPropertyUpdate = (props) => {
       
       };
 
-      console.log("BODY", formatedBody);
 
       let bodyReq = formatedBody;
-      console.log("BODY", bodyReq);
       let asyncPut = async () => {
         await ApiRequest.put(`/property/${idProperty}`, bodyReq).then((res) => {
-          console.log(res);
           if (res.status === 200) {
             notification.success({
               message: `Datos Actualizados`,
@@ -104,7 +94,6 @@ const FormPropertyUpdate = (props) => {
       const formData = new FormData();
       formData.append('type', 'file')
       for (const ph in plist) {
-        console.log(plist[ph].originFileObj)
         let phLast = plist[ph].originFileObj
 
         formData.append("photos", phLast)
@@ -116,7 +105,6 @@ const FormPropertyUpdate = (props) => {
 
       let asyncPutPhoto = async () => {
         await ApiRequest.multipartPut(`/property/${idProperty}/photos`, formData, header).then((res) => {
-          console.log(res);
           if (res.status === 200) {
             notification.success({
               message: `Datos Actualizados`,
@@ -138,10 +126,7 @@ const FormPropertyUpdate = (props) => {
   // Delete photos
   useEffect(() => {
     if (fields && fields.photos && fields.photos.file) {
-      console.log("EN EL DELETE");
       var listPhoto = fields.photos.file.fileList;
-      console.log("photosUpdate -->", photosUpdate);
-      console.log("listPhoto -->", listPhoto);
 
       var auxListPhoto = [];
       listPhoto.forEach((photo, index) => {
@@ -149,19 +134,13 @@ const FormPropertyUpdate = (props) => {
           auxListPhoto.push(photo);
         }
       });
-      console.log("auxListPhoto -->", auxListPhoto);
 
       auxListPhoto.forEach((photoAux, indexAux) => {
         photosUpdate.forEach((photo, index) => {
-          console.log("photoAux -->", photoAux.name);
-          console.log("photo -->", photo);
 
           if (photoAux.name === photo) {
             let asyncPutPhoto = async () => {
-              console.log("Photo a eliminar: ", photo)
-              console.log("EN EL DELETE");
               await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`).then((res) => {
-                console.log(res);
                 if (res.status === 200) {
                   notification.success({
                     message: "Datos Actualizados",

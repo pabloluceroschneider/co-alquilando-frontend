@@ -168,8 +168,6 @@ const UpdateForm = (props) => {
       delete bodyReq.userConfirmPassword;
       delete bodyReq.photos;
 
-      console.log("BODY", bodyReq);
-
       let asyncPutUser = new Promise(async (res, rej) => {
         let {data, status} = await ApiRequest.put(`/user/${idUser}`, bodyReq)
         await dispatch( SIGN_IN(data) )
@@ -205,7 +203,6 @@ const UpdateForm = (props) => {
 
           if (hasFile) {
             await ApiRequest.multipartPut(`/user/${idUser}/photos`, formData, header).then((res) => {
-              console.log(res);
               if (res.status === 200) {
                 notification.success({
                   message: `Datos Actualizados`,
@@ -232,12 +229,8 @@ const UpdateForm = (props) => {
 
   // Delete photos
   useEffect(() => {
-    console.log("EN EL DELETE");
-    console.log("fields", fields);
     if (fields && fields.photo && fields.photos.file && photosUpdate) {
       var listPhoto = fields.photos.file.fileList;
-      console.log("photosUpdate -->", photosUpdate);
-      console.log("listPhoto -->", listPhoto);
 
       var auxListPhoto = [];
       listPhoto.forEach((photo, index) => {
@@ -245,18 +238,13 @@ const UpdateForm = (props) => {
           auxListPhoto.push(photo);
         }
       });
-      console.log("auxListPhoto -->", auxListPhoto);
 
       auxListPhoto.forEach((photoAux, indexAux) => {
         photosUpdate.forEach((photo, index) => {
-          console.log("photoAux -->", photoAux.name);
-          console.log("photo -->", photo);
 
           if (photoAux.name === photo) {
             let asyncPutPhoto = async () => {
-              console.log("Photo a eliminar: ", photo)
               await ApiRequest.delete(`/user/${idUser}/photos/${photo}`).then((res) => {
-                console.log(res);
                 if (res.status === 200) {
                   notification.success({
                     message: "Datos Actualizados",

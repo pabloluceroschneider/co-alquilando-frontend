@@ -45,7 +45,6 @@ const Profile = (props) => {
       icon: <UsergroupAddOutlined />,
       content: `${datos.userName} recibirá tu invitación`,
       onOk() {
-        console.log("OK");
         handleConfirm();
       },
       onCancel() {
@@ -64,13 +63,11 @@ const Profile = (props) => {
             attr = { ...attr, [t.attributeType]: t.value };
           });
         }
-        console.log("attr =>", attr);
         setDatos({ ...data, attributes: attr });
         
       };
       getUser();
     }
-    console.log(datos)
   }, [nickname, datos]);
 
   return (
