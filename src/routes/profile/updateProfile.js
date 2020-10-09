@@ -171,20 +171,19 @@ const UpdateForm = (props) => {
       console.log("BODY", bodyReq);
 
       let asyncPutUser = new Promise(async (res, rej) => {
-        await ApiRequest.put(`/user/${idUser}`, bodyReq).then((res) => {
-          if (res.status === 200) {
-            notification.success({
-              message: `Datos Actualizados`,
-              placement: "bottomLeft",
-            });
-            dispatch( SIGN_IN(res.data) )
-          } else {
-            notification.error({
-              message: `Error: No se pudo actualizar sus datos`,
-              placement: "bottomLeft",
-            });
-          }
-        })
+        let {data, status} = await ApiRequest.put(`/user/${idUser}`, bodyReq)
+        await dispatch( SIGN_IN(data) )
+        if (status === 200) {
+          notification.success({
+            message: `Datos Actualizados`,
+            placement: "bottomLeft",
+          });
+        } else {
+          notification.error({
+            message: `Error: No se pudo actualizar sus datos`,
+            placement: "bottomLeft",
+          });
+        }
 
         if (fields && fields.photos && fields.photos.file) {
           var plist = fields.photos.file.fileList;
