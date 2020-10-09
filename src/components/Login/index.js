@@ -94,7 +94,7 @@ const CustomizedModal = (props) => {
 			delete user.userPassword;
 			dispatch( SIGN_IN(user) )
 			notification.success({
-				message: `¡ ${user.userName}, Bienvenido a Coalquilando!`,
+				message: `¡${user.userName}, Bienvenido a CoAlquilando!`,
 				placement: 'bottomLeft'
 			});
 			history.push("/")
@@ -124,8 +124,8 @@ const Login = () => {
     }
     
 	return (
-		<div>
-			<span onClick={() => toggleVisible()}> Iniciar sesión </span>
+		<div className="wrapper-login">
+			<span className="title" onClick={() => toggleVisible()}> Iniciar sesión </span>
 			<CustomizedModal visible={visible} toggleVisible={toggleVisible}/>
 		</div>
 	);

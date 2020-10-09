@@ -27,7 +27,7 @@ function sendSubscriptionToServer(subscription) {
 		})
 	};
 	subscription = JSON.stringify(subscription);
-	devicetoken = JSON.stringify(devicetoken);
+	JSON.stringify(devicetoken);
 
 	let formData = new FormData();
 	formData.append('subscriptionJson', subscription);

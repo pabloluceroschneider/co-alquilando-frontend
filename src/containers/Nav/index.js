@@ -72,9 +72,7 @@ const Nav = () => {
 				</>) :
 				<>
 					<li style={{ float: 'right' }}>
-						<a rel="noopener noreferrer" href="#">
-							<Login />
-						</a>
+						<Login />
 					</li>
 					<li style={{ float: 'right' }}>
 						<a href="/sign-in">
