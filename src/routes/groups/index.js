@@ -37,10 +37,9 @@ const Groups = () => {
         const getGroupInformation = async () => {
             const { data } = await ApiRequest.get(`/group/user/${state.user.id}`);
             setData(data);
-            console.log("Data asdasd ",data)
             };
         getGroupInformation();
-    }, [state.user.id])
+    }, [state.user.id, data])
 
     if (!data?.length) return (
         <ContentWrapper topNav breadscrumb={breadscrumb} >
@@ -65,7 +64,7 @@ const Groups = () => {
                         <Chat render={ group && chat && !votation } channelName={name} groupId={group} channel={chat}/> 
                         : <Votation render={ group && !chat && votation } detail={detail} />
                     ) 
-                    : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
+                    : null
                 }
             </div>
         </ContentWrapper>

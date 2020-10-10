@@ -10,7 +10,7 @@ const CustomBreadcrumb = ({paths}) => {
 			</Breadcrumb.Item>
 			{paths?.map( (c,i) => {
 				let values = Object.values(c)[0]
-				if (!values) return
+				if (!values) return null
 				return (
 					<Breadcrumb.Item key={i} href={values}>
 						{Object.keys(c)}

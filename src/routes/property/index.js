@@ -15,8 +15,6 @@ const usePostProperty = (values) => {
       values.address = { ...values.address, coordinates: values.coordinates };
       delete values.coordinates;
       let atributos = Object.entries(values.attributes);
-      console.log("values", values);
-      console.log("atributos", atributos);
       const attributesFormate = atributos.map((a) => {
         let json = {
           attributeType: a[0],
@@ -46,7 +44,6 @@ const usePostProperty = (values) => {
       });
 
       createProperty.then((property) => {
-        console.log("Property ->", property, "Body request ->", bodyReq);
 
         if (values && values.photos) {
           var plist = values.photos.file.fileList;
@@ -54,7 +51,6 @@ const usePostProperty = (values) => {
           const formData = new FormData();
           formData.append("type", "file");
           for (const ph in plist) {
-            console.log(plist[ph].originFileObj);
             let phLast = plist[ph].originFileObj;
 
             formData.append("photos", phLast);
@@ -70,7 +66,6 @@ const usePostProperty = (values) => {
               formData,
               header
             ).then((res) => {
-			  console.log(res);
 			  setResponse(res)
               if (res.status === 200) {
                 notification.success({
@@ -98,10 +93,8 @@ const Property = () => {
   const [form] = Form.useForm();
 
   let property = usePostProperty(values);
-  console.log("asdasdasda", values);
   useEffect(() => {
     if (property) {
-      console.log(property);
       notification.success({
         message: `Propiedad Publicada`,
         placement: "bottomLeft",

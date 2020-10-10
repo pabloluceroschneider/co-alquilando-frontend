@@ -40,7 +40,6 @@ const Name = ({ name, coincidence }) => {
 };
 
 const UserCard = ({ user, coincidence } ) => {
-  console.log(user)
 
   const ViewProfile = ({ title }) => {
     return (

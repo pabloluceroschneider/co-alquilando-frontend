@@ -35,7 +35,7 @@ const useVotations = (detail) => {
 
         let ongoing = null;
         let history = []
-        data.map(item => {
+        data.forEach(item => {
             if (item.result === "ongoing") {
                 ongoing = item
                 let votos = Object.entries(item.votes)

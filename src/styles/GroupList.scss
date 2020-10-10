@@ -11,9 +11,10 @@
     height: 100%;
 }
 .group-list .container{
-    width: 100%;
+    width: 90%;
     max-height: 79vh;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 .group-list .detail{
     display: grid; 

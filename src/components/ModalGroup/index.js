@@ -14,7 +14,6 @@ import { SessionContext } from "../../store";
 
 const RadioGroup = ({ radio, setRadio }) => {
     const onChange = (e) => {
-      console.log("radio checked", e.target.value);
       setRadio(e.target.value);
     };
   
@@ -33,7 +32,6 @@ const RadioGroup = ({ radio, setRadio }) => {
   };
   
   const NewGroupForm = ({ input, setInput }) => {
-    console.log("Input", input);
     return (
       <>
         <Form layout="vertical">
@@ -88,8 +86,6 @@ const RadioGroup = ({ radio, setRadio }) => {
   
     let { data } = await ApiRequest.post("/group", bodyReqNewGroup);
   
-    console.log("DATA ->", data);
-  
     let bodyReqNewInvitation = {
       groupId: data.id,
     };
@@ -100,7 +96,6 @@ const RadioGroup = ({ radio, setRadio }) => {
   };
   
   const inviteToGroup = async (user, selected) => {
-    console.log('Selected ->', selected);
     let bodyReqNewInvitation = {
       groupId: selected.id,
     };
@@ -122,7 +117,6 @@ const RadioGroup = ({ radio, setRadio }) => {
         
         if (radio === 1) {
             groupId = await createNewGroup(input, user, state.user.id);
-            console.log('groupID', groupId)
         } else {
             inviteToGroup(user, selected);
         }
@@ -152,7 +146,6 @@ const RadioGroup = ({ radio, setRadio }) => {
   
     const handleConnect = () => {
       setVisible(!visible);
-      console.log("USER ->", user);
     };
   
     useEffect(() => {

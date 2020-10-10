@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { SessionContext, SIGN_IN } from '../../store'
 import { Modal, Form, notification } from 'antd';
 import { useHistory } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import Auth from '../../util/Auth';
 import ApiRequest from '../../util/ApiRequest';
 import CustomizedForm from '../CustomizedForm';
@@ -52,6 +53,7 @@ const CustomizedModal = (props) => {
 	const [ form ] = Form.useForm();
 	const [ authErr, setAuthErr ] = useState(null);
 	const [ user, setUser ] = useState(null);
+	const { t } = useTranslation()
 
     const postSession = data => {
 		setAuthErr(null)
@@ -92,7 +94,7 @@ const CustomizedModal = (props) => {
 			delete user.userPassword;
 			dispatch( SIGN_IN(user) )
 			notification.success({
-				message: `¡ ${user.userName}, Bienvenido a Coalquilando!`,
+				message: `¡${user.userName}, Bienvenido a CoAlquilando!`,
 				placement: 'bottomLeft'
 			});
 			history.push("/")
@@ -109,7 +111,7 @@ const CustomizedModal = (props) => {
 			destroyOnClose={true}
         >
 			<CustomizedForm form={form} data={loginFields} onfinish={postSession}/>
-			{ authErr && <span id="authErr">{authErr}</span> }
+			{ authErr && <span id="authErr">{ t(authErr) }</span> }
         </Modal>
 	);
 };
@@ -122,8 +124,8 @@ const Login = () => {
     }
     
 	return (
-		<div>
-			<span onClick={() => toggleVisible()}> Iniciar sesión </span>
+		<div className="wrapper-login">
+			<span className="title" onClick={() => toggleVisible()}> Iniciar sesión </span>
 			<CustomizedModal visible={visible} toggleVisible={toggleVisible}/>
 		</div>
 	);

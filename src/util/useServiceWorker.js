@@ -27,9 +27,7 @@ function sendSubscriptionToServer(subscription) {
 		})
 	};
 	subscription = JSON.stringify(subscription);
-	devicetoken = JSON.stringify(devicetoken);
-
-	console.log(devicetoken);
+	JSON.stringify(devicetoken);
 
 	let formData = new FormData();
 	formData.append('subscriptionJson', subscription);
@@ -47,7 +45,6 @@ function subscribe() {
 	);
 
 	navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-		//console.log('50 serviceWorkerRegistration -->', serviceWorkerRegistration);
 		serviceWorkerRegistration.pushManager
 			.subscribe({
 				userVisibleOnly: true,

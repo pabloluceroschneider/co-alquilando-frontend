@@ -7,7 +7,7 @@
     width: 90%;
     height: 100%;
 
-    .false{
+    &.false{
         display: none; 
     }
 
@@ -56,6 +56,7 @@
         .chats{
             max-height: 62vh;
             overflow-y: scroll;
+            overflow-x: hidden;
         }
     }
     .admin-buttons{
@@ -72,7 +73,7 @@
 
 @media only screen and (min-width: 600px){
     .group-detail{
-        .false{
+        &.false{
             display: grid; 
         }
     }

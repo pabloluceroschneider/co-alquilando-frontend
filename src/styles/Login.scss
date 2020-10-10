@@ -1,0 +1,35 @@
+
+.wrapper-login{
+	span {
+        cursor: pointer;
+		&.title {
+            color: white;
+            font-size: 1.3em;
+            text-align: center;
+            display: block;
+            padding: 14px 15px;
+			&:hover {
+		        color: rgba(0, 0, 0, 0.336);
+			}
+		}
+    }
+}
+
+#login div:last-child{
+    text-align: center;
+}
+
+#login :last-child button{
+    margin-top: 25px;
+}
+
+#authErr{
+    display: block;
+    color: red;
+    text-align: center;
+    margin: 0px 0px 15px 0px ;
+}
+
+.loginModal .ant-modal-body{
+    padding: 24px 24px 1px 24px;
+}

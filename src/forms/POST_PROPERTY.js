@@ -120,6 +120,7 @@ const propertyFields = {
 					label: 'Geolocalizacion',
 					name: 'coordinates',
 					component: 'Map',
+					form: "post",
 					required: true
 				}
 			],

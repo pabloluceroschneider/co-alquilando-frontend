@@ -105,7 +105,7 @@ const PropertyCard = props => {
                     <div className="button-place">
                         <ModalMapa coordinates={coordinates}/>
                         {path === "/my-properties" &&
-                            <Button class="icon-map-pin-5" onClick={() => onEdit()}>
+                            <Button className="icon-map-pin-5" onClick={() => onEdit()}>
                                 <EditOutlined />
                             </Button>
                         }

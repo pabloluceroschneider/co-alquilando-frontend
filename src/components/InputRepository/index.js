@@ -17,6 +17,23 @@ const InputRepository = props => {
     })
   }
 
+  const propMap = () => {
+    if (props.element.form === "post"){
+      return {
+        post: true
+      }
+    }
+    let latitude = props.form.getFieldValue([element.name]) ? props.form.getFieldValue([element.name])["latitude"] : null
+    let length = props.form.getFieldValue([element.name]) ? props.form.getFieldValue([element.name])["length"] : null
+    return {
+      post: false,
+      coordinates: {
+        latitude,
+        length
+      }
+    }
+  }
+
   const pickInput = () => {
     switch (element.component) {
       case "Input":
@@ -46,7 +63,8 @@ const InputRepository = props => {
       case "slider":
         return <SliderForm onChange={onChange} {...props} key={element.label} />
       case "Map":
-        console.log("MAP Form", props.form.getFieldValue([element.name]))
+        let propsMap = propMap()
+        if ( !propsMap.post && !propsMap.coordinates.latitude & !propsMap.coordinates.length) return <div>Cargando Mapa....</div>
         return <div id="formMap" style={{ height: `300px`, width: `100%` }}>
           <ClickeableMap
             googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDzoLTHAJKj5xymA3iBqJxxQl-MYG9R_ag"
@@ -55,8 +73,7 @@ const InputRepository = props => {
             mapElement={<div style={{ height: `100%` }} />}
             zoomLevel={10}
             onChange={onChange}
-            latitude={props.form.getFieldValue([element.name]) ? props.form.getFieldValue([element.name])["latitude"] : null}
-            length={props.form.getFieldValue([element.name]) ? props.form.getFieldValue([element.name])["length"] : null}
+            {...propsMap.coordinates}
           />
         </div>
       default:
@@ -73,10 +90,10 @@ const InputRepository = props => {
       return <span className="span" key={element.label}>{element.label}</span>;
     case "multiple-line":
       return (
-        <div className='multiple-line'>
+        <div key={element.label} className='multiple-line'>
           {
-            element.content.map(label => {
-              return <p className="span" key={label}>{label}</p>;
+            element.content.map( (label,i) => {
+              return <p className="span" key={i}>{label}</p>;
             })
           }
         </div>

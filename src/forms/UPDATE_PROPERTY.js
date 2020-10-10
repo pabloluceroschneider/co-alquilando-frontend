@@ -1,4 +1,3 @@
-import provinces from "../util/provinces.js";
 
 const propertyFields = {
 	name: "property",
@@ -122,6 +121,7 @@ const propertyFields = {
 					label: "Geolocalizacion",
 					name: "coordinates",
 					component: "Map",
+					form: "update",
 					required: true,
 				},
 			],

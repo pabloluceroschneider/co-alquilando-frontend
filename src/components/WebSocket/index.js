@@ -13,16 +13,12 @@ class WebSocket extends React.Component {
   }
 
   onMessageReceive = (msg, topic) => {
-    console.log("Recibiendo mensaje")
-
-    console.log(this.state.messages)
     this.setState(prevState => ({
       messages: [...prevState.messages, msg]
     }));
   }
 
   sendMessage = (msg, selfMsg) => {
-    console.log("Enviando mensaje", selfMsg)
     try {
       selfMsg = { ...selfMsg, groupId: this.props.groupId, channel: this.props.channel } /**Debemos enviar el groupId al back */
       this.clientRef.sendMessage("/app/all-interno", JSON.stringify(selfMsg));  /**Este topico donde se publica se debe customizar -> groupId-intern  // groupId-owner  */

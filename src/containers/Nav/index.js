@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { SessionContext, SIGN_OUT } from '../../store'
 import { Menu, Avatar, Badge, Dropdown } from 'antd';
 import { LogoutOutlined, BellOutlined, TeamOutlined } from '@ant-design/icons';
@@ -72,9 +72,7 @@ const Nav = () => {
 				</>) :
 				<>
 					<li style={{ float: 'right' }}>
-						<span className="no-link">
-							<Login />
-						</span>
+						<Login />
 					</li>
 					<li style={{ float: 'right' }}>
 						<a href="/sign-in">
