@@ -88,16 +88,16 @@ const AdminMenu = ({channels}) => {
           visible={showModal}
           onOk={() => sendDecision()}
           onCancel={toggleShowModal}
-          title={ acceptGroup ? `Confirmar Grupo` : `Rechazar Grupo`}
+          title={ acceptGroup ? `Confirmar reserva` : `Rechazar reserva`}
           okText={ acceptGroup ? `Confirmar` : `Rechazar`}
           cancelText="Cancelar"
           destroyOnClose
           >
             {acceptGroup? (
               <div>
-                <p>Estas confirmando al grupo como inquilinos de tu Propiedad.</p>
+                <p>Estás confirmando a este grupo potenciales inquilinos de tu Propiedad.</p>
                 <p>Al hacerlo, tu Propiedad pasará automaticamente al estado "Reservada".</p>
-                <p>Cuando confirmes alquiler por Contrato, no olvides actualizar su estado a "Alquilada"</p>
+                <p>Cuando conformes el alquiler por Contrato, no olvides actualizar su estado a "Alquilada".</p>
               </div> )
             :(
               <div>
