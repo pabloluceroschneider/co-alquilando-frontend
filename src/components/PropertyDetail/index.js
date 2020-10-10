@@ -40,10 +40,12 @@ const Header = ({status, typology}) => {
         }
     }
 
+    console.log("status", status);
     return (
         <div className="section header"> 
             <Tag>{ t(typology) }</Tag>
             <Tag color={statusColor[status]}>{ t(status) }</Tag>
+            { status === "available" ? 
             <ModalAsyncList 
                 label={<Tag icon={<SendOutlined />} color="#5e83ba">Iniciar Votación</Tag>} 
                 title={<div><TeamOutlined />Seleccione Grupo</div>}
@@ -51,6 +53,7 @@ const Header = ({status, typology}) => {
                 itemTitle="name"
                 handleOk={handleOk}
                 />
+             : null}
         </div>
     )
 }
