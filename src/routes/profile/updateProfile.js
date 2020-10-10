@@ -58,7 +58,7 @@ const userData = {
           label: "Fecha de Nacimiento",
           name: "userBirthDate",
           component: "DatePicker",
-          required:true,
+          required: true,
         },
         {
           label: "Número de Celular",
@@ -107,13 +107,21 @@ const userData = {
           search: 'occupation'
         },
         {
+          label: "Tengo Mascotas",
+          name: ["attributes", "pets"],
+          component: "Select",
+          options: [
+            { name: "Si", value: "true" },
+            { name: "No", value: "False" },
+          ],
+        },
+      ],
+      [
+        {
           label: "Descripción Personal",
           name: "userDescription",
           component: "Input.TextArea",
         },
-
-      ],
-      [
         {
           label: "Cargar Imagen",
           name: "photos",
@@ -169,8 +177,8 @@ const UpdateForm = (props) => {
       delete bodyReq.photos;
 
       let asyncPutUser = new Promise(async (res, rej) => {
-        let {data, status} = await ApiRequest.put(`/user/${idUser}`, bodyReq)
-        await dispatch( SIGN_IN(data) )
+        let { data, status } = await ApiRequest.put(`/user/${idUser}`, bodyReq)
+        await dispatch(SIGN_IN(data))
         if (status === 200) {
           notification.success({
             message: `Datos Actualizados`,
