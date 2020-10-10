@@ -82,10 +82,10 @@ const PriceSection = ({ services, taxes, expenses, rentPrice }) => {
         <div className="section box price">
             <span>Precios</span>
             <div className="table price">
+                <div>Alquiler</div>
+                <div>Expensas</div>
                 <div>Servicios</div>
                 <div>Impuestos</div>
-                <div>Expensas</div>
-                <div>Alquiler</div>
                 <div>${validPrice(rentPrice)}</div>
                 <div>${validPrice(expenses)}</div>
                 <div>${validPrice(services)}</div>
