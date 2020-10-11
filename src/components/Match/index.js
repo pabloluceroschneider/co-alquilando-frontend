@@ -1,9 +1,9 @@
 import React from "react";
 import {
   Card,
-  Avatar,
   Tag,
 } from "antd";
+import Avatar from '../Avatar'
 import ModalGroup from "../ModalGroup";
 
 const { Meta } = Card;
@@ -59,15 +59,7 @@ const UserCard = ({ user, coincidence } ) => {
       ]}
     >
       <Meta
-        avatar={
-          <Avatar
-            src={user?.photo?.photoId}
-            style={{ backgroundColor: "#AED6F1", color: "#154360" }}
-          >
-            {" "}
-            {user?.userName[0].toUpperCase()}{" "}
-          </Avatar>
-        }
+        avatar={ <Avatar user={user} letter={user?.userName[0].toUpperCase()} url={ user?.photos ? `http://localhost:8080/user/${user?.id}/photos/${user?.photos[0]}` : null} />}
         title={
           <Name name={user?.userName + " " + user?.userSurname} coincidence={coincidence} />
         }
