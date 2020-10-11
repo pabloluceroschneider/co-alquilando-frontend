@@ -53,7 +53,7 @@ const Nav = () => {
 				<>
 					<li style={{ float: 'right' }}>
 						<Dropdown overlay={profileSignedIn} placement="bottomRight" trigger="click">
-							<a className="menu" rel="noopener noreferrer" className="ant-dropdown-link" href="/">
+							<a className="ant-dropdown-link" href="/">
 								<span className="userName">{state?.user.userName}</span>
 								<Avatar size={30} src={image} />
 							</a>

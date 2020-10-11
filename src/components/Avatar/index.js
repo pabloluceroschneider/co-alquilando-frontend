@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar } from 'antd'
 
-const CustomAvatar = ({letter, url, user}) => {
+const CustomAvatar = ({letter, url }) => {
     return (
         <div>
              <Avatar
