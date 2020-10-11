@@ -41,7 +41,6 @@ const usePostUser = (bodyReq) => {
 			}).catch( e => {
 				notification.error({
 					message: 'Error al crear usuario ',
-					description: `Cognito: ${e.message}`,
 					placement: 'bottomLeft'
 				});
 			})
