@@ -19,10 +19,9 @@
 
 /* header */
 .propertyDetail .section.header{
-    display: grid;
-    grid-template-columns: auto auto auto;
-    align-items: center;
-    justify-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
 }
 
 /* carrousel */

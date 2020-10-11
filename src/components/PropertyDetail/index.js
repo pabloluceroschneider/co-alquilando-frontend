@@ -44,6 +44,7 @@ const Header = ({status, typology}) => {
         <div className="section header"> 
             <Tag>{ t(typology) }</Tag>
             <Tag color={statusColor[status]}>{ t(status) }</Tag>
+            { status === "available" ? 
             <ModalAsyncList 
                 label={<Tag icon={<SendOutlined />} color="#5e83ba">Iniciar Votación</Tag>} 
                 title={<div><TeamOutlined />Seleccione Grupo</div>}
@@ -51,6 +52,7 @@ const Header = ({status, typology}) => {
                 itemTitle="name"
                 handleOk={handleOk}
                 />
+             : null }
         </div>
     )
 }
@@ -82,10 +84,10 @@ const PriceSection = ({ services, taxes, expenses, rentPrice }) => {
         <div className="section box price">
             <span>Precios</span>
             <div className="table price">
+                <div>Alquiler</div>
+                <div>Expensas</div>
                 <div>Servicios</div>
                 <div>Impuestos</div>
-                <div>Expensas</div>
-                <div>Alquiler</div>
                 <div>${validPrice(rentPrice)}</div>
                 <div>${validPrice(expenses)}</div>
                 <div>${validPrice(services)}</div>

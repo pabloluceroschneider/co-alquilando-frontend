@@ -64,7 +64,6 @@ const Profile = (props) => {
           });
         }
         setDatos({ ...data, attributes: attr });
-        
       };
       getUser();
     }
@@ -78,7 +77,7 @@ const Profile = (props) => {
             <div className="imageContent">
               <img
                 alt="imagen de perfil"
-                src={datos?.photo ? `http://localhost:8080/user/${datos.id}/photos/${datos.photo[0]}`
+                src={datos?.photos ? `http://localhost:8080/user/${datos.id}/photos/${datos.photos[0]}`
                 : image}
                 className="profileImage"
               />
