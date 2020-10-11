@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Avatar, Button, notification, Modal } from "antd";
 import { useHistory } from "react-router-dom";
-import { StarFilled } from "@ant-design/icons";
-import ApiRequest from "../../util/ApiRequest";
 import { SessionContext } from "../../store";
+import ApiRequest from "../../util/ApiRequest";
+import { Button, notification, Modal } from "antd";
+import { StarFilled } from "@ant-design/icons";
+import Avatar from '../Avatar'
+
 
 const Item = ({ name, channel }) => {
   let history = useHistory();
@@ -12,20 +14,14 @@ const Item = ({ name, channel }) => {
     history.push(`/groups/${name}/chat/${channel.channelId}/${channel.name}`);
   };
 
-  function date() {
-    var d = new Date();
-    var h = d.getHours();
-    var m = d.getMinutes();
-    return h + ":" + m;
-  }
   return (
     <div className="item clickeable seleccionable" onClick={handleClick}>
-      <Avatar />
+      <Avatar letter={channel.name[0]} />
       <div className="name-msg">
         <div className="name">{channel.name}</div>
         <div className="msg">{}</div>
       </div>
-      <div className="time">{date()}</div>
+      <div className="time">{}</div>
     </div>
   );
 };
