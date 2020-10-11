@@ -62,7 +62,9 @@ const Groups = () => {
                     group ? (
                         chat ? 
                         <Chat render={ group && chat && !votation } channelName={name} groupId={group} channel={chat}/> 
-                        : <Votation render={ group && !chat && votation } detail={detail} />
+                        : votation ? 
+                            <Votation render={ group && !chat && votation } detail={detail} />
+                            : null
                     ) 
                     : null
                 }

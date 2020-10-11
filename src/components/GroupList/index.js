@@ -10,7 +10,7 @@ const Group = ({name, link}) => {
         history.push(`/groups/${link}`);
     }
     return (
-        <div className={`detail clickeable ${group===link}`} onClick={handleClick} >
+        <div className={`detail clickeable selected-${group===link}`} onClick={handleClick} >
             <div className="header">
                 <div className="name">{name}</div>
                 <ArrowRightOutlined className={`${group===link}`} />
@@ -25,7 +25,7 @@ const GroupList = ({ groups, render}) => {
         <div className={`group-list ${!!render}`}>
             <div className="container">
                 {groups?.map( (grupo) => {
-                       return <Group name={grupo.name} key={grupo.id} link={grupo.id}/>
+                        return <Group name={grupo.name} key={grupo.id} link={grupo.id}/>
                 })}
             </div>
         </div>
