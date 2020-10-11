@@ -40,7 +40,6 @@ const Header = ({status, typology}) => {
         }
     }
 
-    console.log("status", status);
     return (
         <div className="section header"> 
             <Tag>{ t(typology) }</Tag>
@@ -53,7 +52,7 @@ const Header = ({status, typology}) => {
                 itemTitle="name"
                 handleOk={handleOk}
                 />
-             : null}
+             : null }
         </div>
     )
 }
