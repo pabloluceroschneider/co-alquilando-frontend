@@ -20,11 +20,11 @@ const RadioGroup = ({ radio, setRadio }) => {
     return (
       <>
         <Radio.Group className="radioGroup" value={radio}>
-          <Radio onChange={onChange} value={1}>
-            Nuevo Grupo
+        <Radio onChange={onChange} value={1}>
+            Grupo Existente
           </Radio>
           <Radio onChange={onChange} value={2}>
-            Grupo Existente
+            Nuevo Grupo
           </Radio>
         </Radio.Group>
       </>
@@ -61,7 +61,7 @@ const RadioGroup = ({ radio, setRadio }) => {
     };
     return (
       <>
-        {groups
+        {groups && groups.length
           ? groups.map((item, index) => {
               return (
                 <div
@@ -73,7 +73,7 @@ const RadioGroup = ({ radio, setRadio }) => {
                 </div>
               );
             })
-          : "No tiene ningún grupo"}
+          : <div>No tiene ningún grupo</div>}
       </>
     );
   };
@@ -115,7 +115,7 @@ const RadioGroup = ({ radio, setRadio }) => {
   
     const handleConfirm = async (radio, input, user, state, selected) => {
         
-        if (radio === 1) {
+        if (radio === 2) {
             groupId = await createNewGroup(input, user, state.user.id);
         } else {
             inviteToGroup(user, selected);
@@ -124,7 +124,7 @@ const RadioGroup = ({ radio, setRadio }) => {
         let notificationAttributes = [
           {
             attributeType: 'groupId',
-            value: radio === 1 ? groupId : selected.id
+            value: radio === 2 ? groupId : selected.id
           }
         ]
 
@@ -177,7 +177,7 @@ const RadioGroup = ({ radio, setRadio }) => {
           <h3>Seleccione un grupo existe o cree un nuevo grupo</h3>
           <RadioGroup  radio={radio} setRadio={setRadio}></RadioGroup>
   
-          {radio === 1 ? (
+          {radio === 2 ? (
             <NewGroupForm input={input} setInput={setInput} />
           ) : (
             <UserGrops groups={groups} itemTitle={itemTitle} selected={selected} setSelected={setSelected}/>

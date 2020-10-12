@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { Form, notification } from "antd";
 import ApiRequest from "../../util/ApiRequest";
@@ -7,6 +7,8 @@ import CustomizedForm from "../../components/CustomizedForm";
 import Property from "../../classes/Property";
 import useUpdateProperty from '../../hooks/useUpdateProperty';
 import propertyFields from "../../forms/UPDATE_PROPERTY";
+import { SessionContext } from '../../store';
+
 
 const UpdateProperty = () => {
     const [form] = Form.useForm();
@@ -16,20 +18,25 @@ const UpdateProperty = () => {
     const [resultPutBasic, errorBasic] = useUpdateProperty(fields, hiddenFields);
     const { idProperty } = useParams();
     const history = useHistory();
+    const { state } = useContext(SessionContext);
     form.setFieldsValue(data)
 
     useEffect(() => {
         let getProperty = async () => {
             let { data } = await ApiRequest.get(`/property/${idProperty}`)
             let property = new Property(data).mapResponseToFormJson();
-            setData(property)
-            setHiddenFields({
-                ownerId: property.ownerId,
-                photos: property.photos,
-            })
+            if (property.ownerId !== state.user.id){
+                history.push(`/property/${idProperty}`)
+            } else {
+                setData(property)
+                setHiddenFields({
+                    ownerId: property.ownerId,
+                    photos: property.photos,
+                })
+            }
         }
         getProperty();
-    }, [idProperty])
+    }, [idProperty, state.user.id, history])
 
     useEffect(()=>{
         console.log("already update::", resultPutBasic, errorBasic)
@@ -53,7 +60,7 @@ const UpdateProperty = () => {
 
     return (
         <ContentWrapper topNav title="Actualizar Propiedad">
-            <CustomizedForm form={form} data={propertyFields} onfinish={setFields} />
+            {data && <CustomizedForm form={form} data={propertyFields} onfinish={setFields} />}
         </ContentWrapper>
     )
 }
