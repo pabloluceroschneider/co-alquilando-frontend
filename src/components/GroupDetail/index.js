@@ -83,8 +83,8 @@ const AdminMenu = ({channels}) => {
 
   return (
     <div className="admin-buttons">
-        <Button onClick={() => openModal(true)} type="primary">Aceptar Grupo</Button>
         <Button onClick={() => openModal(false)} danger>Rechazar Grupo</Button>
+        <Button onClick={() => openModal(true)} type="primary">Aceptar Grupo</Button>
         <Modal 
           visible={showModal}
           onOk={() => sendDecision()}
