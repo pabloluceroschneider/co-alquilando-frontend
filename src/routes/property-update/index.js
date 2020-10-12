@@ -39,7 +39,6 @@ const UpdateProperty = () => {
     }, [idProperty, state.user.id, history])
 
     useEffect(()=>{
-        console.log("already update::", resultPutBasic, errorBasic)
         if (errorBasic) {
             notification.error({
                 message: `Error: No se pudo actualizar sus datos`,
