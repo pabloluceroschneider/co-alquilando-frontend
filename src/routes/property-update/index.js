@@ -45,7 +45,9 @@ const UpdateProperty = () => {
                 message: `Datos Actualizados`,
                 placement: "bottomLeft",
             });
-            history.push(`property/${idProperty}`)
+            setTimeout( () => {
+                history.push(`/property/${idProperty}`)
+            }, 2000)
         }
     },[resultPutBasic, errorBasic])
 
