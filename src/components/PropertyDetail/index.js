@@ -34,7 +34,7 @@ const Header = ({status, typology}) => {
             });
         }catch(e){
             notification.error({
-                message: `Error: ${e.message}`,
+                message: `Esta propiedad ya ha sido propuesta en este grupo`,
                 placement: 'bottomLeft'
             });
         }

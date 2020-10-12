@@ -20,7 +20,7 @@ const Property = () => {
                     setDatos(data)
                 } catch (e) {
                     notification.error({
-                        message: `Error: ${e.message}`,
+                        message: `Error al obtener propiedades`,
                         placement: 'bottomLeft'
                     });
                 }

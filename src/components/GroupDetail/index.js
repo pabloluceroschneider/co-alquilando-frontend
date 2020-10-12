@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
 import { Avatar, Button, notification, Modal } from "antd";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { StarFilled } from "@ant-design/icons";
 import ApiRequest from "../../util/ApiRequest";
 import { SessionContext } from "../../store";
 
 const Item = ({ name, channel }) => {
+  let { chat } = useParams()
   let history = useHistory();
 
   const handleClick = () => {
@@ -19,7 +20,7 @@ const Item = ({ name, channel }) => {
     return h + ":" + m;
   }
   return (
-    <div className="item clickeable seleccionable" onClick={handleClick}>
+    <div className={`item clickeable selected-${chat===channel.channelId}`} onClick={handleClick}>
       <Avatar />
       <div className="name-msg">
         <div className="name">{channel.name}</div>
