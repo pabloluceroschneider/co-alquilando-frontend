@@ -30,10 +30,11 @@ const Name = ({ name, coincidence }) => {
     <div className="name">
       <p>{name}</p>
       {
-        coincidence && 
-        <Tag color={handleTagCoincidence(coincidence)}>
-          {parseFloat(coincidence).toFixed(2)} %
-        </Tag>
+        Object.is(coincidence, null) || Object.is(coincidence, undefined) ?
+        null
+        : (<Tag color={handleTagCoincidence(coincidence)}>
+            {parseFloat(coincidence).toFixed(2)} %
+          </Tag>)
       }
     </div>
   );
