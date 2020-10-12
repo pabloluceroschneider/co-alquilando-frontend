@@ -49,7 +49,7 @@ const UpdateProperty = () => {
                 history.push(`/property/${idProperty}`)
             }, 2000)
         }
-    },[resultPutBasic, errorBasic])
+    },[resultPutBasic, errorBasic, history, idProperty])
 
     return (
         <ContentWrapper topNav title="Actualizar Propiedad">
