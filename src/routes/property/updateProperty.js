@@ -15,7 +15,6 @@ const FormPropertyUpdate = (props) => {
   const [ownerId, setOwnerId] = useState(null);
   const [status, setStatus] = useState(null);
   const [photosUpdate, setPhotosUpdate] = useState(null);
-  const [payingLink, setPayingLink] = useState(null);
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/property/${idProperty}`).then((res) => {
@@ -23,7 +22,6 @@ const FormPropertyUpdate = (props) => {
         setOwnerId(res.data.ownerId);
         setStatus(res.data.status);
         setPhotosUpdate(res.data.photos);
-        setPayingLink(res.data.payingLink);
         let array = [];
         if (res.data.attributes) {
           res.data.attributes.forEach((t) => {
@@ -161,11 +159,20 @@ const FormPropertyUpdate = (props) => {
     }
   }, [idProperty, history, fields, photosUpdate]);
 
+  onDelete = () => {
+    useEffect(() => {
+      let asyncDeleteProp = async () => {
+        await ApiRequest.delete(`/property/${idProperty}`).then((res) => {
+
+        });
+      };
+      asyncDeleteProp();
+    }, [idProperty, history, fields])};
 
   return (
     <div>
       <ContentWrapper topNav title="Actualizar Propiedad">
-        <CustomizedForm form={form} data={propertyFields} onfinish={setFields} />
+        <CustomizedForm form={form} data={propertyFields} onfinish={setFields} onDelete={this.onDelete()} />
       </ContentWrapper>
     </div>
   );

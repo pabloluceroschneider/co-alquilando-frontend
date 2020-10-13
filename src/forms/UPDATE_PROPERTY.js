@@ -3,6 +3,9 @@ const propertyFields = {
 	name: "property",
 	layout: "vertical",
 	btnSubmit: "Actualizar Propiedad",
+	btnDelete: "Eliminar propiedad",
+	titleDelete: "Eliminar propiedad",
+	deleteContentModal: "¿Desea eliminar esta propiedad?",
 	fields: {
 		primaries: [
 			[
