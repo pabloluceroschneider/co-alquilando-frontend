@@ -32,9 +32,12 @@
         width: 100%;
         border-bottom: 1px solid var(--dark-grey);
         padding: 2%;
-        &:hover{
+        &.selected-true{
             color: var(--secondary-blue);
-            background-color: #f6faff;
+            background-color: #f6faff !important;
+        }
+        &:hover{
+            background-color: var(--grey);
         }
         .name-msg{
             display: grid;
@@ -43,6 +46,7 @@
             justify-items: left;
             .name{
                 font-size: 1.1em ;
+                text-align: left;
             }
             .msg{
                 font-size: 0.9em ;

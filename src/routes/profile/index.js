@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ApiRequest from "../../util/ApiRequest";
 import calculateAge from "../../util/CalculateAge";
 import ContentWrapper from "../../components/ContentWrapper";
-import { Button, Modal, notification } from "antd";
-import { UsergroupAddOutlined } from "@ant-design/icons";
-import Notification from "../../classes/Notification";
-import { SessionContext } from "../../store";
+import { Button } from "antd";
+import ModalGroup from "../../components/ModalGroup";
+
 
 const image =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
@@ -20,38 +19,6 @@ let genders = {
 const Profile = (props) => {
   let { nickname } = useParams();
   const [datos, setDatos] = useState(null);
-  const { state } = useContext(SessionContext);
-
-  const { confirm } = Modal;
-
-  const handleConfirm = async () => {
-    let bodyReq = new Notification(
-      state.user.id,
-      datos.id,
-      "group_send_invitation"
-    );
-    await ApiRequest.post("/notifications/send", bodyReq);
-    notification.success({
-      message: `¡Tu solicitud fue enviada con éxito!`,
-      placement: "bottomLeft",
-    });
-  };
-
-  const handleConnect = () => {
-    confirm({
-      title: "¿Quieres enviar la solicitud de grupo?",
-      okText: "Confirmar",
-      className: "notificationModal",
-      icon: <UsergroupAddOutlined />,
-      content: `${datos.userName} recibirá tu invitación`,
-      onOk() {
-        handleConfirm();
-      },
-      onCancel() {
-        console.log("Cancel");
-      },
-    });
-  };
 
   useEffect(() => {
     if (!datos) {
@@ -64,7 +31,6 @@ const Profile = (props) => {
           });
         }
         setDatos({ ...data, attributes: attr });
-        
       };
       getUser();
     }
@@ -78,7 +44,7 @@ const Profile = (props) => {
             <div className="imageContent">
               <img
                 alt="imagen de perfil"
-                src={datos?.photo ? `http://localhost:8080/user/${datos.id}/photos/${datos.photo[0]}`
+                src={datos?.photos ? `http://localhost:8080/user/${datos.id}/photos/${datos.photos[0]}`
                 : image}
                 className="profileImage"
               />
@@ -111,7 +77,7 @@ const Profile = (props) => {
             </div>
           </div>
           <div className="profileButton">
-            <Button onClick={() => handleConnect()}>Conectar</Button>
+            <Button><ModalGroup user={datos} itemTitle="name" /></Button>
           </div>
         </div>
       ) : null}

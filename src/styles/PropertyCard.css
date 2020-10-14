@@ -7,71 +7,78 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
+    height: 100%;
     }
 
-    .cabeceraPC{
-        text-align: center;
-    }
+.cabeceraPC{
+    text-align: center;
+}
 
-   .itemsPC{
-        display: flex;
-        flex-direction: column;
-        align-self: center;
-    }
+.itemsPC{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
 
-    .typologyPC{
-        position:center;
-        font-weight: bold
-    }
+.typologyPC{
+    position:center;
+    font-weight: bold
+}
 
-    .filaPC {
-        flex-direction: row;
-        display: flex;
-        flex-wrap: wrap;
-    }
+.filaPC {
+    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+}
 
-    .imgPC {
-        width: 10px;
-        height: 10px;
-        margin-right: 17px;
-    }
-   
-    .pricePC {
-        padding:0 0 0 0;
-        color: rgb(9, 93, 9);
-        margin: 0 0 0 0;
-        font-size: 15px;
-        font-weight: bold;
-    }
-    .icon{
-        padding-right: 1%;
+.imgPC {
+    width: 10px;
+    height: 10px;
+    margin-right: 17px;
+}
 
-    }
+.pricePC {
+    padding:0 0 0 0;
+    color: rgb(9, 93, 9);
+    margin: 0 0 0 0;
+    font-size: 15px;
+    font-weight: bold;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.icon{
+    padding-right: 1%;
 
-    .titlePC{
-        padding:0 0 0 0;
-        color:var(--principal-blue );
-        margin: 0 0 0 0;
-        font-size: 15px;
-        font-weight: bold;
-    }
+}
 
-    .tagPC{
-        margin: 5px 15px!important;
-    }
+.titlePC{
+    padding:0 0 0 0;
+    color:var(--principal-blue );
+    margin: 0 0 0 0;
+    font-size: 15px;
+    font-weight: bold;
+    display: block;
+    min-height: 50px;
+    max-height: 50px;
+}
 
-    .dividerPC{
-        margin: 14px 0!important;
-    }
+.dividerPC{
+    margin: 14px 0!important;
+}
 
-    .button-place{
-        display: grid;
-        grid-template-columns: auto auto auto;
-        place-content: center;
-    }
-    .button-place button{
-        margin-left: 8px;
-    }
+.button-place{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    place-content: center;
+}
+.button-place button{
+    margin-left: 8px;
+}
+
+.contentPC .ant-card-body{
+    height: 175px;
+}
+
 
 /* Desktop */
 @media only screen and (min-width: 600px){
@@ -81,6 +88,7 @@
     margin: 1% !important;
     flex-direction: row;
     text-align: center;
+    height: 100%;
     }
 
     .cabeceraPC{
@@ -102,7 +110,6 @@
         flex-direction: row;
         display: flex;
         flex-wrap: wrap;
-        /* margin: 0 60px; */
     }
 
     .imgPC {

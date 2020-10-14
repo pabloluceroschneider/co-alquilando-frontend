@@ -257,8 +257,8 @@ const propertyFields = {
 					component: 'Select',
 					options: [
 						{ name: 'Disponible', value: 'available' },
-						{ name: 'Pre-Rentado', value: 'pre_rented' },
-						{ name: 'Alquilado', value: 'rented' },
+						{ name: 'Reservada', value: 'pre_rented' },
+						{ name: 'Alquilada', value: 'rented' },
 						{ name: 'No disponible', value: 'disabled' },
 					],
 				},
@@ -286,9 +286,9 @@ const propertyFields = {
 				},
 				{
 					content: [
-						'1. Accedé a Mercado Pago desde tu cuenta personal. ',
-						'2. Generá un link de pago por el monto del Pre-Alquiler que deban abonar los inquilinos para reservar esta propiedad.',
-						'3. Recibí el dinero en tu cuenta.'],
+						'1. Accedé a Mercado Pago desde tu cuenta personal.',
+						'2. Generá un link de pago por el monto que deban abonar los inquilinos para reservar esta propiedad.',
+						'3. Recibí el dinero en tu cuenta de Mercado Pago.'],
 					name: ['info'],
 					component: 'multiple-line'
 				},

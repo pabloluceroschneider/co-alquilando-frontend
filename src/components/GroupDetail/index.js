@@ -1,31 +1,28 @@
 import React, { useState, useContext } from "react";
-import { Avatar, Button, notification, Modal } from "antd";
-import { useHistory } from "react-router-dom";
-import { StarFilled } from "@ant-design/icons";
-import ApiRequest from "../../util/ApiRequest";
 import { SessionContext } from "../../store";
+import { useHistory, useParams } from "react-router-dom";
+import ApiRequest from "../../util/ApiRequest";
+import { Button, notification, Modal } from "antd";
+import { StarFilled } from "@ant-design/icons";
+import Avatar from '../Avatar';
+
 
 const Item = ({ name, channel }) => {
+  let { chat } = useParams()
   let history = useHistory();
 
   const handleClick = () => {
     history.push(`/groups/${name}/chat/${channel.channelId}/${channel.name}`);
   };
 
-  function date() {
-    var d = new Date();
-    var h = d.getHours();
-    var m = d.getMinutes();
-    return h + ":" + m;
-  }
   return (
-    <div className="item clickeable seleccionable" onClick={handleClick}>
-      <Avatar />
+    <div className={`item clickeable selected-${chat===channel.channelId}`} onClick={handleClick}>
+      <Avatar letter={channel.name[0]} />
       <div className="name-msg">
         <div className="name">{channel.name}</div>
         <div className="msg">{}</div>
       </div>
-      <div className="time">{date()}</div>
+      <div className="time">{}</div>
     </div>
   );
 };
@@ -82,22 +79,22 @@ const AdminMenu = ({channels}) => {
 
   return (
     <div className="admin-buttons">
-        <Button onClick={() => openModal(true)} type="primary">Aceptar Grupo</Button>
         <Button onClick={() => openModal(false)} danger>Rechazar Grupo</Button>
+        <Button onClick={() => openModal(true)} type="primary">Aceptar Grupo</Button>
         <Modal 
           visible={showModal}
           onOk={() => sendDecision()}
           onCancel={toggleShowModal}
-          title={ acceptGroup ? `Confirmar Grupo` : `Rechazar Grupo`}
+          title={ acceptGroup ? `Confirmar reserva` : `Rechazar reserva`}
           okText={ acceptGroup ? `Confirmar` : `Rechazar`}
           cancelText="Cancelar"
           destroyOnClose
           >
             {acceptGroup? (
               <div>
-                <p>Estas confirmando al grupo como inquilinos de tu Propiedad.</p>
+                <p>Estás confirmando a este grupo potenciales inquilinos de tu Propiedad.</p>
                 <p>Al hacerlo, tu Propiedad pasará automaticamente al estado "Reservada".</p>
-                <p>Cuando confirmes alquiler por Contrato, no olvides actualizar su estado a "Alquilada"</p>
+                <p>Cuando conformes el alquiler por Contrato, no olvides actualizar su estado a "Alquilada".</p>
               </div> )
             :(
               <div>

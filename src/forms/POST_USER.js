@@ -140,11 +140,6 @@ const userFields = {
 					label: "Descripción Personal",
 					name: "userDescription",
 					component: "Input.TextArea",
-				},
-				{
-					label: "Cargar Imagen",
-					name: "userPhoto",
-					component: "Upload",
 				}
 			]
 
