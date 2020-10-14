@@ -111,7 +111,7 @@ const CustomizedForm = (props) => {
 							{btnSubmit}
 						</Button>
 						<Modal visible={showModal}
-							onOk={onDelete}
+							onOk={() => onDelete()}
 							onCancel={toggleShowModal}
 							title={titleDelete}
 							okText="Aceptar"

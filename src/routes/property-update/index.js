@@ -31,6 +31,9 @@ const usePutProperty = (fields, hiddenFields) => {
         asyncPut();
     }, [fields, idProperty, hiddenFields]);
 
+    console.log("FIELDS --> ", fields);
+    console.log("HIDDENFIELDS --> ", hiddenFields);
+    
     // DELETE MULTIPART
     useEffect(() => {
         if (!fields?.photos) return;
@@ -50,19 +53,19 @@ const usePutProperty = (fields, hiddenFields) => {
 
         hiddenFields.photos.forEach((photo) => {
             let res = auxListPhoto.find(photoAux => photoAux.name === photo)
-                if (!res) {
-                    let asyncPutPhoto = async () => {
-                        try {
-                            await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`)
-                            setResultPut(resultPut => { return { ...resultPut, deleteMultipart: true } });
-                        } catch (err) {
-                            setError({ from: "Eliminar Fotos", message: err });
-                        }
+            if (!res) {
+                let asyncPutPhoto = async () => {
+                    try {
+                        await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`)
+                        setResultPut(resultPut => { return { ...resultPut, deleteMultipart: true } });
+                    } catch (err) {
+                        setError({ from: "Eliminar Fotos", message: err });
                     }
-                    asyncPutPhoto();
                 }
-            })
-        }, [fields, hiddenFields, idProperty])
+                asyncPutPhoto();
+            }
+        })
+    }, [fields, hiddenFields, idProperty])
 
     // PUT MULTIPART
     useEffect(() => {
@@ -146,11 +149,17 @@ const UpdateProperty = () => {
         }
     }, [resultPut, error, history, idProperty])
 
+    const onDelete = async () => {
+                await ApiRequest.delete(`/property/${idProperty}`)
+    };
+
     return (
-        <ContentWrapper topNav title="Actualizar Propiedad">
-            <CustomizedForm form={form} data={propertyFields} onfinish={setFields} />
-        </ContentWrapper>
-    )
-}
+        <div>
+            <ContentWrapper topNav title="Actualizar Propiedad">
+                <CustomizedForm form={form} data={propertyFields} onfinish={setFields} onDelete={onDelete} />
+            </ContentWrapper>
+        </div>
+    );
+};
 
 export default UpdateProperty
