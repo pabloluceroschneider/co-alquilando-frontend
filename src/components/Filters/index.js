@@ -1,67 +1,97 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Button, Tag } from 'antd';
+import { Button, Tooltip, Form, InputNumber, Checkbox } from 'antd';
 import { FilterOutlined, CloseOutlined, DownOutlined } from "@ant-design/icons";
-import { getParams } from '../../util/getParams';
+import SelectDB from '../InputRepository/SelectDB'
 
-const FilterPanel = ({filters, onClose}) => {
-    const { t } = useTranslation();
-    const [ params ] = getParams();
-    const [collapse, setCollapse] = useState(true);
-    const toggleCollapse = () => setCollapse(!collapse);
+const FilterProperties = ({onFilter}) => {
+    const [filters] = Form.useForm();
 
     return (
         <div className="panel" >
-            <div className="header">
-                <span><FilterOutlined /> Filtros</span>
-                {window.screen.width < 600 ?
-                    <CloseOutlined onClick={onClose}/> 
-                    : collapse ? 
-                        <CloseOutlined onClick={toggleCollapse}/> 
-                        : <DownOutlined onClick={toggleCollapse}/>
-                }
-            </div>
-            <div className={`filter-content collapse-${collapse}`}>
-                <div className="tags">
-                    {params?.map( p => {
-                        return <Tag closable color="processing" key={p[0]}>{`${t(p[0])}`}</Tag>
-                    })}
-                </div>
-                <form>
-                    {filters?.map( f => {
-                        return (
-                            <div key={f.name} className="filter-item">
-                                <span htmlFor={f.name}>{f.span}</span>
-                                <input type={f.type} name={f.name} id={f.name} list={`datalist-${f.name}`} min={f.min} />
-                                {f.type === "datalist" ?
-                                    <datalist id={`datalist-${f.name}`}>
-                                        {f.options.map( op => {
-                                        return <option key={op.value} value={op.value}>{op.name}</option>
-                                        })}
-                                    </datalist> : null
-                                }
-                            </div>
-                        )
-                    })}
-                    <button type="submit">Filtrar</button>
-                </form>
+            <div className="filter-content">
+                <Form form={filters} onFinish={onFilter}>
+                    <div className="form">
+                        <Form.Item name="neighborhood" label="Barrio">
+                            {SelectDB({endpoint:"/location/all",search:"neighborhood",size:"small"})}
+                        </Form.Item>
+
+                        <Form.Item name="price" label="Precio Máximo">
+                            <InputNumber size="small"/>
+                        </Form.Item>
+
+                        <Form.Item name="rooms" label="Habitaciones">
+                            <InputNumber size="small"/>
+                        </Form.Item>
+
+                        <Form.Item name="pets" label="Acepta Mascotas" valuePropName="checked">
+                            <Checkbox />
+                        </Form.Item>
+
+                        <Form.Item name="gym" label="Gimnasio" valuePropName="checked">
+                            <Checkbox/>
+                        </Form.Item>
+
+                        <Form.Item name="pool" label="Pileta" valuePropName="checked">
+                            <Checkbox/>
+                        </Form.Item>
+
+                        <Form.Item name="playroom" label="Salón de Juegos" valuePropName="checked">
+                            <Checkbox/>
+                        </Form.Item>
+
+                        <Form.Item name="garage" label="Garage" valuePropName="checked">
+                            <Checkbox/>
+                        </Form.Item>
+
+                        <Form.Item name="balcony" label="Balcón" valuePropName="checked">
+                            <Checkbox/>
+                        </Form.Item>
+
+                        <Form.Item name="elevator" label="Ascensor" valuePropName="checked">
+                            <Checkbox/>
+                        </Form.Item>
+                        
+                        <Form.Item name="furnished" label="Amoblado" valuePropName="checked">
+                            <Checkbox/>
+                        </Form.Item>
+                    </div>
+
+                    <Form.Item>
+                        <Button htmlType="submit">Filtrar</Button>
+                    </Form.Item>
+                </Form>
             </div>
         </div>
     )
 }
 
-const Filters = ({filters}) => {
+const Filters = ({title, onFilter}) => {
     const [showPanel, setshowPanel] = useState( window.screen.width > 600 ? true : false);
+    const [collapse, setCollapse] = useState(true);
     const togglePanel = () => setshowPanel(!showPanel)
+    const toggleCollapse = () => setCollapse(!collapse);
 
     return (
         <div className="wrapper-filter">
-            {!showPanel &&
-                <Button onClick={togglePanel} icon={<FilterOutlined /> }>Filtros</Button>
+            {!showPanel ?
+                <Tooltip title={title}>
+                    <Button shape="circle" onClick={togglePanel} icon={<FilterOutlined />}/>
+                </Tooltip> 
+                : (
+                    <div className="header" onClick={toggleCollapse}>
+                        <span><FilterOutlined />{title}</span>
+                        {window.screen.width < 600 ?
+                            <CloseOutlined /> 
+                            : collapse ? 
+                                <CloseOutlined/> 
+                                : <DownOutlined/>
+                        }
+                    </div>
+                )
             }
 
-            {showPanel &&
-                <FilterPanel filters={filters} onClose={togglePanel} />
+            {collapse &&
+                <FilterProperties onFilter={onFilter} />
             }
             
         </div>
