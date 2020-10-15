@@ -58,9 +58,9 @@ const ConfigGroup = ({detail}) => {
             okType: 'danger',
             cancelText: 'Cancelar',
             onOk: async () => {
-                let bodyReq = { userId: member.id }
                 try {
-                    await ApiRequest.delete(`/group/${detail?.id}/delete/member`, bodyReq);
+                    let bodyReq = { userId: member.id }
+                    await ApiRequest.delete(`/group/${detail?.id}/delete/member`, bodyReq );
                     notification.success({
                         message: `El miembro ${member.userName} fue eliminado con éxito`,
                         placement: "bottomLeft",
@@ -88,7 +88,7 @@ const ConfigGroup = ({detail}) => {
             cancelText: 'Cancelar',
             onOk: async () => {
                 try {
-                    await ApiRequest.delete(`/group/${detail?.id}/delete/member`);
+                    await ApiRequest.delete(`/group/${detail?.id}/delete/group`);
                     notification.success({
                         message: `El grupo ${detail.name} se eliminó con éxito`,
                         placement: "bottomLeft",
@@ -120,19 +120,23 @@ const ConfigGroup = ({detail}) => {
                 </div>
             </div>
 
-            <div className="section">
-                <div className="title">Eliminar miembros</div>
-                {members.length ? members.map( m => {
-                    return (
-                        <div className="row" key={m.id}>
-                            <div className="userName">{m.userName}</div> 
-                            <div className="delete-member" onClick={() => deleteMember(m)}>
-                                <CloseOutlined />
+            {members.length ? (
+                <div className="section">
+                    <div className="title">Eliminar miembros</div>
+                    {members.map( m => {
+                        return (
+                            <div className="row" key={m.id}>
+                                <div className="userName">{m.userName}</div> 
+                                <div className="delete-member" onClick={() => deleteMember(m)}>
+                                    <CloseOutlined />
+                                </div>
                             </div>
-                        </div>
-                    )
-                }) : null}
-            </div>
+                        )
+                    })}
+                </div>
+            ) :null}
+
+            
 
             <div className="delete-group">
                 <Button onClick={deleteGroup}>Eliminar Grupo</Button>
