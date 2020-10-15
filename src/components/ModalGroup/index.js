@@ -174,7 +174,7 @@ const RadioGroup = ({ radio, setRadio }) => {
             <UsergroupAddOutlined /> ¿Quieres enviar la solicitud de grupo a{" "}
             {user.userName}?
           </p>
-          <h3>Seleccione un grupo existe o cree un nuevo grupo</h3>
+          <h3>Seleccione un grupo existente o cree un nuevo grupo</h3>
           <RadioGroup  radio={radio} setRadio={setRadio}></RadioGroup>
   
           {radio === 2 ? (
