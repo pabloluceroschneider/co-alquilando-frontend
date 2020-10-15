@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { SessionContext } from "../../store";
+import { GroupContext } from '../../routes/groups';
 import { Input, Button, notification, Modal } from 'antd'
 import { SaveOutlined, CloseOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import ApiRequest from '../../util/ApiRequest';
@@ -8,6 +9,7 @@ const { confirm } = Modal;
 
 const ConfigGroup = ({detail}) => {
     const { state } = useContext(SessionContext);
+    const { setData } = useContext(GroupContext);
     const [members, setMembers] = useState([])
     const [groupName, setGroupName] = useState()
 
@@ -39,6 +41,7 @@ const ConfigGroup = ({detail}) => {
                 message: `El nombre del grupo se actualizó con éxito`,
                 placement: "bottomLeft",
             });
+            setData()
         } catch (error) {
             notification.error({
                 message: `No se pudo actualizar nombre del grupo`,
@@ -62,6 +65,7 @@ const ConfigGroup = ({detail}) => {
                         message: `El miembro ${member.userName} fue eliminado con éxito`,
                         placement: "bottomLeft",
                       });
+                    setData()
                 } catch (error) {
                     notification.error({
                         message: `No se pudo eliminar a ${member.userName} del grupo.`,
@@ -89,6 +93,7 @@ const ConfigGroup = ({detail}) => {
                         message: `El grupo ${detail.name} se eliminó con éxito`,
                         placement: "bottomLeft",
                     });
+                    setData()
                 } catch (error) {
                     notification.error({
                         message: `No se pudo eliminar el grupo ${detail.name}.`,

@@ -10,6 +10,8 @@ import Votation from '../../components/Votation';
 import WaitingSelection from '../../components/WaitingSelection';
 import { TeamOutlined } from '@ant-design/icons';
 
+export const GroupContext = React.createContext();
+
 const Groups = () => {
     const {state} = useContext(SessionContext);
     const { group, chat, name } = useParams();
@@ -51,24 +53,26 @@ const Groups = () => {
 
     return (
         <ContentWrapper topNav breadscrumb={breadscrumb} >
-            <div className="groups-container">
-                <GroupList groups={data} render={ !group && !chat && !votation} />
-                {   
-                    group || chat ?  
-                    <GroupDetail detail={detail} render={ group && !chat && !votation } group={group} /> 
-                    : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
-                }
-                {
-                    group ? (
-                        chat ? 
-                        <Chat render={ group && chat && !votation } channelName={name} groupId={group} channel={chat}/> 
-                        : votation ? 
-                            <Votation render={ group && !chat && votation } detail={detail} />
-                            : null
-                    ) 
-                    : null
-                }
-            </div>
+            <GroupContext.Provider value={ {data, setData, detail, setDetail} }>
+                <div className="groups-container">
+                    <GroupList groups={data} render={ !group && !chat && !votation} />
+                    {   
+                        group || chat ?  
+                        <GroupDetail detail={detail} render={ group && !chat && !votation } group={group} /> 
+                        : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
+                    }
+                    {
+                        group ? (
+                            chat ? 
+                            <Chat render={ group && chat && !votation } channelName={name} groupId={group} channel={chat}/> 
+                            : votation ? 
+                                <Votation render={ group && !chat && votation } detail={detail} />
+                                : null
+                        ) 
+                        : null
+                    }
+                </div>
+            </GroupContext.Provider>
         </ContentWrapper>
     )
 }
