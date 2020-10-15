@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Input, Button, notification } from 'antd'
-import { SaveOutlined, CloseOutlined } from '@ant-design/icons'
+import React, { useState, useEffect, useContext } from 'react';
+import { SessionContext } from "../../store";
+import { Input, Button, notification, Modal } from 'antd'
+import { SaveOutlined, CloseOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import ApiRequest from '../../util/ApiRequest';
 
+const { confirm } = Modal;
+
 const ConfigGroup = ({detail}) => {
+    const { state } = useContext(SessionContext);
     const [members, setMembers] = useState([])
     const [groupName, setGroupName] = useState()
 
     useEffect(()=>{
         if(members.length || !detail) return;
         detail.membersId.forEach( async member => {
+                if (state.user.id === member) return;
                 try {
                     let { data } = await ApiRequest.get(`/user/id/${member}`)
                     setMembers( members => [...members, data])
@@ -18,7 +23,7 @@ const ConfigGroup = ({detail}) => {
                 }
             }
         )
-    },[detail, members])
+    },[detail, members, state])
 
     const handleChangeName = e => {
         e.preventDefault();
@@ -33,47 +38,68 @@ const ConfigGroup = ({detail}) => {
             notification.success({
                 message: `El nombre del grupo se actualizó con éxito`,
                 placement: "bottomLeft",
-              });
+            });
         } catch (error) {
             notification.error({
                 message: `No se pudo actualizar nombre del grupo`,
                 placement: "bottomLeft",
-              });
+            });
         }
     }
 
     const deleteMember = async member => {
-        let bodyReq = { userId: member.id }
-        console.log("bodyReq:::", bodyReq)
-        try {
-            await ApiRequest.delete(`/group/${detail?.id}/delete/member`, bodyReq);
-            notification.success({
-                message: `El miembro ${member.userName} fue eliminado con éxito`,
-                placement: "bottomLeft",
-              });
-        } catch (error) {
-            notification.error({
-                message: `No se pudo eliminar a ${member.userName} del grupo.`,
-                placement: "bottomLeft",
-              });
-        }
-
+        confirm({
+            title: `¿Deseas eliminar a ${member.userName} del grupo?`,
+            icon: <ExclamationCircleOutlined />,
+            okText: 'Confirmar',
+            okType: 'danger',
+            cancelText: 'Cancelar',
+            onOk: async () => {
+                let bodyReq = { userId: member.id }
+                try {
+                    await ApiRequest.delete(`/group/${detail?.id}/delete/member`, bodyReq);
+                    notification.success({
+                        message: `El miembro ${member.userName} fue eliminado con éxito`,
+                        placement: "bottomLeft",
+                      });
+                } catch (error) {
+                    notification.error({
+                        message: `No se pudo eliminar a ${member.userName} del grupo.`,
+                        placement: "bottomLeft",
+                      });
+                }
+            },
+            onCancel() {
+              console.log('Cancel');
+            },
+          });
     }
 
     const deleteGroup = async () => {
-        console.log("deleteGroup")
-        try {
-            await ApiRequest.delete(`/group/${detail?.id}/delete/member`);
-            notification.success({
-                message: `El grupo ${detail.name} se eliminó con éxito`,
-                placement: "bottomLeft",
-              });
-        } catch (error) {
-            notification.error({
-                message: `No se pudo eliminar el grupo ${detail.name}.`,
-                placement: "bottomLeft",
-              });
-        }
+        confirm({
+            title: `¿Deseas eliminar a el grupo ${detail.name}?`,
+            icon: <ExclamationCircleOutlined />,
+            okText: 'Confirmar',
+            okType: 'danger',
+            cancelText: 'Cancelar',
+            onOk: async () => {
+                try {
+                    await ApiRequest.delete(`/group/${detail?.id}/delete/member`);
+                    notification.success({
+                        message: `El grupo ${detail.name} se eliminó con éxito`,
+                        placement: "bottomLeft",
+                    });
+                } catch (error) {
+                    notification.error({
+                        message: `No se pudo eliminar el grupo ${detail.name}.`,
+                        placement: "bottomLeft",
+                    });
+                }
+            },
+            onCancel() {
+              console.log('Cancel');
+            },
+          });
     }
 
     return (
@@ -103,8 +129,8 @@ const ConfigGroup = ({detail}) => {
                 }) : null}
             </div>
 
-            <div className="delete-group" onClick={deleteGroup}>
-                <Button>Eliminar Grupo</Button>
+            <div className="delete-group">
+                <Button onClick={deleteGroup}>Eliminar Grupo</Button>
             </div>
         </div>
     )
