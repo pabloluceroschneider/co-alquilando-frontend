@@ -30,12 +30,13 @@ const Item = ({ name, channel }) => {
 
 const Votation = ({ group }) => {
   let history = useHistory();
+  const votation = window.location.pathname.split("/").includes("votations")
 
   const handleClick = () => {
     history.push(`/groups/${group}/votations`);
   };
   return (
-    <div className="item clickeable" onClick={handleClick}>
+    <div className={`item clickeable selected-${votation}`} onClick={handleClick}>
       <StarFilled />
       <div className="name-msg">
         <div>Votaciones</div>
