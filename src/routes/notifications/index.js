@@ -4,6 +4,7 @@ import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 import NotificationCard from "../../components/NotificationCard";
 import WaitingSelection from '../../components/WaitingSelection';
+import Spin from '../../components/Spin';
 import { BellOutlined } from '@ant-design/icons';
 
 const Notifications = (props) => {
@@ -19,23 +20,27 @@ const Notifications = (props) => {
       );
       setNotifications(data);
     };
-    asyncGet();
+    setTimeout(()=>{
+      asyncGet();
+    },3000)
   }, [state.user.id, notifications]);
 
-  if (!notifications?.length) return (
-    <ContentWrapper topNav breadscrumb={breadscrumb} >
-        <div className="no-groups">
-            <WaitingSelection  message="No tienes notificaciones!" render={!notifications} icon={<BellOutlined />} />
-        </div>
-    </ContentWrapper>
-)
-
   return (
-    <ContentWrapper topNav title="Notificaciones" breadscrumb={breadscrumb}>
+    <ContentWrapper topNav breadscrumb={breadscrumb}>
       <div className="notifications">
+
+        {!notifications ? <Spin /> : null}
+        
         {notifications?.map((n) => {
           return <NotificationCard key={n.id} {...n} setNotifications={setNotifications} notifications={notifications}/>;
         })}
+
+        {notifications && !notifications?.length ? (
+          <div className="no-groups">
+            <WaitingSelection  message="No tienes notificaciones!" render={!notifications} icon={<BellOutlined />} />
+          </div>
+        ):null}
+
       </div>
     </ContentWrapper>
   );

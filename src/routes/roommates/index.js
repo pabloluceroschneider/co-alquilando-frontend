@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { SessionContext } from '../../store';
 import ContentWrapper from '../../components/ContentWrapper';
 import UserCard from '../../components/Match';
-
+import Spin from '../../components/Spin';
 import ApiRequest from '../../util/ApiRequest';
 
 const Match = () => {
@@ -21,12 +21,17 @@ const Match = () => {
 					setUsers(data);
 				}
 			};
-			asyncGet();
+			setTimeout(()=>{
+				asyncGet();
+			},3000)
 		},[ state.user ]);
 
 	return (
 		<ContentWrapper topNav optionsNav>
 			<div className="match">
+
+				{!matched && !users ? <Spin/> : null}
+
 				{matched?.map((u, index) => {
 						return <UserCard key={index} {...u} />;
 				})}

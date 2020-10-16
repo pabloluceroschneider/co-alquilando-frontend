@@ -3,6 +3,7 @@ import { notification, Pagination } from 'antd';
 import ApiRequest from '../../util/ApiRequest';
 import ContentWrapper from '../../components/ContentWrapper';
 import PropertyCard from '../../components/PropertyCard';
+import Spin from '../../components/Spin';
 import Filters from '../../components/Filters';
 // import Loading from '../../components/Loading';
 import WaitingSelection from '../../components/WaitingSelection'
@@ -19,7 +20,7 @@ const Property = () => {
 			let asyncGet = async () => {
 				try {
 					let { data } = await ApiRequest.get(`/property/properties`, { page: page -1, size, ...params });
-					setDatos(data);
+					setDatos(data.content);
 				} catch (e) {
 					notification.error({
                         message: `Error al obtener propiedades`,
@@ -27,10 +28,13 @@ const Property = () => {
 					});
 				}
 			};
-			asyncGet();
+			setTimeout(()=>{
+				asyncGet();
+			},3000)
 		},[ page, size, params ]);
 
 	const onChange = page => setPage(page);
+
 
 	return (
 		<ContentWrapper topNav optionsNav>
@@ -43,12 +47,15 @@ const Property = () => {
 				<div className="list">
 
 					<div className="contentPL">
-						{datos?.content?.map( p => {
+
+						{!datos && <Spin />}
+
+						{datos?.map( p => {
 							return <PropertyCard key={p.id} {...p} />;
 						})}
 
-						{!datos?.content?.length && <WaitingSelection message="No se encontraron propiedades" />}
-						{/* {!datos?.content && <div className="loading-wrapper"><Loading text="Hola" /></div> } */}
+						{datos && !datos?.length ? <WaitingSelection message="No se encontraron propiedades" /> :null}
+
 					</div>
 
 					<div className="pagination">
