@@ -2,10 +2,11 @@ import React, { useState, useEffect, useContext} from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from "react-router-dom";
 import { Rate, notification } from 'antd';
-import { CloseCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { CloseCircleOutlined, CheckCircleOutlined, ExclamationOutlined } from '@ant-design/icons';
 import { SessionContext } from '../../store';
 import ApiRequest from '../../util/ApiRequest';
 import Property from '../../classes/Property';
+import WaitingSelection from '../WaitingSelection'
 
 const useVotations = (detail) => {
     const [data, setData] = useState(null);
@@ -149,6 +150,10 @@ const History = ({ items }) => {
 
 const Votation = ({ detail, render }) => {
     const [votations, setVotations] = useVotations(detail);
+
+    if (!votations?.length){
+        return <WaitingSelection render message="No tienes votaciones" icon={<ExclamationOutlined />}/>
+    }
 
     return (
         <div key={detail?.id} className={`votation-wrapper ${!!render}`}>
