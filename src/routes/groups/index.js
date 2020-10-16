@@ -39,8 +39,12 @@ const Groups = () => {
 		let getGroupInformation = async () => {
             let response = await ApiRequest.get(`/group/${group}/detail`)
             setDetail(response.data);
-		};
-		getGroupInformation();
+        };
+        if (!data?.find( g => g.id === group )){ 
+            setDetail(null);
+            return
+        }
+        getGroupInformation();
 	}, [group, data])
 
     if (!data?.length) return (
@@ -57,12 +61,12 @@ const Groups = () => {
                 <div className="groups-container">
                     <GroupList groups={data} render={ !group && !chat && !votation} />
                     {   
-                        group || chat ?  
+                        detail || chat ?  
                         <GroupDetail detail={detail} render={ group && !chat && !votation } group={group} /> 
                         : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
                     }
                     {
-                        group ? (
+                        detail ? (
                             chat ? 
                             <Chat render={ group && chat && !votation } channelName={name} groupId={group} channel={chat}/> 
                             : votation ? 

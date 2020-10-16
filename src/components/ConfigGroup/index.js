@@ -71,10 +71,10 @@ const ConfigGroup = ({detail}) => {
                                 message: `El miembro ${member.userName} fue eliminado con éxito`,
                                 placement: "bottomLeft",
                             });
-                            setData();
                         }).catch( error =>{
                             console.log("Error fantasma:", error)
                         })
+                        setData();
                     }).catch( error =>{
                         notification.error({
                             message: `No se pudo eliminar a ${member.userName} del grupo.`,
