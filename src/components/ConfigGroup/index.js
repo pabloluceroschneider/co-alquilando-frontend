@@ -4,6 +4,8 @@ import { GroupContext } from '../../routes/groups';
 import { Input, Button, notification, Modal } from 'antd'
 import { SaveOutlined, CloseOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import ApiRequest from '../../util/ApiRequest';
+import Notification from '../../classes/Notification';
+import Attribute from '../../classes/Attribute';
 
 const { confirm } = Modal;
 
@@ -58,20 +60,27 @@ const ConfigGroup = ({detail}) => {
             okType: 'danger',
             cancelText: 'Cancelar',
             onOk: async () => {
-                try {
                     let bodyReq = { userId: member.id }
-                    await ApiRequest.delete(`/group/${detail?.id}/delete/member`, bodyReq );
-                    notification.success({
-                        message: `El miembro ${member.userName} fue eliminado con éxito`,
-                        placement: "bottomLeft",
-                      });
-                    setData()
-                } catch (error) {
-                    notification.error({
-                        message: `No se pudo eliminar a ${member.userName} del grupo.`,
-                        placement: "bottomLeft",
-                      });
-                }
+                    await ApiRequest.delete(`/group/${detail?.id}/delete/member`, bodyReq )
+                    .then(async res => {
+                        let attributes = [ new Attribute( "groupId", 'Ya no tienes acceso al gruop', 0) ]
+                        let notification = new Notification( state.user.id, member.id, "group_delete_member",  attributes)
+                        await ApiRequest.post(`/notifications/send`, notification)
+                        .then(res=>{
+                            notification.success({
+                                message: `El miembro ${member.userName} fue eliminado con éxito`,
+                                placement: "bottomLeft",
+                            });
+                            setData();
+                        }).catch( error =>{
+                            console.log("Error fantasma:", error)
+                        })
+                    }).catch( error =>{
+                        notification.error({
+                            message: `No se pudo eliminar a ${member.userName} del grupo.`,
+                            placement: "bottomLeft",
+                          });
+                    })
             },
             onCancel() {
               console.log('Cancel');
