@@ -52,6 +52,10 @@
     font-weight: bold;
 }
 
+.customizedForm button {
+    margin: 3%;
+}
+
 .multiple-line {
     padding: 7px;
     text-align: left;
