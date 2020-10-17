@@ -6,10 +6,17 @@ import SelectDB from '../InputRepository/SelectDB'
 const FilterProperties = ({onFilter}) => {
     const [filters] = Form.useForm();
 
+    const sendFilters = values => {
+        let filtros = Object.entries(values).filter( f => f[1] );
+        let json = {}
+        filtros.map( m => json = {...json, [m[0]]: m[1] } )
+        onFilter(json)
+    }
+
     return (
         <div className="panel" >
             <div className="filter-content">
-                <Form form={filters} onFinish={onFilter}>
+                <Form form={filters} onFinish={sendFilters}>
                     <div className="form">
                         <Form.Item name="neighborhood" label="Barrio">
                             {SelectDB({endpoint:"/location/all",search:"neighborhood",size:"small"})}
