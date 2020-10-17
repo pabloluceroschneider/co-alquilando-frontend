@@ -25,7 +25,7 @@ const UpdateProperty = () => {
         let getProperty = async () => {
             let { data } = await ApiRequest.get(`/property/${idProperty}`)
             let property = new Property(data).mapResponseToFormJson();
-            if (property.ownerId !== state.user.id){
+            if (property.ownerId !== state.user.id) {
                 history.push(`/property/${idProperty}`)
             } else {
                 setData(property)
@@ -38,7 +38,7 @@ const UpdateProperty = () => {
         getProperty();
     }, [idProperty, state.user.id, history])
 
-    useEffect(()=>{
+    useEffect(() => {
         if (errorBasic) {
             notification.error({
                 message: `Error: No se pudo actualizar sus datos`,
@@ -51,17 +51,30 @@ const UpdateProperty = () => {
                 message: `Datos Actualizados`,
                 placement: "bottomLeft",
             });
-            setTimeout( () => {
+            setTimeout(() => {
                 history.push(`/property/${idProperty}`)
             }, 2000)
         }
-    },[resultPutBasic, errorBasic, history, idProperty])
+    }, [resultPutBasic, errorBasic, history, idProperty])
+
+    const onDelete = async () => {
+        await ApiRequest.delete(`/property/${idProperty}`).then(res => {
+            notification.success({
+                message: `Propiedad eliminada con exito`,
+                placement: "bottomLeft",
+            });
+            history.push(`/my-properties`)
+        })
+
+    };
 
     return (
-        <ContentWrapper topNav title="Actualizar Propiedad">
-            {data && <CustomizedForm form={form} data={propertyFields} onfinish={setFields} />}
-        </ContentWrapper>
-    )
-}
+        <div>
+            <ContentWrapper topNav title="Actualizar Propiedad">
+                <CustomizedForm form={form} data={propertyFields} onfinish={setFields} onDelete={onDelete} />
+            </ContentWrapper>
+        </div>
+    );
+};
 
 export default UpdateProperty

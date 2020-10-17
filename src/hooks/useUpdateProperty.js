@@ -9,7 +9,7 @@ const useUpdateProperty = (fields, hiddenFields) => {
     const [error, setError] = useState()
 
     useEffect(() => {
-        if (!fields) return;
+        if (!fields || (fields && !fields.length)) return;
         let bodyRequest = new Property(fields).mapJsonToRequest();
         bodyRequest = { ...bodyRequest, ownerId: hiddenFields.ownerId, photos: null };
 
