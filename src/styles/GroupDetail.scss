@@ -17,11 +17,26 @@
 
     .info{
         display: grid; 
+        grid-template-columns: 90% 10%;
         place-items: center;
         width: 100%;
         border: 1px solid #dbdbdb;
         padding: 5%;
         box-shadow: 0px 0px 2px var(--dark-grey);
+
+        .cog {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            display: grid;
+            place-content: center;
+            &:hover{
+                background-color: #f6faff;
+            }
+            span{
+                font-size: 1.4em;        
+            }
+        }
     }
 
     .item{
@@ -72,6 +87,68 @@
         align-items: center;
         justify-content: space-evenly;
         flex-direction: row;
+    }
+}
+
+.wrapper-config-group{
+    cursor: default;
+    .section{
+        margin: 0px 0px 20px 0px;
+        padding: 10px;
+        border: 1px solid var(--dark-grey);
+        .title{
+            font-style: italic;
+        }
+    }
+    .row{
+        padding: 5px 0px;
+        margin-left: 5%;
+        display: grid;
+        grid-template-columns: 65% 30%;
+        align-items: center;
+
+        .save-group-name{
+            place-self: center;
+            font-size: 1.5em;
+            color: var(--secondary-blue);
+            border: 1px solid white;
+            border-radius: 100px;
+            padding: 0px 6px;
+            &:hover{
+                // border: 1px solid #5e83ba63;
+                background-color: #f3f3f3;
+            }
+        }
+
+        .delete-member{
+            place-self: center;
+            font-size: 1.3em;
+            color: #ff4d4f;
+            padding: 0px 5px;
+            width: auto;
+            border-radius: 100px;
+            text-align: center;
+            border: 1px solid white;
+            &:hover{
+                // border: 1px solid #ff4d5063;
+                background-color:  #f3f3f3;
+
+            }
+        }
+    }
+    .delete-group{
+        margin: 0px;
+        text-align: center;
+        button:hover{
+            color: #ff4d4f !important;
+            border: 1px solid #ff4d4f !important;
+        }
+        // div{
+        //     display: inline;
+        //     padding: 10px;
+        //     &:hover{
+        //         background-color: red !important;
+        // }}
     }
 }
 

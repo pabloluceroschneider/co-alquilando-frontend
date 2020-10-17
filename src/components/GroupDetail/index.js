@@ -3,8 +3,9 @@ import { SessionContext } from "../../store";
 import { useHistory, useParams } from "react-router-dom";
 import ApiRequest from "../../util/ApiRequest";
 import { Button, notification, Modal } from "antd";
-import { StarFilled } from "@ant-design/icons";
+import { StarFilled, SettingOutlined } from "@ant-design/icons";
 import Avatar from '../Avatar';
+import ConfigGroup from '../ConfigGroup';
 
 
 const Item = ({ name, channel }) => {
@@ -29,12 +30,13 @@ const Item = ({ name, channel }) => {
 
 const Votation = ({ group }) => {
   let history = useHistory();
+  const votation = window.location.pathname.split("/").includes("votations")
 
   const handleClick = () => {
     history.push(`/groups/${group}/votations`);
   };
   return (
-    <div className="item clickeable" onClick={handleClick}>
+    <div className={`item clickeable selected-${votation}`} onClick={handleClick}>
       <StarFilled />
       <div className="name-msg">
         <div>Votaciones</div>
@@ -106,15 +108,28 @@ const AdminMenu = ({channels}) => {
   );
 };
 
-const Info = ({ name }) => {
+const Info = ({ detail, admin }) => {
+  const [showConfig, setShowConfig] = useState(false)
+  const toggleConfig = () => setShowConfig(!showConfig)
   return (
     <div className="info">
-      <div>{name}</div>
+      <div>{detail?.name}</div>
+      { admin && <div className="cog" onClick={toggleConfig}><SettingOutlined /></div> }
+      <Modal 
+          visible={showConfig}
+          onOk={toggleConfig}
+          onCancel={toggleConfig}
+          title={"Configuración de Grupo"}
+          footer={false}
+          destroyOnClose
+          >
+            <ConfigGroup detail={detail} />
+          </Modal>
     </div>
   );
 };
 
-const GroupDetail = ({ detail, render, group }) => {
+const GroupDetail = ({ detail, render }) => {
   const { state } = useContext(SessionContext);
 
   const adminSearh = (detalle) => {
@@ -133,7 +148,7 @@ const GroupDetail = ({ detail, render, group }) => {
   return (
     <div className={`group-detail ${!!render}`}>
       <div className="container">
-        <Info name={detail?.name} />
+        <Info detail={detail} admin={detail?.adminId===state.user.id} />
         {isAdmin ? <AdminMenu channels={detail?.channels} /> : <Votation group={detail?.id} />}
         <div className="chats">
           {detail?.channels?.map((ch) => {

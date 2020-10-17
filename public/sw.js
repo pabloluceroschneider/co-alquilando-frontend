@@ -36,7 +36,7 @@ self.addEventListener('push', function (event) {
         icon: "./LOGO.jpg",
         data: {
             click_url: '/notifications'          
-          },
+        },
     });
 });
 

@@ -12,6 +12,7 @@ const Notifications = (props) => {
   const breadscrumb = [{Notificaciones: '/notifications'}]
 
   useEffect(() => {
+    if (notifications) return;
     let asyncGet = async () => {
       let { data } = await ApiRequest.get(
         `/notifications/user/${state.user.id}`
@@ -19,7 +20,7 @@ const Notifications = (props) => {
       setNotifications(data);
     };
     asyncGet();
-  }, [state.user.id]);
+  }, [state.user.id, notifications]);
 
   if (!notifications?.length) return (
     <ContentWrapper topNav breadscrumb={breadscrumb} >
