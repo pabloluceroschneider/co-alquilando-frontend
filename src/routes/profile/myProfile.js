@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useRouteMatch } from "react-router";
 import { SessionContext } from "../../store";
+import { Button } from "antd";
 import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
+import Spin from "../../components/Spin";
 import calculateAge from "../../util/CalculateAge";
-import { Button } from "antd";
-import { useRouteMatch } from "react-router";
 
 const image =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
@@ -34,12 +35,16 @@ const MyProfile = (props) => {
         setDatos({ ...data, attributes: attr });
         setPhotosUpdate(data.photos);
       };
-      getUser();
+      setTimeout(()=>{
+        getUser();
+      },3000)
     }
   }, [state, datos]);
 
   return (
     <ContentWrapper topNav>
+      {!datos ? <Spin /> :null}
+
       {datos ? (
         <div className="profileContent">
           <div className="profileGroup2">
