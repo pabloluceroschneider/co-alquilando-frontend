@@ -119,7 +119,7 @@ const GroupDetail = ({ detail, render, group }) => {
 
   const adminSearh = (detalle) => {
     var res = false;
-    detalle != null &&
+    detalle && detalle.channels &&
       detalle.channels.forEach((a) => {
         let adminIDarray = a.channelId.split("-");
         if (adminIDarray[3] === state.user.id) {
