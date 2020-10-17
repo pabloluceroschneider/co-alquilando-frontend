@@ -16,7 +16,7 @@ const CustomSelect = (props) => {
     }, [props.endpoint]);
 
     return (
-        <Select showSearch size={props.size}>
+        <Select allowClear showSearch size={props.size}>
             {options?.map((op) => {
                 return (
                     <Option key={op[props.search]} value={op[props.search]}>
