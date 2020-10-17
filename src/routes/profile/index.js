@@ -35,7 +35,7 @@ const Profile = (props) => {
       };
       setTimeout(()=>{
         getUser();
-      },3000)
+      },1000)
     }
   }, [nickname, datos]);
 

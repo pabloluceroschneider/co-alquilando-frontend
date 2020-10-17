@@ -22,7 +22,7 @@ const Notifications = (props) => {
     };
     setTimeout(()=>{
       asyncGet();
-    },3000)
+    },1000)
   }, [state.user.id, notifications]);
 
   return (

@@ -34,7 +34,7 @@ const Groups = () => {
             };
         setTimeout(()=>{
             getGroupInformation();
-        },3000)
+        },1000)
     }, [state.user.id, data])
 
     useEffect( () => {
@@ -47,7 +47,9 @@ const Groups = () => {
             setDetail(null);
             return
         }
-        getGroupInformation();
+        setTimeout(()=>{
+            getGroupInformation();
+        },1000)
 	}, [group, data])
 
     return (
@@ -60,22 +62,25 @@ const Groups = () => {
                     <div className="groups-container">
                         <GroupList groups={data} render={ !group && !chat && !votation} />
                         {   
-                            detail || chat ?  
+                            data ? 
+                            detail ? 
                             <GroupDetail detail={detail} render={ group && !chat && !votation } group={group} /> 
+                            : group ? 
+                            <Spin />
+                            : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
                             : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
                         }
                         {
-                            detail ? (
-                                chat ? 
-                                <Chat render={ group && chat && !votation } channelName={name} groupId={group} channel={chat}/> 
-                                : votation ? 
-                                    <Votation render={ group && !chat && votation } detail={detail} />
-                                    : null
-                            ) 
+                            detail ? 
+                            chat ? 
+                            <Chat render={ group && chat && !votation } channelName={name} groupId={group} channel={chat}/> 
+                            : votation ? 
+                            <Votation render={ group && !chat && votation } detail={detail} />
+                            : null
                             : null
                         }
                     </div>
-                ):null}
+                ): null }
 
                 {data && !data?.length ? (
                     <div className="no-groups">

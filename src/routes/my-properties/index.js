@@ -28,7 +28,7 @@ const Property = () => {
       }
       setTimeout(()=>{
         asyncGet()
-      },3000)
+      },1000)
     }, [state])
 
   return (

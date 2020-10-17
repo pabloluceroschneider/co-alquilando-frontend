@@ -23,7 +23,7 @@ const Match = () => {
 			};
 			setTimeout(()=>{
 				asyncGet();
-			},3000)
+			},1000)
 		},[ state.user ]);
 
 	return (

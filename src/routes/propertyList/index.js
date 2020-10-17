@@ -30,7 +30,7 @@ const Property = () => {
 			};
 			setTimeout(()=>{
 				asyncGet();
-			},3000)
+			},1000)
 		},[ page, size, params ]);
 
 	const onChange = page => setPage(page);
