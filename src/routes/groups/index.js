@@ -32,9 +32,7 @@ const Groups = () => {
             const { data } = await ApiRequest.get(`/group/user/${state.user.id}`);
             setData(data);
             };
-        setTimeout(()=>{
-            getGroupInformation();
-        },1000)
+        getGroupInformation();
     }, [state.user.id, data])
 
     useEffect( () => {
@@ -47,9 +45,7 @@ const Groups = () => {
             setDetail(null);
             return
         }
-        setTimeout(()=>{
-            getGroupInformation();
-        },1000)
+        getGroupInformation();
 	}, [group, data])
 
     return (

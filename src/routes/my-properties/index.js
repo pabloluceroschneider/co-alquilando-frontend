@@ -26,9 +26,7 @@ const Property = () => {
               });
           }
       }
-      setTimeout(()=>{
-        asyncGet()
-      },1000)
+      asyncGet()
     }, [state])
 
   return (

@@ -28,9 +28,7 @@ const Property = () => {
 					});
 				}
 			};
-			setTimeout(()=>{
-				asyncGet();
-			},1000)
+			asyncGet();
 		},[ page, size, params ]);
 
 	const onChange = page => setPage(page);

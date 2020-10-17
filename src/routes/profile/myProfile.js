@@ -35,9 +35,7 @@ const MyProfile = (props) => {
         setDatos({ ...data, attributes: attr });
         setPhotosUpdate(data.photos);
       };
-      setTimeout(()=>{
-        getUser();
-      },1000)
+      getUser();
     }
   }, [state, datos]);
 

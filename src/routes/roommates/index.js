@@ -21,9 +21,7 @@ const Match = () => {
 					setUsers(data);
 				}
 			};
-			setTimeout(()=>{
-				asyncGet();
-			},1000)
+			asyncGet();
 		},[ state.user ]);
 
 	return (
