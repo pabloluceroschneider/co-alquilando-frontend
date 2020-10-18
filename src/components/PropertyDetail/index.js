@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { Carousel, Tag, notification, Modal } from "antd";
+import { Carousel, Tag, notification, Modal, Button, Dropdown, Menu } from "antd";
 import {
   SendOutlined,
   TeamOutlined,
-  ExclamationCircleOutlined,
+  WechatOutlined,
+  DownOutlined
 } from "@ant-design/icons";
 import { SessionContext } from "../../store";
 import { useParams } from "react-router";
@@ -20,7 +21,7 @@ const statusColor = {
   rented: "error",
 };
 
-const Header = ({ status, typology }) => {
+const Header = ({ status, typology, ownerId }) => {
   const { state } = useContext(SessionContext);
   const { t } = useTranslation();
   const { idProperty } = useParams();
@@ -74,7 +75,8 @@ const Header = ({ status, typology }) => {
   function showConfirm() {
     confirm({
       title: "¿Deseas iniciar un chat con el propietario?",
-      icon: <ExclamationCircleOutlined />,
+      icon: <WechatOutlined />,
+      content: 'Iniciarás una conversación directamente con el propietario.',
       onOk() {
         addChannel();
       },
@@ -82,16 +84,14 @@ const Header = ({ status, typology }) => {
     });
   }
 
-  return (
-    <div className="section header">
-      <Tag>{t(typology)}</Tag>
-      <Tag color={statusColor[status]}>{t(status)}</Tag>
-      {status === "available" ? (
-        <ModalAsyncList
+  const menu = (
+    <Menu>
+      <Menu.Item>
+      <ModalAsyncList
           label={
-            <Tag icon={<SendOutlined />} color="#5e83ba">
-              Iniciar Votación
-            </Tag>
+            <a href>
+              <SendOutlined /> Iniciar Votación
+            </a>
           }
           title={
             <div>
@@ -103,12 +103,24 @@ const Header = ({ status, typology }) => {
           itemTitle="name"
           handleOk={handleOk}
         />
-      ) : null}
-      {status === "available" ? (
-        <Tag onClick={showConfirm} icon={<SendOutlined />} color="#5e83ba">
-          Iniciar Conversación
+      </Menu.Item>
+      <Menu.Item>
+        <a href onClick={showConfirm}>
+          <SendOutlined /> Iniciar Conversación
+        </a>
+      </Menu.Item>
+    </Menu>
+  );
+
+  return (
+    <div className="section header">
+      <Tag>{t(typology)}</Tag>
+      <Tag color={statusColor[status]}>{t(status)}</Tag>
+      {status === "available" && state.user.id !== ownerId ? (<Dropdown overlay={menu} placement="bottomCenter">
+        <Tag color="#5e83ba">
+          Acciones <DownOutlined />
         </Tag>
-      ) : null}
+      </Dropdown>): null }
     </div>
   );
 };
@@ -234,9 +246,10 @@ const PayingLink = ({ payingLink }) => {
 };
 
 const PropertyDetail = (props) => {
+  console.log('props', props)
   return (
     <div className="propertyDetail">
-      <Header status={props.status} typology={props.attributes?.typology} />
+      <Header status={props.status} typology={props.attributes?.typology} ownerId={props?.ownerId} />
       <PhotoSection photos={props.photos} alt={props.description} />
       <TitleSection title={props.title} description={props.description} />
       <PriceSection {...props.price} />
