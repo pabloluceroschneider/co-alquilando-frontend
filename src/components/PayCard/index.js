@@ -20,6 +20,7 @@ const PayCard = props => {
         <div className="contentPayCard">
 
             <Card
+                className="cardPay"
                 hoverable
                 style={{ width: 400 }}
                 cover={

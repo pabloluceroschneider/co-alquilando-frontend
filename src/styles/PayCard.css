@@ -86,13 +86,13 @@
     margin: 14px 0!important;
 }
 
-.button-place{
+.cardPay div .button-place{
     display: grid;
     grid-template-columns: auto auto auto;
     place-content: center;
     padding-bottom: 10px;
 }
-.button-place button{
+.cardPay div .button-place button{
     height: 50px;
     width: 300px;
     margin-top: 80px;
