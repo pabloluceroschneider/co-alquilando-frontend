@@ -1,9 +1,15 @@
-import React from 'react';
-import { useHistory, useRouteMatch } from 'react-router';
+import React, { useState, useEffect, useContext } from "react";
+import { useHistory, useRouteMatch} from 'react-router';
+import { SessionContext } from "../../store";
+import ApiRequest from "../../util/ApiRequest";
+import {notification } from "antd";
 
 const OptionsNav = () => {
 	const history = useHistory();
 	const { path } = useRouteMatch();
+	const [response, setResponse] = useState(null);
+	const [pay, setPay] = useState(null);
+	const { state } = useContext(SessionContext);
 
 	const list = [
 		{
@@ -21,7 +27,50 @@ const OptionsNav = () => {
 			className: 'publish_property',
 			link: '/property'
 		}
+
 	];
+	
+	const asyncGet = async () => {
+		try {
+			let pay = await ApiRequest.get(`user/hasToPay/${state.user.id}`);
+			return pay
+		} catch (e) {
+			notification.error({
+				message: `No se pudo conectar con el server`,
+				placement: 'bottomLeft'
+			});
+		}
+		
+	};
+
+	 
+ 
+
+	const validate = (element) =>{
+
+		if (element.title === 'Publicar Propiedad')
+		{
+			const ver = asyncGet()
+			console.log("VER",ver)
+			if(ver){
+				history.push(element.link)
+			}
+			else
+			{
+				history.push("/payOptions")
+				notification.info({
+					message: `No tiene suscripciones activas`,
+					placement: 'bottomLeft'
+				});
+			}
+		}
+
+		else
+		{
+			history.push(element.link)
+		}
+
+	}
 	return (
 		<div className="options-container">
 			{list.map((element) => {
@@ -30,7 +79,7 @@ const OptionsNav = () => {
 						// className={`link-component ${element.className} ${path === element.link ? 'current' : ''}`}
 						className={`link-component ${path === element.link ? 'current' : ''}`}
 						onClick={() => {
-							history.push(element.link);
+							validate(element);
 						}}
 						key={element.link}
 					>
