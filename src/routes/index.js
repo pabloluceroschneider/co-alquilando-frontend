@@ -17,6 +17,7 @@ import Notifications from "./notifications";
 import FormPropertyUpdate from './property-update';
 import UserHome from '../routes/userHome';
 import Groups from './groups';
+import PayOptions from './payOptions'
 
 const Routes = () => {
 	useServiceWorker();
@@ -43,6 +44,7 @@ const Routes = () => {
 						<Route path="/groups/:group" component={Groups} />
 						<Route path="/groups" exact component={Groups} />
 						<Route path="/notifications" exact component={Notifications} />
+						<Route path="/payOptions" exact component={PayOptions} />
 						<Redirect from="*" to="/"/>
 					</Switch>
 				) : (

@@ -12,14 +12,15 @@ const PayCard = props => {
 
     const redirectPurchace = () => {
         // history.push(`/property/${id}`)
-        history.push(`${buyLink}`)
+        history.push({ buyLink })
     }
-    console.log("buyLinkr", buyLink)
+    console.log("color", color)
     return (
 
         <div className="contentPayCard">
 
             <Card
+                className="cardPay"
                 hoverable
                 style={{ width: 400 }}
                 cover={
