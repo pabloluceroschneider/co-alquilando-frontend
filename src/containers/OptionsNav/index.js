@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory, useRouteMatch } from 'react-router';
 import { SessionContext } from "../../store";
 import ApiRequest from "../../util/ApiRequest";
@@ -7,8 +7,6 @@ import { notification } from "antd";
 const OptionsNav = () => {
 	const history = useHistory();
 	const { path } = useRouteMatch();
-	const [response, setResponse] = useState(null);
-	const [pay, setPay] = useState(null);
 	const { state } = useContext(SessionContext);
 
 	const list = [

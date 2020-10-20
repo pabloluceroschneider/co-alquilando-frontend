@@ -1,19 +1,59 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PayCard from '../../components/PayCard/index'
+import { SessionContext } from "../../store";
 import ContentWrapper from "../../components/ContentWrapper";
 import "../../styles/PayOptions.css"
+import ApiRequest from "../../util/ApiRequest";
+import { notification } from "antd";
 
 const PayOptions = () => {
+    const [packages, setPackages] = useState(null)
+    const { state } = useContext(SessionContext);
 
+    const color = {
+        Basico: "#99A3A4",
+        Premium: "#148F77",
+        Business: "#D4AC0D"
+
+    }
+
+    useEffect(() => {
+        searchPackages()
+    }, [])
+
+    const searchPackages = async () => {
+        try {
+            const apiPackages = await ApiRequest.get(`payment/packages/${state.user.id}`)
+            console.log('object :>> ', apiPackages.data);
+
+            setPackages(apiPackages.data)
+        } catch (e) {
+            notification.error({
+                message: `No se pudo conectar con el server`,
+                placement: 'bottomLeft'
+            });
+        }
+    }
 
     return (
 
         <ContentWrapper topNav>
-        <div className="contentPayOptions">
-        <PayCard title="Basico" price="299" propertiesAmount="5" desc="Ideal para propietarios individuales" color="#99A3A4" buyLink="https://www.mercadopago.com.ar/"></PayCard>
-        <PayCard title="Premium" price="690" color="#148F77" propertiesAmount="10" desc="Ideal para pequeños negocios" buyLink="https://www.mercadopago.com.ar/"></PayCard>
-        <PayCard title="Business" price="1640" color="#D4AC0D" propertiesAmount="20" buyLink="https://www.mercadopago.com.ar/" desc="Ideal para grandes negocios"></PayCard>
-        </div>
+            <div className="contentPayOptions">
+                {!!packages &&  packages.map((packagePay, index) => (
+
+                    <PayCard 
+                    key={index} 
+                    title={packagePay.name}
+                     price={packagePay.price} 
+                     propertiesAmount={packagePay.quantity} 
+                     desc={packagePay.description} 
+                     color={color[packagePay.name]} 
+                     buyLink={packagePay.link}>
+
+                     </PayCard>
+                ))}
+
+            </div>
         </ContentWrapper>
     );
 

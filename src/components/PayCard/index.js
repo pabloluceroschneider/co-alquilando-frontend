@@ -8,13 +8,11 @@ const PayCard = props => {
     const { title, price, color, buyLink, propertiesAmount, desc } = props;
 
     const history = useHistory();
-
-
+    
     const redirectPurchace = () => {
         // history.push(`/property/${id}`)
         history.push({ buyLink })
     }
-    console.log("color", color)
     return (
 
         <div className="contentPayCard">
