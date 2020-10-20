@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory, useRouteMatch} from 'react-router';
+import { useHistory, useRouteMatch } from 'react-router';
 import { SessionContext } from "../../store";
 import ApiRequest from "../../util/ApiRequest";
-import {notification } from "antd";
+import { notification } from "antd";
 
 const OptionsNav = () => {
 	const history = useHistory();
@@ -29,44 +29,34 @@ const OptionsNav = () => {
 		}
 
 	];
-	
-	const asyncGet = async () => {
+
+
+
+
+	const validate = async (element) => {
 		try {
-			let pay = await ApiRequest.get(`user/hasToPay/${state.user.id}`);
-			return pay
+			const pay = await ApiRequest.get(`user/hasToPay/${state.user.id}`);
+
+			if (element.title === 'Publicar Propiedad') {
+				if (!pay.data) {
+					history.push(element.link)
+				}
+				else {
+					history.push("/payOptions")
+					notification.info({
+						message: `No tiene suscripciones activas`,
+						placement: 'bottomLeft'
+					});
+				}
+			}
 		} catch (e) {
 			notification.error({
 				message: `No se pudo conectar con el server`,
 				placement: 'bottomLeft'
 			});
 		}
-		
-	};
 
-	 
- 
-
-	const validate = (element) =>{
-
-		if (element.title === 'Publicar Propiedad')
-		{
-			const ver = asyncGet()
-			console.log("VER",ver)
-			if(ver){
-				history.push(element.link)
-			}
-			else
-			{
-				history.push("/payOptions")
-				notification.info({
-					message: `No tiene suscripciones activas`,
-					placement: 'bottomLeft'
-				});
-			}
-		}
-
-		else
-		{
+		if (element.title !== 'Publicar Propiedad') {
 			history.push(element.link)
 		}
 
