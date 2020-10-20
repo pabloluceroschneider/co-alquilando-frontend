@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { Carousel, Tag, notification, Modal, Button, Dropdown, Menu } from "antd";
+import { Carousel, Tag, notification, Modal, Dropdown, Menu } from "antd";
 import {
   SendOutlined,
   TeamOutlined,
@@ -246,7 +246,6 @@ const PayingLink = ({ payingLink }) => {
 };
 
 const PropertyDetail = (props) => {
-  console.log('props', props)
   return (
     <div className="propertyDetail">
       <Header status={props.status} typology={props.attributes?.typology} ownerId={props?.ownerId} />
