@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { useHistory, useRouteMatch } from 'react-router';
 import { SessionContext } from "../../store";
 import ApiRequest from "../../util/ApiRequest";

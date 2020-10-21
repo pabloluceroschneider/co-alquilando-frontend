@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, useRouteMatch } from 'react-router';
-import { Card, Divider, Button, Tag } from 'antd';
-import { EditOutlined, ShoppingCartOutlined } from '@ant-design/icons'
+import React from 'react';
+import { useHistory } from 'react-router';
+import { Card, Divider, Button } from 'antd';
+import { ShoppingCartOutlined } from '@ant-design/icons'
 import '../../styles/PayCard.css'
 
 const PayCard = props => {
@@ -10,7 +10,7 @@ const PayCard = props => {
     const history = useHistory();
 
     const redirectPurchace = () => {
-        // history.push(`/property/${id}`
+        
         window.location.href=buyLink
     }
     return (
