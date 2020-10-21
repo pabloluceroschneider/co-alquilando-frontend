@@ -24,8 +24,6 @@ const PayOptions = () => {
     const searchPackages = async () => {
         try {
             const apiPackages = await ApiRequest.get(`payment/packages/${state.user.id}`)
-            console.log('object :>> ', apiPackages.data);
-
             setPackages(apiPackages.data)
         } catch (e) {
             notification.error({
