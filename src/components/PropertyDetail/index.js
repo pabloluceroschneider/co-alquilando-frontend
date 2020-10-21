@@ -95,9 +95,9 @@ const Header = ({ status, typology, ownerId }) => {
       <Menu.Item key="0" >
       <ModalAsyncList
           label={
-            <a href>
+            <div>
               <SendOutlined /> Iniciar Votación
-            </a>
+            </div>
           }
           title={
             <div>
@@ -111,9 +111,9 @@ const Header = ({ status, typology, ownerId }) => {
         />
       </Menu.Item>
       <Menu.Item key="1">
-        <a href onClick={showConfirm}>
+        <div onClick={showConfirm}>
           <SendOutlined /> Iniciar Conversación
-        </a>
+        </div>
       </Menu.Item>
     </Menu>
   );
