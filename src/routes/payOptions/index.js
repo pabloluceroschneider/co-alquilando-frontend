@@ -4,7 +4,7 @@ import { SessionContext } from "../../store";
 import ContentWrapper from "../../components/ContentWrapper";
 import "../../styles/PayOptions.css"
 import ApiRequest from "../../util/ApiRequest";
-import { notification } from "antd";
+import { notification, Spin } from "antd";
 
 const PayOptions = () => {
     const [packages, setPackages] = useState(null)
@@ -36,10 +36,9 @@ const PayOptions = () => {
     }
 
     return (
-
         <ContentWrapper topNav>
             <div className="contentPayOptions">
-                {!!packages &&  packages.map((packagePay, index) => (
+                {!!packages ? (packages.map((packagePay, index) => (
 
                     <PayCard 
                     key={index} 
@@ -51,7 +50,12 @@ const PayOptions = () => {
                      buyLink={packagePay.link}>
 
                      </PayCard>
-                ))}
+                ))
+                ):
+                <div className="spiner">
+
+                <Spin size="large" />
+                </div>}
 
             </div>
         </ContentWrapper>
