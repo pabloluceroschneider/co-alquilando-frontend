@@ -27,6 +27,7 @@ const PropertyCard = props => {
 
     useEffect(() => {
         let asyncGet = async () => {
+          setPhotoList([])
           photos.forEach( async (photo, index) => {
             let photoJson = {
                 caption: "", 

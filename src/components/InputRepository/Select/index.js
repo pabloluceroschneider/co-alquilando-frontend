@@ -7,7 +7,7 @@ const CustomSelect = (props) => {
 	const {options} = props
 
 	return (
-		<Select>
+		<Select allowClear showSearch>
 			{options.map((op) => {
 				return (
 					<Option key={op.value} value={op.value}>
