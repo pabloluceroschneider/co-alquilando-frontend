@@ -62,7 +62,14 @@
             overflow-y: scroll;
             overflow-x: hidden;
         }
+    
+    .noChats{
+        margin-top: 2%;
+        text-align: center;
     }
+    
+}
+
     .admin-buttons{
         display: flex;
         min-height: 7vh;
