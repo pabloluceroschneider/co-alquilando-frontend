@@ -150,7 +150,7 @@ const RadioGroup = ({ radio, setRadio }) => {
   
     useEffect(() => {
       const handleGroups = async () => {
-        let { data } = await ApiRequest.get(`group/user/${state.user.id}`);
+        let { data } = await ApiRequest.get(`/group/available/user/${state.user.id}`);
         setGroups(data);
       };
       handleGroups();

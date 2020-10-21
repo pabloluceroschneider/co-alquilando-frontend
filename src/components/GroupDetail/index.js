@@ -31,8 +31,13 @@ const Votation = ({ group }) => {
   let history = useHistory();
 
   const handleClick = () => {
-    history.push(`/groups/${group}/votations`);
+    history.push(`/groups/${group?.id}/votations`);
   };
+
+  if (group.name === 'Mis chats'){
+    return <div></div>;
+  }
+
   return (
     <div className="item clickeable" onClick={handleClick}>
       <StarFilled />
@@ -134,12 +139,12 @@ const GroupDetail = ({ detail, render, group }) => {
     <div className={`group-detail ${!!render}`}>
       <div className="container">
         <Info name={detail?.name} />
-        {isAdmin ? <AdminMenu channels={detail?.channels} /> : <Votation group={detail?.id} />}
-        <div className="chats">
+        {isAdmin ? <AdminMenu channels={detail?.channels} /> : <Votation group={detail} />}
+        {detail?.channels.length ? <div className="chats">
           {detail?.channels?.map((ch) => {
             return <Item key={ch.name} name={detail?.id} channel={ch} />;
           })}
-        </div>
+        </div> : <div className="noChats">No tienes ningún chat aún</div>}
       </div>
     </div>
   );

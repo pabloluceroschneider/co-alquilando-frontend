@@ -58,11 +58,17 @@ const Header = ({ status, typology, ownerId }) => {
           propertyId: idProperty,
           groupName: state.user.userName + " " + state.user.userSurname,
         };
-        await ApiRequest.put(`group/owner/channel/${data.id}`, bodyReq);
-      });
-      notification.success({
-        message: `Se creo correctamente el chat con el propietario.`,
-        placement: "bottomLeft",
+        await ApiRequest.put(`group/owner/channel/${data.id}`, bodyReq).then(() => {
+          notification.success({
+            message: `Se creo correctamente el chat con el propietario.`,
+            placement: "bottomLeft",
+          });
+        });
+      }).catch(e => {
+        notification.error({
+          message: `Ya tienes un chat con este propietario`,
+          placement: "bottomLeft",
+        });
       });
     } catch (e) {
       notification.error({
@@ -86,7 +92,7 @@ const Header = ({ status, typology, ownerId }) => {
 
   const menu = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key="0" >
       <ModalAsyncList
           label={
             <a href>
@@ -99,12 +105,12 @@ const Header = ({ status, typology, ownerId }) => {
               Seleccione Grupo
             </div>
           }
-          endpoint={`/group/user/${state.user.id}`}
+          endpoint={`/group/available/user/${state.user.id}`}
           itemTitle="name"
           handleOk={handleOk}
         />
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key="1">
         <a href onClick={showConfirm}>
           <SendOutlined /> Iniciar Conversación
         </a>
@@ -116,7 +122,7 @@ const Header = ({ status, typology, ownerId }) => {
     <div className="section header">
       <Tag>{t(typology)}</Tag>
       <Tag color={statusColor[status]}>{t(status)}</Tag>
-      {status === "available" && state.user.id !== ownerId ? (<Dropdown overlay={menu} placement="bottomCenter">
+      {status === "available" && state.user.id !== ownerId ? (<Dropdown overlay={menu} trigger={['click']} placement="bottomCenter">
         <Tag color="#5e83ba">
           Acciones <DownOutlined />
         </Tag>
