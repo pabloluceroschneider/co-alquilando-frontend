@@ -104,10 +104,10 @@ const CustomizedForm = (props) => {
 
 				{(btnSubmit && btnDelete) ? (
 					<Form.Item>
-						<Button onClick={toggleShowModal} class="delete" type="secondary" htmlType="submit">
+						<Button onClick={toggleShowModal} class="delete" type="secondary" htmlType="delete">
 							{btnDelete}
 						</Button>
-						<Button type="primary" htmlType="submit">
+						<Button loading={loading} type="primary" htmlType="submit">
 							{btnSubmit}
 						</Button>
 						<Modal visible={showModal}

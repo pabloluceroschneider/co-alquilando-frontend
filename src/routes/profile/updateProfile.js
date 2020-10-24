@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { SessionContext, SIGN_IN } from '../../store'
+import { SessionContext, SIGN_IN, SIGN_OUT } from '../../store'
 import { useHistory } from "react-router-dom";
 import { Form, notification } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
@@ -7,12 +7,16 @@ import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 import moment from "moment";
 import provinces from '../../util/provinces'
+import { Auth } from "aws-amplify";
 
 
 const userData = {
   name: "user",
   layout: "vertical",
   btnSubmit: "Actualizar Datos",
+  btnDelete: "Eliminar perfil",
+  titleDelete: "Eliminar perfil",
+  deleteContentModal: "¿Desea eliminar este perfil de usuario? Si selecciona 'Aceptar', no podrá recuperar su cuenta.",
   fields: {
     primaries: [
       [
@@ -273,9 +277,18 @@ const UpdateForm = (props) => {
     }
   }, [idUser, history, fields, photosUpdate]);
 
+  const onDelete = async () => {
+    await ApiRequest.delete(`/user/${idUser}`).then(res => {
+      Auth.signOut();
+      dispatch(SIGN_OUT());
+      history.push("/")
+    })
+
+  };
+
   return (
     <ContentWrapper topNav title="Actualizar Perfil">
-      <CustomizedForm form={form} data={userData} onfinish={setFields} />
+      <CustomizedForm form={form} data={userData} onfinish={setFields} onDelete={onDelete} />
     </ContentWrapper>
   );
 };
