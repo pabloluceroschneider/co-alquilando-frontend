@@ -55,10 +55,10 @@ export default class ApiRequest {
         })
     }
 
-    static delete = async (endpoint) => {
+    static delete = async (endpoint, bodyReq) => {
         return new Promise( async (res, rej) => {
             try{
-                let data = await axios.delete(endpoint)
+                let data = await axios.delete(endpoint, { data: bodyReq} )
                 res(data)
             }catch(err){
                 rej(err)

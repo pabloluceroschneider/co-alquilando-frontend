@@ -73,6 +73,7 @@ const useServiceWorker = () => {
 		}
 
 		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', () => {
 			navigator.serviceWorker
 				.register('./sw.js')
 				.then(function(registration) {
@@ -118,10 +119,12 @@ const useServiceWorker = () => {
 							console.error('Error during service worker registration:', error);
 						}
 					});
+
 				})
 				.catch(function(err) {
 					console.log('Service Worker Failed to Register', err);
 				});
+			})
 		}
 	});
 };
