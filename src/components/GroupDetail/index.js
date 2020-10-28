@@ -5,6 +5,7 @@ import ApiRequest from "../../util/ApiRequest";
 import { Button, notification, Modal } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import Avatar from '../Avatar';
+import Notification from "../../classes/Notification"
 
 
 const Item = ({ name, channel }) => {
@@ -34,7 +35,7 @@ const Votation = ({ group }) => {
     history.push(`/groups/${group?.id}/votations`);
   };
 
-  if (group.name === 'Mis chats'){
+  if (group?.name === 'Mis chats'){
     return <div></div>;
   }
 
@@ -48,7 +49,7 @@ const Votation = ({ group }) => {
   );
 };
 
-const AdminMenu = ({channels}) => {
+const AdminMenu = ({channels, adminId}) => {
   const [ showModal, setShowModal] = useState(false);
   const [acceptGroup, setAcceptGroup] = useState(null)
   let history = useHistory();
@@ -65,8 +66,14 @@ const AdminMenu = ({channels}) => {
 			groupId: channel_data_array[0],
 			decision: acceptGroup
     }
-		await ApiRequest.put(`/property/${channel_data_array[2]}/decideGroup`, bodyReq).then(res => {
+
+    let notificationBodyReq = new Notification(channel_data_array[3], adminId, "group_reject");
+
+		await ApiRequest.put(`/property/${channel_data_array[2]}/decideGroup`, bodyReq).then(async res => {
 			if (res.status === 200){
+        if (!acceptGroup){
+          await ApiRequest.post("/notifications/send", notificationBodyReq);
+        }
 				notification.success({
 					message: `¡Tu respuesta fue enviada con éxito!`,
 					placement: "bottomLeft",
@@ -133,13 +140,13 @@ const GroupDetail = ({ detail, render, group }) => {
       });
     return res;
   };
-
+  
   let isAdmin = adminSearh(detail);
   return (
     <div className={`group-detail ${!!render}`}>
       <div className="container">
         <Info name={detail?.name} />
-        {isAdmin ? <AdminMenu channels={detail?.channels} /> : <Votation group={detail} />}
+        {isAdmin ? <AdminMenu channels={detail?.channels} adminId={detail?.adminId} /> : <Votation group={detail} />}
         {detail?.channels.length ? <div className="chats">
           {detail?.channels?.map((ch) => {
             return <Item key={ch.name} name={detail?.id} channel={ch} />;

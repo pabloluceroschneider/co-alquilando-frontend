@@ -57,6 +57,7 @@ const Header = ({ status, typology, ownerId }) => {
         let bodyReq = {
           propertyId: idProperty,
           groupName: state.user.userName + " " + state.user.userSurname,
+          adminId: state.user.id
         };
         await ApiRequest.put(`group/owner/channel/${data.id}`, bodyReq).then(() => {
           notification.success({
