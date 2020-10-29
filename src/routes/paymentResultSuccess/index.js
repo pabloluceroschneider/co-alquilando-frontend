@@ -16,7 +16,7 @@ const PaymentResultSuccess = () => {
       
         const setPayment = async () => {
             try {
-                const pay = await ApiRequest.post(`payment/success/${state.user.id}/${cantidad}`)
+                await ApiRequest.post(`payment/success/${state.user.id}/${cantidad}`)
             } catch (e) {
                 notification.error({
                     message: `No se pudo conectar con el server`,
@@ -28,7 +28,7 @@ const PaymentResultSuccess = () => {
         setTimeout(() => {
             history.push("/property")
         },5000);  
-    }, [])
+    }, [cantidad, history, state.user.id])
 
     
     return (
