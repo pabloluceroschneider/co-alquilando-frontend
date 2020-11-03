@@ -1,101 +1,103 @@
-
 /* mobile first */
-.customizedForm{
-    border: 1px solid #FAFAFA;
-    text-align: center;
-    margin: 0% 5% 5% 5%;
-    padding: 20px 20px 0px 20px;
-    box-shadow: 1px 1px 5px #AFAFAF;
+.customizedForm {
+  border: 1px solid #fafafa;
+  text-align: center;
+  margin: 0% 5% 0% 5%;
+  padding: 20px 20px 0px 20px;
+  box-shadow: 1px 1px 5px #afafaf;
 }
 
-#submit-customizedForm{
-    margin: 15px;
+#submit-customizedForm {
+  margin: 15px;
 }
 
-.customizedForm .showmore{
-    text-align: left;
-    color: rgb(0, 132, 255);
-    margin: 0px auto 15px auto;
-    cursor: pointer;
+.customizedForm .showmore {
+  text-align: left;
+  color: rgb(0, 132, 255);
+  margin: 0px auto 15px auto;
+  cursor: pointer;
 }
 
-.group2, .group3, .group4{
-    display: grid;
-    grid-template-columns: 100%;
-    text-align: center;
+.group2,
+.group3,
+.group4 {
+  display: grid;
+  grid-template-columns: 100%;
+  text-align: center;
 }
 
-.group2 :first-child, .group3 :first-child, .group4 :first-child{
-    text-align: left;
+.group2 :first-child,
+.group3 :first-child,
+.group4 :first-child {
+  text-align: left;
 }
 
-.customizedForm .Checkbox{
-    border: 1px solid #e4e4e4;
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: 90% 10%;
-    margin: 0px 2px 15px 2px;
-    padding: 8px;
+.customizedForm .Checkbox {
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 90% 10%;
+  margin: 0px 2px 15px 2px;
+  padding: 8px;
 }
 
-.customizedForm .ant-slider-mark-text{
-    transform: translateX(0%);
-    left: -2%;
+.customizedForm .ant-slider-mark-text {
+  transform: translateX(0%);
+  left: -2%;
 }
 
-.customizedForm .ant-input-number{
-    width: 100%;
+.customizedForm .ant-input-number {
+  width: 100%;
 }
 
-.customizedForm .label{
-    font-size: 18px;
-    font-weight: bold;
+.customizedForm .label {
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .customizedForm button {
-    margin: 3%;
+  margin: 3%;
 }
 
 .multiple-line {
-    padding: 7px;
-    text-align: left;
-    align-self: center;
+  padding: 7px;
+  text-align: left;
+  align-self: center;
 }
 
 .multiple-line p {
-    margin: 0;
-    font-style: italic;
+  margin: 0;
+  font-style: italic;
 }
 
 /* pantalla de escritorio */
-@media only screen and (min-width: 600px){
-    .customizedForm{
-        margin: 0% 20% 10% 20%;
-    }
+@media only screen and (min-width: 600px) {
+  .customizedForm {
+    margin: 0% 20% 5% 20%;
+  }
 
-    .group2{
-        display: grid;
-        grid-template-columns: 50% 50%;
-        column-gap: 5px;
-        text-align: justify;
-    }
-    .group3{
-        display: grid;
-        grid-template-columns: 33% 33% 33%;
-        column-gap: 5px;
-        text-align: justify;
-    }
-    .group4{
-        display: grid;
-        grid-template-columns: 25% 25% 25% 25%;
-        column-gap: 5px;
-        text-align: justify;
-    }
-    .group5{
-        display: grid;
-        grid-template-columns: 20% 20% 20% 20% 20%;
-        column-gap: 5px;
-        text-align: justify;
-    }
-    
+  .group2 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    column-gap: 5px;
+    text-align: justify;
+  }
+  .group3 {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    column-gap: 5px;
+    text-align: justify;
+  }
+  .group4 {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    column-gap: 5px;
+    text-align: justify;
+  }
+  .group5 {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    column-gap: 5px;
+    text-align: justify;
+  }
 }
