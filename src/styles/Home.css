@@ -1,0 +1,60 @@
+.Home__Image{
+    width: 100%;
+    height: 568px;
+    margin-top: -14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0.85;
+    background-repeat:no-repeat;
+    background-size: cover;
+    
+}
+
+.Home__Titulo {
+    color: white; 
+    margin-bottom: 100px;
+    text-shadow: black 0.1em 0.1em 0.2em;
+    font-size: 45px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.Home__Image .Home__Button {
+    box-shadow: 1px 1px 10px black;
+    border-radius: 1px;
+background-color: #3a4e7a;
+width: 300px;
+     border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 22px;
+  margin: 4px 2px;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.Home__Image a:hover {
+    opacity: 0.95;
+   
+}
+
+@media screen and (min-width: 1400px) {
+    .Home__Image{
+        height: 880px;
+        
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .Home__Image{
+        height: 550px;
+    }
+
+    .Home__Titulo {
+        text-align: center;
+    }
+}
