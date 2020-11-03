@@ -1,13 +1,16 @@
-import React from 'react';
+import React from "react";
 
-const WaitingSelection = ({message, render, icon}) => {
-    return (
-        <div className={`waiting-selection ${!!render}`}>
-            <div className="container">
-                {icon}
-                <div>{message}</div>
-            </div>
-        </div>
-    )
-}
+const WaitingSelection = ({ message, render, icon, border }) => {
+  return (
+    <div
+      className={`waiting-selection ${!!render}`}
+      style={border ? { border: "1px solid var(--dark-grey)" } : null}
+    >
+      <div className="container">
+        {icon}
+        <div>{message}</div>
+      </div>
+    </div>
+  );
+};
 export default WaitingSelection;
