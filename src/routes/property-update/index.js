@@ -5,7 +5,6 @@ import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 import CustomizedForm from "../../components/CustomizedForm";
 import Property from "../../classes/Property";
-import useUpdateProperty from '../../hooks/useUpdateProperty';
 import propertyFields from "../../forms/UPDATE_PROPERTY";
 import { SessionContext } from '../../store';
 
@@ -13,13 +12,59 @@ import { SessionContext } from '../../store';
 const UpdateProperty = () => {
     const [form] = Form.useForm();
     const [data, setData] = useState(null);
-    const [fields, setFields] = useState(null);
     const [hiddenFields, setHiddenFields] = useState(null);
-    const [resultPutBasic, errorBasic] = useUpdateProperty(fields, hiddenFields);
     const { idProperty } = useParams();
     const history = useHistory();
     const { state } = useContext(SessionContext);
     form.setFieldsValue(data)
+
+    const updateProperty = async (values) => {
+        let bodyRequest = new Property(values).mapJsonToRequest();
+        bodyRequest = { ...bodyRequest, ownerId: hiddenFields.ownerId, photos: null };
+        await ApiRequest.put(`/property/${idProperty}`, bodyRequest).then( async () => {
+            let deletePhotos = new Promise((res,rej)=>{
+                hiddenFields.photos.forEach( async (photo) => {
+                    let res = values.photos.file.fileList.find( photoAux => photoAux.name === photo)
+                    if (!res) {
+                        await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`)
+                    }
+                })
+                res()
+            })
+            deletePhotos.then( async () => {
+                let postPhotos = false;
+                const formData = new FormData();
+                formData.append('type', 'file')
+                await values.photos.file.fileList.map( async pic => {
+                    if ( !hiddenFields.photos.includes(pic.name) ){
+                        postPhotos = true;
+                        formData.append("photos", pic.originFileObj)
+                    }
+                })
+                if(postPhotos){
+                    await ApiRequest.multipartPut(`/property/${idProperty}/photos`, formData).then( () => {
+                        hiddenFields.photos.forEach( async (photo) => {
+                            let res = values.photos.file.fileList.find( photoAux => photoAux.name === photo)
+                            if (!res) {
+                                setTimeout( async ()=>{
+                                    await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`)
+                                }, 250)
+                            }
+                        })    
+                    }).then( () => {
+                        hiddenFields.photos.forEach( async (photo) => {
+                            let res = values.photos.file.fileList.find( photoAux => photoAux.name === photo)
+                            if (!res) {
+                                setTimeout( async ()=>{
+                                    await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`)
+                                }, 250)
+                            }
+                        })    
+                    })
+                }
+            })
+        })
+    }
 
     useEffect(() => {
         let getProperty = async () => {
@@ -38,29 +83,10 @@ const UpdateProperty = () => {
         getProperty();
     }, [idProperty, state.user.id, history])
 
-    useEffect(() => {
-        if (errorBasic) {
-            notification.error({
-                message: `Error: No se pudo actualizar sus datos`,
-                description: `${errorBasic}`,
-                placement: "bottomLeft",
-            });
-        } else if (!!resultPutBasic) {
-            // All put success
-            notification.success({
-                message: `Datos Actualizados`,
-                placement: "bottomLeft",
-            });
-            setTimeout(() => {
-                history.push(`/property/${idProperty}`)
-            }, 2000)
-        }
-    }, [resultPutBasic, errorBasic, history, idProperty])
-
     const onDelete = async () => {
         await ApiRequest.delete(`/property/${idProperty}`).then(res => {
             notification.success({
-                message: `Propiedad eliminada con exito`,
+                message: `Propiedad eliminada con éxito`,
                 placement: "bottomLeft",
             });
             history.push(`/my-properties`)
@@ -71,7 +97,7 @@ const UpdateProperty = () => {
     return (
         <div>
             <ContentWrapper topNav title="Actualizar Propiedad">
-                <CustomizedForm form={form} data={propertyFields} onfinish={setFields} onDelete={onDelete} />
+                <CustomizedForm form={form} data={propertyFields} onfinish={updateProperty} onDelete={onDelete} />
             </ContentWrapper>
         </div>
     );
