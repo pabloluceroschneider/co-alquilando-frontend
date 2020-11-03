@@ -2,7 +2,12 @@ import React, { useContext } from "react";
 import { Card, notification, Avatar, Modal } from "antd";
 import ApiRequest from "../../util/ApiRequest";
 import Notification from "../../classes/Notification";
-import { CloseCircleTwoTone, CheckCircleTwoTone, CloseOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import {
+  CloseCircleTwoTone,
+  CheckCircleTwoTone,
+  CloseOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 import { SessionContext } from "../../store";
 
 const { Meta } = Card;
@@ -30,48 +35,51 @@ const Name = ({ name, userNickname }) => {
   );
 };
 
-const Close = ({id, setNotifications, notifications}) =>{
+const Close = ({ id, setNotifications, notifications }) => {
   const { confirm } = Modal;
 
   function showConfirm() {
     confirm({
-      title: '¿Quieres eliminar esta notificación?',
+      title: "¿Quieres eliminar esta notificación?",
       icon: <ExclamationCircleOutlined />,
-      content: 'No se volverá a mostrar en el listado de notificaciones',
-      okType: 'danger',
-      okText: 'Si',
-      cancelText: 'No',
+      content: "No se volverá a mostrar en el listado de notificaciones",
+      okType: "danger",
+      okText: "Confirmar",
+      cancelText: "Cancelar",
       onOk() {
-        deleteNotification()
+        deleteNotification();
       },
-      onCancel() {
-      },
+      onCancel() {},
     });
   }
 
   const deleteNotification = async () => {
     await ApiRequest.delete(`/notifications/${id}`);
-    setNotifications(notifications?.filter(n => n.id  !== id))
-  }
+    setNotifications(notifications?.filter((n) => n.id !== id));
+  };
 
-  return(<CloseOutlined className="NotificationClose" onClick={showConfirm} />)
-}
+  return <CloseOutlined className="NotificationClose" onClick={showConfirm} />;
+};
 
 const NotificationCard = (props) => {
   const { state } = useContext(SessionContext);
   const response = async (type) => {
-    let groupID = await props.notificationAttributes.find((a) => a.attributeType === 'groupId');
+    let groupID = await props.notificationAttributes.find(
+      (a) => a.attributeType === "groupId"
+    );
 
     if (type !== "group_send_invitation") {
       let bodyReqResp = {
         decision: type === "group_accept_invitation" ? true : false,
-        groupId: groupID.value
+        groupId: groupID.value,
       };
 
       await ApiRequest.put(`/user/${state.user.id}/invite`, bodyReqResp);
 
       await ApiRequest.delete(`/notifications/${props.id}`);
-      props.setNotifications(props.notification?.filter(n => n.id  !== props.id))
+      props.setNotifications(
+        props.notification?.filter((n) => n.id !== props.id)
+      );
     }
 
     let bodyReq = new Notification(props.to, props.from, type);
@@ -86,17 +94,17 @@ const NotificationCard = (props) => {
     group_send_invitation: [
       <span
         onClick={() => {
+          response("group_decline_invitation");
+        }}
+      >
+        <CloseCircleTwoTone className="responseButton" twoToneColor="red" />
+      </span>,
+      <span
+        onClick={() => {
           response("group_accept_invitation");
         }}
       >
         <CheckCircleTwoTone className="responseButton" twoToneColor="#52c41a" />
-      </span>,
-      <span
-        onClick={() => {
-          response("group_decline_invitation");
-        }}
-      >
-        <CloseCircleTwoTone className="responseButton" twoToneColor="#FB8888" />
       </span>,
     ],
   };
@@ -117,12 +125,20 @@ const NotificationCard = (props) => {
             {props.userFrom.userName[0].toUpperCase()}{" "}
           </Avatar>
         }
-        title={<div>
-          <Name
-            name={props.userFrom.userName + " " + props.userFrom.userSurname}
-            userNickname={props.userFrom.userNickname}
-          />{props.type !== 'group_send_invitation' && <Close notifications={props.notifications} setNotifications={props.setNotifications} id={props.id}/>}
-        </div>
+        title={
+          <div>
+            <Name
+              name={props.userFrom.userName + " " + props.userFrom.userSurname}
+              userNickname={props.userFrom.userNickname}
+            />
+            {props.type !== "group_send_invitation" && (
+              <Close
+                notifications={props.notifications}
+                setNotifications={props.setNotifications}
+                id={props.id}
+              />
+            )}
+          </div>
         }
         description={<Description desc={props.type} />}
       />
