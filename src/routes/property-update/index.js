@@ -24,7 +24,7 @@ const UpdateProperty = () => {
         await ApiRequest.put(`/property/${idProperty}`, bodyRequest).then( async () => {
             let deletePhotos = new Promise((res,rej)=>{
                 hiddenFields.photos.forEach( async (photo) => {
-                    let res = values.photos.file.fileList.find( photoAux => photoAux.name === photo)
+                    let res = values.photos.file?.fileList.find( photoAux => photoAux.name === photo)
                     if (!res) {
                         await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`)
                     }
@@ -35,7 +35,7 @@ const UpdateProperty = () => {
                 let postPhotos = false;
                 const formData = new FormData();
                 formData.append('type', 'file')
-                await values.photos.file.fileList.map( async pic => {
+                await values.photos.file?.fileList.map( async pic => {
                     if ( !hiddenFields.photos.includes(pic.name) ){
                         postPhotos = true;
                         formData.append("photos", pic.originFileObj)
@@ -63,6 +63,11 @@ const UpdateProperty = () => {
                     })
                 }
             })
+        }).then( () => {
+            notification.success({
+                message: `Propiedad actualizada con éxito`,
+                placement: "bottomLeft",
+            });
         })
     }
 
