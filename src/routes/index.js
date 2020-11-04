@@ -30,7 +30,7 @@ const Routes = () => {
 			<Router>
 				{state.user ? (
 					<Switch>
-						<Route exact path="/" component={UserHome} />
+						<Route exact path="/" exact component={PropertyList} />
 						<Route path="/my-profile/updatePreferencies" exact component={UpdatePreferenciesForm} />
 						<Route path="/my-profile/update" exact component={UpdateForm} />
 						<Route path="/my-profile" exact component={MyProfile} />
@@ -38,7 +38,7 @@ const Routes = () => {
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
 						<Route path="/property/:idProperty" component={PropertyDetail} />
 						<Route path="/property" exact component={Property} />
-						<Route path="/properties" exact component={PropertyList} />
+						{/* <Route path="/properties" exact component={PropertyList} /> */}
 						<Route path="/my-properties" exact component={MyProperties} />
 						<Route path="/roommates" exact component={Roommates} />
 						<Route path="/groups/:group/votations" component={Groups} />

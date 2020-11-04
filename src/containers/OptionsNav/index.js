@@ -18,7 +18,7 @@ const OptionsNav = () => {
 		{
 			title: 'Buscar Propiedad',
 			className: 'search_property',
-			link: '/properties'
+			link: '/'
 		},
 		{
 			title: 'Publicar Propiedad',
