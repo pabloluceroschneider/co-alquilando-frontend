@@ -31,7 +31,7 @@ const CustomizedForm = (props) => {
 		setTimeout(() => {
 			setLoading(false);
 			onfinish(values);
-		}, 10000);
+		}, 2000);
 	};
 
 	const onFinishFailed = values => {
