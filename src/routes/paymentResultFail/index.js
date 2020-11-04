@@ -11,7 +11,7 @@ const PaymentResultFail = () => {
         setTimeout(() => {
             history.push("/property")
         },5000);  
-    }, [])
+    }, [history])
 
     
     return (

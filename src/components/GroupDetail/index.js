@@ -5,6 +5,7 @@ import ApiRequest from "../../util/ApiRequest";
 import { Button, notification, Modal } from "antd";
 import { StarFilled, SettingOutlined } from "@ant-design/icons";
 import Avatar from '../Avatar';
+import Notification from "../../classes/Notification"
 import ConfigGroup from '../ConfigGroup';
 
 
@@ -33,8 +34,13 @@ const Votation = ({ group }) => {
   const votation = window.location.pathname.split("/").includes("votations")
 
   const handleClick = () => {
-    history.push(`/groups/${group}/votations`);
+    history.push(`/groups/${group?.id}/votations`);
   };
+
+  if (group?.name === 'Mis chats'){
+    return <div></div>;
+  }
+
   return (
     <div className={`item clickeable selected-${votation}`} onClick={handleClick}>
       <StarFilled />
@@ -45,7 +51,7 @@ const Votation = ({ group }) => {
   );
 };
 
-const AdminMenu = ({channels}) => {
+const AdminMenu = ({channels, adminId}) => {
   const [ showModal, setShowModal] = useState(false);
   const [acceptGroup, setAcceptGroup] = useState(null)
   let history = useHistory();
@@ -62,8 +68,14 @@ const AdminMenu = ({channels}) => {
 			groupId: channel_data_array[0],
 			decision: acceptGroup
     }
-		await ApiRequest.put(`/property/${channel_data_array[2]}/decideGroup`, bodyReq).then(res => {
+
+    let notificationBodyReq = new Notification(channel_data_array[3], adminId, "group_reject");
+
+		await ApiRequest.put(`/property/${channel_data_array[2]}/decideGroup`, bodyReq).then(async res => {
 			if (res.status === 200){
+        if (!acceptGroup){
+          await ApiRequest.post("/notifications/send", notificationBodyReq);
+        }
 				notification.success({
 					message: `¡Tu respuesta fue enviada con éxito!`,
 					placement: "bottomLeft",
@@ -134,7 +146,7 @@ const GroupDetail = ({ detail, render }) => {
 
   const adminSearh = (detalle) => {
     var res = false;
-    detalle != null &&
+    detalle && detalle.channels &&
       detalle.channels.forEach((a) => {
         let adminIDarray = a.channelId.split("-");
         if (adminIDarray[3] === state.user.id) {
@@ -143,18 +155,18 @@ const GroupDetail = ({ detail, render }) => {
       });
     return res;
   };
-
+  
   let isAdmin = adminSearh(detail);
   return (
     <div className={`group-detail ${!!render}`}>
       <div className="container">
-        <Info detail={detail} admin={detail?.adminId===state.user.id} />
-        {isAdmin ? <AdminMenu channels={detail?.channels} /> : <Votation group={detail?.id} />}
-        <div className="chats">
+        <Info name={detail?.name} admin={detail?.adminId===state.user.id}/>
+        {isAdmin ? <AdminMenu channels={detail?.channels} adminId={detail?.adminId} /> : <Votation group={detail} />}
+        {detail?.channels.length ? <div className="chats">
           {detail?.channels?.map((ch) => {
             return <Item key={ch.name} name={detail?.id} channel={ch} />;
           })}
-        </div>
+        </div> : <div className="noChats">No tienes ningún chat aún</div>}
       </div>
     </div>
   );

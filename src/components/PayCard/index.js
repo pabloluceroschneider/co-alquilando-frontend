@@ -1,13 +1,10 @@
 import React from 'react';
-import { useHistory } from 'react-router';
 import { Card, Divider, Button } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons'
 import '../../styles/PayCard.css'
 
 const PayCard = props => {
     const { title, price, color, buyLink, propertiesAmount, desc } = props;
-
-    const history = useHistory();
 
     const redirectPurchace = () => {
         
