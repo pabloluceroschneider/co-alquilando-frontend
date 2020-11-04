@@ -11,6 +11,7 @@ let notification_types = {
   group_decline_invitation: "Invitación Rechazada",
   group_accept_invitation: "Invitación Aceptada",
   group_send_invitation: "Invitación de Grupo",
+  group_reject: "El propietario rechazo tu grupo",
   group_delete_member: "Ya no tienes acceso a un grupo",
 };
 

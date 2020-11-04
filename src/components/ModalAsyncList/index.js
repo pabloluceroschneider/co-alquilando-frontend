@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from 'antd';
 import ApiRequest from '../../util/ApiRequest';
 
-const ModalAsyncList = ({endpoint, label, title, itemTitle, handleOk}) => {
+const ModalAsyncList = ({endpoint, label, title, itemTitle, handleOk, nodata}) => {
     const [data, setData] = useState(null)
     const [visible, setVisible] = useState(false);
     const [selected, setSelected] = useState({});
@@ -50,6 +50,9 @@ const ModalAsyncList = ({endpoint, label, title, itemTitle, handleOk}) => {
                         </div>
                     )
                 })}
+                {!data?.length ? <div>
+                    {nodata}
+                </div> :null}
             </Modal>
         </div>
     )
