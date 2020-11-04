@@ -3,13 +3,13 @@ import { SessionContext } from "../../store";
 import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 import NotificationCard from "../../components/NotificationCard";
-import WaitingSelection from '../../components/WaitingSelection';
-import { BellOutlined } from '@ant-design/icons';
+import WaitingSelection from "../../components/WaitingSelection";
+import { BellOutlined } from "@ant-design/icons";
 
 const Notifications = (props) => {
   const { state } = useContext(SessionContext);
   const [notifications, setNotifications] = useState();
-  const breadscrumb = [{Notificaciones: '/notifications'}]
+  const breadscrumb = [{ Notificaciones: "/notifications" }];
 
   useEffect(() => {
     if (notifications) return;
@@ -22,19 +22,31 @@ const Notifications = (props) => {
     asyncGet();
   }, [state.user.id, notifications]);
 
-  if (!notifications?.length) return (
-    <ContentWrapper topNav breadscrumb={breadscrumb} >
+  if (!notifications?.length)
+    return (
+      <ContentWrapper topNav breadscrumb={breadscrumb}>
         <div className="no-groups">
-            <WaitingSelection  message="No tienes notificaciones!" render={!notifications} icon={<BellOutlined />} />
+          <WaitingSelection
+            message="No tienes notificaciones"
+            render={!notifications}
+            icon={<BellOutlined />}
+          />
         </div>
-    </ContentWrapper>
-)
+      </ContentWrapper>
+    );
 
   return (
-    <ContentWrapper topNav title="Notificaciones" breadscrumb={breadscrumb}>
+    <ContentWrapper topNav breadscrumb={breadscrumb}>
       <div className="notifications">
         {notifications?.map((n) => {
-          return <NotificationCard key={n.id} {...n} setNotifications={setNotifications} notifications={notifications}/>;
+          return (
+            <NotificationCard
+              key={n.id}
+              {...n}
+              setNotifications={setNotifications}
+              notifications={notifications}
+            />
+          );
         })}
       </div>
     </ContentWrapper>

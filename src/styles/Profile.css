@@ -1,76 +1,74 @@
-.profileContent{
-    text-align: center;
-    border: 1px solid #AFAFAF;
-    text-align: center;
-    margin: 1% 5% 0% 5%;
-    padding: 20px;
-    box-shadow: 2px 2px 5px var(--dark-grey);
-    word-wrap: break-word;
-    color: var(--letter);
-    margin-bottom: 40px;
+.profileContent {
+  text-align: center;
+  border: 1px solid #afafaf;
+  text-align: center;
+  margin: 1% 5% 0% 5%;
+  padding: 20px;
+  box-shadow: 2px 2px 5px var(--dark-grey);
+  word-wrap: break-word;
+  color: var(--letter);
+  margin-bottom: 40px;
 }
 
-.profileImage{
-    width: 250px;
+.profileImage {
+  width: 250px;
+  border-radius: 100%;
+  margin: 2%;
+}
+
+#buttonConectar {
+  background-color: #2e86c1;
+  color: #f2f3f4;
+  font-weight: bold;
+}
+
+.buttonEdit {
+  margin: 5%;
+}
+
+.profileMainData h1 strong {
+  color: var(--principal-blue);
+}
+
+.profileContent h3 {
+  color: var(--secondary-blue);
+}
+
+@media only screen and (min-width: 600px) {
+  .profileGroup2 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    column-gap: 5px;
+  }
+
+  .profileGroup3 {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    column-gap: 5px;
+  }
+
+  .profileImage {
+    width: 70%;
     border-radius: 100%;
-    margin: 2%;
-}
+  }
 
-#buttonConectar{
-    background-color:#2E86C1 ;
-    color:#F2F3F4 ;
-    font-weight: bold;
-}
+  .profileMainData {
+    text-align: center;
+    align-self: center;
+  }
 
-.buttonEdit{
-    margin: 5%;
-}
+  .datosContent {
+    text-align: start;
+    margin-top: 2%;
+    margin-left: 15%;
+  }
 
-.profileMainData h1 strong{
-    color: var(--principal-blue);
-}
+  .profileButton {
+    text-align-last: center;
+  }
 
-.profileContent h3{
-    color: var(--secondary-blue);
-}
-
-
-@media only screen and (min-width: 600px){
-    .profileGroup2{
-        display: grid;
-        grid-template-columns: 50% 50%;
-        column-gap: 5px;
-    }
-
-    .profileGroup3{
-        display: grid;
-        grid-template-columns: 33% 33% 33%;
-        column-gap: 5px;
-    }
-
-    .profileImage{
-        width: 70%;
-        border-radius: 100%;
-    }
-
-    .profileMainData{
-        text-align: center;
-        align-self: center;
-    }
-
-    .datosContent{
-        text-align: start;
-        margin-top: 2%;
-        margin-left: 15%;
-    }
-
-    .profileButton{
-        text-align-last: center;
-    }
-
-    .profileContent{
-        width: 60%;
-        margin-left: 20%;
-    }
-
+  .profileContent {
+    width: 60%;
+    margin-left: 20%;
+  }
 }
