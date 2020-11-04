@@ -24,13 +24,17 @@ const UpdateProperty = () => {
         let allPromise = new Promise( async (res,rej)=> {
             try {
                 await ApiRequest.put(`/property/${idProperty}`, bodyRequest).then( async () => {
-                    let deletePhotos = new Promise((resolve,reject)=>{
+                    let deletePhotos = new Promise( async (resolve,reject)=>{
+                        let array_delete_photos = [];
                         hiddenFields.photos.forEach( async (photo) => {
                             let res = values.photos.file?.fileList.find( photoAux => photoAux.name === photo)
                             if (!res) {
-                                await ApiRequest.delete(`/property/${idProperty}/photos/${photo}`)
+                                array_delete_photos.push(photo)
                             }
                         })
+                        if (array_delete_photos.length) {
+                            await ApiRequest.delete(`/property/${idProperty}/photos`, { photos: array_delete_photos})
+                        }
                         resolve()
                     })
                     deletePhotos.then( async () => {
