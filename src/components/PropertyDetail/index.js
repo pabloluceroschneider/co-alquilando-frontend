@@ -109,6 +109,7 @@ const Header = ({ status, typology, ownerId }) => {
           endpoint={`/group/available/user/${state.user.id}`}
           itemTitle="name"
           handleOk={handleOk}
+          nodata="No tienes grupos creados"
         />
       </Menu.Item>
       <Menu.Item key="1">
