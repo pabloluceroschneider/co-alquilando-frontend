@@ -1,28 +1,34 @@
 import React from 'react';
-import ContentWrapper from '../../components/ContentWrapper'
-import imageHome from '../../assets/images/Home/imageHome.jpg'
 import LogoSinFondo from '../../assets/images/Home/LogoSinFondo.png'
-import imageHomeBig from '../../assets/images/Home/imageHomeBig.jpg'
-import { Button } from 'antd';
+import video from '../../assets/images/Home/Coalq.mp4'
 import "../../styles/Home.css"
+import Login from  '../../components/Login'
 
 
 const Home = () => {
 
-   
-    return (
-		<ContentWrapper topNav footer>
-            <div className="Home__Image" style={{backgroundImage: "url(" + imageHomeBig + ")" }}>
-            {/* <img src={LogoSinFondo}></img> */}
-            <span className="Home__Titulo">La oportunidad que estabas esperando</span>
-            <a href="/sign-in" className="Home__Button"  type="button">
-							Encontrá tu Lugar
-						</a>
-             
 
+  return (
+  
+      <div className="Home__Image">
+        <div className="LogoContext">
+          <img src={LogoSinFondo}></img>
+        </div>
+         <div className="iniciarSesionContext">
+        <Login></Login>
             </div>
-		</ContentWrapper>
-    );
+          <video loop autoPlay preload>
+            <source src={video} ></source>
+          </video>
+          <div className="Home__Text">
+            <span className="Home__Titulo">La oportunidad que estabas esperando</span>
+            <a href="/sign-in" className="Home__Button" type="button">
+              Encontrá tu Lugar
+						</a>
+         </div>
+      </div>
+
+  );
 
 }
 
