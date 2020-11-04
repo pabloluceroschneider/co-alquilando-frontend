@@ -4,6 +4,7 @@ import { Menu, Avatar, Badge, Dropdown } from 'antd';
 import { LogoutOutlined, BellOutlined, TeamOutlined } from '@ant-design/icons';
 import Login from '../../components/Login';
 import Auth from '../../util/Auth';
+import logo from '../../assets/images/logonav.png'
 
 const Ring = () => {
 	useEffect(() => { return () => { new AbortController().abort(); } })
@@ -47,7 +48,9 @@ const Nav = () => {
 	return (
 		<ul className="principalNav">
 			<li>
-				<a className="home" href="/">CoAlquilando</a>
+				<a className="home" href="/">
+					<img className="logo" src={logo} alt="CoAlquilando"></img>
+				</a>
 			</li>
 			{state?.user ? (
 				<>
@@ -73,11 +76,6 @@ const Nav = () => {
 				<>
 					<li style={{ float: 'right' }}>
 						<Login />
-					</li>
-					<li style={{ float: 'right' }}>
-						<a href="/sign-in">
-							Registrarse
-					</a>
 					</li>
 				</>
 			}
