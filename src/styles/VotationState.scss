@@ -1,97 +1,97 @@
-
-
 .votationHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding-bottom: 12px;
-    .contentVotationTitle{
-        display: grid;
-        .priceVotation {
-            color: rgb(95, 95, 95);
-            font-size: 10px;
-            margin-top: -3px;
-            font-weight: 500;
-            text-align: start;
-        }
-        .titleVotation {
-            color: var(--principal-blue);
-            font-size: 20px;
-            font-weight: 500;
-            text-align: center;
-        }
-        .buttonsVotation {
-            place-items: center;
-            .buttonsVotationOk {
-                &:hover svg{
-                    opacity: 1;
-                }
-                svg {
-                    margin-right: 12px;
-                    width: 30px;
-                    height: 30px;
-                    color: rgb(79, 168, 113);
-                    opacity: 0.2;
-                }
-            }
-            .buttonsVotationNo {
-                &:hover svg{
-                    opacity: 1;
-                }
-                svg {
-                    width: 30px;
-                    height: 30px;
-                    color: red;
-                    opacity: 0.2;
-
-                }
-            }
-            
-        }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-bottom: 12px;
+  .contentVotationTitle {
+    display: grid;
+    .priceVotation {
+      color: rgb(95, 95, 95);
+      font-size: 10px;
+      margin-top: -3px;
+      font-weight: 500;
+      text-align: center;
     }
-
+    .titleVotation {
+      color: var(--principal-blue);
+      font-size: 20px;
+      font-weight: 500;
+      text-align: center;
+    }
+    .buttonsVotation {
+      text-align: center;
+      .buttonsVotationOk {
+        &:hover svg {
+          opacity: 1;
+        }
+        svg {
+          width: 30px;
+          height: 30px;
+          opacity: 0.5;
+        }
+      }
+      .buttonsVotationNo {
+        &:hover svg {
+          opacity: 1;
+        }
+        svg {
+          margin-right: 12px;
+          width: 30px;
+          height: 30px;
+          color: red;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
 }
 
-
 .imageVotation {
-    width: 30%;
-    height: 30%;
+  width: 30%;
+  height: 30%;
 }
 
 .rowVotation {
-    display: flex;
-    flex-direction: column;
-    margin-top: 5px;
-    padding-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  padding-bottom: 12px;
 }
 
 .subtitleVotation {
-    color: rgb(95, 95, 95);
-    font-size: 13px;
-    font-weight: 500;
-    text-align: start;
+  color: rgb(95, 95, 95);
+  font-size: 13px;
+  font-weight: 500;
+  text-align: start;
 }
 
 .rowVotation .actualVotation {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .resultVotation {
-    color: var(--principal-blue);
-    text-align: center;
+  color: var(--principal-blue);
+  text-align: center;
 }
 
 .ongoing {
-    .results {
-        display: grid;
-        grid-template-columns: auto auto;
-        place-items: center;
-        border-top: 1px solid var(--dark-grey);
-        border-bottom: 1px solid var(--dark-grey);
-    }
+  .results {
+    display: grid;
+    grid-template-columns: auto auto;
+    place-items: center;
+    border-top: 1px solid var(--dark-grey);
+    border-bottom: 1px solid var(--dark-grey);
+  }
 
-    .state {
-        padding: 2px 0;
-    }
+  .state {
+    padding: 2px 0;
+  }
+}
+
+/* Desktop View */
+@media only screen and (min-width: 600px) {
+  .votationHeader .contentVotationTitle .priceVotation {
+    font-size: 1em;
+  }
 }
