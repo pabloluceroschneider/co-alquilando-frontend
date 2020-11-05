@@ -63,8 +63,8 @@ const Groups = () => {
                             <GroupDetail detail={detail} render={ group && !chat && !votation } group={group} /> 
                             : group ? 
                             <Spin />
-                            : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
-                            : <WaitingSelection message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
+                            : <WaitingSelection border message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
+                            : <WaitingSelection border message="Seleccione Grupo" render={ group && !chat } icon={<TeamOutlined />}/> 
                         }
                         {
                             detail ? 
@@ -80,7 +80,7 @@ const Groups = () => {
 
                 {data && !data?.length ? (
                     <div className="no-groups">
-                        <WaitingSelection  message="No tienes grupos!" render={!group && !chat} icon={<TeamOutlined />} />
+                        <WaitingSelection border message="No tienes grupos!" render={!group && !chat} icon={<TeamOutlined />} />
                     </div>
                 ) :null }
             </GroupContext.Provider>
