@@ -75,7 +75,7 @@ const useServiceWorker = () => {
 		if ('serviceWorker' in navigator) {
 			window.addEventListener('load', () => {
 			navigator.serviceWorker
-				.register('./sw.js')
+				.register('/sw.js')
 				.then(function(registration) {
 					//console.log('Service Worker Registered', registration);
 					// El usuario permitió Notificaciones.
