@@ -61,6 +61,7 @@ const propertyFields = {
 					label: "Cargar Imagen",
 					name: "photos",
 					component: "Upload",
+					aspect: 16/9
 				},
 			],
 			[
