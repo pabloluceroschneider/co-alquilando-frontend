@@ -1,5 +1,4 @@
-
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from "react";
 import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 import PropertyCard from '../../components/PropertyCard';

@@ -10,7 +10,7 @@ import { BellOutlined } from '@ant-design/icons';
 const Notifications = (props) => {
   const { state } = useContext(SessionContext);
   const [notifications, setNotifications] = useState();
-  const breadscrumb = [{Notificaciones: '/notifications'}]
+  const breadscrumb = [{ Notificaciones: "/notifications" }];
 
   useEffect(() => {
     if (notifications) return;
@@ -30,7 +30,14 @@ const Notifications = (props) => {
         {!notifications ? <Spin /> : null}
         
         {notifications?.map((n) => {
-          return <NotificationCard key={n.id} {...n} setNotifications={setNotifications} notifications={notifications}/>;
+          return (
+            <NotificationCard
+              key={n.id}
+              {...n}
+              setNotifications={setNotifications}
+              notifications={notifications}
+            />
+          );
         })}
 
         {notifications && !notifications?.length ? (

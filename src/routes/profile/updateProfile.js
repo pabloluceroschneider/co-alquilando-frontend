@@ -1,18 +1,22 @@
 import React, { useEffect, useState, useContext } from "react";
-import { SessionContext, SIGN_IN } from '../../store'
+import { SessionContext, SIGN_IN, SIGN_OUT } from "../../store";
 import { useHistory } from "react-router-dom";
 import { Form, notification } from "antd";
 import CustomizedForm from "../../components/CustomizedForm";
 import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 import moment from "moment";
-import provinces from '../../util/provinces'
-
+import provinces from "../../util/provinces";
+import { Auth } from "aws-amplify";
 
 const userData = {
   name: "user",
   layout: "vertical",
   btnSubmit: "Actualizar Datos",
+  btnDelete: "Eliminar perfil",
+  titleDelete: "Eliminar perfil",
+  deleteContentModal:
+    "¿Desea eliminar este perfil de usuario? Si selecciona 'Aceptar', no podrá recuperar su cuenta.",
   fields: {
     primaries: [
       [
@@ -89,13 +93,13 @@ const userData = {
           name: ["attributes", "nationality"],
           component: "SelectDB",
           endpoint: "/nationality/all",
-          search: 'nationality',
+          search: "nationality",
         },
         {
           label: "Provincia",
           name: ["attributes", "city"],
           component: "Select",
-          options: provinces
+          options: provinces,
         },
       ],
       [
@@ -103,8 +107,8 @@ const userData = {
           label: "Ocupación",
           name: ["attributes", "occupation"],
           component: "SelectDB",
-          endpoint: '/occupation/all',
-          search: 'occupation'
+          endpoint: "/occupation/all",
+          search: "occupation",
         },
         {
           label: "Tengo Mascotas",
@@ -138,13 +142,17 @@ const UpdateForm = (props) => {
   const history = useHistory();
   const { state, dispatch } = useContext(SessionContext);
   const [photosUpdate, setPhotosUpdate] = useState(null);
+  const breadscrumb = [
+    { "Mi Perfil": "/my-profile" },
+    { "Actualizar Mi Perfil": "/my-profile/update" },
+  ];
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/user/${state.user.userNickname}`).then((res) => {
         let { data } = res;
         let attributes = {};
 
-        if (data.attributes && data.attributes !== 'photos') {
+        if (data.attributes && data.attributes !== "photos") {
           data.attributes.forEach((t) => {
             attributes = { ...attributes, [t.attributeType]: t.value };
           });
@@ -177,8 +185,8 @@ const UpdateForm = (props) => {
       delete bodyReq.photos;
 
       let asyncPutUser = new Promise(async (res, rej) => {
-        let { data, status } = await ApiRequest.put(`/user/${idUser}`, bodyReq)
-        await dispatch(SIGN_IN(data))
+        let { data, status } = await ApiRequest.put(`/user/${idUser}`, bodyReq);
+        await dispatch(SIGN_IN(data));
         if (status === 200) {
           notification.success({
             message: `Datos Actualizados`,
@@ -195,22 +203,26 @@ const UpdateForm = (props) => {
           var plist = fields.photos.file.fileList;
 
           const formData = new FormData();
-          formData.append('type', 'file')
+          formData.append("type", "file");
           let hasFile = false;
           for (const ph in plist) {
             hasFile = true;
             if (plist[ph].originFileObj) {
-              let phLast = plist[ph].originFileObj
-              formData.append("photos", phLast)
+              let phLast = plist[ph].originFileObj;
+              formData.append("photos", phLast);
             }
           }
 
           let header = {
-            'Content-Type': 'multipart/form-data'
-          }
+            "Content-Type": "multipart/form-data",
+          };
 
           if (hasFile) {
-            await ApiRequest.multipartPut(`/user/${idUser}/photos`, formData, header).then((res) => {
+            await ApiRequest.multipartPut(
+              `/user/${idUser}/photos`,
+              formData,
+              header
+            ).then((res) => {
               if (res.status === 200) {
                 notification.success({
                   message: `Datos Actualizados`,
@@ -225,10 +237,8 @@ const UpdateForm = (props) => {
             });
           }
         }
-        res()
-      }
-
-      );
+        res();
+      });
       asyncPutUser.then(() => {
         history.push(`/my-profile`);
       });
@@ -249,33 +259,47 @@ const UpdateForm = (props) => {
 
       auxListPhoto.forEach((photoAux, indexAux) => {
         photosUpdate.forEach((photo, index) => {
-
           if (photoAux.name === photo) {
             let asyncPutPhoto = async () => {
-              await ApiRequest.delete(`/user/${idUser}/photos/${photo}`).then((res) => {
-                if (res.status === 200) {
-                  notification.success({
-                    message: "Datos Actualizados",
-                    placement: "bottomLeft",
-                  });
-                } else {
-                  notification.error({
-                    message: "Error: No se pudo actualizar sus datos",
-                    placement: "bottomLeft",
-                  });
+              await ApiRequest.delete(`/user/${idUser}/photos/${photo}`).then(
+                (res) => {
+                  if (res.status === 200) {
+                    notification.success({
+                      message: "Datos Actualizados",
+                      placement: "bottomLeft",
+                    });
+                  } else {
+                    notification.error({
+                      message: "Error: No se pudo actualizar sus datos",
+                      placement: "bottomLeft",
+                    });
+                  }
                 }
-              });
+              );
             };
             asyncPutPhoto();
           }
-        })
-      })
+        });
+      });
     }
   }, [idUser, history, fields, photosUpdate]);
 
+  const onDelete = async () => {
+    await ApiRequest.delete(`/user/${idUser}`).then((res) => {
+      Auth.signOut();
+      dispatch(SIGN_OUT());
+      history.push("/");
+    });
+  };
+
   return (
-    <ContentWrapper topNav title="Actualizar Perfil">
-      <CustomizedForm form={form} data={userData} onfinish={setFields} />
+    <ContentWrapper topNav breadscrumb={breadscrumb}>
+      <CustomizedForm
+        form={form}
+        data={userData}
+        onfinish={setFields}
+        onDelete={onDelete}
+      />
     </ContentWrapper>
   );
 };

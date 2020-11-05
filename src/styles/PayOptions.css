@@ -1,0 +1,13 @@
+.contentPayOptions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.spiner {
+    margin-top: 10%;
+}
+
+.spiner .ant-spin-lg .ant-spin-dot {
+    font-size: 56px;
+}

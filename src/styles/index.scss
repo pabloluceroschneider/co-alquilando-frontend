@@ -1,9 +1,9 @@
-@import '../assets/Icons/Icon/styles.css';
+@import "../assets/Icons/Icon/styles.css";
 @import "./App.css";
 @import "./Profile.css";
 @import "./property.css";
 @import "./customizedForm.css";
-@import './ContentWrapper.css';
+@import "./ContentWrapper.css";
 @import "./Footer.css";
 @import "./Header.css";
 @import "./TopNav.css";
@@ -12,15 +12,12 @@
 @import "./Portada.css";
 @import "./Login.scss";
 @import "./Match.css";
-@import "./UserPreferencies.css";
-@import './Header.css';
 @import './Nav.scss';
 @import './OptionsNav.css';
 @import './PropertyList.css';
 @import './PropertyCard.css';
 @import './PropertyDetail.css';
 @import './ModalAsyncList.css';
-@import './ContentWrapper.css';
 @import './Groups.css';
 @import './SideList.css';
 @import './H-Scroll-List.css';
@@ -35,17 +32,16 @@
 @import './Loading.scss';
 @import './Spin.scss';
 
-
 body {
   --principal-blue: #3a4e7a;
   --secondary-blue: #5e83ba;
   --tertiary-blue: #c2d2e9;
-  --grey: #FAFAFA;
+  --grey: #fafafa;
   --dark-grey: #d8d8d8;
   --letter: #000000a6;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -53,11 +49,11 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.userHome img{
+.userHome img {
   width: 100vw;
 }
 
@@ -79,24 +75,24 @@ code {
   border-radius: 15px;
   padding-top: 300%;
   padding-left: 350%;
-  margin-left: -10px!important;
+  margin-left: -10px !important;
   margin-top: -120%;
   opacity: 0;
-  transition: all 0.8s
+  transition: all 0.8s;
 }
 
 .clickeable:active:after {
   padding: 0;
   margin: 0;
   opacity: 0.3;
-  transition: 0s
+  transition: 0s;
 }
 
-@media only screen and (min-width: 600px){
-  .userHome{
+@media only screen and (min-width: 600px) {
+  .userHome {
     text-align: center;
   }
-  .userHome img{
+  .userHome img {
     max-width: 50vw;
   }
 }

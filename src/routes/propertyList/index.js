@@ -5,16 +5,14 @@ import ContentWrapper from '../../components/ContentWrapper';
 import PropertyCard from '../../components/PropertyCard';
 import Spin from '../../components/Spin';
 import Filters from '../../components/Filters';
-// import Loading from '../../components/Loading';
 import WaitingSelection from '../../components/WaitingSelection'
-import { propertyFilters } from '../../forms/FILTERS';
-import { getParamsEntries } from '../../util/getParams'
 
 const Property = () => {
 	const [ datos, setDatos ] = useState(null);
 	const [ page, setPage ] = useState(1);
 	const [ size ] = useState(10);
-	const [ params ] = useState( getParamsEntries() );
+	const [params, setParams] = useState();
+	const onChange = page => setPage(page);
 
 	useEffect(() => {
 			let asyncGet = async () => {
@@ -31,7 +29,6 @@ const Property = () => {
 			asyncGet();
 		},[ page, size, params ]);
 
-	const onChange = page => setPage(page);
 
 
 	return (
@@ -39,7 +36,7 @@ const Property = () => {
 			<div className="properties-wrapper">
 				
 				<div className="filters">
-					<Filters filters={propertyFilters}/>
+					<Filters title="Filtros" onFilter={setParams}/>
 				</div>
 
 				<div className="list">

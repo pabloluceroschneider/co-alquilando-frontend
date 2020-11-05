@@ -1,24 +1,31 @@
 import React, { useEffect, useState, useContext } from "react";
-import {SessionContext} from '../../store';
+import { SessionContext } from "../../store";
 import ContentWrapper from "../../components/ContentWrapper";
 import CustomizedForm from "../../components/CustomizedForm";
 import { Form, notification } from "antd";
 import { useHistory } from "react-router-dom";
 import ApiRequest from "../../util/ApiRequest";
-import provinces from '../../util/provinces.js'
-
+import provinces from "../../util/provinces.js";
 
 const userPreferenciesRoomie = {
   name: "user",
   layout: "vertical",
-  btnSubmit: "Actualizar Preferencias de Roomie",
-  className: "userPreferencies",
+  btnSubmit: "Actualizar Preferencias de Coinquilino",
   fields: {
     primaries: [
       [
         {
-          label: "Preferencias de Roomie",
+          label: "Preferencias de Coinquilino",
           component: "h2",
+        },
+      ],
+      [
+        {
+          content: [
+            "Aquí podras cargar tus preferencias con respecto tus potenciales coinquilinos, para que podamos ayudarte a encontrarlo.",
+          ],
+          name: ["info"],
+          component: "multiple-line",
         },
       ],
       [
@@ -36,8 +43,8 @@ const userPreferenciesRoomie = {
           label: "Ocupación",
           name: ["roommatePreferences", "occupation"],
           component: "SelectDB",
-          endpoint: '/occupation/all',
-          search: 'occupation'
+          endpoint: "/occupation/all",
+          search: "occupation",
         },
       ],
       [
@@ -45,15 +52,15 @@ const userPreferenciesRoomie = {
           label: "Nacionalidad",
           name: ["roommatePreferences", "nationality"],
           component: "SelectDB",
-          endpoint: '/nationality/all',
-          search: 'nationality'
+          endpoint: "/nationality/all",
+          search: "nationality",
         },
         {
-					label: 'Provincia',
-					name: [ 'address', 'province' ],
-					component: 'Select',
-					options: provinces,
-				}
+          label: "Provincia",
+          name: ["address", "province"],
+          component: "Select",
+          options: provinces,
+        },
       ],
       [
         {
@@ -76,7 +83,6 @@ const userPreferenciesProperty = {
   name: "user",
   layout: "vertical",
   btnSubmit: "Actualizar Preferencias de Propiedad",
-  className: "userPreferencies",
   fields: {
     primaries: [
       [
@@ -200,6 +206,10 @@ const UpdatePreferenciesForm = (props) => {
   const [idUser, setIdUser] = useState(null);
   const history = useHistory();
   const { state } = useContext(SessionContext);
+  const breadscrumb = [
+    { "Mi Perfil": "/my-profile" },
+    { "Mi Preferencias": "/my-profile/updatePreferencies" },
+  ];
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/user/${state.user.userNickname}`).then((res) => {
@@ -284,7 +294,7 @@ const UpdatePreferenciesForm = (props) => {
         ).then((res) => {
           if (res.status === 200) {
             notification.success({
-              message: `Preferencias de Roommie Actualizadas`,
+              message: `Preferencias de Coinquilino Actualizadas`,
               placement: "bottomLeft",
             });
           } else {
@@ -327,9 +337,9 @@ const UpdatePreferenciesForm = (props) => {
       };
       asyncPutUser();
     }
-  }, [fieldsProp, idUser,history,state]);
+  }, [fieldsProp, idUser, history, state]);
   return (
-    <ContentWrapper topNav>
+    <ContentWrapper topNav breadscrumb={breadscrumb}>
       <CustomizedForm
         form={formRoom}
         data={userPreferenciesRoomie}
