@@ -8,6 +8,7 @@ import ContentWrapper from "../../components/ContentWrapper";
 import moment from "moment";
 import provinces from "../../util/provinces";
 import { Auth } from "aws-amplify";
+import User from '../../classes/User';
 
 const userData = {
   name: "user",
@@ -130,6 +131,7 @@ const userData = {
           label: "Cargar Imagen",
           name: "photos",
           component: "Upload",
+          aspect: 1/1
         },
       ],
     ],
@@ -146,6 +148,7 @@ const UpdateForm = (props) => {
     { "Mi Perfil": "/my-profile" },
     { "Actualizar Mi Perfil": "/my-profile/update" },
   ];
+
   useEffect(() => {
     let asyncGetUser = async () => {
       await ApiRequest.get(`/user/${state.user.userNickname}`).then((res) => {
@@ -172,117 +175,85 @@ const UpdateForm = (props) => {
     asyncGetUser();
   }, [form, state, idUser, history]);
 
-  useEffect(() => {
-    if (fields) {
-      var attributes = Object.entries(fields.attributes);
-      let arrayAttributes = [];
-      attributes.map((t) => {
-        return arrayAttributes.push({ attributeType: t[0], value: t[1] });
-      });
-      let bodyReq = { ...fields, attributes: arrayAttributes };
-      delete bodyReq.userConfirmEmail;
-      delete bodyReq.userConfirmPassword;
-      delete bodyReq.photos;
 
-      let asyncPutUser = new Promise(async (res, rej) => {
-        let { data, status } = await ApiRequest.put(`/user/${idUser}`, bodyReq);
-        await dispatch(SIGN_IN(data));
-        if (status === 200) {
-          notification.success({
-            message: `Datos Actualizados`,
-            placement: "bottomLeft",
-          });
-        } else {
-          notification.error({
-            message: `Error: No se pudo actualizar sus datos`,
-            placement: "bottomLeft",
-          });
-        }
-
-        if (fields && fields.photos && fields.photos.file) {
-          var plist = fields.photos.file.fileList;
-
-          const formData = new FormData();
-          formData.append("type", "file");
-          let hasFile = false;
-          for (const ph in plist) {
-            hasFile = true;
+  let updateProfile = async fields => {
+    let updatePhotoPromise = new Promise( async (res,rej) => {
+      try {
+        if(!fields.photos.file) res()
+        let plist = fields.photos.file.fileList;
+        const formData = new FormData();
+        formData.append("type", "file");
+        let hasFile = false;
+        for (const ph in plist) {
             if (plist[ph].originFileObj) {
-              let phLast = plist[ph].originFileObj;
-              formData.append("photos", phLast);
+            hasFile = true;
+            let phLast = plist[ph].originFileObj;
+            console.log(plist[ph])
+            formData.append("photos", phLast);
             }
-          }
-
-          let header = {
-            "Content-Type": "multipart/form-data",
-          };
-
-          if (hasFile) {
-            await ApiRequest.multipartPut(
-              `/user/${idUser}/photos`,
-              formData,
-              header
-            ).then((res) => {
-              if (res.status === 200) {
-                notification.success({
-                  message: `Datos Actualizados`,
-                  placement: "bottomLeft",
-                });
-              } else {
-                notification.error({
-                  message: `Error: No se pudo actualizar sus datos`,
-                  placement: "bottomLeft",
-                });
-              }
-            });
-          }
         }
-        res();
-      });
-      asyncPutUser.then(() => {
-        history.push(`/my-profile`);
-      });
-    }
-  }, [fields, idUser, history, dispatch]);
-
-  // Delete photos
-  useEffect(() => {
-    if (fields && fields.photo && fields.photos.file && photosUpdate) {
-      var listPhoto = fields.photos.file.fileList;
-
-      var auxListPhoto = [];
-      listPhoto.forEach((photo, index) => {
-        if (!photo.originFileObj) {
-          auxListPhoto.push(photo);
+        if(!hasFile) res()
+        await ApiRequest.multipartPut(`/user/${idUser}/photos`, formData)
+        res()
+      } catch (error) {
+        rej(error)
+      }
+    })
+    updatePhotoPromise.then(()=>{
+      console.log("delete")
+      let deletePhotoPromise = new Promise( async (res,rej) => {
+        try {
+          photosUpdate.forEach( async photo => {
+            let find = fields.photos.file.fileList.find( t => t.name === photo )
+            if(!find){
+                await ApiRequest.delete(`/user/${idUser}/photos/${photo}`)
+            }
+          })
+          res()
+        } catch (error) {
+          rej(error)
         }
-      });
-
-      auxListPhoto.forEach((photoAux, indexAux) => {
-        photosUpdate.forEach((photo, index) => {
-          if (photoAux.name === photo) {
-            let asyncPutPhoto = async () => {
-              await ApiRequest.delete(`/user/${idUser}/photos/${photo}`).then(
-                (res) => {
-                  if (res.status === 200) {
-                    notification.success({
-                      message: "Datos Actualizados",
-                      placement: "bottomLeft",
-                    });
-                  } else {
-                    notification.error({
-                      message: "Error: No se pudo actualizar sus datos",
-                      placement: "bottomLeft",
-                    });
-                  }
-                }
-              );
-            };
-            asyncPutPhoto();
+      })
+      deletePhotoPromise.then(()=>{
+        console.log("update photo")
+        let updateDataProfile = new Promise( async (res,rej) => {
+          try {
+            let user = new User(fields).mapFormToUpdate();
+            let { data } = await ApiRequest.put(`/user/${idUser}`, user)
+            res(data)
+          } catch (error) {
+            rej(error)
           }
+        })
+        updateDataProfile.then( (data) => {
+          notification.success({
+            message: `Datos Actualizados con éxito`,
+            placement: "bottomLeft",
+          })
+          if(data.photos.length > 1){
+            data = {...data, photos: [data.photos[1]]}
+          }
+          dispatch( SIGN_IN(data) )
+        }).catch(e => {
+        notification.error({
+          message: `Error: No se pudo actualizar sus datos`,
+          placement: "bottomLeft",
         });
+      })
+      }).catch(e =>{
+        notification.error({
+          message: `Error: No se pudo actualizar sus datos`,
+          placement: "bottomLeft",
+        });
+      })
+    }).catch(e=>{
+      notification.error({
+        message: `Error: No se pudo actualizar sus datos`,
+        placement: "bottomLeft",
       });
-    }
-  }, [idUser, history, fields, photosUpdate]);
+    })
+
+  }
 
   const onDelete = async () => {
     await ApiRequest.delete(`/user/${idUser}`).then((res) => {
@@ -297,7 +268,7 @@ const UpdateForm = (props) => {
       <CustomizedForm
         form={form}
         data={userData}
-        onfinish={setFields}
+        onfinish={updateProfile}
         onDelete={onDelete}
       />
     </ContentWrapper>
