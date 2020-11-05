@@ -20,7 +20,9 @@ const ConfigGroup = ({ detail }) => {
   const [groupName, setGroupName] = useState();
 
   useEffect(() => {
-    if (members.length || !detail) return;
+    console.log('detail->pre if', detail)
+    if (!detail || members.length ) return;
+    console.log('detail->pos if', detail)
     detail.membersId.forEach(async (member) => {
       if (state.user.id === member) return;
       try {

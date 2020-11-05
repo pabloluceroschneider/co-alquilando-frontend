@@ -120,13 +120,13 @@ const AdminMenu = ({channels, adminId}) => {
   );
 };
 
-const Info = ({ detail, admin }) => {
+const Info = ( {detail, admin} ) => {
   const [showConfig, setShowConfig] = useState(false)
   const toggleConfig = () => setShowConfig(!showConfig)
   return (
     <div className="info">
       <div>{detail?.name}</div>
-      { admin && <div className="cog" onClick={toggleConfig}><SettingOutlined /></div> }
+      { admin && detail?.name !== 'Mis chats' && <div className="cog" onClick={toggleConfig}><SettingOutlined /></div> }
       <Modal 
           visible={showConfig}
           onOk={toggleConfig}
@@ -160,7 +160,7 @@ const GroupDetail = ({ detail, render }) => {
   return (
     <div className={`group-detail ${!!render}`}>
       <div className="container">
-        <Info name={detail?.name} admin={detail?.adminId===state.user.id}/>
+        <Info detail={detail} admin={detail?.adminId===state.user.id}/>
         {isAdmin ? <AdminMenu channels={detail?.channels} adminId={detail?.adminId} /> : <Votation group={detail} />}
         {detail?.channels.length ? <div className="chats">
           {detail?.channels?.map((ch) => {
