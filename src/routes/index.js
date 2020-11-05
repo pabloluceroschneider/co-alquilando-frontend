@@ -15,7 +15,7 @@ import MyProperties from "./my-properties";
 import Roommates from "./roommates";
 import Notifications from "./notifications";
 import FormPropertyUpdate from './property-update';
-import UserHome from '../routes/userHome';
+// import UserHome from '../routes/userHome';
 import Groups from './groups';
 import PayOptions from './payOptions'
 import PaymentResultSuccess from './paymentResultSuccess'
@@ -30,7 +30,7 @@ const Routes = () => {
 			<Router>
 				{state.user ? (
 					<Switch>
-						<Route exact path="/" exact component={PropertyList} />
+						<Route exact path="/" component={PropertyList} />
 						<Route path="/my-profile/updatePreferencies" exact component={UpdatePreferenciesForm} />
 						<Route path="/my-profile/update" exact component={UpdateForm} />
 						<Route path="/my-profile" exact component={MyProfile} />

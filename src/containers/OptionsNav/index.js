@@ -64,14 +64,17 @@ const OptionsNav = () => {
 			{list.map((element) => {
 				return (
 					<div
-						// className={`link-component ${element.className} ${path === element.link ? 'current' : ''}`}
-						className={`link-component ${path === element.link ? 'current' : ''}`}
+						className={`link-component ${element.className} ${path === element.link ? 'current' : ''}`}
+						// className={`link-component ${path === element.link ? 'current' : ''}`}
 						onClick={() => {
 							validate(element);
 						}}
 						key={element.link}
 					>
+
 						<span className="itemMenuTitle">{element.title}</span>
+						<div className="title-background"></div>
+						
 					</div>
 				);
 			})}
