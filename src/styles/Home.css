@@ -1,5 +1,5 @@
 .Home__Image{
-    width: 1900px;
+    width: 1880px;
     height: 800px;
     margin-top: -14px;
     display: flex;
@@ -68,10 +68,10 @@
    
 }
 
-/* @media screen and (min-width: 1400px) {
+@media screen and (max-width: 1400px) {
     .Home__Image{
-        height: 880px;
-        
+        width: 1366px;
+        height: 600px;
     }
 }
 
@@ -83,4 +83,4 @@
     .Home__Titulo {
         text-align: center;
     }
-} */
+} 
