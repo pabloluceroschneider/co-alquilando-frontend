@@ -34,6 +34,15 @@ class User {
         delete formatedUser.userConfirmEmail;
         return formatedUser;
     }
+
+    mapFormToUpdate(){
+        let formatedUser = {
+            ...this.user,
+            attributes: this.mapAttributesToRequest(this.user.attributes),
+            photos: null
+        }
+        return formatedUser;
+    }
 }
 
 export default User;
