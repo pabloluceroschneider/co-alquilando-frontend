@@ -29,6 +29,11 @@ ul.principalNav {
 			&:hover:not(.active) {
 				color: rgba(0, 0, 0, 0.336);
 			}
+
+			img.logo{
+				width: 30px;
+				height: 30px;
+			}
 		}
 	}
 	.active {
