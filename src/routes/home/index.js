@@ -17,7 +17,7 @@ const Home = () => {
          <div className="iniciarSesionContext">
         <Login></Login>
             </div>
-          <video loop autoPlay preload>
+          <video loop autoPlay preload muted>
             <source src={video} ></source>
           </video>
           <div className="Home__Text">
