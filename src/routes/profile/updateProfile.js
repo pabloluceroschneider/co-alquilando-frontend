@@ -200,7 +200,6 @@ const UpdateForm = (props) => {
       }
     })
     updatePhotoPromise.then(()=>{
-      console.log("delete")
       let deletePhotoPromise = new Promise( async (res,rej) => {
         try {
           photosUpdate.forEach( async photo => {
@@ -215,7 +214,6 @@ const UpdateForm = (props) => {
         }
       })
       deletePhotoPromise.then(()=>{
-        console.log("update photo")
         let updateDataProfile = new Promise( async (res,rej) => {
           try {
             let user = new User(fields).mapFormToUpdate();
@@ -225,7 +223,7 @@ const UpdateForm = (props) => {
             rej(error)
           }
         })
-        updateDataProfile.then( (data) => {
+        updateDataProfile.then( async (data) => {
           notification.success({
             message: `Datos Actualizados con éxito`,
             placement: "bottomLeft",
@@ -233,7 +231,8 @@ const UpdateForm = (props) => {
           if(data.photos.length > 1){
             data = {...data, photos: [data.photos[1]]}
           }
-          dispatch( SIGN_IN(data) )
+          await dispatch( SIGN_IN(data) );
+          history.push("/my-profile");
         }).catch(e => {
         notification.error({
           message: `Error: No se pudo actualizar sus datos`,
