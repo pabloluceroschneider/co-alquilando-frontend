@@ -1,38 +1,56 @@
 .Home__Image{
     width: 100%;
-    height: 800px;
-    margin-top: -14px;
+    background-color: black;
+    height: auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    
+    /* align-items: center; */
+     flex-direction: column; 
     opacity: 0.85;
-    background-repeat:no-repeat;
+    /* background-repeat:no-repeat;
     background-size: cover;
-    position: relative;
+    position: relative; */
 }
 
-.iniciarSesionContext{
-    top: 40px;
-    right: 20px;
-    position: absolute;
-    border-radius: 1px;
+.iniciarSesionContext div{
+    
     border: 2px solid  white;
-    z-index: 1;
 }
 .LogoContext{
-    top: 40px;
+    /* top: 40px;
     left: 50px;
     position: absolute;
-    z-index: 1;
+    z-index: 1; */
+    margin: 0 10px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
+
+.Home__Image video{
+    width: 100%;
+}
+
+video { 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: inherit;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+ 
+  	transition: 1s opacity;
+}
+
+
 .LogoContext img{
- max-width: 150px;
+  max-width: 150px;
 }
 
  .Home__Text{
-    position: absolute;
     z-index: 1;
+    margin-top: 80px;
     display: grid;
     justify-items: center;
 }
@@ -70,19 +88,35 @@
 
 @media screen and (max-width: 1400px) {
     .Home__Image{
-        height: 780px;
+        height: auto;
     } 
     .Home__Image video{
-        height: 780px;
+        height: auto;
         width: 100%;
     }
   
 
 }
 
-@media screen and (max-width: 640px) {
-    .Home__Image video{
-        height: 550px;
+@media screen and (max-width: 900px) {
+    .Home__Image{
+        justify-content: space-around;
+        height:667px;
     }
 
+    .LogoContext img{
+        max-width: 100px;
+      }
+
+    .Home__Titulo {
+    font-size: 30px;
+    }
+
+    .Home__Text {
+        margin-top: -60px;
+    }
+
+    .iniciarSesionContext div{
+        font-size: 12px;
+    }
 } 

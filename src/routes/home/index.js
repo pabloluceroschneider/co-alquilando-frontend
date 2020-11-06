@@ -11,15 +11,18 @@ const Home = () => {
   return (
   
       <div className="Home__Image">
-        <div className="LogoContext">
-          <img src={LogoSinFondo}></img>
-        </div>
-         <div className="iniciarSesionContext">
-        <Login></Login>
-            </div>
-          <video loop autoPlay preload muted>
+        <video loop autoPlay preload="true" muted>
             <source src={video} ></source>
           </video>
+          
+        <div className="LogoContext">
+          <img src={LogoSinFondo}></img>
+           <div className="iniciarSesionContext">
+              <Login />
+          </div>
+        </div>
+        
+          
           <div className="Home__Text">
             <span className="Home__Titulo">La oportunidad que estabas esperando</span>
             <a href="/sign-in" className="Home__Button" type="button">
