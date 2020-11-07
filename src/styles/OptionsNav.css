@@ -151,7 +151,7 @@
 	.options-container {
 		display: flex;
 		cursor: pointer;
-		justify-content: space-evenly;
+		justify-content: space-between;
 		padding: 0 0 0 0;
 	}
 
