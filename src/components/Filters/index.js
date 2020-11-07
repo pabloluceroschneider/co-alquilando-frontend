@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Tooltip, Form, InputNumber, Checkbox } from 'antd';
-import { FilterOutlined, CloseOutlined, DownOutlined } from "@ant-design/icons";
+import { Button, Form, InputNumber, Checkbox } from 'antd';
+import { FilterOutlined, CloseOutlined } from "@ant-design/icons";
 import SelectDB from '../InputRepository/SelectDB'
 
 const FilterProperties = ({onFilter}) => {
