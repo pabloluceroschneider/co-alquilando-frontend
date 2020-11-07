@@ -56,6 +56,7 @@ const UserGrops = ({ groups, itemTitle, selected, setSelected }) => {
     <>
       {groups && groups.length ? (
         groups.map((item, index) => {
+          if (item[itemTitle] === "Mis chats") return
           return (
             <div
               onClick={() => handleSelected(item)}
