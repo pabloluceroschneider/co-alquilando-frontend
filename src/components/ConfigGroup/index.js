@@ -20,7 +20,7 @@ const ConfigGroup = ({ detail }) => {
   const [groupName, setGroupName] = useState();
 
   useEffect(() => {
-    if (members.length || !detail) return;
+    if (!detail || members.length ) return;
     detail.membersId.forEach(async (member) => {
       if (state.user.id === member) return;
       try {
