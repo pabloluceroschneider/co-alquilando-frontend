@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { SessionContext } from "../../store";
 import { useHistory, useParams } from "react-router-dom";
 import ApiRequest from "../../util/ApiRequest";
@@ -53,9 +53,21 @@ const Votation = ({ group }) => {
 
 const AdminMenu = ({channels, adminId}) => {
   const [ showModal, setShowModal] = useState(false);
-  const [acceptGroup, setAcceptGroup] = useState(null)
+  const [acceptGroup, setAcceptGroup] = useState(null);
+  const [propertyStatus, setPropertyStatus] = useState(null)
+  const { chat } = useParams();
+  let idproperty = chat.split("-")[2]
   let history = useHistory();
   const toggleShowModal = () => setShowModal(visible => !visible);
+
+  useEffect(() => {
+    let asyncGetUser = async () => {
+      let { data } = await ApiRequest.get(`/property/${idproperty}`);
+      let available = data.status === "available";
+      setPropertyStatus(available);
+    };
+    asyncGetUser();
+  }, [idproperty])
 
   const openModal = value => {
     setAcceptGroup(value);
@@ -94,7 +106,7 @@ const AdminMenu = ({channels, adminId}) => {
   return (
     <div className="admin-buttons">
         <Button onClick={() => openModal(false)} danger>Rechazar Grupo</Button>
-        <Button onClick={() => openModal(true)} type="primary">Aceptar Grupo</Button>
+        { propertyStatus ? <Button onClick={() => openModal(true)} type="primary">Aceptar Grupo</Button> : null}
         <Modal 
           visible={showModal}
           onOk={() => sendDecision()}
@@ -143,6 +155,7 @@ const Info = ( {detail, admin} ) => {
 
 const GroupDetail = ({ detail, render }) => {
   const { state } = useContext(SessionContext);
+  const { chat } = useParams();
 
   const adminSearh = (detalle) => {
     var res = false;
@@ -161,12 +174,20 @@ const GroupDetail = ({ detail, render }) => {
     <div className={`group-detail ${!!render}`}>
       <div className="container">
         <Info detail={detail} admin={detail?.adminId===state.user.id}/>
-        {isAdmin ? <AdminMenu channels={detail?.channels} adminId={detail?.adminId} /> : <Votation group={detail} />}
+
+        { isAdmin ? 
+          chat ? 
+          <AdminMenu channels={detail?.channels} adminId={detail?.adminId} /> 
+          : null
+        : <Votation group={detail} />}
+
         {detail?.channels.length ? <div className="chats">
           {detail?.channels?.map((ch) => {
             return <Item key={ch.name} name={detail?.id} channel={ch} />;
           })}
+
         </div> : <div className="noChats">No tienes ningún chat aún</div>}
+
       </div>
     </div>
   );
