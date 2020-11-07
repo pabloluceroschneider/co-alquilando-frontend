@@ -109,11 +109,12 @@ video {
       }
 
     .Home__Titulo {
-    font-size: 30px;
+    font-size: 20px;
     }
 
     .Home__Text {
         margin-top: -60px;
+        text-align-last: center;
     }
 
     .iniciarSesionContext div{
