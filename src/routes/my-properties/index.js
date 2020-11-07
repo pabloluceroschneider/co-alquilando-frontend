@@ -1,17 +1,18 @@
 import React, { useEffect, useState, useContext } from "react";
+import { notification } from 'antd';
+import { SessionContext } from '../../store';
 import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 import PropertyCard from '../../components/PropertyCard';
+import PackagePropertyInfo from '../../components/PackagePropertyInfo';
 import Spin from '../../components/Spin';
-import {notification} from 'antd';
-import '../../styles/PropertyList.css';
-import { SessionContext } from '../../store';
 
 
 const Property = () => {
     const breadscrumb = [{'Mis Propiedades': '/my-properties'}]
     const [datos, setDatos] = useState()
     const {state} = useContext(SessionContext);
+    console.log("user", state.user)
 
     useEffect(() => {
       let asyncGet = async () => {
@@ -32,17 +33,22 @@ const Property = () => {
     <ContentWrapper topNav breadscrumb={breadscrumb}>
       <div className="contentMyProperties">
 
-        {!datos ? <Spin /> : null}
+        <PackagePropertyInfo count={state.user.propertiesToPost} />
 
-        {datos?.length
-        ? datos.map((p) => {
-            return <PropertyCard key={p.id} {...p} />;
-          })
-        : null}
+        <div className="propiedades">
+          {!datos ? <Spin /> : null}
 
-        {datos && !datos.length ? (
-          <div className="no-properties">No tienes ninguna propiedad publicada. Carga tu propiedad <a href="/property">aquí</a></div>
-        ) :null}
+          {datos?.length
+          ? datos.map((p) => {
+              return <PropertyCard key={p.id} {...p} />;
+            })
+          : null}
+
+          {datos && !datos.length ? (
+            <div className="no-properties">No tienes ninguna propiedad publicada. Carga tu propiedad <a href="/property">aquí</a></div>
+          ) :null}
+        </div>
+
       </div>
     </ContentWrapper>
   );
