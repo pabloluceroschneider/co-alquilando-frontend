@@ -3,6 +3,7 @@
   place-items: center;
   width: 90%;
   height: 100%;
+  text-align: center;
 }
 .waiting-selection .container {
   display: grid;
@@ -14,7 +15,7 @@
 }
 
 .waiting-selection .container {
-  font-size: 2em;
+  font-size: 1em;
 }
 
 .waiting-selection.false {
@@ -24,5 +25,9 @@
 @media only screen and (min-width: 600px) {
   .waiting-selection.false {
     display: grid;
+  }
+
+  .waiting-selection .container{
+  font-size: 2em;
   }
 }

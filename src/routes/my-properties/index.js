@@ -6,6 +6,8 @@ import ContentWrapper from "../../components/ContentWrapper";
 import PropertyCard from '../../components/PropertyCard';
 import PackagePropertyInfo from '../../components/PackagePropertyInfo';
 import Spin from '../../components/Spin';
+import { HomeOutlined } from '@ant-design/icons';
+import WaitingSelection from '../../components/WaitingSelection';
 
 
 const Property = () => {
@@ -45,7 +47,9 @@ const Property = () => {
           : null}
 
           {datos && !datos.length ? (
-            <div className="no-properties">No tienes ninguna propiedad publicada. Carga tu propiedad <a href="/property">aquí</a></div>
+            <div className="no-groups">
+              <WaitingSelection  message="No tienes ninguna propiedad publicada" render={true} icon={<HomeOutlined />} />
+            </div>
           ) :null}
         </div>
 
