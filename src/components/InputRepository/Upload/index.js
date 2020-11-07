@@ -77,9 +77,9 @@ const CustomUpload = (props) => {
 		newFileList.splice(index, 1);
 		setFileList(newFileList);
 	};
-
+	
 	return (
-		<ImgCrop aspect={16/9} rotate modalOk="Confirmar" modalCancel="Cancelar" modalTitle="Editar Imagen">
+		<ImgCrop aspect={props.element.aspect} rotate modalOk="Confirmar" modalCancel="Cancelar" modalTitle="Editar Imagen">
 			<Upload
 				action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
 				listType="picture-card"

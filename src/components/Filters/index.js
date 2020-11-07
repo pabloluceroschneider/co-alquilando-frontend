@@ -73,29 +73,15 @@ const FilterProperties = ({onFilter}) => {
 }
 
 const Filters = ({title, onFilter}) => {
-    const [showPanel, setshowPanel] = useState( window.screen.width > 600 ? true : false);
-    const [collapse, setCollapse] = useState(true);
-    const togglePanel = () => setshowPanel(!showPanel)
+    const [collapse, setCollapse] = useState( window.screen.width > 600 ? true : false );
     const toggleCollapse = () => setCollapse(!collapse);
 
     return (
         <div className="wrapper-filter">
-            {!showPanel ?
-                <Tooltip title={title}>
-                    <Button shape="circle" onClick={togglePanel} icon={<FilterOutlined />}/>
-                </Tooltip> 
-                : (
-                    <div className="header" onClick={toggleCollapse}>
-                        <span><FilterOutlined />{title}</span>
-                        {window.screen.width < 600 ?
-                            <CloseOutlined /> 
-                            : collapse ? 
-                                <CloseOutlined/> 
-                                : <DownOutlined/>
-                        }
-                    </div>
-                )
-            }
+            <div className="header" onClick={toggleCollapse}>
+                <span><FilterOutlined />{title}</span>
+                <CloseOutlined /> 
+            </div>
 
             {collapse &&
                 <FilterProperties onFilter={onFilter} />

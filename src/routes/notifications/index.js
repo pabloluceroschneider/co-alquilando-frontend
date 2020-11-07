@@ -3,8 +3,9 @@ import { SessionContext } from "../../store";
 import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 import NotificationCard from "../../components/NotificationCard";
-import WaitingSelection from "../../components/WaitingSelection";
-import { BellOutlined } from "@ant-design/icons";
+import WaitingSelection from '../../components/WaitingSelection';
+import Spin from '../../components/Spin';
+import { BellOutlined } from '@ant-design/icons';
 
 const Notifications = (props) => {
   const { state } = useContext(SessionContext);
@@ -22,22 +23,12 @@ const Notifications = (props) => {
     asyncGet();
   }, [state.user.id, notifications]);
 
-  if (!notifications?.length)
-    return (
-      <ContentWrapper topNav breadscrumb={breadscrumb}>
-        <div className="no-groups">
-          <WaitingSelection
-            message="No tienes notificaciones"
-            render={!notifications}
-            icon={<BellOutlined />}
-          />
-        </div>
-      </ContentWrapper>
-    );
-
   return (
     <ContentWrapper topNav breadscrumb={breadscrumb}>
       <div className="notifications">
+
+        {!notifications ? <Spin /> : null}
+        
         {notifications?.map((n) => {
           return (
             <NotificationCard
@@ -48,6 +39,13 @@ const Notifications = (props) => {
             />
           );
         })}
+
+        {notifications && !notifications?.length ? (
+          <div className="no-groups">
+            <WaitingSelection  message="No tienes notificaciones!" render={!notifications} icon={<BellOutlined />} />
+          </div>
+        ):null}
+
       </div>
     </ContentWrapper>
   );

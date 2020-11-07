@@ -40,6 +40,10 @@
   margin-bottom: 20%;
 }
 
+.no-properties{
+  margin-top: 50px;
+}
+
 /* pantalla de escritorio */
 @media only screen and (min-width: 600px) {
   .properties-wrapper {

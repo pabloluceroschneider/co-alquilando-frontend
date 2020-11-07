@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { SessionContext } from '../../store';
 import ContentWrapper from '../../components/ContentWrapper';
 import UserCard from '../../components/Match';
-
+import Spin from '../../components/Spin';
 import ApiRequest from '../../util/ApiRequest';
 
 const Match = () => {
@@ -27,6 +27,9 @@ const Match = () => {
 	return (
 		<ContentWrapper topNav optionsNav>
 			<div className="match">
+
+				{!matched && !users ? <Spin/> : null}
+
 				{matched?.map((u, index) => {
 						return <UserCard key={index} {...u} />;
 				})}

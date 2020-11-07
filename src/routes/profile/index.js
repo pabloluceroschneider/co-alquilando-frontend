@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ApiRequest from "../../util/ApiRequest";
-import calculateAge from "../../util/CalculateAge";
-import ContentWrapper from "../../components/ContentWrapper";
 import { Button } from "antd";
+import ApiRequest from "../../util/ApiRequest";
+import ContentWrapper from "../../components/ContentWrapper";
 import ModalGroup from "../../components/ModalGroup";
+import Spin from "../../components/Spin";
+import calculateAge from "../../util/CalculateAge";
 
 
 const image =
@@ -38,6 +39,8 @@ const Profile = (props) => {
 
   return (
     <ContentWrapper topNav>
+      {!datos ? <Spin /> :null}
+
       {datos ? (
         <div className="profileContent">
           <div className="profileGroup2">
