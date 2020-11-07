@@ -1,4 +1,4 @@
-.options-container{
+/* .options-container{
 	display: flex;
 	flex-direction: column;
 	width: 90vw;
@@ -10,7 +10,6 @@
 .options-container .link-component{
 	display: flex;
 	align-items: center;
-	
 	font-size: 18px;
 	justify-content: center;
 	min-height: 45px;
@@ -24,29 +23,35 @@
 	letter-spacing: 0.6px;
 	width: 100%;
 	text-align: center;
+	color: var(--principal-blue);
 }
 
-.options-container .link-component .itemMenuTitle:hover{
+.options-container .link-component:hover .itemMenuTitle{
 	font-weight: 700 !important;
 }
 
 .options-container .link-component:hover{
 	
-	box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
-}
+	/* box-shadow: 2px 2px rgba(0, 0, 0, 0.2); */
+	/* box-shadow: 2px 2px 5px #afafaf; */
+
+/* }
 .options-container .link-component.current{
 	background: var(--principal-blue);
-	
 	color: #f5f5f5;
 	box-shadow: 2px 2px 5px #FAFAFA;
 }
 
-.options-container .link-component{
-	background:  #dddddd;
+.options-container .link-component.current .itemMenuTitle{
+	color: white;
 }
 
+.options-container .link-component{
+	background:  #dddddd;
+} */
+
 /* Desktop View  */
-@media only screen and (min-width: 600px) {
+/* @media only screen and (min-width: 600px) {
 	.options-container{
 		display: grid;
 		grid-template-columns: auto auto auto;
@@ -57,16 +62,20 @@
 	.options-container .link-component{
 		width: 95%;
 	}
-}
+} */ 
 
-/* .nav-container {
-	border-bottom: 1px solid #fafafa;
+.options-container {
+	border-bottom: 1px solid var(--dark-grey);
+	width: 90vw;
+	margin-left: 5vw;
+	padding: 0 0 3% 0;
+
 }
 
 .link-component {
 	position: relative;
 	width: 80%;
-	height: 100px;
+	height: 90px;
 
 	margin-top: 20px;
 	margin-left: 10%;
@@ -76,6 +85,9 @@
 	border-radius: 2px;
 	color: rgba(0, 0, 0, 0.6);
 	opacity: 1;
+
+	box-shadow: 1px 1px 5px #afafaf;
+	border: 1px solid #fafafa;
 }
 
 .link-component:hover {
@@ -91,8 +103,8 @@
 }
 
 .link-component.current {
-	box-shadow: 2px 2px 10px #12558b;
-	height: 106px;
+	box-shadow: 2px 2px 10px var(--secondary-blue);
+	height: 90px;
 }
 
 .link-component.search_roommate {
@@ -105,7 +117,25 @@
 	background-size: 308px;
 }
 
-Transiciónes
+.link-component.publish_property {
+	background-image: url('../assets/images/publish_property.jpg');
+	background-size: 308px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.itemMenuTitle{
+	background-color: transparent;
+	color: white;
+	font-size: initial;
+	position: absolute;
+	z-index: 1;
+	text-shadow: black 0.1em 0.1em 0.2em;
+	font-weight: 600;
+	font-size: 17px;
+}
+
+/* Transiciónes */
 @media only screen and (min-width: 400px) and (max-width: 1000px) {
 	.link-component {
 		margin-top: 0px;
@@ -116,20 +146,19 @@ Transiciónes
 	}
 }
 
-Desktop View 
+/* Desktop View  */
 @media only screen and (min-width: 600px) {
-	.nav-container {
-		width: 100%;
+	.options-container {
 		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: center;
+		cursor: pointer;
+		justify-content: space-between;
+		padding: 0 0 0 0;
 	}
 
 	.link-component {
 		position: relative;
 		width: 300px;
-		height: 100px;
+		height: 90px;
 		margin: 2%;
 	}
-} */
+}

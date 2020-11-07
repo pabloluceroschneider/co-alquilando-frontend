@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import PayCard from '../../components/PayCard/index'
 import { SessionContext } from "../../store";
 import ContentWrapper from "../../components/ContentWrapper";
@@ -17,11 +17,7 @@ const PayOptions = () => {
 
     }
 
-    useEffect(() => {
-        searchPackages()
-    }, [])
-
-    const searchPackages = async () => {
+    const searchPackages = useCallback (async () => {
         try {
             const apiPackages = await ApiRequest.get(`payment/packages/${state.user.id}`)
             setPackages(apiPackages.data)
@@ -31,7 +27,11 @@ const PayOptions = () => {
                 placement: 'bottomLeft'
             });
         }
-    }
+    }, [state.user.id]);
+
+    useEffect(() => {
+        searchPackages()
+    }, [searchPackages])
 
     return (
         <ContentWrapper topNav>
