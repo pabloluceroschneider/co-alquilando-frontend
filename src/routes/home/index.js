@@ -16,7 +16,7 @@ const Home = () => {
           </video>
           
         <div className="LogoContext">
-          <img src={LogoSinFondo}></img>
+          <img src={LogoSinFondo} alt="image_home"></img>
            <div className="iniciarSesionContext">
               <Login />
           </div>
