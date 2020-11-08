@@ -79,9 +79,11 @@ const usePostProperty = (values) => {
 										placement: 'bottomLeft'
 									});
 								}
-              });
+							});
 						};
 						asyncPutPhoto();
+					}else{
+						setResponse(true);
 					}
 				});
 			}
@@ -109,11 +111,11 @@ const Property = () => {
 					})
 					.then(async () => {
 						const { data } = await ApiRequest.get(`user/hasToPay/${state.user.id}`);
-						if (data) {
-              notification.info({
-                message: `No tiene suscripciones activas`,
-                placement: 'bottomLeft'
-              });
+						if (data || state.user.propertiesToPost < 1) {
+							notification.info({
+								message: `No tiene suscripciones activas`,
+								placement: 'bottomLeft'
+							});
 							history.push('/payOptions');
 						}
 					});
@@ -133,7 +135,6 @@ const Property = () => {
 
 	useEffect(
 		() => {
-			console.log(property);
 			if (property) {
 				notification.success({
 					message: `Propiedad Publicada`,
