@@ -31,11 +31,11 @@ const loginFields = {
 				}
             ],
             [
-				{
-					label: 'Olvidé mi Contraseña',
-                    component: 'link',
-                    href: "#"
-                },
+				// {
+				// 	label: 'Olvidé mi Contraseña',
+                //     component: 'link',
+                //     href: "#"
+                // },
                 {
 					label: '¿No tienes cuenta? ¡Registrate!',
                     component: 'link',
