@@ -25,7 +25,7 @@ const Property = () => {
       })
     }
     getUser()
-  }, [state])
+  }, [user, state])
 
   useEffect(()=>{
     if(!user) return

@@ -110,6 +110,10 @@ const Property = () => {
 					.then(async () => {
 						const { data } = await ApiRequest.get(`user/hasToPay/${state.user.id}`);
 						if (data) {
+              notification.info({
+                message: `No tiene suscripciones activas`,
+                placement: 'bottomLeft'
+              });
 							history.push('/payOptions');
 						}
 					});
