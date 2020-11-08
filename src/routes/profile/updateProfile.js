@@ -75,9 +75,12 @@ const UpdateForm = (props) => {
       let deletePhotoPromise = new Promise( async (res,rej) => {
         try {
           photosUpdate.forEach( async photo => {
-            let find = fields.photos.file.fileList.find( t => t.name === photo )
-            if(!find){
-                await ApiRequest.delete(`/user/${idUser}/photos/${photo}`)
+            if(fields.photos.file?.fileList) {
+              let find = fields.photos.file?.fileList.find( t => t.name === photo )
+              if(!find){
+                  await ApiRequest.delete(`/user/${idUser}/photos/${photo}`)
+              }
+              res()
             }
           })
           res()
