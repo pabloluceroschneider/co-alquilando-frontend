@@ -1,7 +1,28 @@
 /* Mobile First */
+
+.roommates-wrapper{
+    display: grid;
+    grid-template-columns: auto;
+    width: 90vw;
+    margin-left: 5vw;
+}
+
+.roommates-wrapper .info-column{
+    margin: 16px 0px 0px 0px;
+    width: 100%;
+    text-align-last: center;
+    text-align: -webkit-center;
+    .edit.preferences{
+        width: 100%;
+        padding: 10px;
+        background-color: var(--grey);
+    }
+
+}
+
 .match{
     text-align: -webkit-center !important;
-    margin: 5vh 0vw 5vh 0vw;
+    margin: 0vh 0vw 5vh 0vw;
     text-align: left;
 }
 
@@ -55,6 +76,9 @@
 
 /* Desktop View */
 @media only screen and (min-width: 600px){
+    .roommates-wrapper{
+        grid-template-columns: 25% 75%;
+    }
     
     .match .userCard{
         width: 40vw;

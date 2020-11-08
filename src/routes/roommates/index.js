@@ -26,22 +26,31 @@ const Match = () => {
 
 	return (
 		<ContentWrapper topNav optionsNav>
-			<div className="match">
+			<div className="roommates-wrapper">
 
-				{!matched && !users ? <Spin/> : null}
-
-				{matched?.map((u, index) => {
-						return <UserCard key={index} {...u} />;
-				})}
-
-				{users &&
-					<div>
-						No hemos encontrado coincidencias para ti. Carga tus preferencias <a href="/my-profile/updatePreferencies">aqui</a>
-						{users.map((u, index) => {
-							return <UserCard key={index} user={{...u}}/>;
-						})} 
+				<div className="info-column">
+					<div className="edit preferences">
+						<a href="my-profile/updatePreferencies">Editar Preferencias</a>
 					</div>
-				}
+				</div>
+
+				<div className="match">
+
+					{!matched && !users ? <Spin/> : null}
+
+					{matched?.map((u, index) => {
+						return <UserCard key={index} {...u} />;
+					})}
+
+					{users &&
+						<div>
+							No hemos encontrado coincidencias para ti. Carga tus preferencias <a href="/my-profile/updatePreferencies">aqui</a>
+							{users.map((u, index) => {
+								return <UserCard key={index} user={{...u}}/>;
+							})} 
+						</div>
+					}
+				</div>
 			</div>
 		</ContentWrapper>
 	);
