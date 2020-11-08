@@ -1,0 +1,131 @@
+/* Mobile First */
+
+.roommates-wrapper{
+    display: grid;
+    grid-template-columns: auto;
+    width: 90vw;
+    margin-left: 5vw;
+}
+
+.roommates-wrapper .info-column{
+    margin: 16px 0px 0px 0px;
+    width: 100%;
+    text-align-last: center;
+    text-align: -webkit-center;
+    .no-match{
+        padding: 10px;
+        width: 100%;
+        p { margin: 0; }
+        .here {
+            display: inline;
+            margin: 0px 5px;
+        }
+        span { 
+            animation-name: parpadeo;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            -webkit-animation-name:parpadeo;
+            -webkit-animation-duration: 2s;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-iteration-count: infinite;
+        }
+    }
+    .edit.preferences{
+        width: 100%;
+        padding: 10px;
+        background-color: var(--grey);
+    }
+
+}
+
+@-moz-keyframes parpadeo{  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+  }
+  
+  @-webkit-keyframes parpadeo {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+     100% { opacity: 1.0; }
+  }
+  
+  @keyframes parpadeo {  
+    0% { opacity: 1.0; }
+     50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+  }
+
+.match{
+    text-align: -webkit-center !important;
+    margin: 0vh 0vw 5vh 0vw;
+    text-align: left;
+}
+
+.match .userCard{
+    text-align: left;
+    width: 90vw;
+    margin-top: 16px;
+}
+
+.desc.coinc{
+    color: #000;
+}
+.match .name{
+    display: block;
+    margin-bottom: 15px;
+}
+.match .name p{
+    color: #515A5A;
+    margin-bottom: 0px;
+}
+
+.match .name span{
+    padding: 2px;
+    text-align: center;
+}
+
+.notificationModal svg{
+    color: var(--principal-blue);
+}
+
+.notificationModal .item{
+    border: 1px solid white;
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 5px;
+    cursor: default;
+    transition: border 0.4s;
+}
+
+.notificationModal .item:hover{
+    border: 1px solid var(--dark-grey);
+}
+
+.notificationModal .item.selected{
+    border: 1px solid var(--secondary-blue);
+}
+
+.ant-radio-group.ant-radio-group-outline.radioGroup {
+    margin-bottom: 2%;
+}
+
+/* Desktop View */
+@media only screen and (min-width: 600px){
+    .roommates-wrapper{
+        grid-template-columns: 25% 75%;
+    }
+    
+    .match .userCard{
+        width: 40vw;
+        margin-left: 5vw;
+    }
+
+    .match .name{
+        display: grid;
+        grid-template-columns: 80% 20%;
+    }
+
+
+}

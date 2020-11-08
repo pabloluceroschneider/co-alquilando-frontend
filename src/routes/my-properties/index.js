@@ -1,48 +1,74 @@
 import React, { useEffect, useState, useContext } from "react";
+import { notification } from 'antd';
+import { SessionContext, SIGN_IN } from '../../store';
 import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 import PropertyCard from '../../components/PropertyCard';
+import PackagePropertyInfo from '../../components/PackagePropertyInfo';
 import Spin from '../../components/Spin';
-import {notification} from 'antd';
-import '../../styles/PropertyList.css';
-import { SessionContext } from '../../store';
+import { HomeOutlined } from '@ant-design/icons';
+import WaitingSelection from '../../components/WaitingSelection';
 
 
 const Property = () => {
-    const breadscrumb = [{'Mis Propiedades': '/my-properties'}]
-    const [datos, setDatos] = useState()
-    const {state} = useContext(SessionContext);
+  const { state, dispatch } = useContext(SessionContext);
+  const [ user, setUser] = useState();
+  const [ datos, setDatos] = useState();
+  const breadscrumb = [{'Mis Propiedades': '/my-properties'}]
 
-    useEffect(() => {
-      let asyncGet = async () => {
-          try {
-              let{data} = await ApiRequest.get(`/property/properties/owner/${state.user.id}`);
-              setDatos(data)
-          } catch (e) {
-              notification.error({
-                  message: `Error al obtener propiedades`,
-                  placement: 'bottomLeft'
-              });
-          }
-      }
-      asyncGet()
-    }, [state])
+  useEffect(() => {
+    if(user) return
+    const getUser = async () => {
+      await ApiRequest.get(`user/${state.user.userNickname}`)
+      .then( ({data}) => {
+        setUser(data)
+      })
+    }
+    getUser()
+  }, [user, state])
+
+  useEffect(()=>{
+    if(!user) return
+    dispatch( SIGN_IN(user) )
+  },[user, dispatch])
+
+  useEffect(() => {
+    let asyncGet = async () => {
+        try {
+            let {data} = await ApiRequest.get(`/property/properties/owner/${state.user.id}`);
+            setDatos(data)
+        } catch (e) {
+            notification.error({
+                message: `Error al obtener propiedades`,
+                placement: 'bottomLeft'
+            });
+        }
+    }
+    asyncGet()
+  }, [state])
 
   return (
     <ContentWrapper topNav breadscrumb={breadscrumb}>
       <div className="contentMyProperties">
 
-        {!datos ? <Spin /> : null}
+        <PackagePropertyInfo count={state.user.propertiesToPost} />
 
-        {datos?.length
-        ? datos.map((p) => {
-            return <PropertyCard key={p.id} {...p} />;
-          })
-        : null}
+        <div className="propiedades">
+          {!datos ? <Spin /> : null}
 
-        {datos && !datos.length ? (
-          <div className="no-properties">No tienes ninguna propiedad publicada. Carga tu propiedad <a href="/property">aquí</a></div>
-        ) :null}
+          {datos?.length
+          ? datos.map((p) => {
+              return <PropertyCard key={p.id} {...p} />;
+            })
+          : null}
+
+          {datos && !datos.length ? (
+            <div className="no-groups">
+              <WaitingSelection  message="No tienes ninguna propiedad publicada" render={true} icon={<HomeOutlined />} />
+            </div>
+          ) :null}
+        </div>
+
       </div>
     </ContentWrapper>
   );

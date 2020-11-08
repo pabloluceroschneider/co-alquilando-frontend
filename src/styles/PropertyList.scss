@@ -1,0 +1,112 @@
+.contentMyProperties {
+    display: grid;
+    grid-template-columns: auto;
+    width: 90vw;
+    place-items: center;
+    margin-left: 5vw;
+    padding-top: 5%;
+    cursor: default;
+    .propiedades {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 5px;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .side{
+        width: 100%;
+        padding: 1px 5px;
+        .package-property-info {
+            display: grid;
+            justify-items: center;
+            background-color: var(--grey);
+            .current{
+                .info{
+                    width: 100%;
+                }
+            }
+            .more{
+                text-align-last: center;
+                margin: 5px 0;
+                a button{
+                    padding: 5px;
+                }
+            }
+        }
+        .publish{
+            float: right;
+            margin: 15px 0px 0px 0;
+        }
+    }
+}
+
+.properties-wrapper {
+    display: grid;
+    grid-template-columns: auto;
+    width: 90vw;
+    place-items: center;
+    margin-left: 5vw;
+    padding-top: 5%;
+    cursor: default;
+}
+
+.properties-wrapper .filters {
+    width: 100%;
+    padding-bottom: 5%;
+}
+
+.properties-wrapper .contentPL {
+    display: flex;
+    column-gap: 5px;
+    flex-direction: column;
+    position: center;
+    justify-content: center;
+}
+
+.properties-wrapper .contentPL .waiting-selection {
+    height: 60vh;
+    margin-bottom: 2%;
+}
+
+.properties-wrapper .pagination {
+    display: block;
+    text-align-last: center;
+    margin-bottom: 20%;
+}
+
+.no-properties {
+    margin-top: 50px;
+}
+
+/* pantalla de escritorio */
+@media only screen and (min-width: 600px) {
+    .properties-wrapper {
+        display: grid;
+        grid-template-columns: 25% 75%;
+        place-items: stretch;
+        padding-top: 20px;
+    }
+
+    .properties-wrapper .contentPL {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 5px;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .contentMyProperties {
+        grid-template-columns: 25% 75%;
+        padding: 10px;
+        place-items: flex-start;
+        .package-property-info{
+            padding: 5px;
+        }
+        .propiedades{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+}

@@ -4,17 +4,18 @@ import { SessionContext } from "../../store";
 import ContentWrapper from "../../components/ContentWrapper";
 import "../../styles/PayOptions.css"
 import ApiRequest from "../../util/ApiRequest";
-import { notification, Spin } from "antd";
+import { notification } from "antd";
+import Spin from '../../components/Spin';
 
 const PayOptions = () => {
     const [packages, setPackages] = useState(null)
     const { state } = useContext(SessionContext);
+    const breadscrumb = [{'Contratar paquetes': '/payOptions'}]
 
     const color = {
         Basico: "#99A3A4",
         Premium: "#148F77",
         Business: "#D4AC0D"
-
     }
 
     const searchPackages = useCallback (async () => {
@@ -34,7 +35,7 @@ const PayOptions = () => {
     }, [searchPackages])
 
     return (
-        <ContentWrapper topNav>
+        <ContentWrapper topNav breadscrumb={breadscrumb}>
             <div className="contentPayOptions">
                 {!!packages ? (packages.map((packagePay, index) => (
 
@@ -50,10 +51,8 @@ const PayOptions = () => {
                      </PayCard>
                 ))
                 ):
-                <div className="spiner">
-
                 <Spin size="large" />
-                </div>}
+                }
 
             </div>
         </ContentWrapper>

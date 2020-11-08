@@ -177,12 +177,13 @@ const ModalGroup = ({ user, itemTitle }) => {
   };
 
   useEffect(() => {
+    if (!visible) return;
     const handleGroups = async () => {
       let { data } = await ApiRequest.get(`group/user/${state.user.id}`);
       setGroups(data);
     };
     handleGroups();
-  }, [state.user.id]);
+  }, [visible, state.user.id]);
 
   return (
     <>

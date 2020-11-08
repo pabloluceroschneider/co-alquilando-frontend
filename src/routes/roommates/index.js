@@ -4,6 +4,7 @@ import ContentWrapper from '../../components/ContentWrapper';
 import UserCard from '../../components/Match';
 import Spin from '../../components/Spin';
 import ApiRequest from '../../util/ApiRequest';
+import { ArrowDownOutlined } from '@ant-design/icons';
 
 const Match = () => {
 	const [ matched, setMatched ] = useState(null);
@@ -26,22 +27,41 @@ const Match = () => {
 
 	return (
 		<ContentWrapper topNav optionsNav>
-			<div className="match">
+			<div className="roommates-wrapper">
 
-				{!matched && !users ? <Spin/> : null}
+				<div className="info-column">
 
-				{matched?.map((u, index) => {
-						return <UserCard key={index} {...u} />;
-				})}
+					{!matched ? (
+						<div className="no-match">
+							<p>No tienes preferencias cargadas</p>
+							<div>
+								<p className="here">Cargalas aqui</p>
+								<ArrowDownOutlined />
+							</div>
+						</div>
+					) : null}
 
-				{users &&
-					<div>
-						No hemos encontrado coincidencias para ti. Carga tus preferencias <a href="/my-profile/updatePreferencies">aqui</a>
-						{users.map((u, index) => {
-							return <UserCard key={index} user={{...u}}/>;
-						})} 
+					<div className="edit preferences">
+						<a href="my-profile/updatePreferencies">Editar Preferencias</a>
 					</div>
-				}
+				</div>
+
+				<div className="match">
+
+					{!matched && !users ? <Spin/> : null}
+
+					{matched?.map((u, index) => {
+						return <UserCard key={index} {...u} />;
+					})}
+
+					{users &&
+						<div>
+							{users.map((u, index) => {
+								return <UserCard key={index} user={{...u}}/>;
+							})} 
+						</div>
+					}
+				</div>
 			</div>
 		</ContentWrapper>
 	);

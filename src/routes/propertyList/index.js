@@ -10,7 +10,7 @@ import WaitingSelection from '../../components/WaitingSelection'
 const Property = () => {
 	const [ datos, setDatos ] = useState(null);
 	const [ page, setPage ] = useState(1);
-	const [ size ] = useState(10);
+	const [ size ] = useState(9);
 	const [params, setParams] = useState();
 	const onChange = page => setPage(page);
 
@@ -18,7 +18,7 @@ const Property = () => {
 			let asyncGet = async () => {
 				try {
 					let { data } = await ApiRequest.get(`/property/properties`, { page: page -1, size, ...params });
-					setDatos(data.content);
+					setDatos(data);
 				} catch (e) {
 					notification.error({
                         message: `Error al obtener propiedades`,
@@ -28,8 +28,6 @@ const Property = () => {
 			};
 			asyncGet();
 		},[ page, size, params ]);
-
-
 
 	return (
 		<ContentWrapper topNav optionsNav>
@@ -45,16 +43,16 @@ const Property = () => {
 
 						{!datos && <Spin />}
 
-						{datos?.map( p => {
+						{datos?.content.map( p => {
 							return <PropertyCard key={p.id} {...p} />;
 						})}
 
-						{datos && !datos?.length ? <WaitingSelection message="No se encontraron propiedades" /> :null}
+						{datos && !datos?.content.length ? <WaitingSelection message="No se encontraron propiedades" /> :null}
 
 					</div>
 
 					<div className="pagination">
-						<Pagination current={page} onChange={onChange} total={datos?.totalItems} pageSize={size} />
+						<Pagination current={page} onChange={onChange} total={datos?.totalElements} pageSize={size} />
 					</div>
 
 				</div>

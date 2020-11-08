@@ -42,7 +42,7 @@ const Notifications = (props) => {
 
         {notifications && !notifications?.length ? (
           <div className="no-groups">
-            <WaitingSelection  message="No tienes notificaciones!" render={!notifications} icon={<BellOutlined />} />
+            <WaitingSelection  message="No tienes notificaciones" render={true} icon={<BellOutlined />} />
           </div>
         ):null}
 
