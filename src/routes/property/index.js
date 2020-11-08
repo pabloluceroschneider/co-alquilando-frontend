@@ -7,96 +7,9 @@ import CustomizedForm from '../../components/CustomizedForm';
 import ContentWrapper from '../../components/ContentWrapper';
 import propertyFields from '../../forms/POST_PROPERTY';
 
-const usePostProperty = (values) => {
-	const [ response, setResponse ] = useState(null);
-	const { state } = useContext(SessionContext);
-
-	useEffect(
-		() => {
-			if (values) {
-				values.address = { ...values.address, coordinates: values.coordinates };
-				delete values.coordinates;
-				let atributos = Object.entries(values.attributes);
-				const attributesFormate = atributos.map((a) => {
-					let json = {
-						attributeType: a[0],
-						value: a[1] ? a[1] : '',
-						weigth: 0
-					};
-					return json;
-				});
-
-				let formatedBody = {
-					...values,
-					attributes: attributesFormate,
-					ownerId: state.user.id,
-					status: 'available'
-				};
-
-				let bodyReq = formatedBody;
-				delete bodyReq.photos;
-
-				let createProperty = new Promise(async (res, rej) => {
-					try {
-						let ok = await ApiRequest.post('/property', bodyReq);
-						res(ok);
-					} catch (e) {
-						rej(e);
-					}
-				});
-
-				createProperty.then((property) => {
-					if (values && values.photos) {
-						var plist = values.photos.file.fileList;
-
-						const formData = new FormData();
-						formData.append('type', 'file');
-						for (const ph in plist) {
-							let phLast = plist[ph].originFileObj;
-
-							formData.append('photos', phLast);
-						}
-
-						let header = {
-							'Content-Type': 'multipart/form-data'
-						};
-
-						let asyncPutPhoto = async () => {
-							await ApiRequest.multipartPut(
-								`/property/${property.data.id}/photos`,
-								formData,
-								header
-							).then((res) => {
-								setResponse(res);
-								if (res.status === 200) {
-									notification.success({
-										message: `Datos Actualizados`,
-										placement: 'bottomLeft'
-									});
-								} else {
-									notification.error({
-										message: `Error: No se pudo actualizar sus datos`,
-										placement: 'bottomLeft'
-									});
-								}
-							});
-						};
-						asyncPutPhoto();
-					}else{
-						setResponse(true);
-					}
-				});
-			}
-		},
-		[ values, state ]
-	);
-	return response;
-};
-
 const Property = () => {
-	const [ values, setValues ] = useState(null);
 	const [ form ] = Form.useForm();
-	let property = usePostProperty(values);
+	const [property, setResponse] = useState(null);
 	const { state, dispatch } = useContext(SessionContext);
 	const [ user, setUser ] = useState();
 	const history = useHistory();
@@ -111,7 +24,8 @@ const Property = () => {
 					})
 					.then(async () => {
 						const { data } = await ApiRequest.get(`user/hasToPay/${state.user.id}`);
-						if (data || state.user.propertiesToPost < 1) {
+						console.log("data", data)
+						if (data) {
 							notification.info({
 								message: `No tiene suscripciones activas`,
 								placement: 'bottomLeft'
@@ -133,6 +47,81 @@ const Property = () => {
 		[ user, dispatch ]
 	);
 
+	const postProperty = values => {
+		values.address = { ...values.address, coordinates: values.coordinates };
+		delete values.coordinates;
+		let atributos = Object.entries(values.attributes);
+		const attributesFormate = atributos.map((a) => {
+			let json = {
+				attributeType: a[0],
+				value: a[1] ? a[1] : '',
+				weigth: 0
+			};
+			return json;
+		});
+
+		let formatedBody = {
+			...values,
+			attributes: attributesFormate,
+			ownerId: state.user.id,
+			status: 'available'
+		};
+
+		let bodyReq = formatedBody;
+		delete bodyReq.photos;
+
+		let createProperty = new Promise(async (res, rej) => {
+			try {
+				let ok = await ApiRequest.post('/property', bodyReq);
+				res(ok);
+			} catch (e) {
+				rej(e);
+			}
+		});
+
+		createProperty.then((property) => {
+			if (values && values.photos) {
+				var plist = values.photos.file.fileList;
+
+				const formData = new FormData();
+				formData.append('type', 'file');
+				for (const ph in plist) {
+					let phLast = plist[ph].originFileObj;
+
+					formData.append('photos', phLast);
+				}
+
+				let header = {
+					'Content-Type': 'multipart/form-data'
+				};
+
+				let asyncPutPhoto = async () => {
+					await ApiRequest.multipartPut(
+						`/property/${property.data.id}/photos`,
+						formData,
+						header
+					).then((res) => {
+						setResponse(res);
+						if (res.status === 200) {
+							notification.success({
+								message: `Datos Actualizados`,
+								placement: 'bottomLeft'
+							});
+						} else {
+							notification.error({
+								message: `Error: No se pudo actualizar sus datos`,
+								placement: 'bottomLeft'
+							});
+						}
+					});
+				};
+				asyncPutPhoto();
+			}else{
+				setResponse(true);
+			}
+		});
+	}
+
 	useEffect(
 		() => {
 			if (property) {
@@ -150,7 +139,7 @@ const Property = () => {
 	return (
 		<ContentWrapper topNav optionsNav>
 			<div className="form-property">
-				<CustomizedForm form={form} data={propertyFields} onfinish={setValues} />
+				<CustomizedForm form={form} data={propertyFields} onfinish={postProperty} />
 			</div>
 		</ContentWrapper>
 	);
