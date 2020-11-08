@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { notification } from 'antd';
-import { SessionContext } from '../../store';
+import { SessionContext, SIGN_IN } from '../../store';
 import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 import PropertyCard from '../../components/PropertyCard';
@@ -9,25 +9,41 @@ import Spin from '../../components/Spin';
 
 
 const Property = () => {
-    const breadscrumb = [{'Mis Propiedades': '/my-properties'}]
-    const [datos, setDatos] = useState()
-    const {state} = useContext(SessionContext);
-    console.log("user", state.user)
+  const { state, dispatch } = useContext(SessionContext);
+  const [ user, setUser] = useState();
+  const [ datos, setDatos] = useState();
+  const breadscrumb = [{'Mis Propiedades': '/my-properties'}]
 
-    useEffect(() => {
-      let asyncGet = async () => {
-          try {
-              let{data} = await ApiRequest.get(`/property/properties/owner/${state.user.id}`);
-              setDatos(data)
-          } catch (e) {
-              notification.error({
-                  message: `Error al obtener propiedades`,
-                  placement: 'bottomLeft'
-              });
-          }
-      }
-      asyncGet()
-    }, [state])
+  useEffect(() => {
+    if(user) return
+    const getUser = async () => {
+      await ApiRequest.get(`user/${state.user.userNickname}`)
+      .then( ({data}) => {
+        setUser(data)
+      })
+    }
+    getUser()
+  }, [state])
+
+  useEffect(()=>{
+    if(!user) return
+    dispatch( SIGN_IN(user) )
+  },[user, dispatch])
+
+  useEffect(() => {
+    let asyncGet = async () => {
+        try {
+            let {data} = await ApiRequest.get(`/property/properties/owner/${state.user.id}`);
+            setDatos(data)
+        } catch (e) {
+            notification.error({
+                message: `Error al obtener propiedades`,
+                placement: 'bottomLeft'
+            });
+        }
+    }
+    asyncGet()
+  }, [state])
 
   return (
     <ContentWrapper topNav breadscrumb={breadscrumb}>
