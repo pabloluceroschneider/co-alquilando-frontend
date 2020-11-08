@@ -4,6 +4,7 @@ import ContentWrapper from '../../components/ContentWrapper';
 import UserCard from '../../components/Match';
 import Spin from '../../components/Spin';
 import ApiRequest from '../../util/ApiRequest';
+import { ArrowDownOutlined } from '@ant-design/icons';
 
 const Match = () => {
 	const [ matched, setMatched ] = useState(null);
@@ -29,6 +30,17 @@ const Match = () => {
 			<div className="roommates-wrapper">
 
 				<div className="info-column">
+
+					{!matched ? (
+						<div className="no-match">
+							<p>No tienes preferencias cargadas</p>
+							<div>
+								<p className="here">Cargalas aqui</p>
+								<ArrowDownOutlined />
+							</div>
+						</div>
+					) : null}
+
 					<div className="edit preferences">
 						<a href="my-profile/updatePreferencies">Editar Preferencias</a>
 					</div>
@@ -44,7 +56,6 @@ const Match = () => {
 
 					{users &&
 						<div>
-							No hemos encontrado coincidencias para ti. Carga tus preferencias <a href="/my-profile/updatePreferencies">aqui</a>
 							{users.map((u, index) => {
 								return <UserCard key={index} user={{...u}}/>;
 							})} 
