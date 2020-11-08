@@ -18,7 +18,7 @@ const Property = () => {
 			let asyncGet = async () => {
 				try {
 					let { data } = await ApiRequest.get(`/property/properties`, { page: page -1, size, ...params });
-					setDatos(data.content);
+					setDatos(data);
 				} catch (e) {
 					notification.error({
                         message: `Error al obtener propiedades`,
@@ -43,16 +43,16 @@ const Property = () => {
 
 						{!datos && <Spin />}
 
-						{datos?.map( p => {
+						{datos?.content.map( p => {
 							return <PropertyCard key={p.id} {...p} />;
 						})}
 
-						{datos && !datos?.length ? <WaitingSelection message="No se encontraron propiedades" /> :null}
+						{datos && !datos?.content.length ? <WaitingSelection message="No se encontraron propiedades" /> :null}
 
 					</div>
 
 					<div className="pagination">
-						<Pagination current={page} onChange={onChange} total={datos?.length} pageSize={size} />
+						<Pagination current={page} onChange={onChange} total={datos?.totalElements} pageSize={size} />
 					</div>
 
 				</div>
