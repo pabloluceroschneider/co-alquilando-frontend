@@ -114,7 +114,7 @@
 }
 
 .link-component.search_property {
-	background-image: url('../assets/images/search_apartment.jpg');
+	background-image: url('../assets/images/search_dept.jpg');
 	background-size: 308px;
 }
 
@@ -127,13 +127,14 @@
 
 .itemMenuTitle{
 	background-color: transparent;
-	color: white;
+	color: var(--principal-blue);
 	font-size: initial;
 	position: absolute;
 	z-index: 1;
-	text-shadow: black 0.1em 0.1em 0.2em;
+	background-color: rgba(255, 255, 255, 0.842);
 	font-weight: 600;
-	font-size: 17px;
+	font-size: 18px;
+	padding: 0px 5px;
 }
 
 /* Transiciónes */

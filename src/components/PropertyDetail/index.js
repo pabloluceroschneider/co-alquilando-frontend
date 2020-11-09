@@ -112,11 +112,13 @@ const Header = ({ status, typology, ownerId }) => {
           nodata="No tienes grupos creados"
         />
       </Menu.Item>
-      <Menu.Item key="1">
-        <div onClick={showConfirm}>
-          <SendOutlined /> Iniciar Conversación
-        </div>
-      </Menu.Item>
+      { state.user.id !== ownerId ? (
+        <Menu.Item key="1">
+          <div onClick={showConfirm}>
+            <SendOutlined /> Iniciar Conversación
+          </div>
+        </Menu.Item>
+      ):null}
     </Menu>
   );
 
@@ -124,7 +126,7 @@ const Header = ({ status, typology, ownerId }) => {
     <div className="section header">
       <Tag>{t(typology)}</Tag>
       <Tag color={statusColor[status]}>{t(status)}</Tag>
-      {status === "available" && state.user.id !== ownerId ? (<Dropdown overlay={menu} trigger={['click']} placement="bottomCenter">
+      {status === "available" ? (<Dropdown overlay={menu} trigger={['click']} placement="bottomCenter">
         <Tag color="#5e83ba">
           Acciones <DownOutlined />
         </Tag>

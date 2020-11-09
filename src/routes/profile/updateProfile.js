@@ -109,18 +109,21 @@ const UpdateForm = (props) => {
           await dispatch( SIGN_IN(data) );
           history.push("/my-profile");
         }).catch(e => {
+        console.log("1")
         notification.error({
           message: `Error: No se pudo actualizar sus datos`,
           placement: "bottomLeft",
         });
       })
       }).catch(e =>{
+        console.log("2")
         notification.error({
           message: `Error: No se pudo actualizar sus datos`,
           placement: "bottomLeft",
         });
       })
     }).catch(e=>{
+      console.log("3")
       notification.error({
         message: `Error: No se pudo actualizar sus datos`,
         placement: "bottomLeft",
