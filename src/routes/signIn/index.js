@@ -71,7 +71,7 @@ const SignIn = () => {
 				});
 			}
 		},
-		[ user, history ]
+		[ user, history, fields ]
 	);
 
 	return (

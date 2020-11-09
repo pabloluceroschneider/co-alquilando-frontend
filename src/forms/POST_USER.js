@@ -125,15 +125,18 @@ const userFields = {
 			],
 			[
 				{
-					label: "Nacionalidad",
-					name: ["attributes","nationality"],
-					component: "Input",
+					label: 'Nacionalidad',
+					name: [ 'attributes', 'nationality' ],
+					component: 'SelectDB',
+					endpoint: '/nationality/all',
+					search: 'nationality'
 				},
-				{
-					label: "Ciudad",
-					name: ["attributes","city"],
-					component: "Input",
-				}
+				// {
+				// 	label: "Provincia ()",
+				// 	name: ["attributes","city"],
+				// 	component: "Select",
+				// 	options: provinces
+				// }
 			],
 			[
 				{

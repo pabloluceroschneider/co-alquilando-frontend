@@ -93,10 +93,13 @@ const userPreferenciesProperty = {
       ],
       [
         {
-          label: "Barrio",
-          name: ["propertyPreferences", "address"],
-          component: "Input",
-        },
+					label: "Barrio",
+					name: ["address", "neighborhood"],
+					component: "SelectDB",
+					endpoint: "/location/all",
+					search: "neighborhood",
+					required: true,
+				},
         {
           label: "Tipología",
           name: ["propertyPreferences", "typology"],
