@@ -63,6 +63,12 @@ const SignIn = () => {
 					placement: 'bottomLeft'
 				});
 				history.push('/');
+				notification.info({
+					message: "No olvides validar tu email",
+					description: `Valida tu cuenta verificando tu correo ${fields?.userEmail} y comenzá a utilizar la aplicación.`,
+					placement: 'bottomLeft',
+					duration: 30
+				});
 			}
 		},
 		[ user, history ]
