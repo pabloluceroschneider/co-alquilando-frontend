@@ -51,17 +51,16 @@ const UpdateForm = (props) => {
   let updateProfile = async fields => {
     let updatePhotoPromise = new Promise( async (res,rej) => {
       try {
-        if(!fields.photos.file) res()
+        if(!fields.photos || !fields.photos.file) res()
         let plist = fields.photos.file.fileList;
         const formData = new FormData();
         formData.append("type", "file");
         let hasFile = false;
         for (const ph in plist) {
             if (plist[ph].originFileObj) {
-            hasFile = true;
-            let phLast = plist[ph].originFileObj;
-            console.log(plist[ph])
-            formData.append("photos", phLast);
+              hasFile = true;
+              let phLast = plist[ph].originFileObj;
+              formData.append("photos", phLast);
             }
         }
         if(!hasFile) res()
@@ -74,8 +73,9 @@ const UpdateForm = (props) => {
     updatePhotoPromise.then(()=>{
       let deletePhotoPromise = new Promise( async (res,rej) => {
         try {
+          if (!photosUpdate) res()
           photosUpdate.forEach( async photo => {
-            if(fields.photos.file?.fileList) {
+            if(fields.photos && fields.photos.file?.fileList) {
               let find = fields.photos.file?.fileList.find( t => t.name === photo )
               if(!find){
                   await ApiRequest.delete(`/user/${idUser}/photos/${photo}`)
@@ -103,29 +103,29 @@ const UpdateForm = (props) => {
             message: `Datos Actualizados con éxito`,
             placement: "bottomLeft",
           })
-          if(data.photos.length > 1){
+          if(data.photos?.length > 1){
             data = {...data, photos: [data.photos[1]]}
           }
           await dispatch( SIGN_IN(data) );
           history.push("/my-profile");
         }).catch(e => {
-        console.log("1")
         notification.error({
           message: `Error: No se pudo actualizar sus datos`,
+          description: `Hubo un problema al actualizar los datos`,
           placement: "bottomLeft",
         });
       })
       }).catch(e =>{
-        console.log("2")
         notification.error({
           message: `Error: No se pudo actualizar sus datos`,
+          description: `Hubo un problema al subir las nuevas fotos`,
           placement: "bottomLeft",
         });
       })
     }).catch(e=>{
-      console.log("3")
       notification.error({
         message: `Error: No se pudo actualizar sus datos`,
+        description: `Hubo un problema al eliminar las antiguas fotos`,
         placement: "bottomLeft",
       });
     })
