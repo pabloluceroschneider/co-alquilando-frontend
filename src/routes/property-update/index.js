@@ -16,6 +16,12 @@ const UpdateProperty = () => {
     const { idProperty } = useParams();
     const history = useHistory();
     const { state } = useContext(SessionContext);
+    const breadscrumb = [
+        { "Mis Propiedades": "/my-properties" },
+        { "Actualizar": `/property/${idProperty}/update` },
+
+    ];
+
     form.setFieldsValue(data)
 
     const updateProperty = async (values) => {
@@ -25,17 +31,21 @@ const UpdateProperty = () => {
             try {
                 await ApiRequest.put(`/property/${idProperty}`, bodyRequest).then( async () => {
                     let deletePhotos = new Promise( async (resolve,reject)=>{
-                        let array_delete_photos = [];
-                        hiddenFields.photos.forEach( async (photo) => {
-                            let res = values.photos.file?.fileList.find( photoAux => photoAux.name === photo)
-                            if (!res) {
-                                array_delete_photos.push(photo)
+                        try {
+                            let array_delete_photos = [];
+                            hiddenFields.photos.forEach( async (photo) => {
+                                let res = values.photos.file?.fileList.find( photoAux => photoAux.name === photo)
+                                if (!res) {
+                                    array_delete_photos.push(photo)
+                                }
+                            })
+                            if (array_delete_photos.length) {
+                                await ApiRequest.delete(`/property/${idProperty}/photos`, { photos: array_delete_photos})
                             }
-                        })
-                        if (array_delete_photos.length) {
-                            await ApiRequest.delete(`/property/${idProperty}/photos`, { photos: array_delete_photos})
-                        }
-                        resolve()
+                            resolve()
+                        } catch (error) {
+                         reject(error)   
+                        }                        
                     })
                     deletePhotos.then( async () => {
                         let postPhotos = false;
@@ -100,7 +110,7 @@ const UpdateProperty = () => {
 
     return (
         <div>
-            <ContentWrapper topNav title="Actualizar Propiedad">
+            <ContentWrapper topNav breadscrumb={breadscrumb}>
                 <CustomizedForm form={form} data={propertyFields} onfinish={updateProperty} onDelete={onDelete} />
             </ContentWrapper>
         </div>
