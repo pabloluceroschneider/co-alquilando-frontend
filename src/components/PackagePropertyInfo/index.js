@@ -7,7 +7,7 @@ const PackagePropertyInfo = ({count}) => {
             <section className="package-property-info">
                 <div className="current">
                     <div className="info">
-                        Tienes {count} publicaciones disponibles
+                        Tienes {count} {count>1?"publicaciones disponibles":"publicación disponible"} 
                     </div>
                 </div>
                 <div className="more" >
