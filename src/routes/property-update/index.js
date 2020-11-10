@@ -32,6 +32,10 @@ const UpdateProperty = () => {
                 await ApiRequest.put(`/property/${idProperty}`, bodyRequest).then( async () => {
                     let deletePhotos = new Promise( async (resolve,reject)=>{
                         try {
+                            if (Array.isArray(values.photos) && values.photos.length){
+                                resolve()
+                                return
+                            }
                             let array_delete_photos = [];
                             hiddenFields.photos.forEach( async (photo) => {
                                 let res = values.photos.file?.fileList.find( photoAux => photoAux.name === photo)
