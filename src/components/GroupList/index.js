@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { ArrowRightOutlined } from '@ant-design/icons';
 
 const Group = ({name, link}) => {
@@ -10,12 +10,14 @@ const Group = ({name, link}) => {
         history.push(`/groups/${link}`);
     }
     return (
-        <div className={`detail clickeable selected-${group===link}`} onClick={handleClick} >
-            <div className="header">
-                <div className="name">{name}</div>
-                <ArrowRightOutlined className={`${group===link}`} />
+        <Link to={`/groups/${link}`}>
+            <div className={`detail clickeable selected-${group===link}`}>
+                <div className="header">
+                    <div className="name">{name}</div>
+                    <ArrowRightOutlined className={`${group===link}`} />
+                </div>
             </div>
-        </div>
+        </Link>
     )
 }
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+import { Link } from "react-router-dom";
 import { SessionContext, SIGN_OUT } from '../../store'
 import { Menu, Avatar, Badge, Dropdown } from 'antd';
 import { LogoutOutlined, BellOutlined, TeamOutlined } from '@ant-design/icons';
@@ -25,14 +26,14 @@ const Nav = () => {
 	const profileSignedIn = (
 		<Menu>
 			<Menu.Item key="0">
-				<a rel="noopener noreferrer" href="/my-profile">
+				<Link to="/my-profile" replace>
 					Mi Perfil
-				</a>
+				</Link>
 			</Menu.Item>
 			<Menu.Item key="1">
-				<a rel="noopener noreferrer" href="/my-properties">
+				<Link to="/my-properties">
 					Mis Propiedades
-				</a>
+				</Link>
 			</Menu.Item>
 			<Menu.Divider />
 			<Menu.Item key="3" onClick={async () => {
@@ -48,29 +49,31 @@ const Nav = () => {
 	return (
 		<ul className="principalNav">
 			<li>
-				<a className="home" href="/">
+				<Link to="/">
 					<img className="logo" src={logo} alt="CoAlquilando"></img>
-				</a>
+				</Link>
 			</li>
 			{state?.user ? (
 				<>
 					<li style={{ float: 'right' }}>
 						<Dropdown overlay={profileSignedIn} placement="bottomRight" trigger="click">
-							<a className="ant-dropdown-link" href="/">
-								<span className="userName">{state?.user.userName}</span>
-								<Avatar size={30} src={image} />
-							</a>
+							<Link to="/" >
+								<div className="ant-dropdown-link">
+									<span className="userName">{state?.user.userName}</span>
+									<Avatar size={30} src={image} />
+								</div>
+							</Link>
 						</Dropdown>
 					</li>
 					<li style={{ float: 'right' }}>
-						<a href="/notifications">
+						<Link to="/notifications" >
 							<Ring />
-						</a>
+						</Link>
 					</li>
 					<li style={{ float: 'right' }}>
-						<a href="/groups">
+						<Link to="/groups">
 							<TeamOutlined />
-						</a>
+						</Link>
 					</li>
 				</>) :
 				<>
