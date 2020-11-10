@@ -1,14 +1,10 @@
 import React from 'react'
-import { useHistory, useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { ArrowRightOutlined } from '@ant-design/icons';
 
 const Group = ({name, link}) => {
     const { group } = useParams();
-    const history = useHistory();
 
-    const handleClick = () => {
-        history.push(`/groups/${link}`);
-    }
     return (
         <Link to={`/groups/${link}`}>
             <div className={`detail clickeable selected-${group===link}`}>
