@@ -6,6 +6,8 @@ import ApiRequest from "../../util/ApiRequest";
 import ContentWrapper from "../../components/ContentWrapper";
 import Spin from "../../components/Spin";
 import calculateAge from "../../util/CalculateAge";
+import { Link } from "react-router-dom";
+
 
 const image =
   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
@@ -85,10 +87,10 @@ const MyProfile = (props) => {
           </div>
           <div className="profileButton">
             <Button className="buttonEdit">
-              <a href="/my-profile/update">Editar Datos</a>
+              <Link to="/my-profile/update">Editar Datos</Link>
             </Button>
             <Button className="buttonEdit">
-              <a href="/my-profile/updatePreferencies">Editar Preferencias</a>
+              <Link to="/my-profile/updatePreferencies">Editar Preferencias</Link>
             </Button>
           </div>
         </div>

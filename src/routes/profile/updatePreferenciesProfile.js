@@ -211,7 +211,7 @@ const UpdatePreferenciesForm = (props) => {
   const { state } = useContext(SessionContext);
   const breadscrumb = [
     { "Mi Perfil": "/my-profile" },
-    { "Mi Preferencias": "/my-profile/updatePreferencies" },
+    { "Mis Preferencias": "/my-profile/updatePreferencies" },
   ];
   useEffect(() => {
     let asyncGetUser = async () => {

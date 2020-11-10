@@ -5,6 +5,7 @@ import UserCard from '../../components/Match';
 import Spin from '../../components/Spin';
 import ApiRequest from '../../util/ApiRequest';
 import { ArrowDownOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 const Match = () => {
 	const [ matched, setMatched ] = useState(null);
@@ -42,7 +43,7 @@ const Match = () => {
 					) : null}
 
 					<div className="edit preferences">
-						<a href="my-profile/updatePreferencies">Editar Preferencias</a>
+						<Link to="my-profile/updatePreferencies">Editar Preferencias</Link>
 					</div>
 				</div>
 
