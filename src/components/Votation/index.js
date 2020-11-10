@@ -188,7 +188,7 @@ const History = ({ items }) => {
 const Votation = ({ detail, render }) => {
   const [votations, setVotations] = useVotations(detail);
 
-  if (!votations?.history && !votations?.ongoing) {
+  if (!votations?.history.length && !votations?.ongoing) {
     return (
       <WaitingSelection
         border
