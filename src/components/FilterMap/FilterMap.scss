@@ -1,0 +1,13 @@
+
+.filter-map-wrapper{
+    display: grid;
+    place-items: center;
+
+    .header{
+        display: flex;
+        flex-direction: row;
+        label {
+            padding: 5px;
+        }
+    }
+}
