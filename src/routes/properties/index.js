@@ -32,7 +32,7 @@ const Property = () => {
 
 	return (
 		<ContentWrapper topNav optionsNav>
-			<div id="piechart" style={{width:900, height: 500}}></div>
+			<FilterMap />
 		</ContentWrapper>
 	);
 };

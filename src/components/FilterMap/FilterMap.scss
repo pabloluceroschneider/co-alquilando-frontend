@@ -11,3 +11,12 @@
         }
     }
 }
+
+.map-wrapper{
+    max-height: 50px;
+    .map{
+        position: relative;
+        left: 0px;
+        max-height: 200px;
+    }
+}
