@@ -7,6 +7,7 @@ import Spin from '../../components/Spin';
 import Filters from '../../components/Filters';
 import FilterMap from '../../components/FilterMap';
 import WaitingSelection from '../../components/WaitingSelection'
+import '../../styles/Properties.scss';
 
 const Property = () => {
 	const [ datos, setDatos ] = useState(null);
@@ -32,7 +33,15 @@ const Property = () => {
 
 	return (
 		<ContentWrapper topNav optionsNav>
-			<FilterMap />
+			<div className="properties-container">
+				<FilterMap />
+				<div>
+					<div>casa</div>
+					<div>casa</div>
+					<div>casa</div>
+					<div>casa</div>
+				</div>
+			</div>
 		</ContentWrapper>
 	);
 };

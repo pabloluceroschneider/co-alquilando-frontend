@@ -1,0 +1,28 @@
+// Mobile First
+
+.properties-container{
+    display: flex;
+    flex-flow: column;
+
+    .filter-map-wrapper{
+        align-self: center;
+        .header{
+            display: flex;
+            flex-direction: row;
+            label {
+                padding: 5px;
+            }
+        }
+    }
+    
+    .map-wrapper{
+        top: 1px;
+        min-height: 200px;
+        .map{
+            display: block;
+            position: relative;
+            left: 0px;
+            max-height: 200px;
+        }
+    }
+}

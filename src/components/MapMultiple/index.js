@@ -11,7 +11,13 @@ const ClickeableMap = ({google, currentPosition}) => {
     
   return (
         <Map initialCenter={currentPosition} google={google} zoom={14} className="map">
-            { marks.map((mark, index) => <Marker key={index} position={mark} onClick={() => console.log(index)} />)}
+            { marks.map((mark, index) => (
+                <Marker 
+                    key={index} 
+                    position={mark} 
+                    onClick={() => console.log(index)} 
+                    />
+            ))}
         </Map>
     )
 }

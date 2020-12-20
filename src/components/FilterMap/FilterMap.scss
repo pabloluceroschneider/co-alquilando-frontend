@@ -1,22 +1,2 @@
 
-.filter-map-wrapper{
-    display: grid;
-    place-items: center;
 
-    .header{
-        display: flex;
-        flex-direction: row;
-        label {
-            padding: 5px;
-        }
-    }
-}
-
-.map-wrapper{
-    max-height: 50px;
-    .map{
-        position: relative;
-        left: 0px;
-        max-height: 200px;
-    }
-}

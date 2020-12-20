@@ -18,6 +18,7 @@ const FilterMap = () => {
 	};
 
 	return (
+        <>
 		<div className="filter-map-wrapper">
 			<div className="header">
 				<label>Buscar por mi ubicación</label>
@@ -36,15 +37,8 @@ const FilterMap = () => {
                     />
                 </div>
 			) : null}
-
-            <div className="properties-wrapp">
-                <div>casa</div>
-                <div>casa</div>
-                <div>casa</div>
-                <div>casa</div>
-            </div>
-
 		</div>
+        </>
 	);
 };
 
