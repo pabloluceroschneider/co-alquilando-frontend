@@ -3,9 +3,12 @@
 .properties-container{
     display: flex;
     flex-flow: column;
+    cursor: pointer;
+    margin-top: 30px;
 
     .filter-map-wrapper{
-        align-self: center;
+        align-self: baseline;
+        text-align: center;
         .header{
             display: flex;
             flex-direction: row;
@@ -13,16 +16,121 @@
                 padding: 5px;
             }
         }
+        .map-wrapper{
+            min-height: 200px;
+            .map{
+                display: block;
+                position: relative;
+                left: 0px;
+                max-height: 200px;
+            }
+        }
     }
-    
-    .map-wrapper{
-        top: 1px;
-        min-height: 200px;
-        .map{
-            display: block;
+    .properties{
+        margin: 40px 20px;
+        .property{
             position: relative;
-            left: 0px;
-            max-height: 200px;
+            box-shadow: 0 0 5px #c0c0c0;
+            margin: 0px 10px 20px 10px;
+            padding: 10px;
+            overflow: hidden;
+            .detail{
+                display: flex;
+                flex-flow: row;
+                img{
+                    height: 90px;
+                    width: 90px;
+                    border-radius: 5%;
+                    margin-right: 10px;
+                }
+                summary{
+                    display: flex;
+                    flex-flow: column;
+                    justify-content: space-around;
+                    max-height: 90px;
+                    div {
+                        width: 200px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                .title{
+                    font-size: 1.1rem;
+                }
+            }
+            &:hover{
+                box-shadow: 0 0 10px rgb(75, 110, 173);
+            }
+            .actions{
+                position: absolute;
+                display: flex;
+                flex-flow: column;
+                justify-content: space-around;
+
+                top: 0px;
+                left: 100%;
+                
+                width: 40%;   
+                transition: left 0.4s ease-in-out;
+
+                overflow: hidden;
+
+                min-height: 110px;
+                background-color: #cecece;
+                padding: 0 10px;
+            }
         }
     }
 }
+.show{
+    left: 60% !important;
+}
+.true{
+    box-shadow: 0 0 10px rgb(75, 110, 173) !important;
+}
+
+
+// Desktop view
+@media only screen and (min-width: 900px) {
+    .properties-container{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        place-items: center;
+
+        .filter-map-wrapper{
+            .header{
+                label {
+                }
+            }
+            .map-wrapper{
+                .map{
+                    max-width: 550px;
+                    max-height: 400px;
+                    margin: 10px 50px;
+                    &> div{
+                        box-shadow: 0 0 10px #cacaca;
+                    }
+                }
+            }
+        }
+        .properties{
+            width: 75%;
+            .property{
+                .detail{
+                    summary{
+                        div{
+                            width: 330px;
+                        }
+                    }
+                }
+                &:hover{
+                    margin-left: -10px;
+                    box-shadow: 0 0 5px #c0c0c0;
+                }
+            }
+        }
+        
+    }
+}
+

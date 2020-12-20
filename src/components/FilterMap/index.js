@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './FilterMap.scss';
 import { Checkbox } from 'antd';
 import MapMultiple from '../MapMultiple';
 
-const FilterMap = () => {
-	const [ currentPosition, setCurrentPosition ] = useState({ lat: null, lng:null});
+const FilterMap = ({properties}) => {
+    const [ currentPosition, setCurrentPosition ] = useState({ lat: null, lng:null});
+    const [ loadingMap, setLoadingMap ] = useState(false)
 
 	const getCurrentPosition = () => {
+        setLoadingMap(true)
         if (currentPosition.lat && currentPosition.lng ) {
             setCurrentPosition({ lat: null, lng:null})
+            setLoadingMap(false);
             return
         }
 		navigator.geolocation.getCurrentPosition(({ coords }) => {
 			console.log(coords);
 			setCurrentPosition({ lat: coords.latitude, lng: coords.longitude });
-		});
+            setLoadingMap(false);
+        });
 	};
 
 	return (
@@ -25,6 +29,8 @@ const FilterMap = () => {
 				<Checkbox onClick={getCurrentPosition} />
 			</div>
 
+            {loadingMap ? (<p>Cargando mapa...</p>) : null}
+
 			{currentPosition.lat && currentPosition.lng ? (
                 <div className="map-wrapper">
                     <MapMultiple
@@ -34,6 +40,7 @@ const FilterMap = () => {
                         mapElement={<div style={{ height: `auto` }} />}
                         zoomLevel={10}
                         currentPosition={currentPosition}
+                        properties={properties}
                     />
                 </div>
 			) : null}
