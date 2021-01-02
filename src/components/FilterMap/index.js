@@ -3,7 +3,7 @@ import './FilterMap.scss';
 import { Checkbox } from 'antd';
 import MapMultiple from '../MapMultiple';
 
-const FilterMap = ({properties}) => {
+const FilterMap = ({properties, selected, onFilter, seeOnMap}) => {
     const [ currentPosition, setCurrentPosition ] = useState({ lat: null, lng:null});
     const [ loadingMap, setLoadingMap ] = useState(false)
 
@@ -18,6 +18,12 @@ const FilterMap = ({properties}) => {
 			console.log(coords);
 			setCurrentPosition({ lat: coords.latitude, lng: coords.longitude });
             setLoadingMap(false);
+            onFilter({ lat: (coords.latitude).toFixed(2) });
+            // onFilter({ lat: (coords.latitude).toFixed(2), lng: (coords.longitude.toFixed(2)) });
+            // onFilter({
+            //     lat: -31.44872900235405.toFixed(2),
+            //     lng: -64.17921968243677.toFixed(2)
+            // })
         });
 	};
 
@@ -41,6 +47,8 @@ const FilterMap = ({properties}) => {
                         zoomLevel={10}
                         currentPosition={currentPosition}
                         properties={properties}
+                        selected={selected}
+                        seeOnMap={seeOnMap}
                     />
                 </div>
 			) : null}

@@ -1,57 +1,58 @@
-import React, { useEffect, useState } from 'react';
-import { notification, Pagination } from 'antd';
-import ApiRequest from '../../util/ApiRequest';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useFetch } from '../../hooks/useFetch';
 import ContentWrapper from '../../components/ContentWrapper';
-import PropertyCard from '../../components/PropertyCard';
-import Spin from '../../components/Spin';
-import Filters from '../../components/Filters';
 import FilterMap from '../../components/FilterMap';
-import WaitingSelection from '../../components/WaitingSelection'
+import Filters from '../../components/Filters';
 import '../../styles/Properties.scss';
+import { label } from 'aws-amplify';
 
 const Property = () => {
-	const [ properties, setProperties ] = useState(null);
 	const [ selected, setSelected ] = useState()
+	const [ onMap, setOnMap ] = useState()
 	const [ page, setPage ] = useState(1);
-	const [ size ] = useState(6);
-	const [params, setParams] = useState();
-	const onChange = page => setPage(page);
+	const [ size ] = useState(3);
+	const [ params, setParams] = useState();
+	const [ properties, error, setResult ] = useFetch(
+		'/property/properties',
+		{ page: page -1, size, ...params }, 
+		[ page, size, params ] 
+	);
 	let to = window.screen.width > 600 ? 0 : 300
-
-	useEffect(() => {
-			let asyncGet = async () => {
-				try {
-					let { data: { content } } = await ApiRequest.get(`/property/properties`, { page: page -1, size, ...params });
-					setProperties(content);
-				} catch (e) {
-					notification.error({
-                        message: `Error al obtener propiedades`,
-						placement: 'bottomLeft'
-					});
-				}
-			};
-			asyncGet();
-	},[ page, size, params ]);
-	
+		
+	const onChange = page => setPage(page);
 	const toggleActions = (id) => {
 		let node = document.getElementById(id);
 		let act = node.getElementsByClassName("actions")
 		act[0].classList.toggle("show")
 	}
 
-	const seeOnMap = (id) => {
+	const seeOnMap = (id, fromList) => {
 		const rest = properties.filter( p => p.id !== id)
 		const prop = properties.find( p => p.id === id)
 		setSelected(prop);
-		setProperties([prop, ...rest])
+		if (fromList) setOnMap(prop);
+		setResult([prop, ...rest])
 		window.scrollTo({ top: to, behavior: 'smooth' })
-		setTimeout(() => toggleActions(id), 1300)
+		let node = document.getElementById(id);
+		let act = node.getElementsByClassName("actions")
+		setTimeout(() => act[0].classList.remove("show"), 1300)
 	}
-	
+
 	return (
 		<ContentWrapper topNav optionsNav>
 			<div className="properties-container">
-				<FilterMap properties={properties} />
+				
+				<FilterMap 
+					properties={properties} 
+					onFilter={setParams} 
+					seeOnMap={seeOnMap}
+					selected={onMap}
+					/>
+
+				{/* <div className="filters">
+					<Filters title="Filtros" onFilter={setParams}/>
+				</div> */}
 
 				<section className="properties">
 					{properties?.map( ({id,  photos, title, price, description, address}) => (
@@ -67,8 +68,10 @@ const Property = () => {
 								</summary>
 							</div>
 							<div className="actions">
-								<div>Ver Detalle</div>
 								<div onClick={() => seeOnMap(id)}>Ver en Mapa</div>
+								<Link to={`/property/${id}`}>
+									Ver Detalle
+								</Link>
 							</div>
 						</div>
 					))}

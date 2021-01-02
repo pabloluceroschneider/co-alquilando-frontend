@@ -1,28 +1,31 @@
 import React from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 
-const ClickeableMap = ({google, currentPosition}) => {
-    let marks = [
-        { lat: "-31.3622851", lng: "-64.173951" },
-        { lat: "-31.3635595", lng: "-64.179473" },
-        { lat: "-31.3647215", lng: "-64.1703123" },
-    ]
-    console.log('currentPosition:', currentPosition)
-    
-  return (
+const ClickeableMap = ({google, properties, selected, currentPosition, seeOnMap}) => {
+
+    return (
         <Map 
             initialCenter={currentPosition} 
             google={google} 
-            zoom={14} 
+            zoom={15} 
             className="map"
                 >
-                { marks.map((mark, index) => (
+                {selected ? (
                     <Marker 
-                        key={index} 
-                        position={mark} 
-                        onClick={() => console.log(index)} 
+                        key={selected.id} 
+                        position={ { lat: selected.address.coordinates.latitude, lng: selected.address.coordinates.length } } 
                         />
-                ))}
+                ) : (
+                    properties.map( 
+                        ({ id, address : { coordinates : { latitude, length } } }) => (
+                            <Marker 
+                                key={id} 
+                                id={id}
+                                position={ { lat: latitude, lng: length } } 
+                                onClick={() => seeOnMap(id, false)} 
+                                />
+                    ))
+                )}
         </Map>
     )
 }

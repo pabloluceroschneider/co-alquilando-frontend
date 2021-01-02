@@ -87,7 +87,7 @@
     left: 60% !important;
 }
 .true{
-    box-shadow: 0 0 10px rgb(75, 110, 173) !important;
+    box-shadow: 0 0 10px #4b6ead !important;
 }
 
 
@@ -95,7 +95,7 @@
 @media only screen and (min-width: 900px) {
     .properties-container{
         display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: auto auto;
         place-items: center;
 
         .filter-map-wrapper{
@@ -120,13 +120,12 @@
                 .detail{
                     summary{
                         div{
-                            width: 330px;
+                            width: 350px;
                         }
                     }
                 }
                 &:hover{
-                    margin-left: -10px;
-                    box-shadow: 0 0 5px #c0c0c0;
+                    box-shadow: 0 0 15px #dbdbdb;
                 }
             }
         }
