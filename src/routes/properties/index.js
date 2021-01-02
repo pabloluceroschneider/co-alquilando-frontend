@@ -18,8 +18,9 @@ const Property = () => {
 		size,
 		params
 	]);
-	let to = window.screen.width > 600 ? 0 : 300;
-
+	const breadscrumb = [
+		{ "Listado de propiedades": "/" },
+	  ];
 	const onChange = (page) => setPage(page);
 	const toggleActions = (id) => {
 		let node = document.getElementById(id);
@@ -39,7 +40,7 @@ const Property = () => {
 	};
 
 	return (
-		<ContentWrapper topNav>
+		<ContentWrapper topNav breadscrumb={breadscrumb}>
 			<div className="properties-container">
 				<FilterMap properties={properties} onFilter={setParams} seeOnMap={seeOnMap} selected={onMap} />
 
