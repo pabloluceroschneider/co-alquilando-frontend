@@ -22,18 +22,22 @@
                 display: block;
                 position: relative;
                 left: 0px;
-                max-height: 200px;
+                max-height: 85vh;
             }
         }
     }
     .properties{
         margin: 40px 20px;
         .property{
-            position: relative;
+            position: absolute;
+            bottom: 0px;
+            right: 55px;
             box-shadow: 0 0 5px #c0c0c0;
-            margin: 0px 10px 20px 10px;
+            margin: 0px;
             padding: 10px;
             overflow: hidden;
+            background-color: white;
+            z-index: 10;
             .detail{
                 display: flex;
                 flex-flow: row;
@@ -105,18 +109,19 @@
             }
             .map-wrapper{
                 .map{
-                    max-width: 550px;
-                    max-height: 400px;
-                    margin: 10px 50px;
                     &> div{
-                        box-shadow: 0 0 10px #cacaca;
+                        box-shadow: 0 0 5px #818181;
                     }
                 }
             }
         }
         .properties{
             width: 75%;
-            .property{
+            .property{  
+                position: absolute;
+                bottom: 40px;
+                right: 50px;
+                margin: 0px 10px 20px 10px;
                 .detail{
                     summary{
                         div{

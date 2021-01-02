@@ -31,7 +31,7 @@ const Routes = () => {
 				{state.user ? (
 					<Switch>
 						<Route exact path="/" component={PropertyList} />
-						<Route exact path="/properties" component={Properties} />
+						<Route exact path="/properties-on-map" component={Properties} />
 						<Route path="/my-profile/updatePreferencies" exact component={UpdatePreferenciesForm} />
 						<Route path="/my-profile/update" exact component={UpdateForm} />
 						<Route path="/my-profile" exact component={MyProfile} />

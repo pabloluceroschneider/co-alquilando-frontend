@@ -5,7 +5,7 @@ import MapMultiple from '../MapMultiple';
 
 const FilterMap = ({properties, selected, onFilter, seeOnMap}) => {
     const [ currentPosition, setCurrentPosition ] = useState({ lat: null, lng:null});
-    const [ loadingMap, setLoadingMap ] = useState(false)
+    const [ loadingMap, setLoadingMap ] = useState(false);
 
 	const getCurrentPosition = () => {
         setLoadingMap(true)
@@ -25,15 +25,16 @@ const FilterMap = ({properties, selected, onFilter, seeOnMap}) => {
             //     lng: -64.17921968243677.toFixed(2)
             // })
         });
-	};
+    };
+    useEffect(()=> {
+        if (currentPosition.lat) return
+        getCurrentPosition()
+    },[currentPosition, getCurrentPosition])
+    
 
 	return (
         <>
 		<div className="filter-map-wrapper">
-			<div className="header">
-				<label>Buscar por mi ubicación</label>
-				<Checkbox onClick={getCurrentPosition} />
-			</div>
 
             {loadingMap ? (<p>Cargando mapa...</p>) : null}
 
