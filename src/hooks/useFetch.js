@@ -22,5 +22,5 @@ export const useFetch = ( endpoint, params, dependencies ) => {
         asyncGet();
     }, dependencies);
 
-    return [result, error, setResult]
+    return [result, setResult, error]
 }
