@@ -9,10 +9,10 @@ import '../../styles/Properties.scss';
 const Property = () => {
 	const [ selected, setSelected ] = useState();
 	const [ onMap, setOnMap ] = useState();
-	const [ page, setPage ] = useState(1);
+	const [ page ] = useState(1);
 	const [ size ] = useState(3);
 	const [ params, setParams ] = useState();
-	const [ properties, error, setResult ] = useFetch('/property/properties', { page: page - 1, size, ...params }, [
+	const [ properties, setResult ] = useFetch('/property/properties', { page: page - 1, size, ...params }, [
 		page,
 		size,
 		params

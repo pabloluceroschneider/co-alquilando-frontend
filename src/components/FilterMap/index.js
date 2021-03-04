@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './FilterMap.scss';
-import { Checkbox } from 'antd';
 import MapMultiple from '../MapMultiple';
 
 const FilterMap = ({properties, selected, onFilter, seeOnMap}) => {
@@ -19,11 +18,6 @@ const FilterMap = ({properties, selected, onFilter, seeOnMap}) => {
 			setCurrentPosition({ lat: coords.latitude, lng: coords.longitude });
             setLoadingMap(false);
             onFilter({ lat: (coords.latitude).toFixed(2) });
-            // onFilter({ lat: (coords.latitude).toFixed(2), lng: (coords.longitude.toFixed(2)) });
-            // onFilter({
-            //     lat: -31.44872900235405.toFixed(2),
-            //     lng: -64.17921968243677.toFixed(2)
-            // })
         });
     };
     useEffect(()=> {
