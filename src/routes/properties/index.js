@@ -5,7 +5,6 @@ import ContentWrapper from '../../components/ContentWrapper';
 import FilterMap from '../../components/FilterMap';
 import Filters from '../../components/Filters';
 import '../../styles/Properties.scss';
-import { label } from 'aws-amplify';
 
 const Property = () => {
 	const [ selected, setSelected ] = useState();
@@ -44,9 +43,13 @@ const Property = () => {
 			<div className="properties-container">
 				<FilterMap properties={properties} onFilter={setParams} seeOnMap={seeOnMap} selected={onMap} />
 
-				{/* <div className="filters">
+				<div className="map-filter-on-map">
+					<Link to={`/`}>Ver listado</Link>
+				</div>
+
+				<div className="filters-on-map">
 					<Filters title="Filtros" onFilter={setParams}/>
-				</div> */}
+				</div>
 
 				{selected ? (
 					<section className="properties">
