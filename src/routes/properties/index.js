@@ -19,8 +19,8 @@ const Property = () => {
 	]);
 	const breadscrumb = [
 		{ "Listado de propiedades": "/" },
+		{ "Mapa": "/properties-on-map" },
 	  ];
-	const onChange = (page) => setPage(page);
 	const toggleActions = (id) => {
 		let node = document.getElementById(id);
 		let act = node.getElementsByClassName('actions');
