@@ -1,0 +1,76 @@
+.ads-list--content {
+  display: grid;
+  grid-template-columns: auto;
+  width: 90vw;
+  place-items: center;
+  margin-left: 5vw;
+  padding-top: 5%;
+  cursor: default;
+  .ads {
+    margin: 5% 5% 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 5px;
+    flex-direction: row;
+    justify-content: center;
+    .ant-card-hoverable{
+        cursor: default;
+    }
+  }
+
+  .side {
+    width: 100%;
+    padding: 1px 5px;
+    .package-property-info {
+      display: grid;
+      justify-items: center;
+      background-color: var(--grey);
+      .current {
+        .info {
+          width: 100%;
+        }
+      }
+      .more {
+        text-align-last: center;
+        margin: 5px 0;
+        a button {
+          padding: 5px;
+        }
+      }
+    }
+    .publish {
+      float: right;
+      margin: 15px 0px 0px 0;
+    }
+  }
+
+  .ad-card--content-title {
+    a {
+      font-size: 18px;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+    span {
+        padding-left: 2%
+    };
+  }
+}
+
+/* pantalla de escritorio */
+@media only screen and (min-width: 600px) {
+  .ads-list--content {
+    grid-template-columns: 25% 75%;
+    padding: 10px;
+    place-items: flex-start;
+    .package-property-info {
+      padding: 5px;
+    }
+    .ads {
+      margin: 0;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}
