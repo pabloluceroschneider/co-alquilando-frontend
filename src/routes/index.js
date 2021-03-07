@@ -7,7 +7,7 @@ import SignIn from './signIn';
 import Profile from './profile/index';
 import MyProfile from './profile/myProfile';
 import UpdateForm from './profile/updateProfile';
-import Property from './property';
+import Property from './properties';
 import PropertyDetail from './property-detail';
 import UpdatePreferenciesForm from './profile/updatePreferenciesProfile';
 import PropertyList from "./propertyList";
