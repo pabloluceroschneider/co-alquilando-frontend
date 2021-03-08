@@ -15,7 +15,7 @@ const props = {
 };
 
 const PieChart = () => {
-	const [ metric, setMetric ] = useState();
+	const [metric, setMetric] = useState();
 	const { state, dispatch } = useContext(SessionContext);
 
 	window.google.charts.load('current', { packages: ['corechart'] });
@@ -41,26 +41,19 @@ const PieChart = () => {
 
 
 	function drawChart() {
-		console.log("metric:", metric);
-		console.log("props:", props);
-
-		if (typeof(metric) != 'undefined' && metric != null ) {
+		if (typeof (metric) != 'undefined' && metric != null) {
 			console.log(metric.propertiesAverage);
 
 			let formated = {
-				data : [metric.propertiesAverage]
-			} 
-			
+				data: metric.propertiesAverage
+			};
 
-			console.log(formated);
+			var data = window.google.visualization.arrayToDataTable(formated.data);
 
-
-			var data = window.google.visualization.arrayToDataTable(formated);
+			var options = {
+				title: formated.data[0][1]
+			};
 		}
-
-		var options = {
-			title: 'My Daily Activities'
-		};
 
 		var chart = new window.google.visualization.PieChart(document.getElementById('piechart'));
 
