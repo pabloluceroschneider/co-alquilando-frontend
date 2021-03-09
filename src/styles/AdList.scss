@@ -13,8 +13,32 @@
     column-gap: 5px;
     flex-direction: row;
     justify-content: center;
-    .ant-card-hoverable{
-        cursor: default;
+    .ant-card-hoverable {
+      cursor: default;
+    }
+    .ant-card {
+      margin-top: 2%;
+      
+    }
+    .ant-card-body{
+      min-height: 420px;
+      max-height: 420px;
+    }
+    .ad-card--content-price{
+      font-size: 20px;
+      color: black;
+    }
+    img {
+      width: 290px;
+      height: 200px;
+    }
+    .ad-card--content-button-editar{
+      text-align: center;
+    }
+    .ant-divider {
+      margin: 15px 0 15px 10%;
+      width: 80%;
+      min-width: 80%
     }
   }
 
@@ -45,6 +69,7 @@
   }
 
   .ad-card--content-title {
+    font-size: 18px;
     a {
       font-size: 18px;
       text-decoration: none;
@@ -52,8 +77,20 @@
       font-weight: bold;
     }
     span {
-        padding-left: 2%
-    };
+      padding-left: 2%;
+    }
+  }
+  .ad-card--content-paymentDate{
+    padding-top: 16px;
+    color: var(--letter);
+  }
+
+  .ad-card--content-description{
+    padding-top: 8px;
+    color: var(--letter);
+  }
+  .ad-card--content-divider{
+    width: 80%;
   }
 }
 
@@ -71,6 +108,22 @@
       width: 100%;
       display: flex;
       flex-wrap: wrap;
+      .ant-card {
+        min-width: 600px;
+        max-width: 600px;
+      }
+      .ant-card-body{
+        min-height: unset;
+        max-height: unset; 
+      }
+      .pubicity-card--container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        column-gap: 32px;
+        .ad-card--content-price{
+          font-size: 26px;
+        }
+      }
     }
   }
 }
