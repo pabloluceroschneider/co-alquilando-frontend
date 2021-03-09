@@ -1,5 +1,7 @@
 import React from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
+import housePin from '../../assets/Icons/house-pin.svg'
+import housePinSelected from '../../assets/Icons/house-pin.svg'
 
 const ClickeableMap = ({google, properties, selected, currentPosition, seeOnMap}) => {
 
@@ -7,9 +9,16 @@ const ClickeableMap = ({google, properties, selected, currentPosition, seeOnMap}
         <Map 
             initialCenter={currentPosition} 
             google={google} 
-            zoom={15} 
+            zoom={14} 
             className="map"
                 >
+
+                <Marker
+                    key='currentPosition' 
+                    id='currentPosition'
+                    position={currentPosition}
+                    />
+
                 {selected ? (
                     <Marker 
                         key={selected.id} 
@@ -23,6 +32,12 @@ const ClickeableMap = ({google, properties, selected, currentPosition, seeOnMap}
                                 id={id}
                                 position={ { lat: latitude, lng: length } } 
                                 onClick={() => seeOnMap(id, false)} 
+                                icon={{
+                                    url: housePin,
+                                    anchor: new google.maps.Point(70 / 4, 94 / 2 - 5),
+                                    size: new google.maps.Size(70 / 2, 94 / 2),
+                                    scaledSize: new google.maps.Size(70 / 2, 94 / 2),
+                                }}
                                 />
                     ))
                 )}
