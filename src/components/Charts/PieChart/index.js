@@ -7,17 +7,21 @@ const PieChart = ({ metric, keys }) => {
 
 
 	function drawChart() {
-		if (typeof (metric) != 'undefined' && metric != null && metric.id != null) {
+		if (typeof (metric) != 'undefined' && metric != null) {
 
 			let formated = {
-				data: metric.propertiesAverage
+				data: metric
 			};
 
 			var data = window.google.visualization.arrayToDataTable(formated.data);
+
 			var options = {
-				title: formated.data[0][1]
+				title: formated.data[0][1],
+				colors: ['#76b5c5',  '#1e81b0', '#0a5da4', '#154c79']
+
 			};
-			var chart = new window.google.visualization.PieChart(document.getElementById(`piechart-${keys}`));
+			var chart = new window.google.visualization.PieChart(
+				document.getElementById(`piechart-${keys}`));
 
 			chart.draw(data, options);
 		}
