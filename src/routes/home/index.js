@@ -1,36 +1,38 @@
 import React from 'react';
-import LogoSinFondo from '../../assets/images/Home/LogoSinFondo.png'
-import video from '../../assets/images/Home/Coalq.mp4'
-import "../../styles/Home.css"
+import LOGO_COALQUILANDO from '../../assets/images/logonav.png'
+import desktopVideo from '../../assets/images/Home/Coalq.mp4'
+import mobileVideo from '../../assets/images/Home/mobile-coalq.mov'
 import Login from  '../../components/Login'
+import "../../styles/Home.scss"
 
 
 const Home = () => {
 
+  const mobileView = window.screen.width < 600;
+  const video = mobileView ? mobileVideo : desktopVideo;
 
   return (
   
-      <div className="Home__Image">
-        <video loop autoPlay preload="true" muted>
+      <div className="home-page">
+
+        <div className='logo'>
+          <img src={LOGO_COALQUILANDO} alt="image_home"></img>
+        </div>
+
+        <section className='video-section'>
+
+          <video className='video' loop autoPlay preload muted>
             <source src={video} ></source>
           </video>
-          
-        <div className="LogoContext">
-          <img src={LogoSinFondo} alt="image_home"></img>
-           <div className="iniciarSesionContext">
-              <Login />
-          </div>
-        </div>
-        
-          
-          <div className="Home__Text">
-            <span className="Home__Titulo">La oportunidad que estabas esperando</span>
-            <a href="/sign-in" className="Home__Button" type="button">
-              Encontrá tu Lugar
-						</a>
-         </div>
-      </div>
 
+          <div className='presentation-text'>
+            <h1 className='text --title'>CoAlquilando</h1>
+            <h3 className='text --subtitle'>Encontrá tu lugar...</h3>
+          </div>
+
+        </section>
+
+      </div>
   );
 
 }
