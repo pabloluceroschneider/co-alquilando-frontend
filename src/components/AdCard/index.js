@@ -1,19 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Divider, Button } from "antd";
 import { Link } from "react-router-dom";
 import { CheckCircleTwoTone, EditOutlined } from "@ant-design/icons";
 import moment from "moment";
 
+const image = "http://anokha.world/images/not-found.png";
+
 const AdCard = (props) => {
+  const [photo, setPhoto] = useState();
+
+  useEffect(() => {
+    let asyncGetPhoto = async () => {
+      let photoJSON = {
+        caption: "",
+        position: "",
+        imgUrl: `http://localhost:8080/ad/${props.id}/image/${props.image}`,
+      };
+      setPhoto(photoJSON);
+    };
+    if (props.image) {
+      asyncGetPhoto();
+    } else {
+      let photoJSON = {
+        caption: "",
+        position: "",
+        imgUrl: "",
+      };
+      setPhoto(photoJSON);
+    }
+  }, [props.id, props.image]);
+
   console.log("props", props);
-  console.log("props.endDate", moment(props.endDate).format("L"));
+  console.log("photo", photo);
   return (
     <Card hoverable>
       <div className="pubicity-card--container">
-        <img
-          src="https://gastrofranchising.com/wp-content/uploads/2018/07/logo_franquicia_pizzeria_popular.jpg"
-          alt={props.client}
-        />
+        {props.image ? (
+          <div
+            className="publicity-card--image"
+            style={{ backgroundImage: `url(${photo?.imgUrl})` }}
+            key={photo?.position}
+            alt={props.client}
+          ></div>
+        ) : (
+          <img
+            className="publicity-card--image"
+            src={image}
+            alt={props.client}
+          ></img>
+        )}
         <div className="ad-card--content">
           <div className="ad-card--content-title">
             <Link to={`/ad/${props.id}/update`}>{props.client}</Link>
@@ -33,11 +68,11 @@ const AdCard = (props) => {
           </div>
           <Divider />
           <div className="ad-card--content-button-editar">
-          <Link to={`/ad/${props.id}/update`}>
-            <Button >
-              <EditOutlined title="Editar" twoToneColor="#52c41a" />
-            </Button>
-          </Link>
+            <Link to={`/ad/${props.id}/update`}>
+              <Button>
+                <EditOutlined title="Editar" twoToneColor="#52c41a" />
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
