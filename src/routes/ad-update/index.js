@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Form, notification } from "antd";
 import adFields from "../../forms/UPDATE_AD";
@@ -11,6 +11,7 @@ const UpdateAd = () => {
   const { idAd } = useParams();
   const history = useHistory();
   const [form] = Form.useForm();
+  const [ad, setResponse] = useState(null);
   const breadscrumb = [
     { Publicidades: "/ads" },
     { "Actualizar Publicidad": idAd ? `/ad/${idAd}/update` : null },
@@ -38,25 +39,60 @@ const UpdateAd = () => {
       ...values,
       startDate: values.startDate.toString(),
       endDate: values.endDate.toString(),
-    };
-    const updateAd = async () => {
-      await ApiRequest.put(`ad/${idAd}`, formatedBodyReq)
-        .then((res) => {
-          notification.success({
-            message: "Publicidad actualizada con éxito",
-            placement: "bottomLeft",
-          });
-        })
-        .catch((err) => {
-          notification.error({
-            message: "Error: no se pudo publicar la publicidad",
-            placement: "bottomLeft",
-          });
-        });
+      image: null,
     };
 
-    updateAd();
+    let updateAd = new Promise(async (res, rej) => {
+      try {
+        let ok = await ApiRequest.put(`/ad/${idAd}`, formatedBodyReq);
+        res(ok);
+      } catch (err) {
+        rej(err);
+      }
+    });
+
+    updateAd.then((ad) => {
+      console.log('values', values)
+      if (values && values.image) {
+        let image = values.image.file?.fileList;
+        const formData = new FormData();
+        formData.append("type", "file");
+
+        for (const ph in image) {
+          let phLast = image[ph].originFileObj;
+          formData.append("image", phLast);
+        }
+
+        let header = {
+          "Content-Type": "multipart/form-data",
+        };
+
+        let asyncPutImage = async () => {
+          await ApiRequest.multipartPut(
+            `/ad/${ad.data.id}/image`,
+            formData,
+            header
+          ).then((res) => {
+            setResponse(res);
+          });
+        };
+
+        asyncPutImage();
+      } else {
+        setResponse(true);
+      }
+    });
   };
+
+  useEffect(() => {
+    if (ad) {
+      notification.success({
+        message: "Publicidad Actualizada con éxito",
+        placement: "bottomLeft",
+      });
+      history.push("/ads");
+    }
+  }, [ad, form, history]);
 
   const onDelete = async () => {
     await ApiRequest.delete(`/ad/${idAd}`).then((res) => {
