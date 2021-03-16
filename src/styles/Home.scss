@@ -5,15 +5,19 @@
 
 .home-page .logo{
     position: absolute;
-    top: 5px;
-    left: 0;
-    right: 0;
+    top: 15px;
     margin: 0 auto;
+    right: 50px;
+    height: auto;
     z-index: 2;
     text-align: center;
     img{
         width: 70px;
         height: 70px;
+    }
+    @media only screen and (max-width: 600px){
+        left: 0;
+        right: 0;
     }
 }
 
@@ -54,11 +58,56 @@
             } 
             &.--subtitle {
                 background-color: var(--secondary-blue);
-                font-size: 2em;
+                font-size: 1.5em;
                 color: white;
             }
         }
-
-        
     }
+}
+
+.home-page .steps{
+    &::before{
+        content: "";
+        position: absolute;
+        display: block;
+        width: 100%;
+        min-height: 30px;
+        background-image: linear-gradient(
+            to bottom, 
+            #616161,
+            #bbbbbb,
+            #e7e7e7,
+            white
+        );
+    }
+    .step-by-step{
+        display: flex;
+        flex-direction: column;
+        @media only screen and (min-width: 600px){
+            flex-direction: row;
+        }
+    }
+
+    .step-by-step .step{
+        width: 87%;
+        margin: 0 3% 0 10%;
+        padding-top: 40px;
+        .title{
+            margin-top: 20px;
+            font-size: 21px;
+            color: var(--letter);
+        }
+    }
+    .ant-steps-item-title{
+        padding-right: 0;
+    }
+    .ant-steps-item-content{
+        width: 80%;
+
+    }
+}
+
+.footer{
+    margin: 50px;
+    color: white;
 }
