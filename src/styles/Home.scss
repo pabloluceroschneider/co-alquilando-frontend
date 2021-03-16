@@ -83,6 +83,7 @@
     .step-by-step{
         display: flex;
         flex-direction: column;
+        padding-top: 30px;
         @media only screen and (min-width: 600px){
             flex-direction: row;
         }
@@ -91,9 +92,9 @@
     .step-by-step .step{
         width: 87%;
         margin: 0 3% 0 10%;
-        padding-top: 40px;
+        padding-top: 10px;
         .title{
-            margin-top: 20px;
+            margin-top: 10px;
             font-size: 21px;
             color: var(--letter);
         }
@@ -104,6 +105,20 @@
     .ant-steps-item-content{
         width: 80%;
 
+    }
+}
+
+.contact-us{
+    margin-top: 20px;
+    padding: 20px 0 30px;
+    background-color: var(--tertiary-blue);
+    .title{
+        margin: 0px 20px 10px;
+        font-size: 21px;
+        color: var(--letter);
+    }
+    .customizedForm{
+        background-color: white;
     }
 }
 

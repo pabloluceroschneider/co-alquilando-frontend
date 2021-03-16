@@ -1,15 +1,19 @@
 import React from 'react';
+import { Steps, Form } from 'antd';
 import LOGO_COALQUILANDO from '../../assets/images/logonav.png'
 import desktopVideo from '../../assets/images/Home/Coalq.mp4'
 import mobileVideo from '../../assets/images/Home/mobile-coalq.mov'
 import Login from  '../../components/Login'
+import CustomizedForm from "../../components/CustomizedForm";
+import contactForm from "../../forms/CONTACT_US";
+
 import "../../styles/Home.scss"
-import { Steps, Divider } from 'antd';
 
 const { Step } = Steps;
 
 
 const Home = () => {
+  const [form] = Form.useForm();
 
   const mobileView = window.screen.width < 600;
   const video = mobileView ? mobileVideo : desktopVideo;
@@ -61,7 +65,12 @@ const Home = () => {
         </section>
 
         <section className='contact-us'>
-
+          <h1 className='title'>Contáctanos</h1>
+          <CustomizedForm
+            form={form}
+            data={contactForm}
+            onfinish={console.log}
+            />
         </section>
 
         <footer className='footer'>
