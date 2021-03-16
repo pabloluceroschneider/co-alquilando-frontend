@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Card, Divider, Button } from "antd";
+import { Card, Divider, Button, notification, Modal } from "antd";
 import { Link } from "react-router-dom";
-import { CheckCircleTwoTone, EditOutlined } from "@ant-design/icons";
+import {
+  CheckCircleTwoTone,
+  EditOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
+import ApiRequest from "../../util/ApiRequest";
 import moment from "moment";
 
 const image = "http://anokha.world/images/not-found.png";
 
 const AdCard = (props) => {
   const [photo, setPhoto] = useState();
+  const { confirm } = Modal;
 
   useEffect(() => {
     let asyncGetPhoto = async () => {
@@ -30,8 +36,29 @@ const AdCard = (props) => {
     }
   }, [props.id, props.image]);
 
-  console.log("props", props);
-  console.log("photo", photo);
+  const onDelete = async () => {
+    await ApiRequest.delete(`/ad/${props.id}`).then((res) => {
+      notification.success({
+        message: `Publicidad eliminada con éxito`,
+        placement: "bottomLeft",
+      });
+    });
+  };
+
+  const showDelete = () => {
+    confirm({
+      title: "¿Desea eliminar esta publicidad?",
+      icon: <ExclamationCircleOutlined />,
+      content: "Si selecciona 'Aceptar', se desactivará la publicidad.",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        onDelete();
+      },
+    });
+  };
+
   return (
     <Card hoverable>
       <div className="pubicity-card--container">
@@ -67,7 +94,10 @@ const AdCard = (props) => {
             {moment(props.endDate).format("L")}
           </div>
           <Divider />
-          <div className="ad-card--content-button-editar">
+          <div className="ad-card--content-buttons">
+            {props.active && <Button danger onClick={showDelete}>
+              Desactivar
+            </Button>}
             <Link to={`/ad/${props.id}/update`}>
               <Button>
                 <EditOutlined title="Editar" twoToneColor="#52c41a" />

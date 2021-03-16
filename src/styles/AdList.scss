@@ -33,8 +33,10 @@
       height: 200px;
       background-repeat: round;
     }
-    .ad-card--content-button-editar{
+    .ad-card--content-buttons{
       text-align: center;
+      display: flex;
+      place-content: space-evenly;
     }
     .ant-divider {
       margin: 15px 0 15px 10%;
