@@ -53,6 +53,7 @@ const adFields = {
           name: "image",
           component: "Upload",
           aspect: 16 / 9,
+          required: true,
         },
       ],
     ],

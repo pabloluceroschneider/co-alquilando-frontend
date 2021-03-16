@@ -2,10 +2,6 @@ const adFields = {
   name: "ad",
   layout: "vertical",
   btnSubmit: "Actualizar Publicidad",
-  btnDelete: "Eliminar Publicidad",
-  titleDelete: "Eliminar Publicidad",
-  deleteContentModal:
-    "¿Desea eliminar esta publicidad? Si selecciona 'Aceptar', no podrá recuperarla.",
   fields: {
     primaries: [
       [
@@ -57,6 +53,7 @@ const adFields = {
           name: "image",
           component: "Upload",
           aspect: 16 / 9,
+          required: true,
         },
       ],
     ],
