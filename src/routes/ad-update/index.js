@@ -21,12 +21,12 @@ const UpdateAd = () => {
     const asyncGetAd = async () => {
       await ApiRequest.get(`/ad/${idAd}`).then((res) => {
         let { data } = res;
-
         let formatedData = {
           ...data,
           paymentDate: data.paymentDate ? moment(data.paymentDate) : null,
           startDate: data.startDate ? moment(data.startDate) : null,
           endDate: data.endDate ? moment(data.endDate) : null,
+          image: [data.image]
         };
         form.setFieldsValue(formatedData);
       });
@@ -94,23 +94,12 @@ const UpdateAd = () => {
     }
   }, [ad, form, history]);
 
-  const onDelete = async () => {
-    await ApiRequest.delete(`/ad/${idAd}`).then((res) => {
-      notification.success({
-        message: `Publicidad eliminada con éxito`,
-        placement: "bottomLeft",
-      });
-      history.push(`/ads`);
-    });
-  };
-
   return (
     <ContentWrapper topNav footer breadscrumb={breadscrumb}>
       <CustomizedForm
         form={form}
         data={adFields}
         onfinish={putAd}
-        onDelete={onDelete}
       />
     </ContentWrapper>
   );
