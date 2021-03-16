@@ -86,6 +86,7 @@
         padding-top: 30px;
         @media only screen and (min-width: 600px){
             flex-direction: row;
+            padding: 100px 0 50px;
         }
     }
 
@@ -93,6 +94,11 @@
         width: 87%;
         margin: 0 3% 0 10%;
         padding-top: 10px;
+        @media only screen and (min-width: 600px){
+            margin: 0 40px;
+            padding: 20px 20px 20px 40px;
+            box-shadow: 0 0 10px var(--dark-grey);
+        }
         .title{
             margin-top: 10px;
             font-size: 21px;
@@ -112,6 +118,11 @@
     margin-top: 20px;
     padding: 20px 0 30px;
     background-color: var(--tertiary-blue);
+    @media only screen and (min-width: 600px){
+        width: 50%;
+        margin: 40px auto;
+        box-shadow: 0 0 10px var(--dark-grey);
+    }
     .title{
         margin: 0px 20px 10px;
         font-size: 21px;
@@ -119,6 +130,8 @@
     }
     .customizedForm{
         background-color: white;
+        width: 96%;
+        margin: 0 2%;
     }
 }
 
