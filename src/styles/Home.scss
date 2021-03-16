@@ -119,19 +119,27 @@
     padding: 20px 0 30px;
     background-color: var(--tertiary-blue);
     @media only screen and (min-width: 600px){
-        width: 50%;
-        margin: 40px auto;
+        width: 100%;
+        margin: 40px 0;
         box-shadow: 0 0 10px var(--dark-grey);
     }
     .title{
         margin: 0px 20px 10px;
         font-size: 21px;
         color: var(--letter);
+        @media only screen and (min-width: 600px){
+            width: 50%;
+            margin: 0px auto 10px;
+        }
     }
     .customizedForm{
         background-color: white;
         width: 96%;
         margin: 0 2%;
+        @media only screen and (min-width: 600px){
+            width: 50%;
+        margin: 0 auto;
+        }
     }
 }
 
