@@ -116,7 +116,7 @@ const CustomizedModal = (props) => {
 	);
 };
 
-const Login = () => {
+const Login = (props) => {
 	const [ visible, setVisible ] = useState(false);
 
 	const toggleVisible = () => {
@@ -125,7 +125,14 @@ const Login = () => {
     
 	return (
 		<div className="wrapper-login">
-			<span className="title" onClick={() => toggleVisible()}> Iniciar sesión </span>
+			{props.children 
+			? (
+				<span onClick={() => toggleVisible()}>
+ 					{props.children }
+				</span>
+			)
+			: <span className="title" onClick={() => toggleVisible()}> Iniciar sesión </span>}
+			
 			<CustomizedModal visible={visible} toggleVisible={toggleVisible}/>
 		</div>
 	);
