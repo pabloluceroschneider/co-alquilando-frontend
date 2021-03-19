@@ -5,14 +5,12 @@ import ImgCrop from "antd-img-crop";
 import { SessionContext } from "../../../store";
 
 const CustomUpload = (props) => {
-  console.log(`props upload`, props);
   const { state } = useContext(SessionContext);
   
   const [fileList, setFileList] = useState([]);
   let { idProperty } = useParams();
   let { idAd } = useParams()
   
-  console.log(`fileList`, fileList)
   const handlePhoto = (file) => {
     setFileList(file.fileList);
 

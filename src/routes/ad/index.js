@@ -22,9 +22,6 @@ const Ad = () => {
       image: null,
     };
 
-    console.log("formatedBodyReq", formatedBodyReq);
-    console.log("values", values);
-
     let createAd = new Promise(async (res, rej) => {
       try {
         let ok = await ApiRequest.post("/ad", formatedBodyReq);
