@@ -12,6 +12,7 @@ const UpdateAd = () => {
   const history = useHistory();
   const [form] = Form.useForm();
   const [ad, setResponse] = useState(null);
+  const [data, setData] = useState()
   const breadscrumb = [
     { Publicidades: "/ads" },
     { "Actualizar Publicidad": idAd ? `/ad/${idAd}/update` : null },
@@ -28,6 +29,7 @@ const UpdateAd = () => {
           endDate: data.endDate ? moment(data.endDate) : null,
           image: [data.image]
         };
+        setData(formatedData)
         form.setFieldsValue(formatedData);
       });
     };
@@ -39,7 +41,7 @@ const UpdateAd = () => {
       ...values,
       startDate: values.startDate.toString(),
       endDate: values.endDate.toString(),
-      image: null,
+      image: data?.image[0],
     };
 
     let updateAd = new Promise(async (res, rej) => {
@@ -52,8 +54,7 @@ const UpdateAd = () => {
     });
 
     updateAd.then((ad) => {
-      console.log('values', values)
-      if (values && values.image) {
+      if (values && values.image && values.image.file?.fileList) {
         let image = values.image.file?.fileList;
         const formData = new FormData();
         formData.append("type", "file");
