@@ -42,6 +42,9 @@ const AdCard = (props) => {
         message: `Publicidad eliminada con éxito`,
         placement: "bottomLeft",
       });
+    }).then(async (res) => {
+      let { data } = await ApiRequest.get(`/ad`);
+      props.setDatos(data);
     });
   };
 

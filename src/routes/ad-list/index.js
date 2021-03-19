@@ -37,7 +37,7 @@ const AdList = () => {
 
           {datos?.length
             ? datos.map((a) => {
-                return <AdCard key={a.id} {...a} />;
+                return <AdCard key={a.id} {...a} datos={datos} setDatos={setDatos} />;
               })
             : null}
 
