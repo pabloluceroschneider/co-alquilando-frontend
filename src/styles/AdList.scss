@@ -1,0 +1,132 @@
+.ads-list--content {
+  display: grid;
+  grid-template-columns: auto;
+  width: 90vw;
+  place-items: center;
+  margin-left: 5vw;
+  padding-top: 5%;
+  cursor: default;
+  .ads {
+    margin: 5% 5% 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 5px;
+    flex-direction: row;
+    justify-content: center;
+    .ant-card-hoverable {
+      cursor: default;
+    }
+    .ant-card {
+      margin-top: 2%;
+      
+    }
+    .ant-card-body{
+      min-height: 420px;
+      max-height: 420px;
+    }
+    .ad-card--content-price{
+      font-size: 20px;
+      color: black;
+    }
+    .publicity-card--image {
+      width: 290px;
+      height: 200px;
+      background-repeat: round;
+    }
+    .ad-card--content-buttons{
+      text-align: center;
+      display: flex;
+      place-content: space-evenly;
+    }
+    .ant-divider {
+      margin: 15px 0 15px 10%;
+      width: 80%;
+      min-width: 80%
+    }
+  }
+
+  .side {
+    width: 100%;
+    padding: 1px 5px;
+    .package-property-info {
+      display: grid;
+      justify-items: center;
+      background-color: var(--grey);
+      .current {
+        .info {
+          width: 100%;
+        }
+      }
+      .more {
+        text-align-last: center;
+        margin: 5px 0;
+        a button {
+          padding: 5px;
+        }
+      }
+    }
+    .publish {
+      float: right;
+      margin: 15px 0px 0px 0;
+    }
+  }
+
+  .ad-card--content-title {
+    font-size: 18px;
+    a {
+      font-size: 18px;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+    span {
+      padding-left: 2%;
+    }
+  }
+  .ad-card--content-paymentDate{
+    padding-top: 16px;
+    color: var(--letter);
+  }
+
+  .ad-card--content-description{
+    padding-top: 8px;
+    color: var(--letter);
+  }
+  .ad-card--content-divider{
+    width: 80%;
+  }
+}
+
+/* pantalla de escritorio */
+@media only screen and (min-width: 600px) {
+  .ads-list--content {
+    grid-template-columns: 25% 75%;
+    padding: 10px;
+    place-items: flex-start;
+    .package-property-info {
+      padding: 5px;
+    }
+    .ads {
+      margin: 0;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      .ant-card {
+        min-width: 600px;
+        max-width: 600px;
+      }
+      .ant-card-body{
+        min-height: unset;
+        max-height: unset; 
+      }
+      .pubicity-card--container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        column-gap: 32px;
+        .ad-card--content-price{
+          font-size: 26px;
+        }
+      }
+    }
+  }
+}
