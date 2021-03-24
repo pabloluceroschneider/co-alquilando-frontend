@@ -4,6 +4,7 @@ import LOGO_COALQUILANDO from '../../assets/images/logonav.png';
 import desktopVideo from '../../assets/images/Home/Coalq.mp4';
 import mobileVideo from '../../assets/images/Home/mobile-coalq.mov';
 import Login from '../../components/Login';
+import Footer from '../../containers/Footer';
 import CustomizedForm from '../../components/CustomizedForm';
 import contactForm from '../../forms/CONTACT_US';
 import { FacebookOutlined, TwitterOutlined, LoginOutlined } from '@ant-design/icons';
@@ -97,7 +98,7 @@ const Home = () => {
 			</section>
 
 			<footer className="footer">
-				<span>footer</span>
+				<Footer />
 			</footer>
 		</div>
 	);
