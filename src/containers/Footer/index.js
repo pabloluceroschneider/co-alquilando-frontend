@@ -1,14 +1,12 @@
 import React from 'react';
-import { Layout } from 'antd';
-const { Footer } = Layout;
-const foot = () => {
+import './styles.scss';
+
+const Footer = () => {
   return (
-
-    <Layout>
-      <Footer style={{ textAlign: 'center' }}>Co-Alquilando Design ©2020 Created by UTN FRC G3</Footer>
-    </Layout>
-
+    <footer className='footer'>
+      Coalquilando. Todos los Derechos Reservados
+    </footer>
   );
 }
 
-export default foot;
+export default Footer;
