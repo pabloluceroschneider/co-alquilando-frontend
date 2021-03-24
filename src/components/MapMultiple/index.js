@@ -25,12 +25,12 @@ const ClickeableMap = ({google, properties, selected, currentPosition, seeOnMap}
                         position={ { lat: selected.address.coordinates.latitude, lng: selected.address.coordinates.length } } 
                         />
                 ) : (
-                    properties.map( 
-                        ({ id, address : { coordinates : { latitude, length } } }) => (
+                    properties?.map( 
+                        ({ id, address : { coordinates } }) => (
                             <Marker 
                                 key={id} 
                                 id={id}
-                                position={ { lat: latitude, lng: length } } 
+                                position={ { lat: coordinates?.latitude, lng: coordinates?.length } } 
                                 onClick={() => seeOnMap(id, false)} 
                                 icon={{
                                     url: housePin,

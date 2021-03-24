@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './FilterMap.scss';
 import MapMultiple from '../MapMultiple';
+import Spin from '../Spin';
 
 const FilterMap = ({properties, selected, onFilter, seeOnMap}) => {
     const [ currentPosition, setCurrentPosition ] = useState({ lat: null, lng:null});
@@ -30,8 +31,12 @@ const FilterMap = ({properties, selected, onFilter, seeOnMap}) => {
         <>
 		<div className="filter-map-wrapper">
 
-            {loadingMap ? (<p>Cargando mapa...</p>) : null}
-
+            {loadingMap ? (
+                <div className='spin-filter-map'>
+                    <Spin />
+                </div>) 
+            : null }
+            
 			{currentPosition.lat && currentPosition.lng ? (
                 <div className="map-wrapper">
                     <MapMultiple
