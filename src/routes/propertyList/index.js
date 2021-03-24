@@ -11,7 +11,7 @@ import WaitingSelection from '../../components/WaitingSelection'
 const Property = () => {
 	const [ datos, setDatos ] = useState(null);
 	const [ page, setPage ] = useState(1);
-	const [ size ] = useState(1);
+	const [ size ] = useState(9);
 	const [params, setParams] = useState();
 	const onChange = page => setPage(page);
 
