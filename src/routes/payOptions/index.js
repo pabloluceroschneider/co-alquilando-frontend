@@ -35,7 +35,7 @@ const PayOptions = () => {
     }, [searchPackages])
 
     return (
-        <ContentWrapper topNav breadscrumb={breadscrumb}>
+        <ContentWrapper topNav breadscrumb={breadscrumb} footer >
             <div className="contentPayOptions">
                 {!!packages ? (packages.map((packagePay, index) => (
 

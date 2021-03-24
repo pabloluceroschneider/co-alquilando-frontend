@@ -38,7 +38,7 @@ const Profile = (props) => {
   }, [nickname, datos]);
 
   return (
-    <ContentWrapper topNav>
+    <ContentWrapper topNav footer>
       {!datos ? <Spin /> :null}
 
       {datos ? (
