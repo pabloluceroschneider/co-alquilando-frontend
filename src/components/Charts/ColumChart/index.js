@@ -10,28 +10,22 @@ const ColumChart = ({ metric, keys }) => {
 
       var colors = [{ "role": "style" }, '#76b5c5', '#1e81b0'];
 
-      console.log("metric 1: ", metric);
-
       let formatedMetric = metric.map((a, index) => {
         console.log("a ", a);
         return a.push(colors[index])
       });
 
-      console.log("metric 2: ", metric);
-
       var data = window.google.visualization.arrayToDataTable(
         metric
       );
 
-
       var options = {
+        width: 500,
+				height: 340,
         title: metric[0][0],
-        width: 600,
-        height: 400,
         bar: { groupWidth: "95%" },
         legend: { position: "none" },
       };
-
 
       var view = new window.google.visualization.DataView(data);
       view.setColumns([0, 1,
@@ -43,14 +37,14 @@ const ColumChart = ({ metric, keys }) => {
         },
         2]);
 
-      var chart = new window.google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      var chart = new window.google.visualization.ColumnChart(document.getElementById(`columnchart_values-${keys}`));
       chart.draw(view, options);
     }
   }
 
   return (
     <div style={{ textAlign: '-webkit-center' }} key={keys}>
-      <div id="columnchart_values" style={{ width: 800, height: 400 }} />
+      <div id={`columnchart_values-${keys}`} />
     </div>
   );
 

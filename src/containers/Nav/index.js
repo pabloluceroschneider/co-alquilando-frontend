@@ -35,6 +35,11 @@ const Nav = () => {
 					Mis Propiedades
 				</Link>
 			</Menu.Item>
+			<Menu.Item key="2">
+				<Link to="/reports">
+					Mis Reportes
+				</Link>
+			</Menu.Item>
 			<Menu.Divider />
 			<Menu.Item key="3" onClick={async () => {
 				await Auth.signOut;

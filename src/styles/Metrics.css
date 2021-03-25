@@ -1,0 +1,10 @@
+.conteiner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.subtitle{
+    color: var(--letter);
+    margin-left: 20px;
+}

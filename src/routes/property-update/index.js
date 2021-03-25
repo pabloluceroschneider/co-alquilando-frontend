@@ -18,8 +18,7 @@ const UpdateProperty = () => {
     const { state } = useContext(SessionContext);
     const breadscrumb = [
         { "Mis Propiedades": "/my-properties" },
-        { "Actualizar": `/property/${idProperty}/update` },
-
+        { "Actualizar": `/property/${idProperty}/update` }
     ];
 
     form.setFieldsValue(data)

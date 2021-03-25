@@ -9,6 +9,7 @@ const Metrics = () => {
 
 	const [metric, setMetric] = useState();
 	const { state, dispatch } = useContext(SessionContext);
+	const breadscrumb = [{'Mis Reportes': '/reports'}]
 
 	useEffect(
 		() => {
@@ -19,22 +20,46 @@ const Metrics = () => {
 						setMetric(data);
 					})
 			};
-		getMetric();	
+			getMetric();
 		},
 		[metric, state]
 	);
 
+	console.log("METRICS: ", metric)
 	return (
 		<div>
-			
+
 			{ metric ? (
-					<ContentWrapper topNav>
-						<div>
-							<PieChart metric={metric.propertiesAverage} keys={1} />
-							<ColumChart metric={metric.propertyAverageLastMonth} keys={2} />
+				<ContentWrapper topNav breadscrumb={breadscrumb}>
+					<div class="metrics">
+						<div class="section box" >
+							<h3 class="subtitle"> Datos generales</h3>
+							<div class="chart" id="pie">
+								<PieChart metric={metric.propertiesAverage} keys={1} />
+							</div>
 						</div>
-					</ContentWrapper >
-				) : null
+						<div>
+							<div>
+								<h3 className="subtitle"> Resultados en el ultimo mes</h3>
+								<div className="conteiner">
+									<div class="chart" id="colum-1">
+										<ColumChart metric={metric.propertyAverageLastMonth} keys={2} />
+									</div>
+									<div class="chart" id="colum-2">
+										<ColumChart metric={metric.propertyAverageLastSixMonth} keys={3} />
+									</div>
+								</div>
+							</div>
+							<div>
+								<h3 class="subtitle"> Resultados en los ultimos seis meses</h3>
+								<div class="chart" id="colum-3">
+									<ColumChart metric={metric.propertyAverageLastSixMonth} keys={3} />
+								</div>
+							</div>
+						</div>
+					</div>
+				</ContentWrapper>
+			) : null
 			};
 		</div>
 	);

@@ -16,9 +16,10 @@ const PieChart = ({ metric, keys }) => {
 			var data = window.google.visualization.arrayToDataTable(formated.data);
 
 			var options = {
+				width: 500,
+				height: 340,
 				title: formated.data[0][1],
-				colors: ['#76b5c5',  '#1e81b0', '#0a5da4', '#154c79']
-
+				colors: ['#76b5c5', '#1e81b0', '#0a5da4', '#154c79']
 			};
 			var chart = new window.google.visualization.PieChart(
 				document.getElementById(`piechart-${keys}`));
@@ -29,7 +30,7 @@ const PieChart = ({ metric, keys }) => {
 
 	return (
 		<div style={{ textAlign: '-webkit-center' }} key={keys}>
-			<div id={`piechart-${keys}`} style={{ width: 800, height: 400 }} />
+			<div id={`piechart-${keys}`} />
 		</div>
 	);
 };
