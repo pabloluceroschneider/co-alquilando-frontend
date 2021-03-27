@@ -6,7 +6,7 @@ import mobileVideo from '../../assets/images/Home/mobile-coalq.mov';
 import Login from '../../components/Login';
 import Footer from '../../containers/Footer';
 import ContactUs from '../../components/ContactUs';
-import { FacebookOutlined, TwitterOutlined, LoginOutlined } from '@ant-design/icons';
+import { LoginOutlined } from '@ant-design/icons';
 
 import '../../styles/Home.scss';
 
@@ -46,44 +46,44 @@ const Home = () => {
 					<div className="step">
 						<h1 className="title">¿Buscás compañero de Alquiler?</h1>
 						<Steps current={3} progressDot direction="vertical">
-							<Step title="Registrate" description="This is a description. This is a description." />
+							<Step title="Registrate" description="Completá tus datos y accede a la plataforma." />
 							<Step
 								title="Personalizá tu Búsqueda"
-								description="This is a description. This is a description."
+								description="Elegí tus preferencias para encontrar a tu compañero ideal."
 							/>
 							<Step
-								title="Encontrá tu compañero ideal"
-								description="This is a description. This is a description."
-							/>
-						</Steps>
-					</div>
-
-					<div className="step">
-						<h1 className="title">Alquilá tu propiedad</h1>
-						<Steps current={3} progressDot direction="vertical">
-							<Step title="Registrate" description="This is a description. This is a description." />
-							<Step
-								title="Publicá tu propiedad"
-								description="This is a description. This is a description."
-							/>
-							<Step
-								title="Seguí publicando"
-								description="This is a description. This is a description."
+								title="Elegí tu Propiedad"
+								description="Navega entre las propiedades y compartilas con tu grupo."
 							/>
 						</Steps>
 					</div>
 
 					<div className="step">
-						<h1 className="title">Alquilá tu propiedad</h1>
+						<h1 className="title">¿Querés compartir tu alquiler?</h1>
 						<Steps current={3} progressDot direction="vertical">
-							<Step title="Registrate" description="This is a description. This is a description." />
+							<Step title="Registrate" description="Completá tus datos y accede a la plataforma." />
 							<Step
 								title="Publicá tu propiedad"
-								description="This is a description. This is a description."
+								description="Si vivís en una propiedad, ingresa los datos y comenzá tu búsqueda."
 							/>
 							<Step
-								title="Seguí publicando"
-								description="This is a description. This is a description."
+								title="Encontrá compañero"
+								description="Navegá entre los perfiles y elegí tus compañeros de vivienda."
+							/>
+						</Steps>
+					</div>
+
+					<div className="step">
+						<h1 className="title">Publicá tu propiedad</h1>
+						<Steps current={3} progressDot direction="vertical">
+							<Step title="Registrate" description="Completá tus datos y accede a la plataforma." />
+							<Step
+								title="Publicá tus propiedades"
+								description="Elegí tu paquete, y cargá los datos de tus propiedades."
+							/>
+							<Step
+								title="Encontrá inquilinos"
+								description="Gestioná los grupos, comunicate y concretá el pre-alquiler."
 							/>
 						</Steps>
 					</div>
