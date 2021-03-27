@@ -87,14 +87,15 @@
                 padding: 0 10px;
             }
         }
+        .true{
+            box-shadow: 0 0 10px #4b6ead !important;
+        }
     }
 }
 .show{
     left: 60% !important;
 }
-.true{
-    box-shadow: 0 0 10px #4b6ead !important;
-}
+
 
 .map-filter-on-map{
     position: absolute;
