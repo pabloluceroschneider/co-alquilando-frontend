@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { notification, Pagination } from 'antd';
 import ApiRequest from '../../util/ApiRequest';
 import ContentWrapper from '../../components/ContentWrapper';
@@ -34,6 +35,13 @@ const Property = () => {
 			<div className="properties-wrapper">
 				
 				<div className="filters">
+
+					<div className="map-filter">
+						<span>Buscar por mi ubicación</span>
+						<Link to={`/properties-on-map`}>Ver en mapa</Link>
+					</div>
+
+
 					<Filters title="Filtros" onFilter={setParams}/>
 				</div>
 
