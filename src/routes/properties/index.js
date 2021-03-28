@@ -60,7 +60,7 @@ const Property = () => {
 								onClick={() => toggleActions(selected.id)}
 							>
 								<img
-									src={`http://localhost:8080//property/${selected.id}/photos/${selected.photos[0]}`}
+									src={`http://localhost:8080//property/${selected.id}/photos/${selected.photos?[0]}`}
 									alt={selected.description}
 								/>
 								<summary>
