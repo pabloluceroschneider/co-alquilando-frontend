@@ -25,8 +25,6 @@ const PropertyCard = props => {
         "HOUSE": "Casa"
     }
 
-    console.log(`attr`, attr)
-
     useEffect(() => {
         let asyncGet = async () => {
           setPhotoList([])
