@@ -1,0 +1,166 @@
+// Mobile First
+
+.properties-container{
+    display: flex;
+    flex-flow: column;
+    position: relative;
+    cursor: pointer;
+    margin-top: 10px;
+
+    .filter-map-wrapper{
+        align-self: baseline;
+        text-align: center;
+        .header{
+            display: flex;
+            flex-direction: row;
+            label {
+                padding: 5px;
+            }
+        }
+        .map-wrapper{
+            min-height: 85vh;
+            .map{
+                display: block;
+                position: relative;
+                left: 0px;
+                max-height: 85vh;
+            }
+        }
+    }
+
+    .properties{
+        .property{
+            position: absolute;
+            bottom: 25px;
+            left: 5px;
+            box-shadow: 0 0 10px #7c7c7c;       
+            margin: 0px;
+            padding: 10px;
+            overflow: hidden;
+            background-color: white;
+            max-width: 85vw;
+            z-index: 2;
+            .detail{
+                display: flex;
+                flex-flow: row;
+                img{
+                    height: 90px;
+                    width: 90px;
+                    border-radius: 5%;
+                    margin-right: 10px;
+                }
+                summary{
+                    display: flex;
+                    flex-flow: column;
+                    justify-content: space-around;
+                    max-height: 90px;
+                    div {
+                        width: 200px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                .title{
+                    font-size: 1.1rem;
+                }
+            }
+            &:hover{
+                box-shadow: 0 0 10px rgb(75, 110, 173);
+            }
+            .actions{
+                position: absolute;
+                display: flex;
+                flex-flow: column;
+                justify-content: space-around;
+
+                top: 0px;
+                left: 100%;
+                
+                width: 40%;   
+                transition: left 0.4s ease-in-out;
+
+                overflow: hidden;
+
+                min-height: 110px;
+                background-color: #cecece;
+                padding: 0 10px;
+            }
+        }
+        .true{
+            box-shadow: 0 0 10px #4b6ead !important;
+        }
+    }
+}
+.show{
+    left: 60% !important;
+}
+
+
+.map-filter-on-map{
+    position: absolute;
+    padding: 10px 20px;
+    background-color: var(--grey);
+    top: 60px;
+    left: 20px;
+    width: 90%;
+    text-align: right;
+    box-shadow: 0 0 10px #7c7c7c;       
+}
+
+.filters-on-map .wrapper-filter{
+    position: absolute;
+    top: 110px;
+    left: 20px;
+    width: 90%;
+    box-shadow: 0 0 10px #7c7c7c;
+    z-index: 10;
+}
+
+
+// Desktop view
+@media only screen and (min-width: 900px) {
+    .properties-container{
+        .filter-map-wrapper{
+            .map-wrapper{
+                .map{
+                    &> div{
+                        box-shadow: 0 0 5px #818181;
+                    }
+                }
+            }
+        }
+        .properties{
+            .property{  
+                width: 540px;
+                right: 80px;
+                bottom: 25px;
+                left: initial;
+                box-shadow: 0 0 10px #7c7c7c;
+                .detail{
+                    summary{
+                        div{
+                            width: 350px;
+                        }
+                    }
+                }
+                &:hover{
+                    box-shadow: 0 0 15px #dbdbdb;
+                }
+            }
+        }
+
+        .map-filter-on-map{
+            left: 5vw;
+            width: 20%;
+        }
+        
+        .filters-on-map .wrapper-filter{
+            left: 5vw;
+            width: 20%;
+        }
+
+        
+    }
+}
+

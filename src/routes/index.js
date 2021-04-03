@@ -12,11 +12,11 @@ import ContactUs from './contact-us';
 import PropertyDetail from './property-detail';
 import UpdatePreferenciesForm from './profile/updatePreferenciesProfile';
 import PropertyList from "./propertyList";
+import Properties from "./properties";
 import MyProperties from "./my-properties";
 import Roommates from "./roommates";
 import Notifications from "./notifications";
 import FormPropertyUpdate from './property-update';
-// import UserHome from '../routes/userHome';
 import Groups from './groups';
 import PayOptions from './payOptions'
 import PaymentResultSuccess from './paymentResultSuccess'
@@ -35,6 +35,7 @@ const Routes = () => {
 				{state.user ? (
 					<Switch>
 						<Route exact path="/" component={PropertyList} />
+						<Route exact path="/properties-on-map" component={Properties} />
 						<Route path="/my-profile/updatePreferencies" exact component={UpdatePreferenciesForm} />
 						<Route path="/my-profile/update" exact component={UpdateForm} />
 						<Route path="/my-profile" exact component={MyProfile} />
@@ -43,7 +44,6 @@ const Routes = () => {
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
 						<Route path="/property/:idProperty" component={PropertyDetail} />
 						<Route path="/property" exact component={Property} />
-						{/* <Route path="/properties" exact component={PropertyList} /> */}
 						<Route path="/my-properties" exact component={MyProperties} />
 						<Route path="/roommates" exact component={Roommates} />
 						<Route path="/groups/:group/votations" component={Groups} />

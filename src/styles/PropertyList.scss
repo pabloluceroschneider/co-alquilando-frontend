@@ -79,6 +79,17 @@
     margin-top: 50px;
 }
 
+.map-filter{
+    width: 90vw;
+    background-color: var(--grey);
+    border: 1px solid #f5f5f5;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
 /* pantalla de escritorio */
 @media only screen and (min-width: 600px) {
     .properties-wrapper {
@@ -108,5 +119,9 @@
             display: flex;
             flex-wrap: wrap;
         }
+    }
+
+    .map-filter{
+        width: 100%;
     }
 }
