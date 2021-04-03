@@ -90,10 +90,6 @@ const Home = () => {
 				</div>
 			</section>
 
-			<section className="contact-us">
-				<ContactUs />
-			</section>
-
 			<footer className="footer">
 				<Footer />
 			</footer>

@@ -8,17 +8,15 @@ const Footer = () => {
   return (
     <footer className='footer'>
       <div className='footer__about'>
-        <Link >
-          CoAlquilando
-        </Link>
+        <span className="title"><Link>COALQUILANDO</Link></span>
       </div>
       <div className='footer__contact-us'>
-        <Link to={`/contact-us`}>
-          Contactanos
-        </Link>
+        <span className="title">REDES SOCIALES</span>
+        <a href="mailto:coalquilando@gmail.com">Atención al Cliente</a>
+        <a href="mailto:coalquilando@gmail.com?subject=Contacto Publicidad">Publicidad</a>
       </div>
       <div className='footer__media'>
-        <span>Redes Sociales</span>
+        <span className="title">REDES SOCIALES</span>
         <Link to=''> <TwitterOutlined /> Twitter</Link>
       </div>
     </footer>

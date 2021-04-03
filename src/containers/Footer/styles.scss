@@ -1,10 +1,10 @@
 .footer{
     background-color: #1b1b1b;
-    margin: 50px 0 0 0;
-    height: 150px;
+    margin: 50px 0;
     width: 100%;
     display: flex;
-    place-items: center;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     text-align: center;
     color: var(--dark-grey);
@@ -12,18 +12,12 @@
 .footer{
     color: #f5f5f5 !important;
 
-    &__about{
-        width: 30%;
-    }
-
     &__contact-us{
-        width: 30%;
-        a {
-        }
+        display: flex;
+        flex-direction: column;
     }
 
     &__media{
-        width: 30%;
         display: flex;
         flex-direction: column;
     }
@@ -35,4 +29,30 @@
         }
     }
 
+    .title {
+        margin: 5px;
+        cursor: default;
+        font-size: 1.2em;
+        text-decoration: underline;
+    }
+
+}
+
+@media only screen and (min-width: 600px){
+    .footer{
+        flex-direction: row;
+        align-items: flex-start;
+
+        &__about{
+            width: 30%;
+        }
+    
+        &__contact-us{
+            width: 30%;
+        }
+    
+        &__media{
+            width: 30%;
+        }
+    }
 }
