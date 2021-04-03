@@ -5,7 +5,6 @@ import desktopVideo from '../../assets/images/Home/Coalq.mp4';
 import mobileVideo from '../../assets/images/Home/mobile-coalq.mov';
 import Login from '../../components/Login';
 import Footer from '../../containers/Footer';
-import ContactUs from '../../components/ContactUs';
 import { LoginOutlined } from '@ant-design/icons';
 
 import '../../styles/Home.scss';

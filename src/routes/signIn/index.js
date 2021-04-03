@@ -75,7 +75,7 @@ const SignIn = () => {
 	);
 
 	return (
-		<ContentWrapper topNav footer footer>
+		<ContentWrapper topNav footer>
 			<CustomizedForm form={form} data={userFields} onfinish={setFields} />
 		</ContentWrapper>
 	);
