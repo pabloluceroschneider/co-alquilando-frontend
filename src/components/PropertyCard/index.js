@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useRouteMatch } from 'react-router';
 import { Card, Divider, Button, Tag } from 'antd';
-import { EditOutlined, EyeOutlined } from '@ant-design/icons'
+import { EditOutlined, EyeOutlined, UserOutlined } from '@ant-design/icons'
 import CarrouselPequeño from '../CarrouselPequeño';
 import ModalMapa from '../Modal';
 
@@ -76,6 +76,7 @@ const PropertyCard = props => {
                         <div className="pricePC"> 
                             <label>${rentPrice}</label>
                             <Tag className="tagPC" title="Tipología" >{ typologies[attr.typology] }</Tag>
+                            {attr?.ownerInhabited && <Tag color="blue" className="tagPC" title="Vivir con dueño" >{ <UserOutlined /> }</Tag>}
                         </div>
                     </div>
 
