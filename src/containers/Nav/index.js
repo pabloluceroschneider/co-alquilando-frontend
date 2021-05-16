@@ -40,8 +40,13 @@ const Nav = () => {
 					Mis Reportes
 				</Link>
 			</Menu.Item>
+			<Menu.Item key="3">
+				<Link to="/ads">
+					Publicidades
+				</Link>
+			</Menu.Item>
 			<Menu.Divider />
-			<Menu.Item key="3" onClick={async () => {
+			<Menu.Item key="4" onClick={async () => {
 				await Auth.signOut;
 				dispatch(SIGN_OUT())
 			}

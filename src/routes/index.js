@@ -20,6 +20,9 @@ import Groups from './groups';
 import PayOptions from './payOptions'
 import PaymentResultSuccess from './paymentResultSuccess'
 import PaymentResultFail from './paymentResultFail'
+import AdList from './ad-list'
+import Ad from './ad'
+import FormAdUpdate from './ad-update'
 
 const Routes = () => {
 	useServiceWorker();
@@ -31,7 +34,7 @@ const Routes = () => {
 				{state.user ? (
 					<Switch>
 						<Route exact path="/" component={PropertyList} />
-						<Route exact path="/properties" component={Properties} />
+						<Route exact path="/properties-on-map" component={Properties} />
 						<Route path="/my-profile/updatePreferencies" exact component={UpdatePreferenciesForm} />
 						<Route path="/my-profile/update" exact component={UpdateForm} />
 						<Route path="/my-profile" exact component={MyProfile} />
@@ -49,6 +52,9 @@ const Routes = () => {
 						<Route path="/payOptions" exact component={PayOptions} />
 						<Route path="/paymentResultSuccess/:idowner/:cantidad" exact component={PaymentResultSuccess} />
 						<Route path="/paymentResultFail" exact component={PaymentResultFail} />
+						<Route path="/ads" exact component={AdList} />
+						<Route path="/ad" exact component={Ad} />
+						<Route path="/ad/:idAd/update" component={FormAdUpdate} />
 						<Redirect from="*" to="/"/>
 					</Switch>
 				) : (
