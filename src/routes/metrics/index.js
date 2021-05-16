@@ -32,7 +32,7 @@ const Metrics = () => {
 			{ metric ? (
 				<ContentWrapper topNav breadscrumb={breadscrumb}>
 					<div class="metrics">
-						<div class="section box" >
+						<div>
 							<h3 class="subtitle"> Datos generales</h3>
 							<div class="chart" id="pie">
 								<PieChart metric={metric.propertiesAverage} keys={1} />
