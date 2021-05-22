@@ -7,12 +7,12 @@ import SignIn from './signIn';
 import Profile from './profile/index';
 import MyProfile from './profile/myProfile';
 import UpdateForm from './profile/updateProfile';
-import Property from './property';
 import ContactUs from './contact-us';
+import Metrics from './metrics';
 import PropertyDetail from './property-detail';
 import UpdatePreferenciesForm from './profile/updatePreferenciesProfile';
 import PropertyList from "./propertyList";
-import Properties from "./properties";
+import Properties from "./property";
 import MyProperties from "./my-properties";
 import Roommates from "./roommates";
 import Notifications from "./notifications";
@@ -43,7 +43,7 @@ const Routes = () => {
 						<Route path="/contact-us" component={ContactUs} />
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
 						<Route path="/property/:idProperty" component={PropertyDetail} />
-						<Route path="/property" exact component={Property} />
+						<Route path="/reports" exact component={Metrics} />
 						<Route path="/my-properties" exact component={MyProperties} />
 						<Route path="/roommates" exact component={Roommates} />
 						<Route path="/groups/:group/votations" component={Groups} />

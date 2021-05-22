@@ -59,4 +59,9 @@ export const propertyFilters = [
         name: "furnished",
         type: "checkbox"
     },
+    {
+        span: "Dueño vive en propiedad",
+        name: "ownerInhabited",
+        type: "checkbox"
+    },
 ]

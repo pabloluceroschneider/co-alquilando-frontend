@@ -58,6 +58,20 @@ const propertyFields = {
 			],
 			[
 				{
+					label: 'Dueño vive en propiedad',
+					name: [ 'attributes', 'ownerInhabited' ],
+					valuePropName: 'checked',
+					component: 'Checkbox'
+				},
+				{
+					content: [
+						'Checkear en caso de querer ser co-inquilino en su propiedad.',],
+					name: ['info'],
+					component: 'multiple-line'
+				},
+			],
+			[
+				{
 					label: "Cargar Imagen",
 					name: "photos",
 					component: "Upload",

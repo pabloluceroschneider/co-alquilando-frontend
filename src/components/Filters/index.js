@@ -61,6 +61,10 @@ const FilterProperties = ({onFilter}) => {
                         <Form.Item name="furnished" label="Amoblado" valuePropName="checked">
                             <Checkbox/>
                         </Form.Item>
+
+                        <Form.Item name="ownerInhabited" label="Vivir con dueño" valuePropName="checked">
+                            <Checkbox/>
+                        </Form.Item>
                     </div>
 
                     <Form.Item>
