@@ -7,6 +7,7 @@ import SignIn from './signIn';
 import Profile from './profile/index';
 import MyProfile from './profile/myProfile';
 import UpdateForm from './profile/updateProfile';
+import ContactUs from './contact-us';
 import Metrics from './metrics';
 import PropertyDetail from './property-detail';
 import UpdatePreferenciesForm from './profile/updatePreferenciesProfile';
@@ -39,6 +40,7 @@ const Routes = () => {
 						<Route path="/my-profile/update" exact component={UpdateForm} />
 						<Route path="/my-profile" exact component={MyProfile} />
 						<Route path="/profile/:nickname" component={Profile} />
+						<Route path="/contact-us" component={ContactUs} />
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
 						<Route path="/property/:idProperty" component={PropertyDetail} />
 						<Route path="/reports" exact component={Metrics} />
@@ -61,6 +63,7 @@ const Routes = () => {
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route path="/sign-in" exact component={SignIn} />
+						<Route path="/contact-us" component={ContactUs} />
 						<Redirect from="*" to="/"/>
 					</Switch>
 				)}

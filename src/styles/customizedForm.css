@@ -18,6 +18,10 @@
   cursor: pointer;
 }
 
+.group1{
+  text-align: center;
+}
+
 .group2,
 .group3,
 .group4 {
