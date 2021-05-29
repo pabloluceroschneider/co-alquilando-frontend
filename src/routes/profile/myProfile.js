@@ -43,6 +43,8 @@ const MyProfile = (props) => {
 
   return (
     <ContentWrapper topNav>
+      <div style={{padding:'20px 0'}}>
+
       {!datos ? <Spin /> :null}
 
       {datos ? (
@@ -120,6 +122,7 @@ const MyProfile = (props) => {
           {datos.userDescription}
         </div>
       ) : null}
+      </div>
     </ContentWrapper>
   );
 };

@@ -100,6 +100,10 @@ const CustomizedModal = (props) => {
 					message: `¡${user.userName}, Bienvenido a CoAlquilando!`,
 					placement: 'bottomLeft'
 				});
+				if (user.userNickname === 'admin') {
+					history.push('/admin');
+					return;
+				}
 				history.push('/');
 			}
 		},
