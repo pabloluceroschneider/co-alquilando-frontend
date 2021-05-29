@@ -1,11 +1,12 @@
 import React from 'react';
 import ContentWrapper from '../../components/ContentWrapper';
+import OptionsNav from './optionsNav';
 
 const AdminHome = () => {
 
 	return (
-		<ContentWrapper topNav optionsNav>
-			<h1>AdminHome</h1>
+		<ContentWrapper topNav >
+			<OptionsNav />
 		</ContentWrapper>
 	);
 };
