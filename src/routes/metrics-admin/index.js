@@ -8,7 +8,6 @@ import ApiRequest from '../../util/ApiRequest';
 const MetricsAdmin = () => {
     const [metric, setMetric] = useState();
     const { state, dispatch } = useContext(SessionContext);
-    const breadscrumb = [{ 'Reportes': '/reports' }]
 
     useEffect(
         () => {
@@ -25,9 +24,8 @@ const MetricsAdmin = () => {
     );
     return (
         <div>
-
             { metric ? (
-                <ContentWrapper topNav breadscrumb={breadscrumb}>
+                <ContentWrapper>
                     <div >
                         <h3 class="subtitle">   Datos generales del sistema</h3>
                         <div class="chart" id="pie-gral">
