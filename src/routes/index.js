@@ -12,7 +12,8 @@ import Metrics from './metrics';
 import PropertyDetail from './property-detail';
 import UpdatePreferenciesForm from './profile/updatePreferenciesProfile';
 import PropertyList from "./propertyList";
-import Properties from "./property";
+import Property from "./property";
+import PropertiesOnMap from "./properties-on-map";
 import MyProperties from "./my-properties";
 import Roommates from "./roommates";
 import Notifications from "./notifications";
@@ -35,29 +36,41 @@ const Routes = () => {
 				{state.user ? (
 					<Switch>
 						<Route exact path="/" component={PropertyList} />
-						<Route exact path="/properties-on-map" component={Properties} />
+						<Route path="/property" component={Property} />
+						<Route path="/property/:idProperty" component={PropertyDetail} />
+						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
+						<Route path="/my-properties" exact component={MyProperties} />
+						<Route exact path="/properties-on-map" component={PropertiesOnMap} />
+
+						<Route exact path="/my-profile" component={MyProfile} />
 						<Route path="/my-profile/updatePreferencies" exact component={UpdatePreferenciesForm} />
 						<Route path="/my-profile/update" exact component={UpdateForm} />
-						<Route path="/my-profile" exact component={MyProfile} />
+						
 						<Route path="/profile/:nickname" component={Profile} />
+						
 						<Route path="/contact-us" component={ContactUs} />
-						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
-						<Route path="/property/:idProperty" component={PropertyDetail} />
-						<Route path="/reports" exact component={Metrics} />
-						<Route path="/my-properties" exact component={MyProperties} />
+						
 						<Route path="/roommates" exact component={Roommates} />
+						
 						<Route path="/groups/:group/votations" component={Groups} />
 						<Route path="/groups/:group/chat/:chat/:name" component={Groups} />
 						<Route path="/groups/:group" component={Groups} />
 						<Route path="/groups" exact component={Groups} />
+						
 						<Route path="/notifications" exact component={Notifications} />
+						
+						<Route path="/reports" exact component={Metrics} />
+						
 						<Route path="/payOptions" exact component={PayOptions} />
 						<Route path="/paymentResultSuccess/:idowner/:cantidad" exact component={PaymentResultSuccess} />
 						<Route path="/paymentResultFail" exact component={PaymentResultFail} />
+						
 						<Route path="/ads" exact component={AdList} />
 						<Route path="/ad" exact component={Ad} />
 						<Route path="/ad/:idAd/update" component={FormAdUpdate} />
+						
 						<Redirect from="*" to="/"/>
+
 					</Switch>
 				) : (
 					<Switch>

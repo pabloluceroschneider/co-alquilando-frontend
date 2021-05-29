@@ -71,12 +71,11 @@ const CustomizedModal = (props) => {
 				try {
 					let nickname = user.username;
 					let { data } = await ApiRequest.get(`user/${nickname}`);
-					//TODO: Store user in global state
 					setUser(data);
 				} catch (e) {
 					notification.error({
 						message: 'No se pudo traer datos del usuario.',
-						description: `Servidor de Coalquilando: ${e.message}`,
+						description: `${t(e.message)}`,
 						placement: 'bottomLeft'
 					});
 				}

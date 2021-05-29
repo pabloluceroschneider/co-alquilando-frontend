@@ -39,5 +39,9 @@
 	"boulevard": "Barrio",
 
 	"Incorrect username or password.": "Usuario o contraseña incorrectos",
-	"User is not confirmed.": "Su cuenta no ha sido validada. Confirme su email"
+	"User is not confirmed.": "Su cuenta no ha sido validada. Confirme su email",
+
+
+
+	"Request failed with status code 404": "Datos no encontrados."
 }
