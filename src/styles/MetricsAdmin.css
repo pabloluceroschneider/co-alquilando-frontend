@@ -1,0 +1,33 @@
+.conteiner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.subtitle{
+    color: var(--letter);
+    margin-left: 20px;
+}
+
+.metrics{
+    border: 1px;
+    display: inline-block;
+    width: auto;
+    margin: auto;
+    padding: 20px, 20px;
+    text-align: justify;
+}
+
+.tabla{
+    display: table;
+}
+
+.fila{
+    display: table-row;
+    width: 200px;
+}
+
+.columna{
+    display: table-cell;
+    width: 200px;
+}

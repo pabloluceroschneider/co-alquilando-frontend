@@ -25,7 +25,6 @@ const Metrics = () => {
 		[metric, state]
 	);
 
-	console.log("METRICS: ", metric)
 	return (
 		<div>
 

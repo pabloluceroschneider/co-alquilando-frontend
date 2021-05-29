@@ -9,6 +9,7 @@ import MyProfile from './profile/myProfile';
 import UpdateForm from './profile/updateProfile';
 import ContactUs from './contact-us';
 import Metrics from './metrics';
+import MetricsAdmin from './metrics-admin';
 import PropertyDetail from './property-detail';
 import UpdatePreferenciesForm from './profile/updatePreferenciesProfile';
 import PropertyList from "./propertyList";
@@ -60,6 +61,7 @@ const Routes = () => {
 						<Route path="/notifications" exact component={Notifications} />
 						
 						<Route path="/reports" exact component={Metrics} />
+						<Route path="/reports-admin" exact component={MetricsAdmin} />
 						
 						<Route path="/payOptions" exact component={PayOptions} />
 						<Route path="/paymentResultSuccess/:idowner/:cantidad" exact component={PaymentResultSuccess} />
