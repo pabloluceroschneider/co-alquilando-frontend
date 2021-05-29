@@ -14,7 +14,9 @@ const ContentWrapper = props => {
         { props.optionsNav && <OptionsNav /> }
         { props.breadscrumb && <Breadscrumb paths={props.breadscrumb}/> }
         { props.title && <span className="content-wrapper">{props.title}</span> }
-        { props.children }
+        <div style={{minHeight: '80vh'}}>
+            { props.children }
+        </div>
         { props.footer && <Footer />}
 
         </>
