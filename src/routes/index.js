@@ -42,7 +42,7 @@ const Routes = () => {
 				{state.user ? (
 					<Switch>
 
-						{ isAdmin && <Route path="/admin" exact component={AdminHome} /> }
+						{ isAdmin && <Route path="/administrador" exact component={AdminHome} /> }
 						{ isAdmin && <Route path="/ads" exact component={AdList} />  }
 						{ isAdmin && <Route path="/ad" exact component={Ad} /> }
 						{ isAdmin && <Route path="/ad/:idAd/update" component={FormAdUpdate} /> }
