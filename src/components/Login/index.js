@@ -101,7 +101,7 @@ const CustomizedModal = (props) => {
 					placement: 'bottomLeft'
 				});
 				if (user.userNickname === 'admin') {
-					history.push('/administrador');
+					history.push('/reports-admin');
 					return;
 				}
 				history.push('/');

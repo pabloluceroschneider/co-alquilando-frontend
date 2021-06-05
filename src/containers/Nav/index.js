@@ -19,6 +19,8 @@ const Ring = () => {
 const Nav = () => {
 	const { state, dispatch } = useContext(SessionContext);
 
+	const isAdmin = state.user.userNickname === 'admin';
+
 	const image = (state.user && state.user.photos) ? 
 	`http://localhost:8080/user/${state.user.id}/photos/${state.user.photos[0]}` :
   	"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
@@ -35,16 +37,28 @@ const Nav = () => {
 					Mis Propiedades
 				</Link>
 			</Menu.Item>
-			<Menu.Item key="2">
-				<Link to="/reports">
-					Mis Reportes
-				</Link>
-			</Menu.Item>
-			<Menu.Item key="3">
-				<Link to="/ads">
-					Publicidades
-				</Link>
-			</Menu.Item>
+			{isAdmin 
+			? (
+				<Menu.Item key="2">
+					<Link to="/reports-admin">
+						Reportes de Administrador
+					</Link>
+				</Menu.Item>
+			)
+			: (
+				<Menu.Item key="2">
+					<Link to="/reports">
+						Mis Reportes
+					</Link>
+				</Menu.Item>
+			)}
+			{isAdmin && (
+				<Menu.Item key="2">
+					<Link to="/ads">
+						Administrar Publicidades
+					</Link>
+				</Menu.Item>
+			)}
 			<Menu.Divider />
 			<Menu.Item key="4" onClick={async () => {
 				await Auth.signOut;

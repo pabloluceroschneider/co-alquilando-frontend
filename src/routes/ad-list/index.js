@@ -11,7 +11,6 @@ import Spin from "../../components/Spin";
 const AdList = () => {
   const [datos, setDatos] = useState(null);
   const breadscrumb = [
-    { Administrador: '/administrador'},,
     { Publicidades: "/ads" }
   ];
 

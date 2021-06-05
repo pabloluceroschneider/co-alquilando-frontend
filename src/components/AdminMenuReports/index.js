@@ -9,8 +9,8 @@ import ApiRequest from '../../util/ApiRequest';
 const items = [
   "Datos generales del sistema",
   "Paquetes de publicaciones",
-  "Resultados en el ultimo mes",
-  "Resultados en los ultimos seis meses",
+  "Resultados en el último mes",
+  "Resultados en los últimos seis meses",
   "Resultados en los último año",
 ];
 

@@ -10,7 +10,6 @@ const MetricsAdmin = () => {
     const [metric, setMetric] = useState(null);
     const { state } = useContext(SessionContext);
     const breadscrumb = [
-        { Administrador: '/administrador'},
         { Métricas: '/reports-admin'},
     ];
 
