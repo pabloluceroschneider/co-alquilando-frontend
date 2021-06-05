@@ -8,7 +8,7 @@ import ApiRequest from '../../util/ApiRequest';
 
 const items = [
   "Datos generales",
-  "Resultados en el ultimo mes",
+  "Resultados en el último mes",
   "Resultados en los últimos seis meses",
   "Resultados en los último año"
 ];
