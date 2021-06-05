@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import Auth from '../../util/Auth';
 import ApiRequest from '../../util/ApiRequest';
+import isAdminRole from '../../util/isAdmin';
 import CustomizedForm from '../CustomizedForm';
 
 const loginFields = {
@@ -100,6 +101,10 @@ const CustomizedModal = (props) => {
 					message: `¡${user.userName}, Bienvenido a CoAlquilando!`,
 					placement: 'bottomLeft'
 				});
+				if (isAdminRole(user)) {
+					history.push('/reports-admin');
+					return;
+				}
 				history.push('/');
 			}
 		},

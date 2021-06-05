@@ -1,0 +1,28 @@
+
+.page.reports-admin{
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  margin: auto;
+  
+}
+
+.menu-admin-reports{
+  width: 30%;
+  min-height: 80vh;
+  border: 1px solid #dedede;
+}
+
+.page.reports-admin{
+  .charts{
+    width: 100%;
+    border: 1px solid #dedede;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .spin{
+    height: 80vh;
+  }
+}

@@ -41,7 +41,29 @@
 	"Incorrect username or password.": "Usuario o contraseña incorrectos",
 	"User is not confirmed.": "Su cuenta no ha sido validada. Confirme su email",
 
-
+	"title-metric-semester": "Semestre",
+	"title-metric-year": "Año",
+	"title-metric-1": "Enero",
+	"title-metric-2": "Febrero",
+	"title-metric-3": "Marzo",
+	"title-metric-4": "Abril",
+	"title-metric-5": "Mayo",
+	"title-metric-6": "Junio",
+	"title-metric-7": "Julio",
+	"title-metric-8": "Agosto",
+	"title-metric-9": "Septiembre",
+	"title-metric-10": "Octubre",
+	"title-metric-11": "Noviembre",
+	"title-metric-12": "Diciembre",
+	"title-metric-Tamaño de grupo": "Tamaño de grupo",
+	"title-metric-Tipo de paquete": "Tipo de paquete",
+	"title-metric-Ganacias de Publicidades": "Ganacias de Publicidades",
+	"title-metric-Cantidad de Propiedades ALQUILADAS/RESERVADAS en el último mes": "Cantidad de Propiedades ALQUILADAS/RESERVADAS en el último mes",
+	"title-metric-Cantidad de Paquetes de Publicaciones contratados en el último mes": "Cantidad de Paquetes de Publicaciones contratados en el último mes",
+	"title-metric-Cantidad de Propiedades ALQUILADAS/RESERVADAS en los últimos seis meses" : "Cantidad de Propiedades ALQUILADAS/RESERVADAS en los últimos seis meses",
+	"title-metric-Cantidad de Paquetes de Publicaciones contratados en los últimos seis meses": "Cantidad de Paquetes de Publicaciones contratados en los últimos seis meses",
+	"title-metric-Cantidad de Propiedades ALQUILADAS/RESERVADAS en el último año": "Cantidad de Propiedades ALQUILADAS/RESERVADAS en el último año",
+	"title-metric-Cantidad de Paquetes de Publicaciones contratados en el último año": "Cantidad de Paquetes de Publicaciones contratados en el último año",
 
 	"Request failed with status code 404": "Datos no encontrados."
 }

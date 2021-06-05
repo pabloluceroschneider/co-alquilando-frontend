@@ -26,20 +26,31 @@ import PaymentResultFail from './paymentResultFail'
 import AdList from './ad-list'
 import Ad from './ad'
 import FormAdUpdate from './ad-update'
+import isAdminRole from '../util/isAdmin'
 
 const Routes = () => {
 	useServiceWorker();
 	const [state, dispatch] = useReducer(reducer, initialState);
+
+	const isAdmin = isAdminRole(state.user);
 
 	return (
 		<SessionContext.Provider value={ {state, dispatch} }>
 			<Router>
 				{state.user ? (
 					<Switch>
+
+						{ isAdmin && <Route path="/ads" exact component={AdList} />  }
+						{ isAdmin && <Route path="/ad" exact component={Ad} /> }
+						{ isAdmin && <Route path="/ad/:idAd/update" component={FormAdUpdate} /> }
+						{ isAdmin && <Route path="/reports-admin" exact component={MetricsAdmin} /> }
+						
+
+					
 						<Route exact path="/" component={PropertyList} />
-						<Route path="/property" component={Property} />
 						<Route path="/property/:idProperty" component={PropertyDetail} />
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
+						<Route exact path="/property" component={Property} />
 						<Route path="/my-properties" exact component={MyProperties} />
 						<Route exact path="/properties-on-map" component={PropertiesOnMap} />
 
@@ -61,17 +72,14 @@ const Routes = () => {
 						<Route path="/notifications" exact component={Notifications} />
 						
 						<Route path="/reports" exact component={Metrics} />
-						<Route path="/reports-admin" exact component={MetricsAdmin} />
 						
 						<Route path="/payOptions" exact component={PayOptions} />
 						<Route path="/paymentResultSuccess/:idowner/:cantidad" exact component={PaymentResultSuccess} />
 						<Route path="/paymentResultFail" exact component={PaymentResultFail} />
 						
-						<Route path="/ads" exact component={AdList} />
-						<Route path="/ad" exact component={Ad} />
-						<Route path="/ad/:idAd/update" component={FormAdUpdate} />
+					
 						
-						<Redirect from="*" to="/"/>
+						<Redirect from="*" to={`${isAdmin ? "/admin": "/"}`}/>
 
 					</Switch>
 				) : (
