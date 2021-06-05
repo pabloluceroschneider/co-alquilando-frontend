@@ -9,7 +9,7 @@ const OptionsNav = () => {
 		{
 			title: 'Métricas',
 			className: 'search_roommate',
-			link: '/metrics'
+			link: '/reports-admin'
 		},
 		{
 			title: 'Publicidades',

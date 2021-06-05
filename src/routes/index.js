@@ -34,11 +34,21 @@ const Routes = () => {
 
 	const isAdmin = state.user?.userNickname === 'admin';
 
+	const home_route = isAdmin ? AdminHome : PropertyList;
+
 	return (
 		<SessionContext.Provider value={ {state, dispatch} }>
 			<Router>
 				{state.user ? (
 					<Switch>
+
+						{ isAdmin && <Route path="/admin" exact component={AdminHome} /> }
+						{ isAdmin && <Route path="/ads" exact component={AdList} />  }
+						{ isAdmin && <Route path="/ad" exact component={Ad} /> }
+						{ isAdmin && <Route path="/ad/:idAd/update" component={FormAdUpdate} /> }
+						{ isAdmin && <Route path="/reports-admin" exact component={MetricsAdmin} /> }
+						
+
 					
 						<Route exact path="/" component={PropertyList} />
 						<Route path="/property" component={Property} />
@@ -65,16 +75,12 @@ const Routes = () => {
 						<Route path="/notifications" exact component={Notifications} />
 						
 						<Route path="/reports" exact component={Metrics} />
-						<Route path="/reports-admin" exact component={MetricsAdmin} />
 						
 						<Route path="/payOptions" exact component={PayOptions} />
 						<Route path="/paymentResultSuccess/:idowner/:cantidad" exact component={PaymentResultSuccess} />
 						<Route path="/paymentResultFail" exact component={PaymentResultFail} />
 						
-						{ isAdmin && <Route exact path="/admin" component={AdminHome} /> }
-						{ isAdmin && <Route path="/ads" exact component={AdList} /> }
-						{ isAdmin && <Route path="/ad" exact component={Ad} />}
-						{ isAdmin && <Route path="/ad/:idAd/update" component={FormAdUpdate} /> }
+					
 						
 						<Redirect from="*" to={`${isAdmin ? "/admin": "/"}`}/>
 
