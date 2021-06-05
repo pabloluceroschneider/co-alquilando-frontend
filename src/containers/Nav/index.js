@@ -5,6 +5,7 @@ import { Menu, Avatar, Badge, Dropdown } from 'antd';
 import { LogoutOutlined, BellOutlined, TeamOutlined } from '@ant-design/icons';
 import Login from '../../components/Login';
 import Auth from '../../util/Auth';
+import isAdminRole from '../../util/isAdmin';
 import logo from '../../assets/images/logonav.png'
 
 const Ring = () => {
@@ -19,7 +20,7 @@ const Ring = () => {
 const Nav = () => {
 	const { state, dispatch } = useContext(SessionContext);
 
-	const isAdmin = state.user.userNickname === 'admin';
+	const isAdmin = isAdminRole(state.user);
 
 	const image = (state.user && state.user.photos) ? 
 	`http://localhost:8080/user/${state.user.id}/photos/${state.user.photos[0]}` :

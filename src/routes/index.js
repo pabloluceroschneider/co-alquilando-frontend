@@ -26,15 +26,13 @@ import PaymentResultFail from './paymentResultFail'
 import AdList from './ad-list'
 import Ad from './ad'
 import FormAdUpdate from './ad-update'
-import AdminHome from './admin'
+import isAdminRole from '../util/isAdmin'
 
 const Routes = () => {
 	useServiceWorker();
 	const [state, dispatch] = useReducer(reducer, initialState);
 
-	const isAdmin = state.user?.userNickname === 'admin';
-
-	const home_route = isAdmin ? AdminHome : PropertyList;
+	const isAdmin = isAdminRole(state.user);
 
 	return (
 		<SessionContext.Provider value={ {state, dispatch} }>
