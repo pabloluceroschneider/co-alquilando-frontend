@@ -5,7 +5,6 @@ const PieChart = ({ metric, keys }) => {
 	window.google.charts.load('current', { packages: ['corechart'] });
 	window.google.charts.setOnLoadCallback(drawChart);
 
-
 	function drawChart() {
 		if (typeof (metric) != 'undefined' && metric != null) {
 
