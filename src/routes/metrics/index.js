@@ -4,6 +4,7 @@ import PieChart from '../../components/Charts/PieChart';
 import ColumChart from '../../components/Charts/ColumChart';
 import { SessionContext } from '../../store';
 import ApiRequest from '../../util/ApiRequest';
+import UserMenuReports from '../../components/UserMenuReports';
 
 const Metrics = () => {
 
@@ -24,6 +25,14 @@ const Metrics = () => {
 		},
 		[metric, state]
 	);
+
+	return (
+		<ContentWrapper topNav breadscrumb={breadscrumb}>
+				<div className="page reports-admin">
+						<UserMenuReports metric={metric} />
+				</div>
+		</ContentWrapper>
+	)
 
 	return (
 		<div>

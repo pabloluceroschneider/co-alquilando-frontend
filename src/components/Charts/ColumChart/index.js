@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
 
 const ColumChart = ({ metric, keys }) => {
+  const { t } = useTranslation();
   window.google.charts.load('current', { packages: ['corechart'] });
   window.google.charts.setOnLoadCallback(drawChart);
 
@@ -22,7 +24,7 @@ const ColumChart = ({ metric, keys }) => {
       var options = {
         width: 500,
 				height: 340,
-        title: metric[0][0],
+        title: t(`title-metric-${metric[0][0]}`),
         bar: { groupWidth: "95%" },
         legend: { position: "none" },
       };

@@ -3,24 +3,21 @@
   display: flex;
   flex-direction: row;
   width: 80%;
+  min-height: 80vh;
   margin: auto;
-  
 }
 
 .menu-admin-reports{
   width: 30%;
-  min-height: 80vh;
   border: 1px solid #dedede;
+  min-height: 80vh;
 }
 
 .page.reports-admin{
   .charts{
     width: 100%;
     border: 1px solid #dedede;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    min-height: 80vh;
   }
   .spin{
     height: 80vh;
