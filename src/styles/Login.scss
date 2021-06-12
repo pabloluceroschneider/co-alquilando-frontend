@@ -1,43 +1,50 @@
-
-.wrapper-login{
-	span {
-        cursor: pointer;
-		&.title {
-            color: white;
-            font-size: 1.3em;
-            text-align: center;
-            display: block;
-            padding: 14px 15px;
-			&:hover {
-		        color: rgba(0, 0, 0, 0.336);
-			}
-		}
+.wrapper-login {
+  span {
+    cursor: pointer;
+    &.title {
+      color: white;
+      font-size: 1.3em;
+      text-align: center;
+      display: block;
+      padding: 14px 15px;
+      &:hover {
+        color: rgba(0, 0, 0, 0.336);
+      }
     }
-
+  }
 }
 .redes {
-    border-top: 1px solid #f5f5f5;
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
-    margin-top: -10px;
+  border-top: 1px solid #f5f5f5;
+  display: grid;
+  justify-content: center;
+  padding: 20px 0;
+  margin-top: -10px;
+
+  .kep-login-facebook {
+    margin-bottom: 14px;
+    text-transform: none;
+    
+    .anticon-facebook {
+      margin-right: 16px;
+    }
+  }
 }
 
-#login div:last-child{
-    text-align: center;
+#login div:last-child {
+  text-align: center;
 }
 
-#login :last-child button{
-    margin-top: 25px;
+#login :last-child button {
+  margin-top: 25px;
 }
 
-#authErr{
-    display: block;
-    color: red;
-    text-align: center;
-    margin: 0px 0px 15px 0px ;
+#authErr {
+  display: block;
+  color: red;
+  text-align: center;
+  margin: 0px 0px 15px 0px;
 }
 
-.loginModal .ant-modal-body{
-    padding: 24px 24px 1px 24px;
+.loginModal .ant-modal-body {
+  padding: 24px 24px 1px 24px;
 }

@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { SessionContext, SIGN_IN } from '../../store';
-import { Modal, Form, notification, Tag } from 'antd';
-import { TwitterOutlined, FacebookOutlined } from '@ant-design/icons';
+import { Modal, Form, notification } from 'antd';
+import { FacebookOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import Auth from '../../util/Auth';
 import ApiRequest from '../../util/ApiRequest';
 import isAdminRole from '../../util/isAdmin';
+import getSocialNetwork from '../../util/getSocialNetwork'
 import CustomizedForm from '../CustomizedForm';
+import FacebookLogin from 'react-facebook-login';
+import { GoogleLogin } from 'react-google-login';
 
 const loginFields = {
 	name: 'login',
@@ -92,35 +95,105 @@ const CustomizedModal = (props) => {
 		}
 	};
 
-	useEffect(
-		() => {
-			if (user) {
-				delete user.userPassword;
-				dispatch(SIGN_IN(user));
-				notification.success({
-					message: `¡${user.userName}, Bienvenido a CoAlquilando!`,
-					placement: 'bottomLeft'
-				});
-				if (isAdminRole(user)) {
-					history.push('/reports-admin');
-					return;
-				}
-				history.push('/');
-			}
-		},
-		[ dispatch, user, history ]
-	);
+	const postSessionSocialNetwork = (res) => {
+	const social_network = getSocialNetwork(res);
+
+    if (res) {
+		let userBodyReq = {};
+		// TODO: agregar attributtes!
+		switch (social_network) {
+			case 'FACEBOOK':
+				userBodyReq = {
+					userName: res.first_name,
+					userSurname: res.last_name,
+					userEmail: res.email,
+					userNickname: res.first_name + res.last_name,
+					attributes: [
+						{attributeType: "sex", 
+						value: "not_defined", 
+						weight: 0}
+					]
+				  };
+				break;
+			case 'GOOGLE':
+				let data = res.profileObj;
+				userBodyReq = {
+				userName: data.givenName,
+				userSurname: data.familyName,
+				userEmail: data.email,
+				userNickname: data.first_name + data.last_name,
+				attributes: [
+					{attributeType: "sex", 
+					value: "not_defined", 
+					weight: 0}
+				]
+			  };
+			// eslint-disable-next-line no-fallthrough
+			default:
+				break;
+		}
+      
+
+      let asyncPost = async () => {
+        try {
+          let { data } = await ApiRequest.post("/user", userBodyReq);
+          setUser(data);
+        } catch (e) {
+          notification.error({
+            message: "Error al almacenar usuario ",
+            description: `Api Error: ${e.message}`,
+            placement: "bottomLeft",
+          });
+        }
+      };
+
+      let asyncGetUser = async (res) => {
+        try {
+		  let email = social_network === 'FACEBOOK' ? res.email : res.profileObj.email;
+          let { data } = await ApiRequest.get(`user/email/${email}`);
+          setUser(data);
+        } catch (e) {
+          asyncPost();
+        }
+      };
+      asyncGetUser(res);
+    }
+  };
+
+	useEffect(() => {
+    if (user) {
+      delete user.userPassword;
+      dispatch(SIGN_IN(user));
+      notification.success({
+        message: `¡${user.userName}, Bienvenido a CoAlquilando!`,
+        placement: "bottomLeft",
+      });
+	  if (isAdminRole(user)) {
+		history.push('/reports-admin');
+		return;
+	}
+      history.push("/");
+    }
+  }, [dispatch, user, history]);
 
 	const redes = (
-		<div className="redes">
-			<Tag icon={<TwitterOutlined />} color="#55acee">
-				Twitter
-			</Tag>
-			<Tag icon={<FacebookOutlined />} color="#3b5999">
-				Facebook
-			</Tag>
-		</div>
-	);
+    <div className="redes">
+      <FacebookLogin
+        appId="1725304344329251"
+        fields="name,email,picture,first_name,last_name"
+        icon={<FacebookOutlined />}
+        textButton="Continuar con Facebook"
+        size="small"
+        callback={postSessionSocialNetwork}
+      />
+      <GoogleLogin
+        clientId="1020592739385-h7eftrjsbjeluoj7mcjq65gqbu161rjt.apps.googleusercontent.com"
+        buttonText="Continuar con Google"
+        onSuccess={postSessionSocialNetwork}
+        cookiePolicy={"single_host_origin"}
+      />
+    </div>
+  );
 
 	return (
 		<Modal
