@@ -4,6 +4,7 @@ import PieChart from '../../components/Charts/PieChart';
 import ColumChart from '../../components/Charts/ColumChart';
 import { SessionContext } from '../../store';
 import ApiRequest from '../../util/ApiRequest';
+import UserMenuReports from '../../components/UserMenuReports';
 
 const Metrics = () => {
 
@@ -25,44 +26,13 @@ const Metrics = () => {
 		[metric, state]
 	);
 
-	console.log("METRICS: ", metric)
 	return (
-		<div>
-
-			{ metric ? (
-				<ContentWrapper topNav breadscrumb={breadscrumb}>
-					<div class="metrics">
-						<div>
-							<h3 class="subtitle"> Datos generales</h3>
-							<div class="chart" id="pie">
-								<PieChart metric={metric.propertiesAverage} keys={1} />
-							</div>
-						</div>
-						<div>
-							<div>
-								<h3 className="subtitle"> Resultados en el ultimo mes</h3>
-								<div className="conteiner">
-									<div class="chart" id="colum-1">
-										<ColumChart metric={metric.propertyAverageLastMonth} keys={2} />
-									</div>
-									<div class="chart" id="colum-2">
-										<ColumChart metric={metric.propertyAverageLastSixMonth} keys={3} />
-									</div>
-								</div>
-							</div>
-							<div>
-								<h3 class="subtitle"> Resultados en los ultimos seis meses</h3>
-								<div class="chart" id="colum-3">
-									<ColumChart metric={metric.propertyAverageLastSixMonth} keys={3} />
-								</div>
-							</div>
-						</div>
-					</div>
-				</ContentWrapper>
-			) : null
-			};
-		</div>
-	);
+		<ContentWrapper topNav breadscrumb={breadscrumb}>
+				<div className="page reports-admin">
+						<UserMenuReports metric={metric} />
+				</div>
+		</ContentWrapper>
+	)
 };
 
 export default Metrics;

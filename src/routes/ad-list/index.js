@@ -10,7 +10,9 @@ import Spin from "../../components/Spin";
 
 const AdList = () => {
   const [datos, setDatos] = useState(null);
-  const breadscrumb = [{ Publicidades: "/ads" }];
+  const breadscrumb = [
+    { Publicidades: "/ads" }
+  ];
 
   useEffect(() => {
     let asyncGet = async () => {
