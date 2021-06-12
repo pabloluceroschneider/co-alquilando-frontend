@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import Auth from '../../util/Auth';
 import ApiRequest from '../../util/ApiRequest';
 import isAdminRole from '../../util/isAdmin';
+import getSocialNetwork from '../../util/getSocialNetwork'
 import CustomizedForm from '../CustomizedForm';
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
@@ -48,20 +49,6 @@ const loginFields = {
 			]
 		]
 	}
-};
-
-const SOCIAL_NETWORK = {
-	facebook: 'FACEBOOK',
-	google: 'GOOGLE',
-}
-
-const getSocialNetwork = (res) => {
-  const isGoogle = res.googleId;
-  const isFacebook = res.graphDomain === 'facebook';
-
-  if (isGoogle) return SOCIAL_NETWORK.google;
-  else if (isFacebook) return SOCIAL_NETWORK.facebook;
-  else return;
 };
 
 const CustomizedModal = (props) => {
