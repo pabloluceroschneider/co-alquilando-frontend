@@ -6,6 +6,7 @@ import Spin from '../../components/Spin';
 import ApiRequest from '../../util/ApiRequest';
 import { ArrowDownOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import AdImage from '../../components/Ad/AdImage';
 
 const Match = () => {
 	const [ matched, setMatched ] = useState(null);
@@ -27,45 +28,44 @@ const Match = () => {
 		},[ state.user ]);
 
 	return (
-		<ContentWrapper topNav optionsNav>
-			<div className="roommates-wrapper">
+    <ContentWrapper topNav optionsNav>
+      <div className="roommates-wrapper">
+        <div className="info-column">
+          {!matched ? (
+            <div className="no-match">
+              <p>No tienes preferencias cargadas</p>
+              <div>
+                <p className="here">Cargalas aqui</p>
+                <ArrowDownOutlined />
+              </div>
+            </div>
+          ) : null}
 
-				<div className="info-column">
+          <div className="edit preferences">
+            <Link to="my-profile/updatePreferencies">Editar Preferencias</Link>
+          </div>
 
-					{!matched ? (
-						<div className="no-match">
-							<p>No tienes preferencias cargadas</p>
-							<div>
-								<p className="here">Cargalas aqui</p>
-								<ArrowDownOutlined />
-							</div>
-						</div>
-					) : null}
+          <AdImage position="vertical" />
+        </div>
 
-					<div className="edit preferences">
-						<Link to="my-profile/updatePreferencies">Editar Preferencias</Link>
-					</div>
-				</div>
+        <div className="match">
+          {!matched && !users ? <Spin /> : null}
 
-				<div className="match">
+          {matched?.map((u, index) => {
+            return <UserCard key={index} {...u} />;
+          })}
 
-					{!matched && !users ? <Spin/> : null}
-
-					{matched?.map((u, index) => {
-						return <UserCard key={index} {...u} />;
-					})}
-
-					{users &&
-						<div>
-							{users.map((u, index) => {
-								return <UserCard key={index} user={{...u}}/>;
-							})} 
-						</div>
-					}
-				</div>
-			</div>
-		</ContentWrapper>
-	);
+          {users && (
+            <div>
+              {users.map((u, index) => {
+                return <UserCard key={index} user={{ ...u }} />;
+              })}
+            </div>
+          )}
+        </div>
+      </div>
+    </ContentWrapper>
+  );
 };
 
 export default Match;

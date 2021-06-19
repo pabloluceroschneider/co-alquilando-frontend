@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'antd'
+import AdImage from "../../components/Ad/AdImage";
 
 const PackagePropertyInfo = ({count}) => {
     return (
@@ -26,6 +27,8 @@ const PackagePropertyInfo = ({count}) => {
                     </a>
                 </div>
             ) :null}
+
+            <AdImage position="vertical" />
         </div>
     )
 }
