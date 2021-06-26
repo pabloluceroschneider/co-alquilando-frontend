@@ -63,6 +63,13 @@ const OnGoing = ({ votations, detail, setVotations }) => {
   const { t } = useTranslation();
   const { state } = useContext(SessionContext);
   const [property, setProperty] = useState(null);
+  const [userVote, setuserVote] = useState(null);
+  const userId = state.user.id;
+  const voteConfig = {
+    false: 0,
+    true: 1,
+    null: 2,
+  }
 
   useEffect(() => {
     if (!votations?.ongoing) {
@@ -79,9 +86,19 @@ const OnGoing = ({ votations, detail, setVotations }) => {
     asyncGetUser();
   }, [votations, detail]);
 
+  useEffect(() => {
+    const getVotations = async () => {
+      if (!votations.ongoing?.id) return;
+      const { data } = await ApiRequest.get(`/group/votation/${votations.ongoing?.id}`);
+      const vote = voteConfig[data.votes[`${userId}`]]
+      setuserVote( vote );
+    };
+    getVotations();
+  }, [votations]);
+
   const handleVote = async (vote) => {
     let bodyReq = {
-      userId: state.user.id,
+      userId: userId,
       votationId: votations?.ongoing.id,
       vote,
     };
@@ -124,16 +141,18 @@ const OnGoing = ({ votations, detail, setVotations }) => {
               Precio: ${property?.price.rentPrice}
             </div>
             <div className="buttonsVotation">
+              {(userVote === 2 || userVote === 1) && (
               <CloseCircleTwoTone
                 twoToneColor="red"
                 className="buttonsVotationNo"
                 onClick={() => handleVote(false)}
-              />
+              />)}
+              {(userVote === 2 || userVote === 0) && (
               <CheckCircleTwoTone
                 twoToneColor="#52c41a"
                 className="buttonsVotationOk"
                 onClick={() => handleVote(true)}
-              />
+              />)}
             </div>
           </div>
         </div>
