@@ -48,8 +48,8 @@ const Routes = () => {
 
 					
 						<Route exact path="/" component={PropertyList} />
-						<Route path="/property/:idProperty" component={PropertyDetail} />
 						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
+						<Route path="/property/:idProperty" component={PropertyDetail} />
 						<Route exact path="/property" component={Property} />
 						<Route path="/my-properties" exact component={MyProperties} />
 						<Route exact path="/properties-on-map" component={PropertiesOnMap} />
