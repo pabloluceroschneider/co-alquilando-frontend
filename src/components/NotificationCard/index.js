@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { Card, notification, Avatar, Modal } from "antd";
 import ApiRequest from "../../util/ApiRequest";
 import Notification from "../../classes/Notification";
@@ -29,11 +30,7 @@ const Description = ({ desc }) => {
 };
 
 const Name = ({ name, userNickname }) => {
-  return (
-    <a href={`profile/${userNickname}`} rel="noopener noreferrer">
-      {name}
-    </a>
-  );
+  return <Link to={`profile/${userNickname}`} replace>{name}</Link>
 };
 
 const Close = ({ id, setNotifications, notifications }) => {
