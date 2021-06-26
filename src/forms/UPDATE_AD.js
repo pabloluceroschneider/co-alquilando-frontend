@@ -17,12 +17,6 @@ const adFields = {
           component: "InputCurrency",
           required: true,
         },
-        {
-					label: "Activo",
-					name: "active",
-					valuePropName: "checked",
-					component: "Checkbox",
-				},
       ],
       [
         {
@@ -49,13 +43,26 @@ const adFields = {
       ],
       [
         {
+					label: "Activo",
+					name: "active",
+					valuePropName: "checked",
+					component: "Checkbox",
+				},
+        {
+					label: "Foto Vertical",
+					name: "isVertical",
+					valuePropName: "checked",
+					component: "Checkbox",
+				},
+      ],
+      [
+        {
           label: "Cargar Imagen",
           name: "image",
           component: "Upload",
-          aspect: 16 / 9,
           required: true,
         },
-      ],
+      ]
     ],
   },
 };
