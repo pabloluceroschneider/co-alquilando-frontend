@@ -41,6 +41,7 @@
 	"Incorrect username or password.": "Usuario o contraseña incorrectos",
 	"User is not confirmed.": "Su cuenta no ha sido validada. Confirme su email",
 
+	"title-metric-month": "Mes",
 	"title-metric-semester": "Semestre",
 	"title-metric-year": "Año",
 	"title-metric-1": "Enero",
