@@ -68,9 +68,9 @@
 }
 
 .button-place{
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    place-content: center;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 .button-place button{
     margin-left: 8px;
