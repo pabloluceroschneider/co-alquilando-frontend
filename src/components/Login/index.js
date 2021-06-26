@@ -42,7 +42,7 @@ const loginFields = {
 				//     href: "#"
 				// },
 				{
-					label: '¿No tienes cuenta? ¡Registrate!',
+					label: '¿No tenés cuenta? ¡Registrate!',
 					component: 'link',
 					href: '/sign-in'
 				}

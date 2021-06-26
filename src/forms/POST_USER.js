@@ -1,3 +1,4 @@
+import { regex } from 'uuidv4';
 import calcAge from '../util/CalculateAge';
 
 const userFields = {
@@ -11,7 +12,26 @@ const userFields = {
 					label: "Nombre de usuario",
 					name: "userNickname",
 					component: "Input",
-					required: true
+					required: true,
+					validate: ({getFieldValue}) => ({
+						validator() {
+							let userNickname = getFieldValue("userNickname")
+
+							let result_space = userNickname.split(" ")
+							if(result_space.length > 1){
+								return Promise.reject('No debe contener espacios');
+							}
+
+							let regexp = /^[A-Za-z0-9\s]/
+							let result_special_chart = regexp.test(userNickname)
+							console.log("result reg", result_special_chart)
+							if(!result_special_chart){
+								return Promise.reject('No debe contener caracteres especiales');
+							}
+
+							return Promise.resolve()
+						},
+					  }),
 				}
 			],
 			[
