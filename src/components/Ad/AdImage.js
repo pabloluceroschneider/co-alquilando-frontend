@@ -5,42 +5,47 @@ import ApiRequest from "../../util/ApiRequest";
 
 const AdImage = (props) => {
   const { position } = props;
-  const [image, setImage] = useState();
+  const [ad, setAd] = useState();
   const [visible, setVisible] = useState(true);
+  const isVertical = position === 'vertical';
 
   const modifier = `ad-image--${position}`;
-  const className = ["ad-image", modifier];
+  const className = ['ad-image', modifier];
   let windowSize = getWindowSize();
 
   useEffect(() => {
-    if (!image) {
+    if (!ad) {
       const getImage = async () => {
-        const data  = await ApiRequest.get(
-          '/ad/toDisplay'
+        const {data} = await ApiRequest.get(
+          '/ad/toDisplay', {isVertical}
         );
-        setImage(data);
+        setAd(data);
       };
       getImage();
-      console.log(`image`, image)
     }
-  }, [image]);
+  }, [ad, isVertical]);
 
   const closeAd = () => {
     setVisible(false);
   }
 
-  const renderAdImage = () => (
-    <div className="ad-image__container">
-      <img
-        src="https://www.dzoom.org.es/wp-content/uploads/2008/12/panoramica-13-734x243.jpg"
-        alt="ad"
-      />
-      <CloseCircleTwoTone twoToneColor="fafafa" className="ad-image__button" onClick={closeAd} />
-    </div>
-  );
+  const renderAdImage = () =>
+    ad && (
+      <div className="ad-image__container">
+        <img
+          src={`http://localhost:8080/ad/${ad.id}/image/${ad.image}`}
+          alt="ad"
+        />
+        <CloseCircleTwoTone
+          twoToneColor="fafafa"
+          className="ad-image__button"
+          onClick={closeAd}
+        />
+      </div>
+    );
 
   return (
-    <div className={className.join(" ")}>
+    <div className={className.join(' ')}>
       {visible && windowSize[0] > 600 && renderAdImage()}
     </div>
   );
