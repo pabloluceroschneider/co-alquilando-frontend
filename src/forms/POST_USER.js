@@ -22,10 +22,10 @@ const userFields = {
 								return Promise.reject('No debe contener espacios');
 							}
 
-							let regexp = /^[A-Za-z0-9\s]/
+							let regexp = /[^a-zA-Z0-9-/]/
 							let result_special_chart = regexp.test(userNickname)
 							console.log("result reg", result_special_chart)
-							if(!result_special_chart){
+							if(result_special_chart){
 								return Promise.reject('No debe contener caracteres especiales');
 							}
 
