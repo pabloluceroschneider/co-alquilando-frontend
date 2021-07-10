@@ -1,0 +1,43 @@
+.ad-image {
+  &__container {
+    position: relative;
+    width: 100%;
+  }
+
+  &__button {
+    position: absolute;
+    opacity: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    top: 3%;
+    &:hover {
+      opacity: 100%;
+    }
+  }
+
+  &--vertical {
+    margin: 32px 0 0 0;
+    img {
+      width: 100%;
+      max-height: 40em;
+      min-height: 40em;
+    }
+
+    .ad-image__button {
+      left: 90%;
+    }
+  }
+
+  &--horizontal {
+    img {
+      width: 95%;
+      min-height: 200px;
+      max-height: 200px;
+      margin-left: 2.5%;
+    }
+
+    .ad-image__button {
+        left: 95%;
+      }
+  }
+}

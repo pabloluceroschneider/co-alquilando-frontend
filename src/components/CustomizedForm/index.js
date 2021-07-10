@@ -62,6 +62,12 @@ const CustomizedForm = (props) => {
 		}
 	}
 
+	const onValuesChange = (name, form) => (field) => {
+		if (name === 'ad') {
+			form.setFieldsValue({ image: field.isVertical })	
+		}
+	}
+
 	const renderForm = () => {
 		return (
 			<Form
@@ -73,6 +79,7 @@ const CustomizedForm = (props) => {
 				onFinishFailed={onFinishFailed}
 				form={form}
 				layout={layout}
+				onValuesChange={onValuesChange(name, form)}
 			>
 				{data && (
 					primaries.map((row, index) => {

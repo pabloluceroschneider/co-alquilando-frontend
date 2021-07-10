@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ContentWrapper from "../../components/ContentWrapper";
-import AdCard from "../../components/AdCard";
+import AdCard from "../../components/Ad";
 import AdInfo from "../../components/AdInfo";
 import { notification } from "antd";
 import ApiRequest from "../../util/ApiRequest";
