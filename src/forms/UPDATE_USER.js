@@ -29,23 +29,8 @@ const userData = {
 					label: 'Email',
 					name: 'userEmail',
 					component: 'Input',
+					disabled: true,
 					required: true
-				},
-				{
-					label: 'Confirme Email',
-					name: 'userConfirmEmail',
-					component: 'Input',
-					required: true,
-					dependencies: [ 'userEmail' ],
-					hasFeedback: true,
-					validate: ({ getFieldValue }) => ({
-						validator(rule, value) {
-							if (!value || getFieldValue('userEmail') === value) {
-								return Promise.resolve();
-							}
-							return Promise.reject('Los emails no coinciden!');
-						}
-					})
 				}
 			],
 			[
