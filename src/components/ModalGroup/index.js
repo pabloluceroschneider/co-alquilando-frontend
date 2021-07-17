@@ -157,24 +157,24 @@ const inviteToGroup = async (user, selected, id) => {
 const ModalGroup = ({ user, itemTitle }) => {
   const [groups, setGroups] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [loading, setloading] = useState(false);
   const [radio, setRadio] = useState(1);
   const [input, setInput] = useState("");
   const [selected, setSelected] = useState({});
   const { state } = useContext(SessionContext);
 
   const handleConfirm = async (radio, input, user, state, selected) => {
+    setloading(true)
     if (radio === 2) {
       await createNewGroup(input, user, state.user.id);
     } else {
       inviteToGroup(user, selected, state.user.id);
     }
-
+    setloading(false);
     setVisible(!visible);
   };
 
-  const handleConnect = () => {
-    setVisible(!visible);
-  };
+  const handleConnect = () => setVisible(vis => !vis);
 
   useEffect(() => {
     if (!visible) return;
@@ -195,6 +195,7 @@ const ModalGroup = ({ user, itemTitle }) => {
         onCancel={() => {
           setVisible(!visible);
         }}
+        confirmLoading={loading}
         okText="Confirmar"
         cancelText="Cancelar"
       >
