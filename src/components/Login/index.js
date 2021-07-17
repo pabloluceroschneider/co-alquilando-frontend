@@ -110,7 +110,7 @@ const CustomizedModal = (props) => {
 					userNickname: res.first_name + res.last_name,
 					attributes: [
 						{attributeType: "sex", 
-						value: "NOT_DEFINED", 
+						value: "Otro", 
 						weight: 0}
 					]
 				  };
