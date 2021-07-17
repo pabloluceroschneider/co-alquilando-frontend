@@ -34,53 +34,58 @@ const Routes = () => {
 
 	const isAdmin = isAdminRole(state.user);
 
+	const userRoutes = (
+		<Switch>
+			<Route exact path="/" component={PropertyList} />
+			<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
+			<Route path="/property/:idProperty" component={PropertyDetail} />
+			<Route exact path="/property" component={Property} />
+			<Route path="/my-properties" exact component={MyProperties} />
+			<Route exact path="/properties-on-map" component={PropertiesOnMap} />
+	
+			<Route exact path="/my-profile" component={MyProfile} />
+			<Route path="/my-profile/updatePreferencies" exact component={UpdatePreferenciesForm} />
+			<Route path="/my-profile/update" exact component={UpdateForm} />
+			
+			<Route path="/profile/:nickname" component={Profile} />
+			
+			<Route path="/contact-us" component={ContactUs} />
+			
+			<Route path="/roommates" exact component={Roommates} />
+			
+			<Route path="/groups/:group/votations" component={Groups} />
+			<Route path="/groups/:group/chat/:chat/:name" component={Groups} />
+			<Route path="/groups/:group" component={Groups} />
+			<Route path="/groups" exact component={Groups} />
+			
+			<Route path="/notifications" exact component={Notifications} />
+			
+			<Route path="/reports" exact component={Metrics} />
+			
+			<Route path="/payOptions" exact component={PayOptions} />
+			<Route path="/paymentResultSuccess/:idowner/:cantidad" exact component={PaymentResultSuccess} />
+			<Route path="/paymentResultFail" exact component={PaymentResultFail} />
+			<Redirect from="*" to="/" />
+
+		</Switch>
+	)
+
+	const adminRoutes = (
+		<Switch>
+			<Route path="/ads" exact component={AdList} />  
+			<Route path="/ad" exact component={Ad} /> 
+			<Route path="/ad/:idAd/update" component={FormAdUpdate} /> 
+			<Route path="/reports-admin" exact component={MetricsAdmin} /> 
+			<Redirect from="*" to="/reports-admin" />
+		</Switch>
+	)
+
 	return (
 		<SessionContext.Provider value={ {state, dispatch} }>
 			<Router>
 				{state.user ? (
 					<Switch>
-
-						{ isAdmin && <Route path="/ads" exact component={AdList} />  }
-						{ isAdmin && <Route path="/ad" exact component={Ad} /> }
-						{ isAdmin && <Route path="/ad/:idAd/update" component={FormAdUpdate} /> }
-						{ isAdmin && <Route path="/reports-admin" exact component={MetricsAdmin} /> }
-						
-
-					
-						<Route exact path="/" component={PropertyList} />
-						<Route path="/property/:idProperty/update" component={FormPropertyUpdate} />
-						<Route path="/property/:idProperty" component={PropertyDetail} />
-						<Route exact path="/property" component={Property} />
-						<Route path="/my-properties" exact component={MyProperties} />
-						<Route exact path="/properties-on-map" component={PropertiesOnMap} />
-
-						<Route exact path="/my-profile" component={MyProfile} />
-						<Route path="/my-profile/updatePreferencies" exact component={UpdatePreferenciesForm} />
-						<Route path="/my-profile/update" exact component={UpdateForm} />
-						
-						<Route path="/profile/:nickname" component={Profile} />
-						
-						<Route path="/contact-us" component={ContactUs} />
-						
-						<Route path="/roommates" exact component={Roommates} />
-						
-						<Route path="/groups/:group/votations" component={Groups} />
-						<Route path="/groups/:group/chat/:chat/:name" component={Groups} />
-						<Route path="/groups/:group" component={Groups} />
-						<Route path="/groups" exact component={Groups} />
-						
-						<Route path="/notifications" exact component={Notifications} />
-						
-						<Route path="/reports" exact component={Metrics} />
-						
-						<Route path="/payOptions" exact component={PayOptions} />
-						<Route path="/paymentResultSuccess/:idowner/:cantidad" exact component={PaymentResultSuccess} />
-						<Route path="/paymentResultFail" exact component={PaymentResultFail} />
-						
-					
-						
-						<Redirect from="*" to={`${isAdmin ? "/admin": "/"}`}/>
-
+						{ isAdmin ? adminRoutes : userRoutes }
 					</Switch>
 				) : (
 					<Switch>
