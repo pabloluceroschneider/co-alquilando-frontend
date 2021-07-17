@@ -8,5 +8,5 @@ export default function calcularEdad(fecha) {
         edad--;
     }
 
-    return edad;
+    return fecha ? edad : '';
 }

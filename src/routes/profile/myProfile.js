@@ -68,7 +68,7 @@ const MyProfile = (props) => {
                 </strong>
               </h1>
               <h3>
-                {datos.attributes.nationality} - {datos.attributes.city}
+                {datos.attributes.nationality}{datos.attributes.city && `- ${datos.attributes.city}`}
               </h3>
               <div>
                 <p>
@@ -77,12 +77,12 @@ const MyProfile = (props) => {
               </div>
               <div>
                 <p>
-                  <b>Sexo:</b> {genders[datos.attributes.sex]}
+                   {genders[datos.attributes.sex] && <b>Sexo:{genders[datos.attributes.sex]}</b>}
                 </p>
               </div>
               <div>
                 <p>
-                  <b>Edad:</b> {calculateAge(datos.userBirthDate)}
+                   {datos?.userBirthDate && <b>Edad: {calculateAge(datos.userBirthDate)}</b>}
                 </p>
               </div>
             </div>
