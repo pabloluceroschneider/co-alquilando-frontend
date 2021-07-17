@@ -13,7 +13,7 @@ import Attribute from "../../classes/Attribute";
 
 const { confirm } = Modal;
 
-const ConfigGroup = ({ detail }) => {
+const ConfigGroup = ({ detail, isAdmin }) => {
   const { state } = useContext(SessionContext);
   const { setData } = useContext(GroupContext);
   const [members, setMembers] = useState([]);
@@ -130,7 +130,7 @@ const ConfigGroup = ({ detail }) => {
 
   return (
     <div className="wrapper-config-group">
-      <div className="section">
+      {isAdmin && (<div className="section">
         <div className="title">Modificar nombre de Grupo</div>
         <div className="row">
           <Input
@@ -142,18 +142,20 @@ const ConfigGroup = ({ detail }) => {
             <SaveOutlined />
           </div>
         </div>
-      </div>
+      </div>)}
 
       {members.length ? (
         <div className="section">
-          <div className="title">Eliminar miembros</div>
+          {isAdmin 
+          ? <div className="title">Eliminar miembros</div>
+          : <div className="title">Otro miembros</div>}
           {members.map((m) => {
             return (
               <div className="row" key={m.id}>
                 <div className="userName">{m.userName}</div>
-                <div className="delete-member" onClick={() => deleteMember(m)}>
+                {isAdmin && <div className="delete-member" onClick={() => deleteMember(m)}>
                   <CloseOutlined />
-                </div>
+                </div>}
               </div>
             );
           })}
@@ -161,7 +163,7 @@ const ConfigGroup = ({ detail }) => {
       ) : null}
 
       <div className="delete-group">
-        <Button onClick={deleteGroup}>Eliminar Grupo</Button>
+        {isAdmin && <Button onClick={deleteGroup}>Eliminar Grupo</Button>}
       </div>
     </div>
   );
