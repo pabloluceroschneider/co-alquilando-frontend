@@ -8,16 +8,16 @@ import Auth from '../../util/Auth';
 import isAdminRole from '../../util/isAdmin';
 import logo from '../../assets/images/logonav.png'
 
-const Ring = () => {
+const Ring = ({ notifications }) => {
 	useEffect(() => { return () => { new AbortController().abort(); } })
 	return (
-		<Badge>
+		<Badge size="small" count={notifications}>
 			<BellOutlined />
 		</Badge>
 	);
 };
 
-const Nav = () => {
+const Nav = ({notifications}) => {
 	const { state, dispatch } = useContext(SessionContext);
 
 	const isAdmin = isAdminRole(state.user);
@@ -28,16 +28,20 @@ const Nav = () => {
 
 	const profileSignedIn = (
 		<Menu>
-			<Menu.Item key="0">
-				<Link to="/my-profile" replace>
-					Mi Perfil
-				</Link>
-			</Menu.Item>
-			<Menu.Item key="1">
-				<Link to="/my-properties">
-					Mis Propiedades
-				</Link>
-			</Menu.Item>
+			{!isAdmin && (
+				<Menu.Item key="0">
+					<Link to="/my-profile" replace>
+						Mi Perfil
+					</Link>
+				</Menu.Item>
+			)}
+			{!isAdmin && (
+				<Menu.Item key="1">
+					<Link to="/my-properties">
+						Mis Propiedades
+					</Link>
+				</Menu.Item>
+			)}
 			{isAdmin 
 			? (
 				<Menu.Item key="2">
@@ -90,16 +94,20 @@ const Nav = () => {
 							</Link>
 						</Dropdown>
 					</li>
-					<li style={{ float: 'right' }}>
-						<Link to="/notifications" >
-							<Ring />
-						</Link>
-					</li>
-					<li style={{ float: 'right' }}>
-						<Link to="/groups">
-							<TeamOutlined />
-						</Link>
-					</li>
+					{!isAdmin && (
+						<li style={{ float: 'right' }}>
+							<Link to="/notifications" >
+								<Ring notifications={notifications} />
+							</Link>
+						</li>
+					)}
+					{!isAdmin && (
+						<li style={{ float: 'right' }}>
+							<Link to="/groups">
+								<TeamOutlined />
+							</Link>
+						</li>
+					)}
 				</>) :
 				<>
 					<li style={{ float: 'right' }}>
