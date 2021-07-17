@@ -8,16 +8,16 @@ import Auth from '../../util/Auth';
 import isAdminRole from '../../util/isAdmin';
 import logo from '../../assets/images/logonav.png'
 
-const Ring = () => {
+const Ring = ({ notifications }) => {
 	useEffect(() => { return () => { new AbortController().abort(); } })
 	return (
-		<Badge>
+		<Badge size="small" count={notifications}>
 			<BellOutlined />
 		</Badge>
 	);
 };
 
-const Nav = () => {
+const Nav = ({notifications}) => {
 	const { state, dispatch } = useContext(SessionContext);
 
 	const isAdmin = isAdminRole(state.user);
@@ -97,7 +97,7 @@ const Nav = () => {
 					{!isAdmin && (
 						<li style={{ float: 'right' }}>
 							<Link to="/notifications" >
-								<Ring />
+								<Ring notifications={notifications} />
 							</Link>
 						</li>
 					)}

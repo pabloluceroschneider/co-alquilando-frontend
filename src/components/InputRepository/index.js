@@ -37,7 +37,7 @@ const InputRepository = props => {
   const pickInput = () => {
     switch (element.component) {
       case "Input":
-        return <Input />;
+        return <Input disabled={element.disabled}/>;
       case "Input.Password":
         return <Input.Password />;
       case "InputNumber":

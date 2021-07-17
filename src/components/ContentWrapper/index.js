@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from "react";
+import { SessionContext } from "../../store";
+import ApiRequest from "../../util/ApiRequest";
 import Nav from '../../containers/Nav';
 import Breadscrumb from '../Breadscrumb';
 import OptionsNav from '../../containers/OptionsNav';
@@ -6,11 +8,23 @@ import Footer from '../../containers/Footer';
 
 
 const ContentWrapper = props => {
+    const { state } = useContext(SessionContext);
+    const [notifications, setNotifications] = useState();
+    useEffect(() => {
+        if (notifications) return;
+        let asyncGet = async () => {
+          let { data } = await ApiRequest.get(
+            `/notifications/user/${state.user.id}`
+          );
+          setNotifications(data.length);
+        };
+        asyncGet();
+      }, [state.user.id, notifications]);
 
     return (
         <>
 
-        { props.topNav && <Nav />  }
+        { props.topNav && <Nav notifications={notifications} />  }
         { props.optionsNav && <OptionsNav /> }
         { props.breadscrumb && <Breadscrumb paths={props.breadscrumb}/> }
         { props.title && <span className="content-wrapper">{props.title}</span> }

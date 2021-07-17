@@ -138,7 +138,7 @@ const Info = ( {detail, admin} ) => {
   return (
     <div className="info">
       <div>{detail?.name}</div>
-      { admin && detail?.name !== 'Mis chats' && <div className="cog" onClick={toggleConfig}><SettingOutlined /></div> }
+      { detail?.name !== 'Mis chats' && <div className="cog" onClick={toggleConfig}><SettingOutlined /></div> }
       <Modal 
           visible={showConfig}
           onOk={toggleConfig}
@@ -147,7 +147,7 @@ const Info = ( {detail, admin} ) => {
           footer={false}
           destroyOnClose
           >
-            <ConfigGroup detail={detail} />
+            <ConfigGroup isAdmin={admin} detail={detail} />
           </Modal>
     </div>
   );
