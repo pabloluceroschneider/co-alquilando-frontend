@@ -1,5 +1,5 @@
 const adFields = {
-  name: "ad",
+  name: "update-ad",
   layout: "vertical",
   btnSubmit: "Actualizar Publicidad",
   fields: {

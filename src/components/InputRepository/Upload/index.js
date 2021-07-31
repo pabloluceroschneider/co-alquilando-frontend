@@ -47,7 +47,7 @@ const CustomUpload = (props) => {
             });
           }
         } else {
-          if (String(props.id) === "ad_image" && props.value) {
+          if ((String(props.id) === "ad_image" || String(props.id) === "update-ad_image") && props.value) {
             if (Array.isArray(props.value)) {
               props.value.forEach(async (photo, index) => {
                 let photoJson = {

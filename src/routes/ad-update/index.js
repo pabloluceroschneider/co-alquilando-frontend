@@ -40,9 +40,9 @@ const UpdateAd = () => {
     let formatedBodyReq = {
       ...values,
       startDate: values.startDate.toString(),
-      endDate: values.endDate.toString(),
-      image: data?.image[0],
+      endDate: values.endDate.toString()
     };
+    delete formatedBodyReq.image
 
     let updateAd = new Promise(async (res, rej) => {
       try {
