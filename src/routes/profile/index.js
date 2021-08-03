@@ -47,7 +47,7 @@ const Profile = (props) => {
             <div className="imageContent">
               <img
                 alt="imagen de perfil"
-                src={datos?.photos ? `http://localhost:8080/user/${datos.id}/photos/${datos.photos[0]}`
+                src={datos?.photos ? `http://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080/user/${datos.id}/photos/${datos.photos[0]}`
                 : image}
                 className="profileImage"
               />

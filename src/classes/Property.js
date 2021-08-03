@@ -30,7 +30,7 @@ class Property{
         if (!photos) return ["https://omegamma.com.au/wp-content/uploads/2017/04/default-image-720x530.jpg"]
         let urlArray = [];
         if(photos){
-            let url = "http://localhost:8080"
+            let url = "http://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080"
             let endpoint = `/property/${idProperty}/photos/`
             photos.forEach( id => {
                 let photoUrl = url + endpoint + id

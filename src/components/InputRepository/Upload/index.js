@@ -30,7 +30,7 @@ const CustomUpload = (props) => {
               let photoJson = {
                 uid: index,
                 name: photo,
-                url: `http://localhost:8080/property/${idProperty}/photos/${photo}`,
+                url: `http://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080/property/${idProperty}/photos/${photo}`,
               };
               setFileList((fileList) => [...fileList, photoJson]);
             });
@@ -41,7 +41,7 @@ const CustomUpload = (props) => {
               let photoJson = {
                 uid: index,
                 name: photo,
-                url: `http://localhost:8080/user/${state.user.id}/photos/${photo}`,
+                url: `http://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080/user/${state.user.id}/photos/${photo}`,
               };
               setFileList((fileList) => [...fileList, photoJson]);
             });
@@ -53,7 +53,7 @@ const CustomUpload = (props) => {
                 let photoJson = {
                   uid: index,
                   name: photo,
-                  url: `http://localhost:8080/ad/${idAd}/image/${photo}`,
+                  url: `http://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080/ad/${idAd}/image/${photo}`,
                 };
                 setFileList((fileList) => [...fileList, photoJson]);
               });

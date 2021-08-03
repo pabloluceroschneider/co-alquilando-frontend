@@ -33,7 +33,7 @@ const PropertyCard = props => {
             let photoJson = {
                 caption: "", 
                 position: "",
-                imgUrl: `http://localhost:8080/property/${id}/photos/${photo}`
+                imgUrl: `http://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080/property/${id}/photos/${photo}`
             }
             setPhotoList(photoList => [...photoList, photoJson])
           })
