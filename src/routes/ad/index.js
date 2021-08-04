@@ -17,8 +17,6 @@ const Ad = () => {
   const postAd = (values) => {
     let formatedBodyReq = {
       ...values,
-      startDate: moment(values.startDate).format(),
-      endDate: moment(values.endDate).format(),
       image: null,
     };
 
