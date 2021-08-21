@@ -1,6 +1,7 @@
 {
   "name": "co-alquilando-frontend",
   "version": "0.1.0",
+  "homepage": "https://camila-stock.github.io/co-alquilando-frontend/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
