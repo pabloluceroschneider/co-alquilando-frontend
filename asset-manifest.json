@@ -1,30 +1,30 @@
 {
   "files": {
-    "main.css": "/static/css/main.eef16d71.chunk.css",
-    "main.js": "/static/js/main.e4dcb6ce.chunk.js",
-    "main.js.map": "/static/js/main.e4dcb6ce.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.787c3fcb.js",
-    "runtime-main.js.map": "/static/js/runtime-main.787c3fcb.js.map",
-    "static/css/2.38bff71c.chunk.css": "/static/css/2.38bff71c.chunk.css",
-    "static/js/2.ffde8b3a.chunk.js": "/static/js/2.ffde8b3a.chunk.js",
-    "static/js/2.ffde8b3a.chunk.js.map": "/static/js/2.ffde8b3a.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.8ba84e6f4e00aa2b9a9973144c08cf57.js": "/precache-manifest.8ba84e6f4e00aa2b9a9973144c08cf57.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.38bff71c.chunk.css.map": "/static/css/2.38bff71c.chunk.css.map",
-    "static/css/main.eef16d71.chunk.css.map": "/static/css/main.eef16d71.chunk.css.map",
-    "static/js/2.ffde8b3a.chunk.js.LICENSE.txt": "/static/js/2.ffde8b3a.chunk.js.LICENSE.txt",
-    "static/media/Coalq.mp4": "/static/media/Coalq.a8a2fe17.mp4",
-    "static/media/house-pin.svg": "/static/media/house-pin.21d98890.svg",
-    "static/media/logonav.png": "/static/media/logonav.94cc580f.png",
-    "static/media/mobile-coalq.mov": "/static/media/mobile-coalq.4ef7ced1.mov",
-    "static/media/index.scss": "/static/media/untitled-font-1.ea1400e1.eot"
+    "main.css": "/co-alquilando-frontend/static/css/main.0c9ce727.chunk.css",
+    "main.js": "/co-alquilando-frontend/static/js/main.edb2fd8d.chunk.js",
+    "main.js.map": "/co-alquilando-frontend/static/js/main.edb2fd8d.chunk.js.map",
+    "runtime-main.js": "/co-alquilando-frontend/static/js/runtime-main.8d8b0ca4.js",
+    "runtime-main.js.map": "/co-alquilando-frontend/static/js/runtime-main.8d8b0ca4.js.map",
+    "static/css/2.38bff71c.chunk.css": "/co-alquilando-frontend/static/css/2.38bff71c.chunk.css",
+    "static/js/2.dfe16ed3.chunk.js": "/co-alquilando-frontend/static/js/2.dfe16ed3.chunk.js",
+    "static/js/2.dfe16ed3.chunk.js.map": "/co-alquilando-frontend/static/js/2.dfe16ed3.chunk.js.map",
+    "index.html": "/co-alquilando-frontend/index.html",
+    "precache-manifest.286ceb36738281753cdcbeb5f768bb7e.js": "/co-alquilando-frontend/precache-manifest.286ceb36738281753cdcbeb5f768bb7e.js",
+    "service-worker.js": "/co-alquilando-frontend/service-worker.js",
+    "static/css/2.38bff71c.chunk.css.map": "/co-alquilando-frontend/static/css/2.38bff71c.chunk.css.map",
+    "static/css/main.0c9ce727.chunk.css.map": "/co-alquilando-frontend/static/css/main.0c9ce727.chunk.css.map",
+    "static/js/2.dfe16ed3.chunk.js.LICENSE.txt": "/co-alquilando-frontend/static/js/2.dfe16ed3.chunk.js.LICENSE.txt",
+    "static/media/Coalq.mp4": "/co-alquilando-frontend/static/media/Coalq.a8a2fe17.mp4",
+    "static/media/house-pin.svg": "/co-alquilando-frontend/static/media/house-pin.21d98890.svg",
+    "static/media/logonav.png": "/co-alquilando-frontend/static/media/logonav.94cc580f.png",
+    "static/media/mobile-coalq.mov": "/co-alquilando-frontend/static/media/mobile-coalq.4ef7ced1.mov",
+    "static/media/index.scss": "/co-alquilando-frontend/static/media/untitled-font-1.ea1400e1.eot"
   },
   "entrypoints": [
-    "static/js/runtime-main.787c3fcb.js",
+    "static/js/runtime-main.8d8b0ca4.js",
     "static/css/2.38bff71c.chunk.css",
-    "static/js/2.ffde8b3a.chunk.js",
-    "static/css/main.eef16d71.chunk.css",
-    "static/js/main.e4dcb6ce.chunk.js"
+    "static/js/2.dfe16ed3.chunk.js",
+    "static/css/main.0c9ce727.chunk.css",
+    "static/js/main.edb2fd8d.chunk.js"
   ]
 }
