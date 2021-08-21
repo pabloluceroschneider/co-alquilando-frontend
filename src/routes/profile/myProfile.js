@@ -55,7 +55,7 @@ const MyProfile = (props) => {
                 alt="imagen de perfil"
                 src={ 
                   (state.user.id && photosUpdate?.length) 
-                    ? `http://localhost:8080/user/${state.user.id}/photos/${photosUpdate}`
+                    ? `https://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080/user/${state.user.id}/photos/${photosUpdate}`
                     : image
                 }
                 className="profileImage"

@@ -35,7 +35,7 @@ class WebSocket extends React.Component {
   }
 
   render() {
-    const wsSourceUrl = "http://localhost:8080/handler";
+    const wsSourceUrl = "https://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080/handler";
     return (
       <div>
         

@@ -23,7 +23,7 @@ const Nav = ({notifications}) => {
 	const isAdmin = isAdminRole(state.user);
 
 	const image = (state.user && state.user.photos) ? 
-	`http://localhost:8080/user/${state.user.id}/photos/${state.user.photos[0]}` :
+	`https://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080/user/${state.user.id}/photos/${state.user.photos[0]}` :
   	"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
 
 	const profileSignedIn = (

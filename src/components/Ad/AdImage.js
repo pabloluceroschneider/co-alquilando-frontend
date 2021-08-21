@@ -33,7 +33,7 @@ const AdImage = (props) => {
     ad && (
       <div className="ad-image__container">
         <img
-          src={`http://localhost:8080/ad/${ad.id}/image/${ad.image}`}
+          src={`https://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080/ad/${ad.id}/image/${ad.image}`}
           alt="ad"
         />
         <CloseCircleTwoTone

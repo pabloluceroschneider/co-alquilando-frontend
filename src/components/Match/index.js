@@ -60,7 +60,7 @@ const UserCard = ({ user, coincidence } ) => {
       ]}
     >
       <Meta
-        avatar={ <Avatar user={user} letter={user?.userName[0].toUpperCase()} url={ user?.photos ? `http://localhost:8080/user/${user?.id}/photos/${user?.photos[0]}` : null} />}
+        avatar={ <Avatar user={user} letter={user?.userName[0].toUpperCase()} url={ user?.photos ? `https://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080/user/${user?.id}/photos/${user?.photos[0]}` : null} />}
         title={
           <Name name={user?.userName + " " + user?.userSurname} coincidence={coincidence} />
         }
