@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/co-alquilando-frontend/precache-manifest.d0a5e95f00aae047a165f821a36cba68.js"
+  "/co-alquilando-frontend/precache-manifest.053a5daa16bd9d48eaccc9356a1f9a70.js"
 );
 
 self.addEventListener('message', (event) => {
