@@ -40,7 +40,8 @@ const UpdateAd = () => {
     let formatedBodyReq = {
       ...values,
       startDate: values.startDate.toString(),
-      endDate: values.endDate.toString()
+      endDate: values.endDate.toString(),
+      image: data?.image[0],
     };
     delete formatedBodyReq.image
 

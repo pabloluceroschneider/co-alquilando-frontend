@@ -52,8 +52,8 @@ const AdCard = (props) => {
     confirm({
       title: "¿Desea eliminar esta publicidad?",
       icon: <ExclamationCircleOutlined />,
-      content: "Si selecciona 'Aceptar', se desactivará la publicidad.",
-      okText: "Yes",
+      content: "Si selecciona 'Si', se desactivará la publicidad.",
+      okText: "Si",
       okType: "danger",
       cancelText: "No",
       onOk() {
