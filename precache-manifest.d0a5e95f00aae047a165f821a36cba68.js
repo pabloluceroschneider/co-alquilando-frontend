@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3f2ebaef083c907833360b1d4274bf2d",
+    "revision": "449950950e7b88188e20dcdaa2a871a3",
     "url": "/co-alquilando-frontend/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/co-alquilando-frontend/static/css/2.38bff71c.chunk.css"
   },
   {
-    "revision": "71598e27803407f2d5d2",
+    "revision": "15afe2f7393ed257c1ce",
     "url": "/co-alquilando-frontend/static/css/main.0c9ce727.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/co-alquilando-frontend/static/js/2.dfe16ed3.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "71598e27803407f2d5d2",
-    "url": "/co-alquilando-frontend/static/js/main.edb2fd8d.chunk.js"
+    "revision": "15afe2f7393ed257c1ce",
+    "url": "/co-alquilando-frontend/static/js/main.e37aab99.chunk.js"
   },
   {
     "revision": "9f8f908b4a426d0dac72",
