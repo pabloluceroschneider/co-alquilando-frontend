@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Rate, notification } from "antd";
 import {
   CheckCircleOutlined,
@@ -190,7 +190,9 @@ const History = ({ items }) => {
       {items?.map((item) => {
         return (
           <div className="row" key={item.id}>
-            <a href={`/property/${item?.propertyId}`}>Ver propiedad</a>
+            <Link to={`/property/${item?.propertyId}`}>
+              Ver propiedad
+            </Link>
             <div
               style={{ color: configColor[item?.result] }}
               className="resultVotation"

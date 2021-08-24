@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Card,
   Tag,
@@ -44,9 +45,9 @@ const UserCard = ({ user, coincidence } ) => {
 
   const ViewProfile = ({ title }) => {
     return (
-      <a href={`profile/${user?.userNickname}`} rel="noopener noreferrer">
+      <Link to={`profile/${user?.userNickname}`}>
         {title}
-      </a>
+      </Link>
     );
   };
 

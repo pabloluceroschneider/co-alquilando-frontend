@@ -25,15 +25,15 @@ const Header = (props) => {
 
       {state.user ? (
         <Menu.Item key="perfil">
-          <a href={`/profile/${state.user.userNickname}`} rel="noopener noreferrer">
+          <Link to={`/profile/${state.user.userNickname}`}>
             Perfil
-      </a>
+          </Link>
         </Menu.Item>
       ) : (
           <Menu.Item key="Sing-in">
-            <a href="/sign-in" rel="noopener noreferrer">
+            <Link to="/sign-in">
               Registrate
-      </a>
+            </Link>
           </Menu.Item>)}
     {state.user ? (
         <Menu.Item key="Sign-out">

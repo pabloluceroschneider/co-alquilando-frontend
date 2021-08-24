@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { Button } from 'antd'
 import AdImage from "../../components/Ad/AdImage";
 
@@ -12,19 +13,19 @@ const PackagePropertyInfo = ({count}) => {
                     </div>
                 </div>
                 <div className="more" >
-                    <a href="/payOptions">
+                    <Link to="/payOptions">
                         ¡Contratá más!
-                    </a>
+                    </Link>
                 </div>
             </section>
 
             { count ? (
                 <div className="publish">
-                    <a href="/property">
+                    <Link to="/property">
                         <Button type="primary">
                             Publicar
                         </Button>
-                    </a>
+                    </Link>
                 </div>
             ) :null}
 

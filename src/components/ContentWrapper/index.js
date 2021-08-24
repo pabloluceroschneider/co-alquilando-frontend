@@ -14,12 +14,12 @@ const ContentWrapper = props => {
         if (notifications) return;
         let asyncGet = async () => {
           let { data } = await ApiRequest.get(
-            `/notifications/user/${state.user.id}`
+            `/notifications/user/${state?.user?.id}`
           );
           setNotifications(data.length);
         };
         asyncGet();
-      }, [state.user.id, notifications]);
+      }, [state?.user?.id, notifications]);
 
     return (
         <>

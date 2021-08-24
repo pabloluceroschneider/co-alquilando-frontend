@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Carousel, Tag, notification, Modal, Dropdown, Menu } from "antd";
 import {
@@ -247,9 +248,9 @@ const PayingLink = ({ payingLink }) => {
     <div className="section box payingLink">
       <p>Link de Pago </p>
       <div>
-        <a href={`//${payingLink}`} target="blank">
+        <Link to={`/${payingLink}`}>
           {payingLink}
-        </a>
+        </Link>
       </div>
     </div>
   );
