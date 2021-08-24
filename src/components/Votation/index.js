@@ -4,8 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { Rate, notification } from "antd";
 import {
   CheckCircleOutlined,
-  CloseCircleTwoTone,
-  CheckCircleTwoTone,
+  CloseCircleOutlined,
   ExclamationOutlined,
 } from "@ant-design/icons";
 import { SessionContext } from "../../store";
@@ -142,14 +141,14 @@ const OnGoing = ({ votations, detail, setVotations }) => {
             </div>
             <div className="buttonsVotation">
               {(userVote === 2 || userVote === 1) && (
-              <CloseCircleTwoTone
-                twoToneColor="red"
+              <CloseCircleOutlined
+                style={{color:"red"}}
                 className="buttonsVotationNo"
                 onClick={() => handleVote(false)}
               />)}
               {(userVote === 2 || userVote === 0) && (
-              <CheckCircleTwoTone
-                twoToneColor="#52c41a"
+              <CheckCircleOutlined
+                style={{color:"#52c41a"}}
                 className="buttonsVotationOk"
                 onClick={() => handleVote(true)}
               />)}

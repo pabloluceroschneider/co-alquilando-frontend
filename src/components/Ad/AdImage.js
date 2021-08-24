@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import getWindowSize from "../../util/getWindowSize";
-import { CloseCircleTwoTone } from "@ant-design/icons";
+import { CloseCircleOutlined } from "@ant-design/icons";
 import ApiRequest from "../../util/ApiRequest";
 
 const AdImage = (props) => {
@@ -36,8 +36,8 @@ const AdImage = (props) => {
           src={`https://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080/ad/${ad.id}/image/${ad.image}`}
           alt="ad"
         />
-        <CloseCircleTwoTone
-          twoToneColor="fafafa"
+        <CloseCircleOutlined
+          style={{color:"#fff"}}
           className="ad-image__button"
           onClick={closeAd}
         />

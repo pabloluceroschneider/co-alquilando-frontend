@@ -4,8 +4,8 @@ import { Card, notification, Avatar, Modal } from "antd";
 import ApiRequest from "../../util/ApiRequest";
 import Notification from "../../classes/Notification";
 import {
-  CloseCircleTwoTone,
-  CheckCircleTwoTone,
+  CloseCircleOutlined,
+  CheckCircleOutlined,
   CloseOutlined,
   ExclamationCircleOutlined,
 } from "@ant-design/icons";
@@ -95,14 +95,14 @@ const NotificationCard = (props) => {
           response("group_decline_invitation");
         }}
       >
-        <CloseCircleTwoTone className="responseButton" twoToneColor="red" />
+        <CloseCircleOutlined className="responseButton" style={{color:"red"}} />
       </span>,
       <span
         onClick={() => {
           response("group_accept_invitation");
         }}
       >
-        <CheckCircleTwoTone className="responseButton" twoToneColor="#52c41a" />
+        <CheckCircleOutlined className="responseButton" style={{color:"#52c41a"}}/>
       </span>,
     ],
   };
