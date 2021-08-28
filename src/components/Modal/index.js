@@ -30,6 +30,8 @@ const {coordinates} = props;
         visible={visible}
         closable={true}
         onCancel={handleCancel}
+        okText="Confirmar"
+        cancelText="Cancelar"
         footer={[
           <Button type="primary" key="close" onClick={handleCancel}>
             Cerrar

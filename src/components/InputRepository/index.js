@@ -122,14 +122,14 @@ const InputRepository = props => {
               ? [
                 {
                   required: element.required,
-                  message: `Porfavor, ingrese ${element.label}`,
+                  message: `Por favor, ingrese ${element.label}`,
                 },
                 element.validate,
               ]
               : [
                 {
                   required: element.required,
-                  message: `Porfavor, ingrese ${element.label}`,
+                  message: `Por favor, ingrese ${element.label}`,
                 },
               ]
           }

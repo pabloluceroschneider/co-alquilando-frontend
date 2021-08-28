@@ -89,6 +89,8 @@ const Header = ({ status, typology, ownerId }) => {
         addChannel();
       },
       onCancel() {},
+      okText: "Confirmar",
+      cancelText: "Cancelar",
     });
   }
 

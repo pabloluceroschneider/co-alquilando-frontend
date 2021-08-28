@@ -122,7 +122,7 @@ const CustomizedForm = (props) => {
 							onOk={onDelete}
 							onCancel={toggleShowModal}
 							title={titleDelete}
-							okText="Aceptar"
+							okText="Confirmar"
 							cancelText="Cancelar"
 							destroyOnClose
 						>
