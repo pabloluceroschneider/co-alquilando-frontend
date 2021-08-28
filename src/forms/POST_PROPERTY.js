@@ -171,7 +171,7 @@ const propertyFields = {
 			],
 			[
 				{
-					label: 'Informacion de pago',
+					label: 'Información de pago',
 					component: 'h2'
 				}
 			],
