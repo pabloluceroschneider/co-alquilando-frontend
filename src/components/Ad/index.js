@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, Divider, Button, notification, Modal } from "antd";
 import { Link } from "react-router-dom";
 import {
-  CheckCircleTwoTone,
+  CheckCircleOutlined,
   EditOutlined,
   ExclamationCircleOutlined,
 } from "@ant-design/icons";
@@ -83,7 +83,7 @@ const AdCard = (props) => {
           <div className="ad-card--content-title">
             <Link to={`/ad/${props.id}/update`}>{props.client}</Link>
             {props.active ? (
-              <CheckCircleTwoTone title="Activa" twoToneColor="#52c41a" />
+              <CheckCircleOutlined title="Activa" style={{color:"#52c41a"}} />
             ) : null}
           </div>
           <div className="ad-card--content-price">$ {props.price}</div>
@@ -103,7 +103,7 @@ const AdCard = (props) => {
             </Button>}
             <Link to={`/ad/${props.id}/update`}>
               <Button>
-                <EditOutlined title="Editar" twoToneColor="#52c41a" />
+                <EditOutlined title="Editar" />
               </Button>
             </Link>
           </div>

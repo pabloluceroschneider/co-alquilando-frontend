@@ -146,6 +146,8 @@ const Info = ( {detail, admin} ) => {
           title={"Configuración de Grupo"}
           footer={false}
           destroyOnClose
+          okText="Confirmar"
+          cancelText="Cancelar"
           >
             <ConfigGroup isAdmin={admin} detail={detail} />
           </Modal>

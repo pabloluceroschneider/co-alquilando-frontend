@@ -203,6 +203,8 @@ const CustomizedModal = (props) => {
 			onCancel={toggleVisible}
 			footer={null}
 			destroyOnClose={true}
+			okText="Confirmar"
+			cancelText="Cancelar"
 		>
 			<CustomizedForm form={form} data={loginFields} onfinish={postSession} />
 			{authErr && <span id="authErr">{t(authErr)}</span>}

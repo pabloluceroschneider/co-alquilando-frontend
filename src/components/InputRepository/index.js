@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Form, Input, Checkbox, InputNumber } from "antd";
 import Select from "./Select";
 import SelectDB from "./SelectDB";
@@ -102,9 +103,9 @@ const InputRepository = props => {
       return <h2 className="h2" key={element.label}>{element.label}</h2>;
     case "link":
       return (
-        <a key={element.label} href={element.href} rel="noopener noreferrer">
+        <Link to={element.href}>
           {element.label}
-        </a>
+        </Link>
       );
     default:
       return (
@@ -121,14 +122,14 @@ const InputRepository = props => {
               ? [
                 {
                   required: element.required,
-                  message: `Porfavor, ingrese ${element.label}`,
+                  message: `Por favor, ingrese ${element.label}`,
                 },
                 element.validate,
               ]
               : [
                 {
                   required: element.required,
-                  message: `Porfavor, ingrese ${element.label}`,
+                  message: `Por favor, ingrese ${element.label}`,
                 },
               ]
           }

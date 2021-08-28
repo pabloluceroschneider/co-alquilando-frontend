@@ -57,7 +57,7 @@ const userPreferenciesRoomie = {
         },
         {
           label: "Provincia",
-          name: ["address", "province"],
+          name: ["roommatePreferences", "city"],
           component: "Select",
           options: provinces,
         },

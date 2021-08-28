@@ -42,6 +42,7 @@ const ModalAsyncList = ({ endpoint, label, title, itemTitle, handleOk }) => {
         onOk={handleConfirm}
         className="modal-async-list"
         okText="Confirmar"
+        cancelText="Cancelar"
       >
         <div className="title">{title}</div>
         {data?.map((item, index) => {

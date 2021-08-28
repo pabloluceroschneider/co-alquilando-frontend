@@ -35,7 +35,7 @@ const Match = () => {
             <div className="no-match">
               <p>No tienes preferencias cargadas</p>
               <div>
-                <p className="here">Cargalas aqui</p>
+                <p className="here">Cargalas aquí</p>
                 <ArrowDownOutlined />
               </div>
             </div>

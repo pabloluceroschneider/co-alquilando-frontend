@@ -26,7 +26,8 @@ const CustomizedForm = (props) => {
 
 	const toggleShowModal = () => setShowModal(!showModal);
 
-	const onFinish = (values) => {
+	const onFinish = () => {
+		const values = form.getFieldsValue();
 		setLoading(true);
 		setTimeout(() => {
 			setLoading(false);
@@ -111,17 +112,17 @@ const CustomizedForm = (props) => {
 
 				{(btnSubmit && btnDelete) ? (
 					<Form.Item>
-						<Button onClick={toggleShowModal} className="delete" type="secondary" htmlType="delete">
+						<Button onClick={toggleShowModal} className="delete" type="secondary">
 							{btnDelete}
 						</Button>
-						<Button loading={loading} type="primary" htmlType="submit">
+						<Button loading={loading} type="primary" onClick={onFinish}>
 							{btnSubmit}
 						</Button>
 						<Modal visible={showModal}
-							onOk={() => onDelete()}
+							onOk={onDelete}
 							onCancel={toggleShowModal}
 							title={titleDelete}
-							okText="Aceptar"
+							okText="Confirmar"
 							cancelText="Cancelar"
 							destroyOnClose
 						>
@@ -131,7 +132,7 @@ const CustomizedForm = (props) => {
 				) :
 					(
 						<Form.Item>
-							<Button loading={loading} type="primary" htmlType="submit">
+							<Button loading={loading} type="primary" onClick={onFinish}>
 								{btnSubmit}
 							</Button>
 						</Form.Item>
