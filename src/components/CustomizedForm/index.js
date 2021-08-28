@@ -26,7 +26,8 @@ const CustomizedForm = (props) => {
 
 	const toggleShowModal = () => setShowModal(!showModal);
 
-	const onFinish = (values) => {
+	const onFinish = (form) => () => {
+		const values = form.getFieldsValue(form);
 		setLoading(true);
 		setTimeout(() => {
 			setLoading(false);
@@ -114,7 +115,7 @@ const CustomizedForm = (props) => {
 						<Button onClick={toggleShowModal} className="delete" type="secondary">
 							{btnDelete}
 						</Button>
-						<Button loading={loading} type="primary">
+						<Button loading={loading} type="primary" onClick={onFinish(form)}>
 							{btnSubmit}
 						</Button>
 						<Modal visible={showModal}
