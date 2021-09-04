@@ -7,6 +7,7 @@ import ApiRequest from '../../util/ApiRequest';
 import { ArrowDownOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import AdImage from '../../components/Ad/AdImage';
+import WaitingSelection from '../../components/WaitingSelection';
 
 const Match = () => {
 	const [ matched, setMatched ] = useState(null);
@@ -17,11 +18,18 @@ const Match = () => {
 			let asyncGet = async () => {
 				try {
 					let { data } = await ApiRequest.get(`/user/match/${state.user.id}`);
-					setMatched(data);
+          data 
+            ? setMatched(data)
+            : setMatched([])
 				} catch (error) {
 					let params = { userId : state.user.id }
-					let { data } = await ApiRequest.getQuery(`/user/users`, params);
-					setUsers(data);
+					await ApiRequest.getQuery(`/user/users`, params)
+          .then(({data})=> {
+            setUsers(data)
+          })
+          .catch(() => {
+            setUsers([])
+          })
 				}
 			};
 			asyncGet();
@@ -49,6 +57,9 @@ const Match = () => {
         </div>
 
         <div className="match">
+          {users && !users.length 
+            ? <WaitingSelection message="No se encontraron compañeros" /> 
+            : null}
           {!matched && !users ? <Spin /> : null}
 
           {matched?.map((u, index) => {
