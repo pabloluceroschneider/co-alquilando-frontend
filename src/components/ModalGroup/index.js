@@ -142,7 +142,13 @@ const inviteToGroup = async (user, selected, id) => {
           message: `¡Tu solicitud fue enviada con éxito!`,
           placement: "bottomLeft",
         });
+      }).catch((err) => {
+        notification.success({
+          message: `¡Tu solicitud fue enviada con éxito!`,
+          placement: "bottomLeft",
+        });
       });
+  ;
     })
     .catch((err) => {
       notification.error({
