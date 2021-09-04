@@ -91,7 +91,7 @@ const CustomUpload = (props) => {
     <ImgCrop
       aspect={props.element.aspect 
         ? props.element.aspect
-        : props.value ? (9 / 16) : (16 / 9) }
+        : props.value ? (9 / 16) : (64 / 9) }
       rotate
       modalOk="Confirmar"
       modalCancel="Cancelar"

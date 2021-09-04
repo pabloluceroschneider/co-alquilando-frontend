@@ -64,7 +64,7 @@ const CustomizedForm = (props) => {
 	}
 
 	const onValuesChange = (name, form) => (field) => {
-		if (name === 'ad') {
+		if (name === 'ad' || name === 'update-ad') {
 			form.setFieldsValue({ image: field.isVertical })	
 		}
 	}
