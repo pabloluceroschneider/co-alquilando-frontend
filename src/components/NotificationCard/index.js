@@ -95,14 +95,14 @@ const NotificationCard = (props) => {
           response("group_decline_invitation");
         }}
       >
-        <CloseCircleOutlined className="responseButton" style={{color:"red"}} />
+        <span>Cancelar</span>
       </span>,
       <span
         onClick={() => {
           response("group_accept_invitation");
         }}
       >
-        <CheckCircleOutlined className="responseButton" style={{color:"#52c41a"}}/>
+        <span style={{color:"#0098ff"}}>Confirmar</span>
       </span>,
     ],
   };
