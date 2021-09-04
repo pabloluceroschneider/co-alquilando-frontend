@@ -16,7 +16,7 @@ export const GroupContext = React.createContext();
 const Groups = () => {
   const { state } = useContext(SessionContext);
   const { group, chat, name } = useParams();
-  const votation = window.location.pathname.split("/").includes("votations");
+  const votation = window.location.href.split("/").includes("votations");
   const breadscrumb = [
     { Grupos: "/groups" },
     { Detalle: group ? `/groups/${group}` : null },
