@@ -39,11 +39,16 @@
     text-align: center;
 }
 
-.notifications .NotificationClose svg{
+.notifications .NotificationClose {
     opacity: 50%;
+    border: none;
+    background: none;
+    cursor: pointer;
+    box-sizing: unset;
+    -webkit-appearance: unset;
 }
 
-.notifications .NotificationClose:hover svg{
+.notifications .NotificationClose:hover {
     opacity: 100%;
 }
 

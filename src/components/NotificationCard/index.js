@@ -3,12 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, notification, Avatar, Modal } from "antd";
 import ApiRequest from "../../util/ApiRequest";
 import Notification from "../../classes/Notification";
-import {
-  CloseCircleOutlined,
-  CheckCircleOutlined,
-  CloseOutlined,
-  ExclamationCircleOutlined,
-} from "@ant-design/icons";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { SessionContext } from "../../store";
 
 const { Meta } = Card;
@@ -56,7 +51,7 @@ const Close = ({ id, setNotifications, notifications }) => {
     setNotifications(notifications?.filter((n) => n.id !== id));
   };
 
-  return <CloseOutlined className="NotificationClose" onClick={showConfirm} />;
+  return <div className="NotificationClose" onClick={showConfirm}>X</div>;
 };
 
 const NotificationCard = (props) => {
