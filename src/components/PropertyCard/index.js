@@ -109,7 +109,7 @@ const PropertyCard = props => {
                             <a 
                               class="twitter-share-button"
                               target="_blank" 
-                              href={`https://twitter.com/intent/tweet?text=Hechale%20un%20vistazo%20a%20esta%20propiedad%20www.coalquilando.com/property/${id}`}
+                              href={`https://twitter.com/intent/tweet?text=Echale%20un%20vistazo%20a%20esta%20propiedad%20www.coalquilando.com/property/${id}`}
                               data-size="large">
                               <TwitterOutlined />
                             </a>
