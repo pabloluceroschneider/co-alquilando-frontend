@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from 'antd'
 import Filters from '../Filters';
 
-const PackagePropertyInfo = ({count, onFilter}) => {
+const AdInfo = ({count, onFilter}) => {
     return (
         <div className="side">
             <section className="package-property-info">
@@ -27,4 +27,4 @@ const PackagePropertyInfo = ({count, onFilter}) => {
     )
 }
 
-export default PackagePropertyInfo;
+export default AdInfo;
