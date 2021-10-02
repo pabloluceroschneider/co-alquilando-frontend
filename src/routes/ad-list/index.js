@@ -19,7 +19,7 @@ const AdList = () => {
   useEffect(() => {
     let asyncGet = async () => {
       try {
-        // let { data } = await ApiRequest.get(`/ad`, {page: page - 1}, size, ...params);
+        // let { data } = await ApiRequest.get(`/ad`, {page: page - 1, size, ...params});
         let { data } = await ApiRequest.get(`/ad`);
         setDatos(data);
       } catch (e) {
@@ -30,10 +30,10 @@ const AdList = () => {
       }
     };
     asyncGet();
-  }, []);
+  }, [page, size, params]);
 
   return (
-    <ContentWrapper topNav breadscrumb={breadscrumb}>
+    <ContentWrapper topNav breadscrumb={breadscrumb} footer>
       <div className="ads-list--content">
         <AdInfo count={datos?.length} onFilter={setParams} />
         

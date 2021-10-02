@@ -27,7 +27,7 @@ const Metrics = () => {
 	);
 
 	return (
-		<ContentWrapper topNav breadscrumb={breadscrumb}>
+		<ContentWrapper topNav footer breadscrumb={breadscrumb}>
 				<div className="page reports-admin">
 						<UserMenuReports metric={metric} />
 				</div>

@@ -24,7 +24,7 @@ const MetricsAdmin = () => {
     },[]);
 
     return (
-        <ContentWrapper topNav breadscrumb={breadscrumb}>
+        <ContentWrapper topNav footer breadscrumb={breadscrumb}>
             <div className="page reports-admin">
                 <AdminMenuReports metric={metric} />
             </div>
