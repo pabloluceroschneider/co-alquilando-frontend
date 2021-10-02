@@ -89,12 +89,12 @@ const AdCard = (props) => {
           <div className="ad-card--content-price">$ {props.price}</div>
           {props.paymentDate && (
             <div className="ad-card--content-paymentDate">
-              Fecha de pago: {moment(props.paymentDate).format("L")}
+              Fecha de pago: {moment(props.paymentDate).format("DD/MM/YYYY")}
             </div>
           )}
           <div className="ad-card--content-description">
-            Desde: {moment(props.startDate).format("L")} - Hasta:{" "}
-            {moment(props.endDate).format("L")}
+            Desde: {moment(props.startDate).format("DD/MM/YYYY")} - Hasta:{" "}
+            {moment(props.endDate).format("DD/MM/YYYY")}
           </div>
           <Divider />
           <div className="ad-card--content-buttons">
