@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import getWindowSize from "../../util/getWindowSize";
-import { CloseCircleOutlined } from "@ant-design/icons";
 import ApiRequest from "../../util/ApiRequest";
 
 const AdImage = (props) => {
@@ -32,15 +31,18 @@ const AdImage = (props) => {
   const renderAdImage = () =>
     ad && (
       <div className="ad-image__container">
+        <a target="_blank" href={ad?.url}>
         <img
-          src={`https://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080/ad/${ad.id}/image/${ad.image}`}
+          // src={`https://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080/ad/${ad.id}/image/${ad.image}`}
+          src="https://www.valoraanalitik.com/wp-content/uploads/2020/08/MercadoLibre.jpg"
           alt="ad"
         />
-        <CloseCircleOutlined
+        </a>
+        <div
           style={{color:"#fff"}}
           className="ad-image__button"
           onClick={closeAd}
-        />
+        >X</div>
       </div>
     );
 
