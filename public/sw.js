@@ -3,7 +3,7 @@
  *
  * NOTE: This file MUST be located in the root.
  */
-
+/*
 'use strict';
 
 console.log('Started', self);
@@ -48,3 +48,4 @@ var isJson = function (str) {
     }
     return true;
 }
+*/

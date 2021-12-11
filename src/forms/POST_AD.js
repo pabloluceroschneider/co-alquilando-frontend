@@ -60,6 +60,7 @@ const adFields = {
           label: "Cargar Imagen",
           name: "image",
           component: "Upload",
+          aspect: 4/5,
           required: true,
         },
       ]
