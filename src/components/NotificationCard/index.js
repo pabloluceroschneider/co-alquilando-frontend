@@ -124,13 +124,12 @@ const NotificationCard = (props) => {
               name={props.userFrom.userName + " " + props.userFrom.userSurname}
               userNickname={props.userFrom.userNickname}
             />
-            {props.type !== "group_send_invitation" && (
+            // antes validabamos si el type = group_send_invitation para mostrar el close. why? idk. se lo saqué
               <Close
                 notifications={props.notifications}
                 setNotifications={props.setNotifications}
                 id={props.id}
               />
-            )}
           </div>
         }
         description={<Description desc={props.type} />}
