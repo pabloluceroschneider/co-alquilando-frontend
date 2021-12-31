@@ -5,7 +5,7 @@ import { EditOutlined, EyeOutlined, UserOutlined } from '@ant-design/icons'
 import CarrouselPequeño from '../CarrouselPequeño';
 import ModalMapa from '../Modal';
 import { FacebookOutlined, TwitterOutlined } from '@ant-design/icons';
-
+import hostname from '../../util/getHostName';
 
 const PropertyCard = props => {
     const { title, price, address, attributes, id, photos } = props;
@@ -34,7 +34,7 @@ const PropertyCard = props => {
             let photoJson = {
                 caption: "", 
                 position: "",
-                imgUrl: `https://ec2-34-219-1-255.us-west-2.compute.amazonaws.com:8080/property/${id}/photos/${photo}`
+                imgUrl: `${hostname}/property/${id}/photos/${photo}`
             }
             setPhotoList(photoList => [...photoList, photoJson])
           })

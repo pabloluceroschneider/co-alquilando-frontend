@@ -23,7 +23,7 @@ const Home = () => {
 			</div>
 
 			<section className="video-section">
-				<video className="video" loop autoPlay preload muted>
+				<video className="video" loop autoPlay preload="true" muted>
 					<source src={video} />
 				</video>
 
