@@ -22,6 +22,7 @@ const PropertyCard = props => {
         })
     }
     let typologies = {
+        "APARTMENT": "Departamento",
         "APARMENT": "Departamento",
         "HOUSE": "Casa"
     }

@@ -21,15 +21,19 @@ const MetricsAdmin = () => {
 		const from = new Date().toISOString(2020);
 		const to = new Date().toISOString(2022);
 		const body = { allData, from, to };
-		const allProm = await Promise.all([
-			ApiRequest.post(`metrics/users`, body),
-			ApiRequest.post(`metrics/groups`, body),
-			ApiRequest.post(`metrics/properties`, body),
-			ApiRequest.post(`metrics/package_purchases`, body),
-			ApiRequest.post(`metrics/ads`, body)
-		]);
-		const data = allProm.map((prom) => prom.data);
-		setMetric(data);
+		try {
+			const allProm = await Promise.all([
+				ApiRequest.post(`metrics/users`, body),
+				ApiRequest.post(`metrics/groups`, body),
+				ApiRequest.post(`metrics/properties`, body),
+				ApiRequest.post(`metrics/package_purchases`, body),
+				ApiRequest.post(`metrics/ads`, body)
+			]);
+			const data = allProm.map((prom) => prom.data);
+			setMetric(data);
+		} catch (error) {
+			setError('Hubo un error. Intente con otro rango de fechas.');			
+		}
 	},[])
 
 	const handleSearch = async (dates) => {
