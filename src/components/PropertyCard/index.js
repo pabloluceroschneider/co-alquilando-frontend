@@ -95,12 +95,13 @@ const PropertyCard = props => {
                             <EyeOutlined />
                         </Button>
                         <Button>
-                          <div class="fb-share-button" data-href={`http://coalquilando.com/property/${id}`} data-layout="button_count" data-size="small">
+                          <div className="fb-share-button" data-href={`http://coalquilando.com/property/${id}`} data-layout="button_count" data-size="small">
                               <a 
                                   target="_blank" 
+                                  rel="noopener noreferrer"
                                   allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                                   href={`https://www.facebook.com/sharer/sharer.php?u=http://coalquilando.com/property/${id}`} 
-                                  class="fb-xfbml-parse-ignore">
+                                  className="fb-xfbml-parse-ignore">
                                   <FacebookOutlined />
                               </a>
                           </div>
@@ -108,9 +109,10 @@ const PropertyCard = props => {
                         <Button>
                           <div>
                             <a 
-                              class="twitter-share-button"
+                              className="twitter-share-button"
                               target="_blank" 
-                              href={`https://twitter.com/intent/tweet?text=Echale%20un%20vistazo%20a%20esta%20propiedad%20www.coalquilando.com/property/${id}`}
+                              rel="noopener noreferrer"
+                              href={`https://twitter.com/intent/tweet?text=Echale%20un%20vistazo%20a%20esta%20propiedad%20www.coalquilando.com.ar/property/${id}`}
                               data-size="large">
                               <TwitterOutlined />
                             </a>

@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import ContentWrapper from '../../components/ContentWrapper';
 import AdminMenuReports from '../../components/AdminMenuReports';
-import { SessionContext } from '../../store';
 import ApiRequest from '../../util/ApiRequest';
 import FilterNav from '../../components/FilterNav';
 const items = [
@@ -16,21 +15,26 @@ const MetricsAdmin = () => {
 	const [ error, setError ] = useState(null);
 	const breadscrumb = [ { Métricas: '/reports-admin' } ];
 
-	useEffect(async () => {
+	useEffect(() => {
 		const allData = true;
 		const from = new Date().toISOString(2020);
 		const to = new Date().toISOString(2022);
 		const body = { allData, from, to };
 		try {
-			const allProm = await Promise.all([
-				ApiRequest.post(`metrics/users`, body),
-				ApiRequest.post(`metrics/groups`, body),
-				ApiRequest.post(`metrics/properties`, body),
-				ApiRequest.post(`metrics/package_purchases`, body),
-				ApiRequest.post(`metrics/ads`, body)
-			]);
-			const data = allProm.map((prom) => prom.data);
-			setMetric(data);
+			const getProm = async () => {
+				const allProm = await Promise.all([
+					ApiRequest.post(`metrics/users`, body),
+					ApiRequest.post(`metrics/groups`, body),
+					ApiRequest.post(`metrics/properties`, body),
+					ApiRequest.post(`metrics/package_purchases`, body),
+					ApiRequest.post(`metrics/ads`, body)
+				]);
+				return allProm;
+			}
+			getProm().then(allProm => {
+				const data = allProm.map((prom) => prom.data);
+				setMetric(data);
+			})
 		} catch (error) {
 			setError('Hubo un error. Intente con otro rango de fechas.');			
 		}

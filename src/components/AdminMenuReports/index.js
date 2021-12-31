@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import { Menu } from 'antd';
 import ChartRepository from '../Charts/ChartRepository';
 
@@ -15,13 +15,13 @@ const AdminMenuReports = ({
         <div key={index}>
           <div className="metric-tab">
             {Object.keys(d.singleData).map( labels => (
-              <div style={{ display: "flex", gap: 8}}>
+              <div key={labels} style={{ display: "flex", gap: 8}}>
                 <div>{`${labels}:`}</div>
                 <div>{d.singleData[labels]}</div>
               </div>
             ))}
           </div>
-          {d.charts.map( t => <ChartRepository metric={t} />) }
+          {d.charts.map((t, index) => <ChartRepository key={index} metric={t} />) }
         </div>
       )
     })

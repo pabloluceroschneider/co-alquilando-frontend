@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import { TwitterOutlined } from '@ant-design/icons';
 
 import './styles.scss';

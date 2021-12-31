@@ -124,7 +124,7 @@ const NotificationCard = (props) => {
               name={props.userFrom.userName + " " + props.userFrom.userSurname}
               userNickname={props.userFrom.userNickname}
             />
-            // antes validabamos si el type = group_send_invitation para mostrar el close. why? idk. se lo saqué
+            {/* antes validabamos si el type = group_send_invitation para mostrar el close. why? idk. se lo saqué */}
               <Close
                 notifications={props.notifications}
                 setNotifications={props.setNotifications}

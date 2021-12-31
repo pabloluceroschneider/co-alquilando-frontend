@@ -17,18 +17,23 @@ const Metrics = () => {
 	const { state } = useContext(SessionContext);
 	const breadscrumb = [{'Mis Reportes': '/reports'}];
 
-	useEffect(async () => {
+	useEffect(() => {
 		const allData = true;
 		const from = new Date().toISOString(2020);
 		const to = new Date().toISOString(2022);
 		const body = { allData, from, to };
-		const allProm = await Promise.all([
-			ApiRequest.post(`metrics/user/${state.user.id}/properties`, body),
-			ApiRequest.post(`metrics/user/${state.user.id}/packages`, body),
-		]);
-		const data = allProm.map((prom) => prom.data);
-		setMetric(data);
-	},[])
+		const getProms = async () => {
+			const allProm = await Promise.all([
+				ApiRequest.post(`metrics/user/${state.user.id}/properties`, body),
+				ApiRequest.post(`metrics/user/${state.user.id}/packages`, body),
+			]);
+			return allProm;
+		}
+		getProms().then((allProm) => {
+			const data = allProm.map((prom) => prom.data);
+			setMetric(data);
+		});
+	},[state.user.id])
 
 	const handleSearch = async dates => {
 			setMetric(null);
